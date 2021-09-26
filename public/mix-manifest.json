@@ -1,0 +1,9 @@
+{
+    "/js/app.js": "/js/app.js",
+    "/css/plantilla.css": "/css/plantilla.css",
+    "/js/plantilla.js": "/js/plantilla.js",
+    "/css/adminlte.min.css.map": "/css/adminlte.min.css.map",
+    "/js/adminlte.min.js.map": "/js/adminlte.min.js.map",
+    "/js/moment.min.js.map": "/js/moment.min.js.map",
+    "/js/vue-select.js.map": "/js/vue-select.js.map"
+}

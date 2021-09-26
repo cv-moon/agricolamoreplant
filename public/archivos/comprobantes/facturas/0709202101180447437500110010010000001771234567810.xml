@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.1.0">
+	<infoTributaria>
+		<ambiente>1</ambiente>
+		<tipoEmision>1</tipoEmision>
+		<razonSocial>MANGUI ICHINA CHRISTIAN ORLANDO</razonSocial>
+		<nombreComercial>AGRICOLA MOREPLANT</nombreComercial>
+		<ruc>1804474375001</ruc>
+		<claveAcceso>0709202101180447437500110010010000001771234567810</claveAcceso>
+		<codDoc>01</codDoc>
+		<estab>001</estab>
+		<ptoEmi>001</ptoEmi>
+		<secuencial>000000177</secuencial>
+		<dirMatriz>CAMILO CIENFUEGOS S/N</dirMatriz>
+	</infoTributaria>
+	<infoFactura>
+		<fechaEmision>07/09/2021</fechaEmision>
+		<dirEstablecimiento>CAMILO CIENFUEGOS S/N ATRÁS DEL AEROPUERTO</dirEstablecimiento>
+		<obligadoContabilidad>SI</obligadoContabilidad>
+		<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+		<razonSocialComprador>CARLA ROCHA</razonSocialComprador>
+		<identificacionComprador>1724114425</identificacionComprador>
+		<direccionComprador>CAUPICHO</direccionComprador>
+		<totalSinImpuestos>0.03</totalSinImpuestos>
+		<totalDescuento>0.00</totalDescuento>
+		<totalConImpuestos>
+			<totalImpuesto>
+				<codigo>2</codigo>
+				<codigoPorcentaje>0</codigoPorcentaje>
+				<baseImponible>0.03</baseImponible>
+				<valor>0</valor>
+			</totalImpuesto>
+		</totalConImpuestos>
+		<propina>0.00</propina>
+		<importeTotal>0.03</importeTotal>
+		<moneda>DOLAR</moneda>
+		<pagos>
+			<pago>
+				<formaPago>01</formaPago>
+				<total>0.03</total>
+				<plazo>1</plazo>
+				<unidadTiempo>dias</unidadTiempo>
+			</pago>
+		</pagos>
+	</infoFactura>
+	<detalles>
+		<detalle>
+			<codigoPrincipal>PLA000000000001</codigoPrincipal>
+			<descripcion>COLIFLOR F1</descripcion>
+			<cantidad>1.00</cantidad>
+			<precioUnitario>0.026</precioUnitario>
+			<descuento>0.000</descuento>
+			<precioTotalSinImpuesto>0.030</precioTotalSinImpuesto>
+			<impuestos>
+				<impuesto>
+					<codigo>2</codigo>
+					<codigoPorcentaje>0</codigoPorcentaje>
+					<tarifa>0</tarifa>
+					<baseImponible>0.030</baseImponible>
+					<valor>0</valor>
+				</impuesto>
+			</impuestos>
+		</detalle>
+	</detalles>
+	<infoAdicional>
+		<campoAdicional nombre="Dirección">CAUPICHO</campoAdicional>
+		<campoAdicional nombre="Teléfono">0984294819</campoAdicional>
+		<campoAdicional nombre="Email">tcarlaestefania@gmail.com</campoAdicional>
+	</infoAdicional>
+</factura>

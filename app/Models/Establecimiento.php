@@ -1,0 +1,19 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Establecimiento extends Model
+{
+    protected $table = 'establecimientos';
+    protected $fillable = [
+        'empresa_id',
+        'numero',
+        'nom_comercial',
+        'nom_referencia',
+        'direccion',
+        'telefonos',
+        'estado'
+    ];
+}

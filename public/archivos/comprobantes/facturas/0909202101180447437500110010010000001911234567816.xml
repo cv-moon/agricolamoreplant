@@ -1,0 +1,91 @@
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"><soap:Body><ns2:autorizacionComprobanteResponse xmlns:ns2="http://ec.gob.sri.ws.autorizacion"><RespuestaAutorizacionComprobante><claveAccesoConsultada>0909202101180447437500110010010000001911234567816</claveAccesoConsultada><numeroComprobantes>1</numeroComprobantes><autorizaciones><autorizacion><estado>AUTORIZADO</estado><numeroAutorizacion>0909202101180447437500110010010000001911234567816</numeroAutorizacion><fechaAutorizacion>2021-09-09T15:42:57-05:00</fechaAutorizacion><ambiente>PRUEBAS</ambiente><comprobante><?xml version="1.0" encoding="UTF-8"?><factura id="comprobante" version="1.1.0"><infoTributaria><ambiente>1</ambiente><tipoEmision>1</tipoEmision><razonSocial>MANGUI ICHINA CHRISTIAN ORLANDO</razonSocial><nombreComercial>AGRICOLA MOREPLANT</nombreComercial><ruc>1804474375001</ruc><claveAcceso>0909202101180447437500110010010000001911234567816</claveAcceso><codDoc>01</codDoc><estab>001</estab><ptoEmi>001</ptoEmi><secuencial>000000191</secuencial><dirMatriz>CAMILO CIENFUEGOS S/N</dirMatriz></infoTributaria><infoFactura><fechaEmision>09/09/2021</fechaEmision><dirEstablecimiento>CAMILO CIENFUEGOS S/N ATRAS DEL AEROPUERTO</dirEstablecimiento><obligadoContabilidad>SI</obligadoContabilidad><tipoIdentificacionComprador>05</tipoIdentificacionComprador><razonSocialComprador>CRISTIAN CHUQUITARCO</razonSocialComprador><identificacionComprador>1721897765</identificacionComprador><direccionComprador>MOSQUERA NARVAEZ Y VERSALLES</direccionComprador><totalSinImpuestos>9.50</totalSinImpuestos><totalDescuento>0.00</totalDescuento><totalConImpuestos><totalImpuesto><codigo>2</codigo><codigoPorcentaje>0</codigoPorcentaje><baseImponible>9.50</baseImponible><valor>0</valor></totalImpuesto></totalConImpuestos><propina>0.00</propina><importeTotal>9.50</importeTotal><moneda>DOLAR</moneda><pagos><pago><formaPago>01</formaPago><total>9.50</total><plazo>1</plazo><unidadTiempo>dias</unidadTiempo></pago></pagos></infoFactura><detalles><detalle><codigoPrincipal>FER000000000001</codigoPrincipal><descripcion>CAL-BORO ORGANIUM 250CC</descripcion><cantidad>1.00</cantidad><precioUnitario>4.500</precioUnitario><descuento>0.000</descuento><precioTotalSinImpuesto>4.500</precioTotalSinImpuesto><impuestos><impuesto><codigo>2</codigo><codigoPorcentaje>0</codigoPorcentaje><tarifa>0</tarifa><baseImponible>4.500</baseImponible><valor>0</valor></impuesto></impuestos></detalle><detalle><codigoPrincipal>INS000000000001</codigoPrincipal><descripcion>AMITRAZ 100CC</descripcion><cantidad>1.00</cantidad><precioUnitario>5.000</precioUnitario><descuento>0.000</descuento><precioTotalSinImpuesto>5.000</precioTotalSinImpuesto><impuestos><impuesto><codigo>2</codigo><codigoPorcentaje>0</codigoPorcentaje><tarifa>0</tarifa><baseImponible>5.000</baseImponible><valor>0</valor></impuesto></impuestos></detalle></detalles><infoAdicional><campoAdicional nombre="Direccion">MOSQUERA NARVAEZ Y VERSALLES</campoAdicional><campoAdicional nombre="Telefono">2904272</campoAdicional><campoAdicional nombre="Email">cristian.chuquitarco92@gmail.com</campoAdicional></infoAdicional><ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:etsi="http://uri.etsi.org/01903/v1.3.2#" Id="Signature36968">
+<ds:SignedInfo Id="Signature-SignedInfo136037">
+<ds:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"></ds:CanonicalizationMethod>
+<ds:SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"></ds:SignatureMethod>
+<ds:Reference Id="SignedPropertiesID332031" Type="http://uri.etsi.org/01903#SignedProperties" URI="#Signature36968-SignedProperties652016">
+<ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"></ds:DigestMethod>
+<ds:DigestValue>v6sYGDr+AwoJCXcI2T59ga7Eav0=</ds:DigestValue>
+</ds:Reference>
+<ds:Reference URI="#Certificate666928">
+<ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"></ds:DigestMethod>
+<ds:DigestValue>dUs++k5N5+sBR/LfQ9yIkXZExTI=</ds:DigestValue>
+</ds:Reference>
+<ds:Reference Id="Reference-ID-613778" URI="#comprobante">
+<ds:Transforms>
+<ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"></ds:Transform>
+</ds:Transforms>
+<ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"></ds:DigestMethod>
+<ds:DigestValue>xyFXw/QQqQW1RheY4WN3axlZ/+4=</ds:DigestValue>
+</ds:Reference>
+</ds:SignedInfo>
+<ds:SignatureValue Id="SignatureValue881209">
+DWA57vQSQwJsc6/D/9AkyWSWdM3HfLMsZq6Fm11RhHStVcWlNk7xJPI0CS7OKBKZRpyvXDejmHtV
+PHEDR/oxQx9LSd6NuNnjh/S9yxczNDC6GncB+lJHW/PH4fIkj7vytCKwAPcNLn1KhSo4BIlMCi4k
+z344BS5H4ZVGIbvHqBD4BQGsfzq7rcDlBF7h/RciYoGFBo2K31L5FiFm3WqSSJ6WldZU9v/sIZsb
+WnBxIALNNahJbivVVP0zSKJ8nZO4bltW1KK1u3k+N3e1rcSLnjQj2cF/WegwMcO0Wi9WaRc45o+k
+rSPyGd/UUY3epUq+iOQDRaemOC2m9GeU4E2e3A==
+</ds:SignatureValue>
+<ds:KeyInfo Id="Certificate666928">
+<ds:X509Data>
+<ds:X509Certificate>
+MIIJuTCCB6GgAwIBAgIEW2itnTANBgkqhkiG9w0BAQsFADCBoTELMAkGA1UEBhMCRUMxIjAgBgNV
+BAoTGUJBTkNPIENFTlRSQUwgREVMIEVDVUFET1IxNzA1BgNVBAsTLkVOVElEQUQgREUgQ0VSVElG
+SUNBQ0lPTiBERSBJTkZPUk1BQ0lPTi1FQ0lCQ0UxDjAMBgNVBAcTBVFVSVRPMSUwIwYDVQQDExxB
+QyBCQU5DTyBDRU5UUkFMIERFTCBFQ1VBRE9SMB4XDTIxMDQyMDE0NTAzMVoXDTIzMDQyMDE1MjAz
+MVowgbcxCzAJBgNVBAYTAkVDMSIwIAYDVQQKExlCQU5DTyBDRU5UUkFMIERFTCBFQ1VBRE9SMTcw
+NQYDVQQLEy5FTlRJREFEIERFIENFUlRJRklDQUNJT04gREUgSU5GT1JNQUNJT04tRUNJQkNFMQ4w
+DAYDVQQHEwVRVUlUTzE7MBEGA1UEBRMKMDAwMDYzMTc5MzAmBgNVBAMTH0NIUklTVElBTiBPUkxB
+TkRPIE1BTkdVSSBJQ0hJTkEwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC91VIeotF6
+8SNyif1feYftjjP7I6LTpahj9ifk5/w2SsoqL5iyeywkLVSAoay3E5d+gocv5dXt9aCoW/K9ErDx
+aqVI3Jg9xsI6Y+N8/04io+PTqxIQZNQtpuTlJsB5LM2D693rmIOVfCBuDeVaT8C0jAfIXBiY5AI8
+CrMD5VOT4/C3SbVViFh+Dopa5RnbtHIZNi8ylO+8ugtdPCh4x9bxZtaNMj/us/qrW0aRL3LsmYxk
+7VkqvfYAfYR6yaRie2tDdMeBhMmY9K8YkFrOIiQML9+C3jYhDNDovMb7oXvM7GsypBRRYszcQvKh
+Vw2MQcx8+k/ZudGy3oXU00Zbw2ilAgMBAAGjggTfMIIE2zALBgNVHQ8EBAMCB4AwZgYDVR0gBF8w
+XTBbBgsrBgEEAYKoOwIBATBMMEoGCCsGAQUFBwIBFj5odHRwOi8vd3d3LmVjaS5iY2UuZWMvcG9s
+aXRpY2EtY2VydGlmaWNhZG8vcGVyc29uYS1uYXR1cmFsLnBkZjCBkQYIKwYBBQUHAQEEgYQwgYEw
+PgYIKwYBBQUHMAGGMmh0dHA6Ly9vY3NwLmVjaS5iY2UuZWMvZWpiY2EvcHVibGljd2ViL3N0YXR1
+cy9vY3NwMD8GCCsGAQUFBzABhjNodHRwOi8vb2NzcDEuZWNpLmJjZS5lYy9lamJjYS9wdWJsaWN3
+ZWIvc3RhdHVzL29jc3AwGgYKKwYBBAGCqDsDAQQMEwoxODA0NDc0Mzc1MCEGCisGAQQBgqg7AwIE
+ExMRQ0hSSVNUSUFOIE9STEFORE8wFgYKKwYBBAGCqDsDAwQIEwZNQU5HVUkwFgYKKwYBBAGCqDsD
+BAQIEwZJQ0hJTkEwLwYKKwYBBAGCqDsDBwQhEx9ORVNUT1IgVEFDT0FNQU4gUklDQVJETyBDQUxM
+SkFTMBkGCisGAQQBgqg7AwgECxMJMDMyNTEwMTk3MBYGCisGAQQBgqg7AwkECBMGQW1iYXRvMBcG
+CisGAQQBgqg7AwwECRMHRUNVQURPUjAdBgorBgEEAYKoOwMLBA8TDTE4MDQ0NzQzNzUwMDEwIAYK
+KwYBBAGCqDsDMwQSExBTT0ZUV0FSRS1BUkNISVZPMCsGA1UdEQQkMCKBIG1vcmVwbGFudDIwMDBh
+Z3JpY29sYUBvdXRsb29rLmVzMIIB4QYDVR0fBIIB2DCCAdQwggHQoIIBzKCCAciGgdZsZGFwOi8v
+YmNlcWxkYXBzdWJwMS5iY2UuZWMvY249Q1JMMTI0Nyxjbj1BQyUyMEJBTkNPJTIwQ0VOVFJBTCUy
+MERFTCUyMEVDVUFET1IsbD1RVUlUTyxvdT1FTlRJREFEJTIwREUlMjBDRVJUSUZJQ0FDSU9OJTIw
+REUlMjBJTkZPUk1BQ0lPTi1FQ0lCQ0Usbz1CQU5DTyUyMENFTlRSQUwlMjBERUwlMjBFQ1VBRE9S
+LGM9RUM/Y2VydGlmaWNhdGVSZXZvY2F0aW9uTGlzdD9iYXNlhjRodHRwOi8vd3d3LmVjaS5iY2Uu
+ZWMvQ1JML2VjaV9iY2VfZWNfY3JsZmlsZWNvbWIuY3JspIG2MIGzMQswCQYDVQQGEwJFQzEiMCAG
+A1UEChMZQkFOQ08gQ0VOVFJBTCBERUwgRUNVQURPUjE3MDUGA1UECxMuRU5USURBRCBERSBDRVJU
+SUZJQ0FDSU9OIERFIElORk9STUFDSU9OLUVDSUJDRTEOMAwGA1UEBxMFUVVJVE8xJTAjBgNVBAMT
+HEFDIEJBTkNPIENFTlRSQUwgREVMIEVDVUFET1IxEDAOBgNVBAMTB0NSTDEyNDcwKwYDVR0QBCQw
+IoAPMjAyMTA0MjAxNDUwMzFagQ8yMDIzMDQyMDE1MjAzMVowHwYDVR0jBBgwFoAUSKLfIx8d+CxR
+eowDzUkypQnBlKswHQYDVR0OBBYEFLnUjlk0pTEG/CrSaU0P1CPBUhdjMAkGA1UdEwQCMAAwGQYJ
+KoZIhvZ9B0EABAwwChsEVjguMQMCBLAwDQYJKoZIhvcNAQELBQADggIBAGYAs/Hdn9U3jZV1NNfI
+yxmQHCmPT6OvRx4Fm0WwgDVf2hZJsYzm+MADqfiQnetTSqrmm2Pl73CN6jXbOrPQXc+nyroHtJxs
+I9gRY1LmXO5u7aHkXeiDBGU9k8DltqdCeEW3EqpbRA0y1sKGDSfaQT8lixkaOhZd2JYvafJ9CTTt
+xEE/7k0RQmGffxVYHAkpb2S/kPnVcFw5/hWVZVVhFf2lmBUnRF4qoSyUDQQ0+OfZHm8iATVVIYLE
+7ZiL+3Wdzb0glqEJUuTPp4rsFmyFD7jFbwQLRKHzBswfuTIx9+ZXkEqRPk1wMv30ZhsuXfNcdB7G
+AmxdRARLJja9rCVh1sqcIXGAjgIopQQDrFkDI1r8c4jfZsoxrlHcKIuphAfriV1kEvFMmddcbI3L
+rQhbs9OfqG4OUgp7TczoEfl+3mtPKv58JeZ3Y+YB/doAJOZ494OYVl2HuQthyekfJc6KjXFYXSuX
+xEZBaS3XPqTSn7OijVYEQFpbtbyxRYw0dZ3addMAEd2cc0i0O7HaR8r7SPz/PED/HkunVgrVRymH
+yTRRwme0b5/2jMRFb+hh1fLOnPPicrU6WxiXq5EcOCDf2itIQz++mgPH8hhqGYkwGZ3D8Riu68/h
+NKdQaZF3nlzfcXqsodEPWwU44mRMTTJBZ7VW9wzzlvPxp3HL9zcAvMJT
+</ds:X509Certificate>
+</ds:X509Data>
+<ds:KeyValue>
+<ds:RSAKeyValue>
+<ds:Modulus>
+vdVSHqLRevEjcon9X3mH7Y4z+yOi06WoY/Yn5Of8NkrKKi+YsnssJC1UgKGstxOXfoKHL+XV7fWg
+qFvyvRKw8WqlSNyYPcbCOmPjfP9OIqPj06sSEGTULabk5SbAeSzNg+vd65iDlXwgbg3lWk/AtIwH
+yFwYmOQCPAqzA+VTk+Pwt0m1VYhYfg6KWuUZ27RyGTYvMpTvvLoLXTwoeMfW8WbWjTI/7rP6q1tG
+kS9y7JmMZO1ZKr32AH2EesmkYntrQ3THgYTJmPSvGJBaziIkDC/fgt42IQzQ6LzG+6F7zOxrMqQU
+UWLM3ELyoVcNjEHMfPpP2bnRst6F1NNGW8NopQ==
+</ds:Modulus>
+<ds:Exponent>AQAB</ds:Exponent>
+</ds:RSAKeyValue>
+</ds:KeyValue>
+</ds:KeyInfo>
+<ds:Object Id="Signature36968-Object93080"><etsi:QualifyingProperties Target="#Signature36968"><etsi:SignedProperties Id="Signature36968-SignedProperties652016"><etsi:SignedSignatureProperties><etsi:SigningTime>2021-09-09T15:42:52-05:00</etsi:SigningTime><etsi:SigningCertificate><etsi:Cert><etsi:CertDigest><ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"></ds:DigestMethod><ds:DigestValue>TPZ4p+Mlku++qDn6JEKei6Oll6A=</ds:DigestValue></etsi:CertDigest><etsi:IssuerSerial><ds:X509IssuerName>CN=AC BANCO CENTRAL DEL ECUADOR,L=QUITO,OU=ENTIDAD DE CERTIFICACION DE INFORMACION-ECIBCE,O=BANCO CENTRAL DEL ECUADOR,C=EC</ds:X509IssuerName><ds:X509SerialNumber>1533586845</ds:X509SerialNumber></etsi:IssuerSerial></etsi:Cert></etsi:SigningCertificate></etsi:SignedSignatureProperties><etsi:SignedDataObjectProperties><etsi:DataObjectFormat ObjectReference="#Reference-ID-613778"><etsi:Description>contenido comprobante</etsi:Description><etsi:MimeType>text/xml</etsi:MimeType></etsi:DataObjectFormat></etsi:SignedDataObjectProperties></etsi:SignedProperties></etsi:QualifyingProperties></ds:Object></ds:Signature></factura>
+</comprobante><mensajes/></autorizacion></autorizaciones></RespuestaAutorizacionComprobante></ns2:autorizacionComprobanteResponse></soap:Body></soap:Envelope>

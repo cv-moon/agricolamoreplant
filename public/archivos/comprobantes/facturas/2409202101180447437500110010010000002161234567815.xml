@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factura id="comprobante" version="1.1.0">
+	<infoTributaria>
+		<ambiente>1</ambiente>
+		<tipoEmision>1</tipoEmision>
+		<razonSocial>MANGUI ICHINA CHRISTIAN ORLANDO</razonSocial>
+		<nombreComercial>AGRICOLA MOREPLANT</nombreComercial>
+		<ruc>1804474375001</ruc>
+		<claveAcceso>2409202101180447437500110010010000002161234567815</claveAcceso>
+		<codDoc>01</codDoc>
+		<estab>001</estab>
+		<ptoEmi>001</ptoEmi>
+		<secuencial>000000216</secuencial>
+		<dirMatriz>CAMILO CIENFUEGOS S/N</dirMatriz>
+	</infoTributaria>
+	<infoFactura>
+		<fechaEmision>24/09/2021</fechaEmision>
+		<dirEstablecimiento>CAMILO CIENFUEGOS S/N ATRÁS DEL AEROPUERTO</dirEstablecimiento>
+		<obligadoContabilidad>SI</obligadoContabilidad>
+		<tipoIdentificacionComprador>05</tipoIdentificacionComprador>
+		<razonSocialComprador>SEGUNDO CHUQUITARCO</razonSocialComprador>
+		<identificacionComprador>0500435060</identificacionComprador>
+		<direccionComprador>PUJILÍ</direccionComprador>
+		<totalSinImpuestos>48.18</totalSinImpuestos>
+		<totalDescuento>0.00</totalDescuento>
+		<totalConImpuestos>
+			<totalImpuesto>
+				<codigo>2</codigo>
+				<codigoPorcentaje>0</codigoPorcentaje>
+				<baseImponible>48.18</baseImponible>
+				<valor>0.00</valor>
+			</totalImpuesto>
+		</totalConImpuestos>
+		<propina>0.00</propina>
+		<importeTotal>48.18</importeTotal>
+		<moneda>DOLAR</moneda>
+		<pagos>
+			<pago>
+				<formaPago>01</formaPago>
+				<total>48.18</total>
+				<plazo>15</plazo>
+				<unidadTiempo>dias</unidadTiempo>
+			</pago>
+		</pagos>
+	</infoFactura>
+	<detalles>
+		<detalle>
+			<codigoPrincipal>FER000000000005</codigoPrincipal>
+			<descripcion>BAYFOLAN AKTIVATOR 1 LT</descripcion>
+			<cantidad>3.00</cantidad>
+			<precioUnitario>16.060</precioUnitario>
+			<descuento>0.000</descuento>
+			<precioTotalSinImpuesto>48.18</precioTotalSinImpuesto>
+			<impuestos>
+				<impuesto>
+					<codigo>2</codigo>
+					<codigoPorcentaje>0</codigoPorcentaje>
+					<tarifa>0.00</tarifa>
+					<baseImponible>48.18</baseImponible>
+					<valor>0.00</valor>
+				</impuesto>
+			</impuestos>
+		</detalle>
+	</detalles>
+	<infoAdicional>
+		<campoAdicional nombre="Dirección">PUJILÍ</campoAdicional>
+		<campoAdicional nombre="Teléfono"></campoAdicional>
+		<campoAdicional nombre="Email">cristian_metal1980@hotmail.com</campoAdicional>
+		<campoAdicional nombre="F. Pago">CRÉDITO</campoAdicional>
+		<campoAdicional nombre="D. Crédito">15</campoAdicional>
+	</infoAdicional>
+</factura>
