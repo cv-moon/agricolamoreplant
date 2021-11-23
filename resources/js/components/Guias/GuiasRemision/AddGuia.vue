@@ -31,7 +31,7 @@
           <label for="comprobante" class="col-form-label"># Comprobante:</label>
           <p class="col-form-label">{{ datos.comprobante }}</p>
         </div>
-        <div class="col-6">
+        <div class="col-sm-6">
           <label for="num_comprobante" class="col-form-label"
             >Clave de Acceso:</label
           >
@@ -40,20 +40,146 @@
           </p>
         </div>
       </div>
-      <b class="text-primary">Detalle de Productos</b>
+      <b class="text-primary">Datos de Guía</b>
       <hr class="mt-0" />
       <div class="form-group row">
         <div class="col-sm-4">
-          <button
-            type="button"
-            class="btn btn-success"
-            data-target="#modal"
-            @click="abrirModal()"
+          <label for="dat_cliente" class="col-sm-12 col-form-label"
+            >Trasnportista:</label
           >
-            <i class="fas fa-plus"> Agregar Productos </i>
-          </button>
+          <div class="input-group">
+            <div class="col-sm-11">
+              <v-select
+                :options="arrayTransportista"
+                :getOptionLabel="
+                  (option) => option.nombre + ' - ' + option.num_identificacion
+                "
+                @search="selectTransportista"
+                placeholder="Buscar Transportista..."
+                v-model="selected"
+                @input="getId"
+              >
+              </v-select>
+            </div>
+            <button
+              title="Agregar Cliente"
+              class="btn btn-success btn-xs"
+              data-target="#modCliente"
+              @click="abrirModal()"
+            >
+              <i class="fas fa-plus"></i>
+            </button>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <label for="fec_inicio" class="col-sm-12 col-form-label"
+            >Fecha Inicio:</label
+          >
+          <input
+            type="date"
+            class="form-control form-control-sm"
+            v-model="guia.fec_inicio"
+          />
+        </div>
+        <div class="col-sm-4">
+          <label for="fec_fin" class="col-sm-12 col-form-label"
+            >Fecha Fin:</label
+          >
+          <input
+            type="date"
+            class="form-control form-control-sm"
+            v-model="guia.fec_fin"
+          />
         </div>
       </div>
+      <div class="form-group row">
+        <div class="col-sm-4">
+          <label for="fec_fin" class="col-sm-12 col-form-label">Ruta:</label>
+          <input
+            type="text"
+            class="form-control form-control-sm"
+            placeholder="Ruta"
+            maxlength="300"
+            v-model="guia.ruta"
+          />
+        </div>
+        <div class="col-sm-4">
+          <label for="fec_inicio" class="col-sm-12 col-form-label"
+            >Motivo:</label
+          >
+          <input
+            type="text"
+            class="form-control form-control-sm"
+            maxlength="300"
+            placeholder="Motivo"
+            v-model="guia.motivo"
+          />
+        </div>
+        <div class="col-sm-4">
+          <label for="comprobante" class="col-sm-12 col-form-label"
+            >Comprobante:</label
+          >
+          <select
+            v-model="guia.factura_id"
+            class="form-control form-control-sm"
+            @change="getDetails(guia.factura_id)"
+          >
+            <option value="0" disabled>Seleccione...</option>
+            <option
+              v-for="factura in arrayFacturas"
+              :key="factura.id"
+              :value="factura.id"
+              v-text="
+                factura.nom_referencia + ' Factura ' + factura.num_secuencial
+              "
+            ></option>
+          </select>
+        </div>
+      </div>
+      <b class="text-primary">Destino</b>
+      <hr class="mt-0" />
+      <div class="form-group row">
+        <div class="col-sm-8">
+          <label for="fec_fin" class="col-sm-12 col-form-label"
+            >Destinatario:</label
+          >
+          <input
+            type="text"
+            class="form-control form-control-sm"
+            placeholder="Nombre / Razón Social / Destinatario"
+            maxlength="300"
+            v-model="guia.des_nombre"
+          />
+        </div>
+        <div class="col-sm-4">
+          <label for="fec_fin" class="col-sm-12 col-form-label"
+            >Identificación:</label
+          >
+          <input
+            type="text"
+            class="form-control form-control-sm"
+            placeholder="Cédula / R.U.C."
+            maxlength="300"
+            v-model="guia.des_identificacion"
+          />
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-sm-12">
+          <label for="fec_fin" class="col-sm-12 col-form-label"
+            >Dirección:</label
+          >
+          <input
+            type="text"
+            class="form-control form-control-sm"
+            placeholder="Dirección"
+            maxlength="300"
+            v-model="guia.des_direccion"
+          />
+        </div>
+      </div>
+      <b class="text-primary">Detalle de Productos a Trasladarse</b>
+      <hr class="mt-0" />
       <div class="form-group row">
         <div class="col-sm-12 table-responsive">
           <table class="table table-bordered table-striped table-sm">
@@ -82,7 +208,7 @@
                     type="number"
                     class="form-control"
                     min="1"
-                    v-model="detalle.cantidad"
+                    v-model="detalle.det_cantidad"
                   />
                 </td>
               </tr>
@@ -96,6 +222,17 @@
             </tbody>
           </table>
         </div>
+      </div>
+      <b class="text-primary">Observaciones</b>
+      <hr class="mt-0" />
+      <div class="form-group row">
+        <textarea
+          class="form-control"
+          placeholder="Observaciones"
+          maxlength="300"
+          rows="3"
+          v-model="guia.observaciones"
+        ></textarea>
       </div>
       <div v-if="guia.errors.length" class="alert alert-danger">
         <div>
@@ -178,7 +315,7 @@
                   ># Identificación:</label
                 >
                 <div class="col-sm-4">
-                  <template v-if="identificacion_id === 2">
+                  <template v-if="transportista.identificacion_id === 2">
                     <input
                       type="text"
                       class="form-control"
@@ -187,7 +324,7 @@
                       v-model="transportista.num_identificacion"
                     />
                   </template>
-                  <template v-else-if="identificacion_id === 1">
+                  <template v-else-if="transportista.identificacion_id === 1">
                     <input
                       type="text"
                       class="form-control"
@@ -196,7 +333,7 @@
                       v-model="transportista.num_identificacion"
                     />
                   </template>
-                  <template v-else-if="identificacion_id === 3">
+                  <template v-else-if="transportista.identificacion_id === 3">
                     <input
                       type="text"
                       class="form-control"
@@ -300,7 +437,10 @@ export default {
         num_autorizacion: "",
         fec_inicio: "",
         fec_fin: "",
-        motivo: "",
+        des_nombre: "",
+        des_identificacion: "",
+        des_direccion: "",
+        motivo: "VENTA DE PRODUCTOS",
         ruta: "",
         observaciones: "",
         errors: [],
@@ -331,10 +471,20 @@ export default {
       },
 
       identificacion_id: 0,
-      arrayFactura: [],
+      arrayTransportista: [],
+      arrayFacturas: [],
       arrayIdentificaciones: [],
       arrayDetalle: [],
     };
+  },
+  computed: {
+    getId() {
+      if (!this.selected) {
+        this.guia.transportista_id = 0;
+      } else {
+        this.guia.transportista_id = this.selected.id;
+      }
+    },
   },
   methods: {
     myTable() {
@@ -358,16 +508,29 @@ export default {
     },
     validaCampos() {
       this.guia.errors = [];
-      if (!this.guia.cliente_id || this.guia.cliente_id == 0) {
-        this.guia.errors.push("Seleccione Cliente.");
+      if (!this.guia.transportista_id || this.guia.transportista_id == 0) {
+        this.guia.errors.push("Seleccione Transportista.");
+      }
+      if (!this.guia.factura_id || this.guia.factura_id == 0) {
+        this.guia.errors.push("Seleccione Comprobante.");
       }
       if (this.arrayDetalle.length == 0) {
-        this.guia.errors.push("Agregue Productos");
+        this.guia.errors.push("Agregue Productos a Trasnportar");
       }
-      if (this.pago.tipo == "C") {
-        if (!this.pago.plazo || this.pago.plazo == 0) {
-          this.guia.errors.push("Revise el plazo");
-        }
+      if (!this.guia.fec_inicio) {
+        this.guia.errors.push("Ingrese Fecha Inicio");
+      }
+      if (!this.guia.fec_fin) {
+        this.guia.errors.push("Ingrese Fecha Fin");
+      }
+      if (!this.guia.ruta) {
+        this.guia.errors.push("Ingrese Ruta");
+      }
+      if (!this.guia.motivo) {
+        this.guia.errors.push("Ingrese Motivo");
+      }
+      if (!this.guia.observaciones) {
+        this.guia.errors.push("Ingrese Observaciones");
       }
       return this.guia.errors;
     },
@@ -378,29 +541,40 @@ export default {
       }
       axios
         .post("/api/guia/guardar", {
-          cliente_id: this.guia.cliente_id,
+          factura_id: this.guia.factura_id,
           punto_id: this.guia.punto_id,
           transportista_id: this.guia.transportista_id,
-          transportista_id: this.guia.transportista_id,
+          tip_ambiente: this.guia.tip_ambiente,
+          tip_emision: this.guia.tip_emision,
+          num_secuencial: this.guia.num_secuencial,
+          cla_acceso: this.guia.cla_acceso,
+          fec_inicio: this.guia.fec_inicio,
+          fec_fin: this.guia.fec_fin,
+          des_nombre: this.guia.des_nombre,
+          des_direccion: this.guia.des_direccion,
+          des_identificacion: this.guia.des_identificacion,
+          motivo: this.guia.motivo,
+          ruta: this.guia.ruta,
+          observaciones: this.guia.observaciones,
           detalles: this.arrayDetalle,
         })
         .then((resp) => {
-          axios
-            .post("/api/factura/xml_guia", {
-              factura: resp.data.factura,
-              detalles: resp.data.detalles,
-              credito: resp.data.credito,
-            })
-            .then((res) => {
-              this.crearfacturacion(
-                "/" + res.data.firma,
-                res.data.clave,
-                res.data.archivo,
-                res.data.tipo,
-                res.data.id,
-                res.data.carpeta
-              );
-            });
+          console.log(resp.data);
+          // axios
+          //   .post("/api/factura/xml_guia", {
+          //     guia: resp.data.guia,
+          //     detalles: resp.data.detalles,
+          //   })
+          //   .then((res) => {
+          //     this.crearfacturacion(
+          //       "/" + res.data.firma,
+          //       res.data.clave,
+          //       res.data.archivo,
+          //       res.data.tipo,
+          //       res.data.id,
+          //       res.data.carpeta
+          //     );
+          //   });
         })
         .catch((err) => {
           Swal.fire(
@@ -411,11 +585,45 @@ export default {
         });
     },
 
+    selectTransportista(search, loading) {
+      loading(true);
+      axios
+        .get("/api/transportista/buscar?cli=" + search)
+        .then((resp) => {
+          this.arrayTransportista = resp.data;
+          loading(false);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    selectComprobantes() {
+      axios.get("/api/guia/facturas").then((resp) => {
+        this.arrayFacturas = resp.data;
+      });
+    },
+
+    // Métodos para los detalles
+    getDetails(id = 0) {
+      axios
+        .get("/api/guia/detalles", {
+          params: {
+            factura: id,
+          },
+        })
+        .then((resp) => {
+          this.arrayDetalle = resp.data.detalles;
+          this.guia.des_nombre = resp.data.destinatario.nombre;
+          this.guia.des_identificacion =
+            resp.data.destinatario.num_identificacion;
+          this.guia.des_direccion = resp.data.destinatario.direccion;
+        });
+    },
     eliminarDetalle(index) {
       this.arrayDetalle.splice(index, 1);
     },
 
-    // Estructura para Agregar  Cliente
+    // Estructura para Agregar Transportista
     abrirModal() {
       $("#modal").modal("show");
       this.selectIdentificaciones();
@@ -475,12 +683,6 @@ export default {
       this.transportista.telefonos = "";
       this.transportista.email = "";
       this.transportista.placa = "";
-    },
-
-    selectIdentificaciones() {
-      axios.get("/api/identificaciones").then((resp) => {
-        this.arrayIdentificaciones = resp.data;
-      });
     },
 
     // Métodos para la facturación
@@ -582,6 +784,7 @@ export default {
   },
   mounted() {
     this.getGuia();
+    this.selectComprobantes();
   },
 };
 </script>

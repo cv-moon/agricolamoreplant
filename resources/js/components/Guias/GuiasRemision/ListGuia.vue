@@ -22,9 +22,8 @@
             <th>F. Emi.</th>
             <th># Guía.</th>
             <th>Transportista</th>
-            <th># Fact.</th>
-            <th>Usuario</th>
             <th>Motivo</th>
+            <th>Usuario</th>
             <th>Estado</th>
             <th>Acción</th>
           </tr>
@@ -42,11 +41,9 @@
                   .padStart(9, 0)}`
               "
             ></td>
-            <td v-text="guia.cliente"></td>
             <td v-text="guia.transportista"></td>
-            <td v-text="guia.factura"></td>
-            <td v-text="guia.usuario"></td>
             <td v-text="guia.motivo"></td>
+            <td v-text="guia.usuario"></td>
             <td v-text="guia.respuesta"></td>
             <td>
               <router-link

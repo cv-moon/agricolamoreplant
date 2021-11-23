@@ -3,10 +3,10 @@
     <div class="card-header">
       <h3 class="card-title mt-2">
         <i class="fas fa-align-justify"></i>
-        Editar Impuesto: {{ nombre }}
+        Editar Impuesto I.V.A.: {{ nombre }}
       </h3>
       <div class="card-tools">
-        <router-link to="/impuestos" class="btn btn-secondary btn-sm">
+        <router-link to="/impuestos-iva" class="btn btn-secondary btn-sm">
           <i class="fas fa-arrow-left"></i> Regresar
         </router-link>
       </div>
@@ -73,7 +73,7 @@
       </form>
     </div>
     <div class="card-footer">
-      <router-link to="/impuestos" class="btn btn-danger">
+      <router-link to="/impuestos-iva" class="btn btn-danger">
         Cancelar
       </router-link>
       <button type="button" class="btn btn-primary" @click="editar">
@@ -98,7 +98,7 @@ export default {
   methods: {
     detalle() {
       axios
-        .get("/api/tarifa/detalle", {
+        .get("/api/tarifa-iva/detalle", {
           params: {
             id: this.$route.params.id,
           },
@@ -133,7 +133,7 @@ export default {
         return;
       }
       axios
-        .put("/api/tarifa/editar", {
+        .put("/api/tarifa-iva/editar", {
           id: this.tarifa_id,
           impuesto_id: this.impuesto_id,
           nombre: this.nombre,
@@ -142,7 +142,7 @@ export default {
         })
         .then((resp) => {
           Swal.fire("Bien!", "El registro se guardó con éxito.", "success");
-          this.$router.push("/impuestos");
+          this.$router.push("/impuestos-iva");
         })
         .catch((err) => {
           Swal.fire(
@@ -153,7 +153,7 @@ export default {
         });
     },
     selectImpuestos() {
-      axios.get("/api/impuestos").then((resp) => {
+      axios.get("/api/impuestos-iva").then((resp) => {
         this.arrayImpuestos = resp.data;
       });
     },

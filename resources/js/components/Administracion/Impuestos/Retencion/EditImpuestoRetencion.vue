@@ -3,10 +3,10 @@
     <div class="card-header">
       <h3 class="card-title mt-2">
         <i class="fas fa-align-justify"></i>
-        Agregar Impuesto
+        Editar Impuesto Retención: {{ nombre }}
       </h3>
       <div class="card-tools">
-        <router-link to="/impuestos" class="btn btn-secondary btn-sm">
+        <router-link to="/impuestos-retencion" class="btn btn-secondary btn-sm">
           <i class="fas fa-arrow-left"></i> Regresar
         </router-link>
       </div>
@@ -73,11 +73,11 @@
       </form>
     </div>
     <div class="card-footer">
-      <router-link to="/impuestos" class="btn btn-danger">
+      <router-link to="/impuestos-retencion" class="btn btn-danger">
         Cancelar
       </router-link>
-      <button type="button" class="btn btn-success" @click="guardar">
-        Guardar
+      <button type="button" class="btn btn-primary" @click="editar">
+        Actualizar
       </button>
     </div>
   </div>
@@ -86,6 +86,7 @@
 export default {
   data() {
     return {
+      tarifa_id: 0,
       impuesto_id: 0,
       nombre: "",
       codigo: 0,
@@ -95,6 +96,21 @@ export default {
     };
   },
   methods: {
+    detalle() {
+      axios
+        .get("/api/tarifa-retencion/detalle", {
+          params: {
+            id: this.$route.params.id,
+          },
+        })
+        .then((resp) => {
+          this.tarifa_id = resp.data["id"];
+          this.impuesto_id = resp.data["impuesto_id"];
+          this.nombre = resp.data["nombre"];
+          this.codigo = resp.data["codigo"];
+          this.valor = resp.data["valor"];
+        });
+    },
     validaCampos() {
       this.errors = [];
       if (this.impuesto_id == 0) {
@@ -111,13 +127,14 @@ export default {
       }
       return this.errors;
     },
-    guardar() {
+    editar() {
       const condiciones = this.validaCampos();
       if (condiciones.length) {
         return;
       }
       axios
-        .post("/api/tarifa/guardar", {
+        .put("/api/tarifa-retencion/editar", {
+          id: this.tarifa_id,
           impuesto_id: this.impuesto_id,
           nombre: this.nombre,
           codigo: this.codigo,
@@ -125,7 +142,7 @@ export default {
         })
         .then((resp) => {
           Swal.fire("Bien!", "El registro se guardó con éxito.", "success");
-          this.$router.push("/impuestos");
+          this.$router.push("/impuestos-retencion");
         })
         .catch((err) => {
           Swal.fire(
@@ -136,12 +153,13 @@ export default {
         });
     },
     selectImpuestos() {
-      axios.get("/api/impuestos").then((resp) => {
+      axios.get("/api/impuestos-retencion").then((resp) => {
         this.arrayImpuestos = resp.data;
       });
     },
   },
   mounted() {
+    this.detalle();
     this.selectImpuestos();
   },
 };

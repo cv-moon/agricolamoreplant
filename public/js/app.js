@@ -3850,10 +3850,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Administracion/Impuestos/AddImpuesto.vue?vue&type=script&lang=js&":
-/*!***********************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Administracion/Impuestos/AddImpuesto.vue?vue&type=script&lang=js& ***!
-  \***********************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Administracion/Impuestos/Iva/AddImpuestoIva.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Administracion/Impuestos/Iva/AddImpuestoIva.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -3985,7 +3985,7 @@ __webpack_require__.r(__webpack_exports__);
         return;
       }
 
-      axios.post("/api/tarifa/guardar", {
+      axios.post("/api/tarifa-iva/guardar", {
         impuesto_id: this.impuesto_id,
         nombre: this.nombre,
         codigo: this.codigo,
@@ -3993,7 +3993,7 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (resp) {
         Swal.fire("Bien!", "El registro se guardó con éxito.", "success");
 
-        _this.$router.push("/impuestos");
+        _this.$router.push("/impuestos-iva");
       })["catch"](function (err) {
         Swal.fire("Error!", "No se pudo realizar el registro. " + err, "error");
       });
@@ -4001,7 +4001,7 @@ __webpack_require__.r(__webpack_exports__);
     selectImpuestos: function selectImpuestos() {
       var _this2 = this;
 
-      axios.get("/api/impuestos").then(function (resp) {
+      axios.get("/api/impuestos-iva").then(function (resp) {
         _this2.arrayImpuestos = resp.data;
       });
     }
@@ -4013,10 +4013,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Administracion/Impuestos/EditImpuesto.vue?vue&type=script&lang=js&":
-/*!************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Administracion/Impuestos/EditImpuesto.vue?vue&type=script&lang=js& ***!
-  \************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Administracion/Impuestos/Iva/EditImpuestoIva.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Administracion/Impuestos/Iva/EditImpuestoIva.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -4122,7 +4122,7 @@ __webpack_require__.r(__webpack_exports__);
     detalle: function detalle() {
       var _this = this;
 
-      axios.get("/api/tarifa/detalle", {
+      axios.get("/api/tarifa-iva/detalle", {
         params: {
           id: this.$route.params.id
         }
@@ -4164,7 +4164,7 @@ __webpack_require__.r(__webpack_exports__);
         return;
       }
 
-      axios.put("/api/tarifa/editar", {
+      axios.put("/api/tarifa-iva/editar", {
         id: this.tarifa_id,
         impuesto_id: this.impuesto_id,
         nombre: this.nombre,
@@ -4173,7 +4173,7 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (resp) {
         Swal.fire("Bien!", "El registro se guardó con éxito.", "success");
 
-        _this2.$router.push("/impuestos");
+        _this2.$router.push("/impuestos-iva");
       })["catch"](function (err) {
         Swal.fire("Error!", "No se pudo realizar el registro. " + err, "error");
       });
@@ -4181,7 +4181,7 @@ __webpack_require__.r(__webpack_exports__);
     selectImpuestos: function selectImpuestos() {
       var _this3 = this;
 
-      axios.get("/api/impuestos").then(function (resp) {
+      axios.get("/api/impuestos-iva").then(function (resp) {
         _this3.arrayImpuestos = resp.data;
       });
     }
@@ -4194,10 +4194,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Administracion/Impuestos/ListImpuesto.vue?vue&type=script&lang=js&":
-/*!************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Administracion/Impuestos/ListImpuesto.vue?vue&type=script&lang=js& ***!
-  \************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Administracion/Impuestos/Iva/ListImpuestoIva.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Administracion/Impuestos/Iva/ListImpuestoIva.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -4268,7 +4268,439 @@ __webpack_require__.r(__webpack_exports__);
     listar: function listar() {
       var _this = this;
 
-      axios.get("/api/tarifas").then(function (resp) {
+      axios.get("/api/tarifas-iva").then(function (resp) {
+        _this.arrayTarifas = resp.data;
+
+        _this.myTable();
+      });
+    }
+  },
+  mounted: function mounted() {
+    this.listar();
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Administracion/Impuestos/Retencion/AddImpuestoRetencion.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Administracion/Impuestos/Retencion/AddImpuestoRetencion.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      impuesto_id: 0,
+      nombre: "",
+      codigo: 0,
+      valor: 0,
+      arrayImpuestos: [],
+      errors: []
+    };
+  },
+  methods: {
+    validaCampos: function validaCampos() {
+      this.errors = [];
+
+      if (this.impuesto_id == 0) {
+        this.errors.push("Seleccione Tipo de Impuesto.");
+      }
+
+      if (!this.nombre) {
+        this.errors.push("Ingrese Nombre.");
+      }
+
+      if (!this.codigo) {
+        this.errors.push("Ingrese Código.");
+      }
+
+      if (!this.valor) {
+        this.errors.push("Ingrese Valor.");
+      }
+
+      return this.errors;
+    },
+    guardar: function guardar() {
+      var _this = this;
+
+      var condiciones = this.validaCampos();
+
+      if (condiciones.length) {
+        return;
+      }
+
+      axios.post("/api/tarifa-retencion/guardar", {
+        impuesto_id: this.impuesto_id,
+        nombre: this.nombre,
+        codigo: this.codigo,
+        valor: this.valor
+      }).then(function (resp) {
+        Swal.fire("Bien!", "El registro se guardó con éxito.", "success");
+
+        _this.$router.push("/impuestos-retencion");
+      })["catch"](function (err) {
+        Swal.fire("Error!", "No se pudo realizar el registro. " + err, "error");
+      });
+    },
+    selectImpuestos: function selectImpuestos() {
+      var _this2 = this;
+
+      axios.get("/api/impuestos-retencion").then(function (resp) {
+        _this2.arrayImpuestos = resp.data;
+      });
+    }
+  },
+  mounted: function mounted() {
+    this.selectImpuestos();
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Administracion/Impuestos/Retencion/EditImpuestoRetencion.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Administracion/Impuestos/Retencion/EditImpuestoRetencion.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      tarifa_id: 0,
+      impuesto_id: 0,
+      nombre: "",
+      codigo: 0,
+      valor: 0,
+      arrayImpuestos: [],
+      errors: []
+    };
+  },
+  methods: {
+    detalle: function detalle() {
+      var _this = this;
+
+      axios.get("/api/tarifa-retencion/detalle", {
+        params: {
+          id: this.$route.params.id
+        }
+      }).then(function (resp) {
+        _this.tarifa_id = resp.data["id"];
+        _this.impuesto_id = resp.data["impuesto_id"];
+        _this.nombre = resp.data["nombre"];
+        _this.codigo = resp.data["codigo"];
+        _this.valor = resp.data["valor"];
+      });
+    },
+    validaCampos: function validaCampos() {
+      this.errors = [];
+
+      if (this.impuesto_id == 0) {
+        this.errors.push("Seleccione Tipo de Impuesto.");
+      }
+
+      if (!this.nombre) {
+        this.errors.push("Ingrese Nombre.");
+      }
+
+      if (!this.codigo) {
+        this.errors.push("Ingrese Código.");
+      }
+
+      if (!this.valor) {
+        this.errors.push("Ingrese Valor.");
+      }
+
+      return this.errors;
+    },
+    editar: function editar() {
+      var _this2 = this;
+
+      var condiciones = this.validaCampos();
+
+      if (condiciones.length) {
+        return;
+      }
+
+      axios.put("/api/tarifa-retencion/editar", {
+        id: this.tarifa_id,
+        impuesto_id: this.impuesto_id,
+        nombre: this.nombre,
+        codigo: this.codigo,
+        valor: this.valor
+      }).then(function (resp) {
+        Swal.fire("Bien!", "El registro se guardó con éxito.", "success");
+
+        _this2.$router.push("/impuestos-retencion");
+      })["catch"](function (err) {
+        Swal.fire("Error!", "No se pudo realizar el registro. " + err, "error");
+      });
+    },
+    selectImpuestos: function selectImpuestos() {
+      var _this3 = this;
+
+      axios.get("/api/impuestos-retencion").then(function (resp) {
+        _this3.arrayImpuestos = resp.data;
+      });
+    }
+  },
+  mounted: function mounted() {
+    this.detalle();
+    this.selectImpuestos();
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Administracion/Impuestos/Retencion/ListImpuestoRetencion.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Administracion/Impuestos/Retencion/ListImpuestoRetencion.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      arrayTarifas: []
+    };
+  },
+  methods: {
+    myTable: function myTable() {
+      this.$nextTick(function () {
+        $("#tabla").DataTable();
+      });
+    },
+    listar: function listar() {
+      var _this = this;
+
+      axios.get("/api/tarifas-retencion").then(function (resp) {
         _this.arrayTarifas = resp.data;
 
         _this.myTable();
@@ -11556,8 +11988,143 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -11858,7 +12425,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         num_autorizacion: "",
         fec_inicio: "",
         fec_fin: "",
-        motivo: "",
+        des_nombre: "",
+        des_identificacion: "",
+        des_direccion: "",
+        motivo: "VENTA DE PRODUCTOS",
         ruta: "",
         observaciones: "",
         errors: []
@@ -11885,10 +12455,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         errors: []
       },
       identificacion_id: 0,
-      arrayFactura: [],
+      arrayTransportista: [],
+      arrayFacturas: [],
       arrayIdentificaciones: [],
       arrayDetalle: []
     };
+  },
+  computed: {
+    getId: function getId() {
+      if (!this.selected) {
+        this.guia.transportista_id = 0;
+      } else {
+        this.guia.transportista_id = this.selected.id;
+      }
+    }
   },
   methods: {
     myTable: function myTable() {
@@ -11914,52 +12494,122 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     validaCampos: function validaCampos() {
       this.guia.errors = [];
 
-      if (!this.guia.cliente_id || this.guia.cliente_id == 0) {
-        this.guia.errors.push("Seleccione Cliente.");
+      if (!this.guia.transportista_id || this.guia.transportista_id == 0) {
+        this.guia.errors.push("Seleccione Transportista.");
+      }
+
+      if (!this.guia.factura_id || this.guia.factura_id == 0) {
+        this.guia.errors.push("Seleccione Comprobante.");
       }
 
       if (this.arrayDetalle.length == 0) {
-        this.guia.errors.push("Agregue Productos");
+        this.guia.errors.push("Agregue Productos a Trasnportar");
       }
 
-      if (this.pago.tipo == "C") {
-        if (!this.pago.plazo || this.pago.plazo == 0) {
-          this.guia.errors.push("Revise el plazo");
-        }
+      if (!this.guia.fec_inicio) {
+        this.guia.errors.push("Ingrese Fecha Inicio");
+      }
+
+      if (!this.guia.fec_fin) {
+        this.guia.errors.push("Ingrese Fecha Fin");
+      }
+
+      if (!this.guia.ruta) {
+        this.guia.errors.push("Ingrese Ruta");
+      }
+
+      if (!this.guia.motivo) {
+        this.guia.errors.push("Ingrese Motivo");
+      }
+
+      if (!this.guia.observaciones) {
+        this.guia.errors.push("Ingrese Observaciones");
       }
 
       return this.guia.errors;
     },
     guardar: function guardar() {
-      var _axios$post,
-          _this2 = this;
-
       var condiciones = this.validaCampos();
 
       if (condiciones.length) {
         return;
       }
 
-      axios.post("/api/guia/guardar", (_axios$post = {
-        cliente_id: this.guia.cliente_id,
+      axios.post("/api/guia/guardar", {
+        factura_id: this.guia.factura_id,
         punto_id: this.guia.punto_id,
-        transportista_id: this.guia.transportista_id
-      }, _defineProperty(_axios$post, "transportista_id", this.guia.transportista_id), _defineProperty(_axios$post, "detalles", this.arrayDetalle), _axios$post)).then(function (resp) {
-        axios.post("/api/factura/xml_guia", {
-          factura: resp.data.factura,
-          detalles: resp.data.detalles,
-          credito: resp.data.credito
-        }).then(function (res) {
-          _this2.crearfacturacion("/" + res.data.firma, res.data.clave, res.data.archivo, res.data.tipo, res.data.id, res.data.carpeta);
-        });
+        transportista_id: this.guia.transportista_id,
+        tip_ambiente: this.guia.tip_ambiente,
+        tip_emision: this.guia.tip_emision,
+        num_secuencial: this.guia.num_secuencial,
+        cla_acceso: this.guia.cla_acceso,
+        fec_inicio: this.guia.fec_inicio,
+        fec_fin: this.guia.fec_fin,
+        des_nombre: this.guia.des_nombre,
+        des_direccion: this.guia.des_direccion,
+        des_identificacion: this.guia.des_identificacion,
+        motivo: this.guia.motivo,
+        ruta: this.guia.ruta,
+        observaciones: this.guia.observaciones,
+        detalles: this.arrayDetalle
+      }).then(function (resp) {
+        console.log(resp.data); // axios
+        //   .post("/api/factura/xml_guia", {
+        //     guia: resp.data.guia,
+        //     detalles: resp.data.detalles,
+        //   })
+        //   .then((res) => {
+        //     this.crearfacturacion(
+        //       "/" + res.data.firma,
+        //       res.data.clave,
+        //       res.data.archivo,
+        //       res.data.tipo,
+        //       res.data.id,
+        //       res.data.carpeta
+        //     );
+        //   });
       })["catch"](function (err) {
         Swal.fire("Error!", "No se pudo realizar el registro. " + err, "error");
+      });
+    },
+    selectTransportista: function selectTransportista(search, loading) {
+      var _this2 = this;
+
+      loading(true);
+      axios.get("/api/transportista/buscar?cli=" + search).then(function (resp) {
+        _this2.arrayTransportista = resp.data;
+        loading(false);
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    },
+    selectComprobantes: function selectComprobantes() {
+      var _this3 = this;
+
+      axios.get("/api/guia/facturas").then(function (resp) {
+        _this3.arrayFacturas = resp.data;
+      });
+    },
+    // Métodos para los detalles
+    getDetails: function getDetails() {
+      var _this4 = this;
+
+      var id = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+      axios.get("/api/guia/detalles", {
+        params: {
+          factura: id
+        }
+      }).then(function (resp) {
+        _this4.arrayDetalle = resp.data.detalles;
+        _this4.guia.des_nombre = resp.data.destinatario.nombre;
+        _this4.guia.des_identificacion = resp.data.destinatario.num_identificacion;
+        _this4.guia.des_direccion = resp.data.destinatario.direccion;
       });
     },
     eliminarDetalle: function eliminarDetalle(index) {
       this.arrayDetalle.splice(index, 1);
     },
-    // Estructura para Agregar  Cliente
+    // Estructura para Agregar Transportista
     abrirModal: function abrirModal() {
       $("#modal").modal("show");
       this.selectIdentificaciones();
@@ -11990,7 +12640,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return this.transportista.errors;
     },
     guardarTransportista: function guardarTransportista() {
-      var _this3 = this;
+      var _this5 = this;
 
       var condiciones = this.validaCamposTransportista();
 
@@ -12009,7 +12659,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }).then(function (resp) {
         Swal.fire("Bien!", "El registro se guardó con éxito.", "success");
 
-        _this3.cerrarModal();
+        _this5.cerrarModal();
       })["catch"](function (err) {
         Swal.fire("Error!", "No se pudo realizar el registro. " + err, "error");
       });
@@ -12022,13 +12672,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.transportista.telefonos = "";
       this.transportista.email = "";
       this.transportista.placa = "";
-    },
-    selectIdentificaciones: function selectIdentificaciones() {
-      var _this4 = this;
-
-      axios.get("/api/identificaciones").then(function (resp) {
-        _this4.arrayIdentificaciones = resp.data;
-      });
     },
     // Métodos para la facturación
     zeroFill: function zeroFill(number, width) {
@@ -12057,7 +12700,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return digito_calculado;
     },
     crearfacturacion: function crearfacturacion(firma, password, factura, tipo, id, carpeta) {
-      var _this5 = this;
+      var _this6 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
         var _yield$script_comprob, comprobante, _yield$script_comprob2, contenido, _yield$script_comprob3, certificado, _yield$script_comprob4, quefirma, _yield$script_comprob5, validado, _yield$script_comprob6, recibida, _yield$script_comprob7, registrado;
@@ -12147,11 +12790,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 if (registrado == "enviado") {
                   Swal.fire("Bien!", "La factura se envió exitosamente.", "success");
 
-                  _this5.$router.push("/guias");
+                  _this6.$router.push("/guias");
                 } else {
                   Swal.fire("Error!", "La factura no pudo ser enviada, intente mas tarde.", "error");
 
-                  _this5.$router.push("/guias");
+                  _this6.$router.push("/guias");
                 }
 
                 _context.next = 36;
@@ -12162,7 +12805,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 _context.t0 = _context["catch"](0);
                 Swal.fire("Error!", "Error en el envio al SRI" + _context.t0, "error");
 
-                _this5.$router.push("/guias");
+                _this6.$router.push("/guias");
 
               case 36:
               case "end":
@@ -12175,6 +12818,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   mounted: function mounted() {
     this.getGuia();
+    this.selectComprobantes();
   }
 });
 
@@ -12189,9 +12833,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
 //
 //
 //
@@ -81142,10 +81783,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Administracion/Impuestos/AddImpuesto.vue?vue&type=template&id=a59114e0&":
-/*!***************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Administracion/Impuestos/AddImpuesto.vue?vue&type=template&id=a59114e0& ***!
-  \***************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Administracion/Impuestos/Iva/AddImpuestoIva.vue?vue&type=template&id=743ffb0f&":
+/*!**********************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Administracion/Impuestos/Iva/AddImpuestoIva.vue?vue&type=template&id=743ffb0f& ***!
+  \**********************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -81169,7 +81810,7 @@ var render = function() {
             "router-link",
             {
               staticClass: "btn btn-secondary btn-sm",
-              attrs: { to: "/impuestos" }
+              attrs: { to: "/impuestos-iva" }
             },
             [
               _c("i", { staticClass: "fas fa-arrow-left" }),
@@ -81355,7 +81996,7 @@ var render = function() {
       [
         _c(
           "router-link",
-          { staticClass: "btn btn-danger", attrs: { to: "/impuestos" } },
+          { staticClass: "btn btn-danger", attrs: { to: "/impuestos-iva" } },
           [_vm._v("\n      Cancelar\n    ")]
         ),
         _vm._v(" "),
@@ -81380,7 +82021,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("h3", { staticClass: "card-title mt-2" }, [
       _c("i", { staticClass: "fas fa-align-justify" }),
-      _vm._v("\n      Agregar Impuesto\n    ")
+      _vm._v("\n      Agregar Impuesto I.V.A.\n    ")
     ])
   }
 ]
@@ -81390,10 +82031,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Administracion/Impuestos/EditImpuesto.vue?vue&type=template&id=656e2962&":
-/*!****************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Administracion/Impuestos/EditImpuesto.vue?vue&type=template&id=656e2962& ***!
-  \****************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Administracion/Impuestos/Iva/EditImpuestoIva.vue?vue&type=template&id=5d5460da&":
+/*!***********************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Administracion/Impuestos/Iva/EditImpuestoIva.vue?vue&type=template&id=5d5460da& ***!
+  \***********************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -81409,7 +82050,9 @@ var render = function() {
     _c("div", { staticClass: "card-header" }, [
       _c("h3", { staticClass: "card-title mt-2" }, [
         _c("i", { staticClass: "fas fa-align-justify" }),
-        _vm._v("\n      Editar Impuesto: " + _vm._s(_vm.nombre) + "\n    ")
+        _vm._v(
+          "\n      Editar Impuesto I.V.A.: " + _vm._s(_vm.nombre) + "\n    "
+        )
       ]),
       _vm._v(" "),
       _c(
@@ -81420,7 +82063,7 @@ var render = function() {
             "router-link",
             {
               staticClass: "btn btn-secondary btn-sm",
-              attrs: { to: "/impuestos" }
+              attrs: { to: "/impuestos-iva" }
             },
             [
               _c("i", { staticClass: "fas fa-arrow-left" }),
@@ -81606,7 +82249,7 @@ var render = function() {
       [
         _c(
           "router-link",
-          { staticClass: "btn btn-danger", attrs: { to: "/impuestos" } },
+          { staticClass: "btn btn-danger", attrs: { to: "/impuestos-iva" } },
           [_vm._v("\n      Cancelar\n    ")]
         ),
         _vm._v(" "),
@@ -81631,10 +82274,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Administracion/Impuestos/ListImpuesto.vue?vue&type=template&id=e78e203a&":
-/*!****************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Administracion/Impuestos/ListImpuesto.vue?vue&type=template&id=e78e203a& ***!
-  \****************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Administracion/Impuestos/Iva/ListImpuestoIva.vue?vue&type=template&id=0b0db874&":
+/*!***********************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Administracion/Impuestos/Iva/ListImpuestoIva.vue?vue&type=template&id=0b0db874& ***!
+  \***********************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -81658,7 +82301,7 @@ var render = function() {
             "router-link",
             {
               staticClass: "btn btn-success",
-              attrs: { to: "/impuestos/agregar" }
+              attrs: { to: "/impuestos-iva/agregar" }
             },
             [_c("i", { staticClass: "fas fa-plus" }), _vm._v(" Nuevo\n      ")]
           )
@@ -81693,7 +82336,7 @@ var render = function() {
                         attrs: {
                           type: "button",
                           title: "Editar",
-                          to: "/impuestos/editar/" + tarifa.id
+                          to: "/impuestos-iva/editar/" + tarifa.id
                         }
                       },
                       [_c("i", { staticClass: "fas fa-pen" })]
@@ -81727,7 +82370,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("h3", { staticClass: "card-title mt-2" }, [
       _c("i", { staticClass: "fas fa-align-justify" }),
-      _vm._v("\n      Impuestos\n    ")
+      _vm._v("\n      Impuestos I.V.A.\n    ")
     ])
   },
   function() {
@@ -81755,10 +82398,658 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Administracion/Impuestos/Main.vue?vue&type=template&id=700c000c&":
-/*!********************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Administracion/Impuestos/Main.vue?vue&type=template&id=700c000c& ***!
-  \********************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Administracion/Impuestos/Iva/Main.vue?vue&type=template&id=a5e974f2&":
+/*!************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Administracion/Impuestos/Iva/Main.vue?vue&type=template&id=a5e974f2& ***!
+  \************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("router-view")
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Administracion/Impuestos/Retencion/AddImpuestoRetencion.vue?vue&type=template&id=4798a76f&":
+/*!**********************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Administracion/Impuestos/Retencion/AddImpuestoRetencion.vue?vue&type=template&id=4798a76f& ***!
+  \**********************************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "card card-primary card-outline" }, [
+    _c("div", { staticClass: "card-header" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "card-tools" },
+        [
+          _c(
+            "router-link",
+            {
+              staticClass: "btn btn-secondary btn-sm",
+              attrs: { to: "/impuestos-retencion" }
+            },
+            [
+              _c("i", { staticClass: "fas fa-arrow-left" }),
+              _vm._v(" Regresar\n      ")
+            ]
+          )
+        ],
+        1
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "card-body" }, [
+      _c("form", [
+        _c("b", { staticClass: "text-primary" }, [_vm._v("Datos Generales")]),
+        _vm._v(" "),
+        _c("hr", { staticClass: "mt-0" }),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group row" }, [
+          _c("div", { staticClass: "col-sm-3" }, [
+            _c(
+              "label",
+              { staticClass: "col-form-label", attrs: { for: "tip_impuesto" } },
+              [_vm._v("Tipo de Impuesto:")]
+            ),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.impuesto_id,
+                    expression: "impuesto_id"
+                  }
+                ],
+                staticClass: "form-control",
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.impuesto_id = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  }
+                }
+              },
+              [
+                _c("option", { attrs: { value: "0", disabled: "" } }, [
+                  _vm._v("Seleccione...")
+                ]),
+                _vm._v(" "),
+                _vm._l(_vm.arrayImpuestos, function(impuesto) {
+                  return _c("option", {
+                    key: impuesto.id,
+                    domProps: {
+                      value: impuesto.id,
+                      textContent: _vm._s(impuesto.nombre)
+                    }
+                  })
+                })
+              ],
+              2
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-3" }, [
+            _c(
+              "label",
+              { staticClass: "col-form-label", attrs: { for: "nombre" } },
+              [_vm._v("Nombre:")]
+            ),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.nombre,
+                  expression: "nombre"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "text", placeholder: "Nombre.", maxlength: "100" },
+              domProps: { value: _vm.nombre },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.nombre = $event.target.value
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-3" }, [
+            _c(
+              "label",
+              { staticClass: "col-form-label", attrs: { for: "codigo" } },
+              [_vm._v("Código:")]
+            ),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.codigo,
+                  expression: "codigo"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "number", placeholder: "0", min: "0", max: "255" },
+              domProps: { value: _vm.codigo },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.codigo = $event.target.value
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-3" }, [
+            _c(
+              "label",
+              { staticClass: "col-form-label", attrs: { for: "valor" } },
+              [_vm._v("Valor (%):")]
+            ),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.valor,
+                  expression: "valor"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "number", placeholder: "0", min: "0", max: "255" },
+              domProps: { value: _vm.valor },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.valor = $event.target.value
+                }
+              }
+            })
+          ])
+        ]),
+        _vm._v(" "),
+        _vm.errors.length
+          ? _c("div", { staticClass: "alert alert-danger" }, [
+              _c(
+                "div",
+                _vm._l(_vm.errors, function(error) {
+                  return _c("div", { key: error }, [
+                    _vm._v("\n            " + _vm._s(error) + "\n          ")
+                  ])
+                }),
+                0
+              )
+            ])
+          : _vm._e()
+      ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "card-footer" },
+      [
+        _c(
+          "router-link",
+          {
+            staticClass: "btn btn-danger",
+            attrs: { to: "/impuestos-retencion" }
+          },
+          [_vm._v("\n      Cancelar\n    ")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-success",
+            attrs: { type: "button" },
+            on: { click: _vm.guardar }
+          },
+          [_vm._v("\n      Guardar\n    ")]
+        )
+      ],
+      1
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h3", { staticClass: "card-title mt-2" }, [
+      _c("i", { staticClass: "fas fa-align-justify" }),
+      _vm._v("\n      Agregar Impuesto para Retención\n    ")
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Administracion/Impuestos/Retencion/EditImpuestoRetencion.vue?vue&type=template&id=4fa89550&":
+/*!***********************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Administracion/Impuestos/Retencion/EditImpuestoRetencion.vue?vue&type=template&id=4fa89550& ***!
+  \***********************************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "card card-primary card-outline" }, [
+    _c("div", { staticClass: "card-header" }, [
+      _c("h3", { staticClass: "card-title mt-2" }, [
+        _c("i", { staticClass: "fas fa-align-justify" }),
+        _vm._v(
+          "\n      Editar Impuesto Retención: " + _vm._s(_vm.nombre) + "\n    "
+        )
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "card-tools" },
+        [
+          _c(
+            "router-link",
+            {
+              staticClass: "btn btn-secondary btn-sm",
+              attrs: { to: "/impuestos-retencion" }
+            },
+            [
+              _c("i", { staticClass: "fas fa-arrow-left" }),
+              _vm._v(" Regresar\n      ")
+            ]
+          )
+        ],
+        1
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "card-body" }, [
+      _c("form", [
+        _c("b", { staticClass: "text-primary" }, [_vm._v("Datos Generales")]),
+        _vm._v(" "),
+        _c("hr", { staticClass: "mt-0" }),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group row" }, [
+          _c("div", { staticClass: "col-sm-3" }, [
+            _c(
+              "label",
+              { staticClass: "col-form-label", attrs: { for: "tip_impuesto" } },
+              [_vm._v("Tipo de Impuesto:")]
+            ),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.impuesto_id,
+                    expression: "impuesto_id"
+                  }
+                ],
+                staticClass: "form-control",
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.impuesto_id = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  }
+                }
+              },
+              [
+                _c("option", { attrs: { value: "0", disabled: "" } }, [
+                  _vm._v("Seleccione...")
+                ]),
+                _vm._v(" "),
+                _vm._l(_vm.arrayImpuestos, function(impuesto) {
+                  return _c("option", {
+                    key: impuesto.id,
+                    domProps: {
+                      value: impuesto.id,
+                      textContent: _vm._s(impuesto.nombre)
+                    }
+                  })
+                })
+              ],
+              2
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-3" }, [
+            _c(
+              "label",
+              { staticClass: "col-form-label", attrs: { for: "nombre" } },
+              [_vm._v("Nombre:")]
+            ),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.nombre,
+                  expression: "nombre"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "text", placeholder: "Nombre.", maxlength: "100" },
+              domProps: { value: _vm.nombre },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.nombre = $event.target.value
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-3" }, [
+            _c(
+              "label",
+              { staticClass: "col-form-label", attrs: { for: "codigo" } },
+              [_vm._v("Código:")]
+            ),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.codigo,
+                  expression: "codigo"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "number", placeholder: "0", min: "0", max: "255" },
+              domProps: { value: _vm.codigo },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.codigo = $event.target.value
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-3" }, [
+            _c(
+              "label",
+              { staticClass: "col-form-label", attrs: { for: "valor" } },
+              [_vm._v("Valor (%):")]
+            ),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.valor,
+                  expression: "valor"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "number", placeholder: "0", min: "0", max: "255" },
+              domProps: { value: _vm.valor },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.valor = $event.target.value
+                }
+              }
+            })
+          ])
+        ]),
+        _vm._v(" "),
+        _vm.errors.length
+          ? _c("div", { staticClass: "alert alert-danger" }, [
+              _c(
+                "div",
+                _vm._l(_vm.errors, function(error) {
+                  return _c("div", { key: error }, [
+                    _vm._v("\n            " + _vm._s(error) + "\n          ")
+                  ])
+                }),
+                0
+              )
+            ])
+          : _vm._e()
+      ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "card-footer" },
+      [
+        _c(
+          "router-link",
+          {
+            staticClass: "btn btn-danger",
+            attrs: { to: "/impuestos-retencion" }
+          },
+          [_vm._v("\n      Cancelar\n    ")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary",
+            attrs: { type: "button" },
+            on: { click: _vm.editar }
+          },
+          [_vm._v("\n      Actualizar\n    ")]
+        )
+      ],
+      1
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Administracion/Impuestos/Retencion/ListImpuestoRetencion.vue?vue&type=template&id=821b1188&":
+/*!***********************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Administracion/Impuestos/Retencion/ListImpuestoRetencion.vue?vue&type=template&id=821b1188& ***!
+  \***********************************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "card card-primary card-outline" }, [
+    _c("div", { staticClass: "card-header" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "card-tools" },
+        [
+          _c(
+            "router-link",
+            {
+              staticClass: "btn btn-success",
+              attrs: { to: "/impuestos-retencion/agregar" }
+            },
+            [_c("i", { staticClass: "fas fa-plus" }), _vm._v(" Nuevo\n      ")]
+          )
+        ],
+        1
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "card-body" }, [
+      _c(
+        "table",
+        {
+          staticClass:
+            "table table-striped table-bordered dt-responsive nowrap",
+          staticStyle: { width: "100%" },
+          attrs: { id: "tabla" }
+        },
+        [
+          _vm._m(1),
+          _vm._v(" "),
+          _c(
+            "tbody",
+            _vm._l(_vm.arrayTarifas, function(tarifa) {
+              return _c("tr", { key: tarifa.id }, [
+                _c(
+                  "td",
+                  [
+                    _c(
+                      "router-link",
+                      {
+                        staticClass: "btn btn-warning btn-xs",
+                        attrs: {
+                          type: "button",
+                          title: "Editar",
+                          to: "/impuestos-retencion/editar/" + tarifa.id
+                        }
+                      },
+                      [_c("i", { staticClass: "fas fa-pen" })]
+                    )
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c("td", {
+                  domProps: { textContent: _vm._s(tarifa.impuesto) }
+                }),
+                _vm._v(" "),
+                _c("td", {
+                  staticStyle: { width: "15px" },
+                  domProps: { textContent: _vm._s(tarifa.tarifa) }
+                }),
+                _vm._v(" "),
+                _c("td", { domProps: { textContent: _vm._s(tarifa.valor) } }),
+                _vm._v(" "),
+                _c("td", { domProps: { textContent: _vm._s(tarifa.codigo) } })
+              ])
+            }),
+            0
+          )
+        ]
+      )
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h3", { staticClass: "card-title mt-2" }, [
+      _c("i", { staticClass: "fas fa-align-justify" }),
+      _vm._v("\n      Impuestos para Retención\n    ")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("Acción")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Impuesto")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Tarifa")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Valor (%)")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Codigo")])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Administracion/Impuestos/Retencion/Main.vue?vue&type=template&id=4ce268a8&":
+/*!******************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Administracion/Impuestos/Retencion/Main.vue?vue&type=template&id=4ce268a8& ***!
+  \******************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -93495,7 +94786,7 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-6" }, [
+        _c("div", { staticClass: "col-sm-6" }, [
           _c(
             "label",
             {
@@ -93511,33 +94802,389 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _c("b", { staticClass: "text-primary" }, [
-        _vm._v("Detalle de Productos")
-      ]),
+      _c("b", { staticClass: "text-primary" }, [_vm._v("Datos de Guía")]),
       _vm._v(" "),
       _c("hr", { staticClass: "mt-0" }),
       _vm._v(" "),
       _c("div", { staticClass: "form-group row" }, [
         _c("div", { staticClass: "col-sm-4" }, [
           _c(
-            "button",
+            "label",
             {
-              staticClass: "btn btn-success",
-              attrs: { type: "button", "data-target": "#modal" },
-              on: {
-                click: function($event) {
-                  return _vm.abrirModal()
+              staticClass: "col-sm-12 col-form-label",
+              attrs: { for: "dat_cliente" }
+            },
+            [_vm._v("Trasnportista:")]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "input-group" }, [
+            _c(
+              "div",
+              { staticClass: "col-sm-11" },
+              [
+                _c("v-select", {
+                  attrs: {
+                    options: _vm.arrayTransportista,
+                    getOptionLabel: function(option) {
+                      return option.nombre + " - " + option.num_identificacion
+                    },
+                    placeholder: "Buscar Transportista..."
+                  },
+                  on: { search: _vm.selectTransportista, input: _vm.getId },
+                  model: {
+                    value: _vm.selected,
+                    callback: function($$v) {
+                      _vm.selected = $$v
+                    },
+                    expression: "selected"
+                  }
+                })
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-success btn-xs",
+                attrs: {
+                  title: "Agregar Cliente",
+                  "data-target": "#modCliente"
+                },
+                on: {
+                  click: function($event) {
+                    return _vm.abrirModal()
+                  }
                 }
+              },
+              [_c("i", { staticClass: "fas fa-plus" })]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-sm-4" }, [
+          _c(
+            "label",
+            {
+              staticClass: "col-sm-12 col-form-label",
+              attrs: { for: "fec_inicio" }
+            },
+            [_vm._v("Fecha Inicio:")]
+          ),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.guia.fec_inicio,
+                expression: "guia.fec_inicio"
+              }
+            ],
+            staticClass: "form-control form-control-sm",
+            attrs: { type: "date" },
+            domProps: { value: _vm.guia.fec_inicio },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.guia, "fec_inicio", $event.target.value)
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-sm-4" }, [
+          _c(
+            "label",
+            {
+              staticClass: "col-sm-12 col-form-label",
+              attrs: { for: "fec_fin" }
+            },
+            [_vm._v("Fecha Fin:")]
+          ),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.guia.fec_fin,
+                expression: "guia.fec_fin"
+              }
+            ],
+            staticClass: "form-control form-control-sm",
+            attrs: { type: "date" },
+            domProps: { value: _vm.guia.fec_fin },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.guia, "fec_fin", $event.target.value)
+              }
+            }
+          })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group row" }, [
+        _c("div", { staticClass: "col-sm-4" }, [
+          _c(
+            "label",
+            {
+              staticClass: "col-sm-12 col-form-label",
+              attrs: { for: "fec_fin" }
+            },
+            [_vm._v("Ruta:")]
+          ),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.guia.ruta,
+                expression: "guia.ruta"
+              }
+            ],
+            staticClass: "form-control form-control-sm",
+            attrs: { type: "text", placeholder: "Ruta", maxlength: "300" },
+            domProps: { value: _vm.guia.ruta },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.guia, "ruta", $event.target.value)
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-sm-4" }, [
+          _c(
+            "label",
+            {
+              staticClass: "col-sm-12 col-form-label",
+              attrs: { for: "fec_inicio" }
+            },
+            [_vm._v("Motivo:")]
+          ),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.guia.motivo,
+                expression: "guia.motivo"
+              }
+            ],
+            staticClass: "form-control form-control-sm",
+            attrs: { type: "text", maxlength: "300", placeholder: "Motivo" },
+            domProps: { value: _vm.guia.motivo },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.guia, "motivo", $event.target.value)
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-sm-4" }, [
+          _c(
+            "label",
+            {
+              staticClass: "col-sm-12 col-form-label",
+              attrs: { for: "comprobante" }
+            },
+            [_vm._v("Comprobante:")]
+          ),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.guia.factura_id,
+                  expression: "guia.factura_id"
+                }
+              ],
+              staticClass: "form-control form-control-sm",
+              on: {
+                change: [
+                  function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.$set(
+                      _vm.guia,
+                      "factura_id",
+                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                    )
+                  },
+                  function($event) {
+                    return _vm.getDetails(_vm.guia.factura_id)
+                  }
+                ]
               }
             },
             [
-              _c("i", { staticClass: "fas fa-plus" }, [
-                _vm._v(" Agregar Productos ")
-              ])
-            ]
+              _c("option", { attrs: { value: "0", disabled: "" } }, [
+                _vm._v("Seleccione...")
+              ]),
+              _vm._v(" "),
+              _vm._l(_vm.arrayFacturas, function(factura) {
+                return _c("option", {
+                  key: factura.id,
+                  domProps: {
+                    value: factura.id,
+                    textContent: _vm._s(
+                      factura.nom_referencia +
+                        " Factura " +
+                        factura.num_secuencial
+                    )
+                  }
+                })
+              })
+            ],
+            2
           )
         ])
       ]),
+      _vm._v(" "),
+      _c("b", { staticClass: "text-primary" }, [_vm._v("Destino")]),
+      _vm._v(" "),
+      _c("hr", { staticClass: "mt-0" }),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group row" }, [
+        _c("div", { staticClass: "col-sm-8" }, [
+          _c(
+            "label",
+            {
+              staticClass: "col-sm-12 col-form-label",
+              attrs: { for: "fec_fin" }
+            },
+            [_vm._v("Destinatario:")]
+          ),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.guia.des_nombre,
+                expression: "guia.des_nombre"
+              }
+            ],
+            staticClass: "form-control form-control-sm",
+            attrs: {
+              type: "text",
+              placeholder: "Nombre / Razón Social / Destinatario",
+              maxlength: "300"
+            },
+            domProps: { value: _vm.guia.des_nombre },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.guia, "des_nombre", $event.target.value)
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-sm-4" }, [
+          _c(
+            "label",
+            {
+              staticClass: "col-sm-12 col-form-label",
+              attrs: { for: "fec_fin" }
+            },
+            [_vm._v("Identificación:")]
+          ),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.guia.des_identificacion,
+                expression: "guia.des_identificacion"
+              }
+            ],
+            staticClass: "form-control form-control-sm",
+            attrs: {
+              type: "text",
+              placeholder: "Cédula / R.U.C.",
+              maxlength: "300"
+            },
+            domProps: { value: _vm.guia.des_identificacion },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.guia, "des_identificacion", $event.target.value)
+              }
+            }
+          })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group row" }, [
+        _c("div", { staticClass: "col-sm-12" }, [
+          _c(
+            "label",
+            {
+              staticClass: "col-sm-12 col-form-label",
+              attrs: { for: "fec_fin" }
+            },
+            [_vm._v("Dirección:")]
+          ),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.guia.des_direccion,
+                expression: "guia.des_direccion"
+              }
+            ],
+            staticClass: "form-control form-control-sm",
+            attrs: { type: "text", placeholder: "Dirección", maxlength: "300" },
+            domProps: { value: _vm.guia.des_direccion },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.guia, "des_direccion", $event.target.value)
+              }
+            }
+          })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("b", { staticClass: "text-primary" }, [
+        _vm._v("Detalle de Productos a Trasladarse")
+      ]),
+      _vm._v(" "),
+      _c("hr", { staticClass: "mt-0" }),
       _vm._v(" "),
       _c("div", { staticClass: "form-group row" }, [
         _c("div", { staticClass: "col-sm-12 table-responsive" }, [
@@ -93581,13 +95228,13 @@ var render = function() {
                               {
                                 name: "model",
                                 rawName: "v-model",
-                                value: detalle.cantidad,
-                                expression: "detalle.cantidad"
+                                value: detalle.det_cantidad,
+                                expression: "detalle.det_cantidad"
                               }
                             ],
                             staticClass: "form-control",
                             attrs: { type: "number", min: "1" },
-                            domProps: { value: detalle.cantidad },
+                            domProps: { value: detalle.det_cantidad },
                             on: {
                               input: function($event) {
                                 if ($event.target.composing) {
@@ -93595,7 +95242,7 @@ var render = function() {
                                 }
                                 _vm.$set(
                                   detalle,
-                                  "cantidad",
+                                  "det_cantidad",
                                   $event.target.value
                                 )
                               }
@@ -93610,6 +95257,34 @@ var render = function() {
             ]
           )
         ])
+      ]),
+      _vm._v(" "),
+      _c("b", { staticClass: "text-primary" }, [_vm._v("Observaciones")]),
+      _vm._v(" "),
+      _c("hr", { staticClass: "mt-0" }),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group row" }, [
+        _c("textarea", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.guia.observaciones,
+              expression: "guia.observaciones"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: { placeholder: "Observaciones", maxlength: "300", rows: "3" },
+          domProps: { value: _vm.guia.observaciones },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.guia, "observaciones", $event.target.value)
+            }
+          }
+        })
       ]),
       _vm._v(" "),
       _vm.guia.errors.length
@@ -93838,7 +95513,7 @@ var render = function() {
                   "div",
                   { staticClass: "col-sm-4" },
                   [
-                    _vm.identificacion_id === 2
+                    _vm.transportista.identificacion_id === 2
                       ? [
                           _c("input", {
                             directives: [
@@ -93872,7 +95547,7 @@ var render = function() {
                             }
                           })
                         ]
-                      : _vm.identificacion_id === 1
+                      : _vm.transportista.identificacion_id === 1
                       ? [
                           _c("input", {
                             directives: [
@@ -93906,7 +95581,7 @@ var render = function() {
                             }
                           })
                         ]
-                      : _vm.identificacion_id === 3
+                      : _vm.transportista.identificacion_id === 3
                       ? [
                           _c("input", {
                             directives: [
@@ -94236,17 +95911,13 @@ var render = function() {
                   }
                 }),
                 _vm._v(" "),
-                _c("td", { domProps: { textContent: _vm._s(guia.cliente) } }),
-                _vm._v(" "),
                 _c("td", {
                   domProps: { textContent: _vm._s(guia.transportista) }
                 }),
                 _vm._v(" "),
-                _c("td", { domProps: { textContent: _vm._s(guia.factura) } }),
+                _c("td", { domProps: { textContent: _vm._s(guia.motivo) } }),
                 _vm._v(" "),
                 _c("td", { domProps: { textContent: _vm._s(guia.usuario) } }),
-                _vm._v(" "),
-                _c("td", { domProps: { textContent: _vm._s(guia.motivo) } }),
                 _vm._v(" "),
                 _c("td", { domProps: { textContent: _vm._s(guia.respuesta) } }),
                 _vm._v(" "),
@@ -94341,11 +96012,9 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Transportista")]),
         _vm._v(" "),
-        _c("th", [_vm._v("# Fact.")]),
+        _c("th", [_vm._v("Motivo")]),
         _vm._v(" "),
         _c("th", [_vm._v("Usuario")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Motivo")]),
         _vm._v(" "),
         _c("th", [_vm._v("Estado")]),
         _vm._v(" "),
@@ -98860,7 +100529,7 @@ var render = function() {
       _c("hr", { staticClass: "mt-0" }),
       _vm._v(" "),
       _c("div", { staticClass: "form-group row" }, [
-        _c("div", { staticClass: "col-6" }, [
+        _c("div", { staticClass: "col-sm-6" }, [
           _c(
             "label",
             {
@@ -98986,7 +100655,7 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-6" }, [
+        _c("div", { staticClass: "col-sm-6" }, [
           _c(
             "label",
             {
@@ -99394,11 +101063,11 @@ var render = function() {
           _c("div", { staticClass: "card card-success card-outline" }, [
             _c("div", { staticClass: "card-body" }, [
               _c("div", { staticClass: "form-group row" }, [
-                _c("div", { staticClass: "col-6" }, [
+                _c("div", { staticClass: "col-sm-6" }, [
                   _vm._v("Subtotal Iva 12%:")
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-6 bg-info text-right" }, [
+                _c("div", { staticClass: "col-sm-6 bg-info text-right" }, [
                   _vm._v(
                     "\n                $ " +
                       _vm._s(
@@ -99410,9 +101079,11 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "form-group row" }, [
-                _c("div", { staticClass: "col-6" }, [_vm._v("Subtotal 0%:")]),
+                _c("div", { staticClass: "col-sm-6" }, [
+                  _vm._v("Subtotal 0%:")
+                ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-6 bg-gray-dark text-right" }, [
+                _c("div", { staticClass: "col-sm-6 bg-gray-dark text-right" }, [
                   _vm._v(
                     "\n                $ " +
                       _vm._s(
@@ -99424,11 +101095,11 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "form-group row" }, [
-                _c("div", { staticClass: "col-6" }, [
+                _c("div", { staticClass: "col-sm-6" }, [
                   _vm._v("Subtotal no objeto de iva:")
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-6 bg-indigo text-right" }, [
+                _c("div", { staticClass: "col-sm-6 bg-indigo text-right" }, [
                   _vm._v(
                     "\n                $ " +
                       _vm._s(
@@ -99442,11 +101113,11 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "form-group row" }, [
-                _c("div", { staticClass: "col-6" }, [
+                _c("div", { staticClass: "col-sm-6" }, [
                   _vm._v("Subtotal exento de iva:")
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-6 bg-lightblue text-right" }, [
+                _c("div", { staticClass: "col-sm-6 bg-lightblue text-right" }, [
                   _vm._v(
                     "\n                $ " +
                       _vm._s(
@@ -99458,7 +101129,7 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "form-group row" }, [
-                _c("div", { staticClass: "col-6" }, [
+                _c("div", { staticClass: "col-sm-6" }, [
                   _vm._v("Subtotal sin Impuestos:")
                 ]),
                 _vm._v(" "),
@@ -99466,7 +101137,7 @@ var render = function() {
                   "div",
                   {
                     staticClass:
-                      "\n                  col-6\n                  solor-palette-set\n                  bg-info\n                  disabled\n                  color-palette\n                  text-right\n                "
+                      "\n                  col-sm-6\n                  solor-palette-set\n                  bg-info\n                  disabled\n                  color-palette\n                  text-right\n                "
                   },
                   [
                     _vm._v(
@@ -99483,11 +101154,11 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "form-group row" }, [
-                _c("div", { staticClass: "col-6" }, [
+                _c("div", { staticClass: "col-sm-6" }, [
                   _vm._v("Total Descuento:")
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-6 bg-success text-right" }, [
+                _c("div", { staticClass: "col-sm-6 bg-success text-right" }, [
                   _vm._v(
                     "\n                $ " +
                       _vm._s(
@@ -99501,9 +101172,9 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "form-group row" }, [
-                _c("div", { staticClass: "col-6" }, [_vm._v("Valor ICE:")]),
+                _c("div", { staticClass: "col-sm-6" }, [_vm._v("Valor ICE:")]),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-6 bg-secondary text-right" }, [
+                _c("div", { staticClass: "col-sm-6 bg-secondary text-right" }, [
                   _vm._v(
                     "\n                $ " +
                       _vm._s(_vm.factura.val_ice) +
@@ -99513,9 +101184,11 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "form-group row" }, [
-                _c("div", { staticClass: "col-6" }, [_vm._v("Valor Irbpnr:")]),
+                _c("div", { staticClass: "col-sm-6" }, [
+                  _vm._v("Valor Irbpnr:")
+                ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-6 bg-gray text-right" }, [
+                _c("div", { staticClass: "col-sm-6 bg-gray text-right" }, [
                   _vm._v(
                     "\n                $ " +
                       _vm._s(_vm.factura.val_irbpnr) +
@@ -99525,9 +101198,9 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "form-group row" }, [
-                _c("div", { staticClass: "col-6" }, [_vm._v("Iva 12%:")]),
+                _c("div", { staticClass: "col-sm-6" }, [_vm._v("Iva 12%:")]),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-6 bg-gray text-right" }, [
+                _c("div", { staticClass: "col-sm-6 bg-gray text-right" }, [
                   _vm._v(
                     "\n                $ " +
                       _vm._s(
@@ -99539,9 +101212,11 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "form-group row" }, [
-                _c("div", { staticClass: "col-6" }, [_vm._v("Propina 10%:")]),
+                _c("div", { staticClass: "col-sm-6" }, [
+                  _vm._v("Propina 10%:")
+                ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-6 bg-gray text-right" }, [
+                _c("div", { staticClass: "col-sm-6 bg-gray text-right" }, [
                   _vm._v(
                     "\n                $ " +
                       _vm._s(_vm.factura.val_propina) +
@@ -99551,13 +101226,15 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "form-group row" }, [
-                _c("div", { staticClass: "col-6" }, [_vm._v("Valor Total:")]),
+                _c("div", { staticClass: "col-sm-6" }, [
+                  _vm._v("Valor Total:")
+                ]),
                 _vm._v(" "),
                 _c(
                   "div",
                   {
                     staticClass:
-                      "col-6 bg-gray disabled color-palette text-right"
+                      "col-sm-6 bg-gray disabled color-palette text-right"
                   },
                   [
                     _vm._v(
@@ -116720,18 +118397,18 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/Administracion/Impuestos/AddImpuesto.vue":
-/*!**************************************************************************!*\
-  !*** ./resources/js/components/Administracion/Impuestos/AddImpuesto.vue ***!
-  \**************************************************************************/
+/***/ "./resources/js/components/Administracion/Impuestos/Iva/AddImpuestoIva.vue":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/components/Administracion/Impuestos/Iva/AddImpuestoIva.vue ***!
+  \*********************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _AddImpuesto_vue_vue_type_template_id_a59114e0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AddImpuesto.vue?vue&type=template&id=a59114e0& */ "./resources/js/components/Administracion/Impuestos/AddImpuesto.vue?vue&type=template&id=a59114e0&");
-/* harmony import */ var _AddImpuesto_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AddImpuesto.vue?vue&type=script&lang=js& */ "./resources/js/components/Administracion/Impuestos/AddImpuesto.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _AddImpuestoIva_vue_vue_type_template_id_743ffb0f___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AddImpuestoIva.vue?vue&type=template&id=743ffb0f& */ "./resources/js/components/Administracion/Impuestos/Iva/AddImpuestoIva.vue?vue&type=template&id=743ffb0f&");
+/* harmony import */ var _AddImpuestoIva_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AddImpuestoIva.vue?vue&type=script&lang=js& */ "./resources/js/components/Administracion/Impuestos/Iva/AddImpuestoIva.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -116740,9 +118417,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _AddImpuesto_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _AddImpuesto_vue_vue_type_template_id_a59114e0___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _AddImpuesto_vue_vue_type_template_id_a59114e0___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _AddImpuestoIva_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _AddImpuestoIva_vue_vue_type_template_id_743ffb0f___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _AddImpuestoIva_vue_vue_type_template_id_743ffb0f___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -116752,124 +118429,55 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/Administracion/Impuestos/AddImpuesto.vue"
+component.options.__file = "resources/js/components/Administracion/Impuestos/Iva/AddImpuestoIva.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/Administracion/Impuestos/AddImpuesto.vue?vue&type=script&lang=js&":
-/*!***************************************************************************************************!*\
-  !*** ./resources/js/components/Administracion/Impuestos/AddImpuesto.vue?vue&type=script&lang=js& ***!
-  \***************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AddImpuesto_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./AddImpuesto.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Administracion/Impuestos/AddImpuesto.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AddImpuesto_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/components/Administracion/Impuestos/AddImpuesto.vue?vue&type=template&id=a59114e0&":
-/*!*********************************************************************************************************!*\
-  !*** ./resources/js/components/Administracion/Impuestos/AddImpuesto.vue?vue&type=template&id=a59114e0& ***!
-  \*********************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddImpuesto_vue_vue_type_template_id_a59114e0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./AddImpuesto.vue?vue&type=template&id=a59114e0& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Administracion/Impuestos/AddImpuesto.vue?vue&type=template&id=a59114e0&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddImpuesto_vue_vue_type_template_id_a59114e0___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddImpuesto_vue_vue_type_template_id_a59114e0___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
-/***/ "./resources/js/components/Administracion/Impuestos/EditImpuesto.vue":
-/*!***************************************************************************!*\
-  !*** ./resources/js/components/Administracion/Impuestos/EditImpuesto.vue ***!
-  \***************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _EditImpuesto_vue_vue_type_template_id_656e2962___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./EditImpuesto.vue?vue&type=template&id=656e2962& */ "./resources/js/components/Administracion/Impuestos/EditImpuesto.vue?vue&type=template&id=656e2962&");
-/* harmony import */ var _EditImpuesto_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EditImpuesto.vue?vue&type=script&lang=js& */ "./resources/js/components/Administracion/Impuestos/EditImpuesto.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _EditImpuesto_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _EditImpuesto_vue_vue_type_template_id_656e2962___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _EditImpuesto_vue_vue_type_template_id_656e2962___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/Administracion/Impuestos/EditImpuesto.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/Administracion/Impuestos/EditImpuesto.vue?vue&type=script&lang=js&":
-/*!****************************************************************************************************!*\
-  !*** ./resources/js/components/Administracion/Impuestos/EditImpuesto.vue?vue&type=script&lang=js& ***!
-  \****************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EditImpuesto_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./EditImpuesto.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Administracion/Impuestos/EditImpuesto.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EditImpuesto_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/components/Administracion/Impuestos/EditImpuesto.vue?vue&type=template&id=656e2962&":
+/***/ "./resources/js/components/Administracion/Impuestos/Iva/AddImpuestoIva.vue?vue&type=script&lang=js&":
 /*!**********************************************************************************************************!*\
-  !*** ./resources/js/components/Administracion/Impuestos/EditImpuesto.vue?vue&type=template&id=656e2962& ***!
+  !*** ./resources/js/components/Administracion/Impuestos/Iva/AddImpuestoIva.vue?vue&type=script&lang=js& ***!
   \**********************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditImpuesto_vue_vue_type_template_id_656e2962___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./EditImpuesto.vue?vue&type=template&id=656e2962& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Administracion/Impuestos/EditImpuesto.vue?vue&type=template&id=656e2962&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditImpuesto_vue_vue_type_template_id_656e2962___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditImpuesto_vue_vue_type_template_id_656e2962___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
-/***/ "./resources/js/components/Administracion/Impuestos/ListImpuesto.vue":
-/*!***************************************************************************!*\
-  !*** ./resources/js/components/Administracion/Impuestos/ListImpuesto.vue ***!
-  \***************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _ListImpuesto_vue_vue_type_template_id_e78e203a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ListImpuesto.vue?vue&type=template&id=e78e203a& */ "./resources/js/components/Administracion/Impuestos/ListImpuesto.vue?vue&type=template&id=e78e203a&");
-/* harmony import */ var _ListImpuesto_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ListImpuesto.vue?vue&type=script&lang=js& */ "./resources/js/components/Administracion/Impuestos/ListImpuesto.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AddImpuestoIva_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./AddImpuestoIva.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Administracion/Impuestos/Iva/AddImpuestoIva.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AddImpuestoIva_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Administracion/Impuestos/Iva/AddImpuestoIva.vue?vue&type=template&id=743ffb0f&":
+/*!****************************************************************************************************************!*\
+  !*** ./resources/js/components/Administracion/Impuestos/Iva/AddImpuestoIva.vue?vue&type=template&id=743ffb0f& ***!
+  \****************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddImpuestoIva_vue_vue_type_template_id_743ffb0f___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./AddImpuestoIva.vue?vue&type=template&id=743ffb0f& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Administracion/Impuestos/Iva/AddImpuestoIva.vue?vue&type=template&id=743ffb0f&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddImpuestoIva_vue_vue_type_template_id_743ffb0f___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddImpuestoIva_vue_vue_type_template_id_743ffb0f___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Administracion/Impuestos/Iva/EditImpuestoIva.vue":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/components/Administracion/Impuestos/Iva/EditImpuestoIva.vue ***!
+  \**********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _EditImpuestoIva_vue_vue_type_template_id_5d5460da___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./EditImpuestoIva.vue?vue&type=template&id=5d5460da& */ "./resources/js/components/Administracion/Impuestos/Iva/EditImpuestoIva.vue?vue&type=template&id=5d5460da&");
+/* harmony import */ var _EditImpuestoIva_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EditImpuestoIva.vue?vue&type=script&lang=js& */ "./resources/js/components/Administracion/Impuestos/Iva/EditImpuestoIva.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -116878,9 +118486,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _ListImpuesto_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _ListImpuesto_vue_vue_type_template_id_e78e203a___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _ListImpuesto_vue_vue_type_template_id_e78e203a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _EditImpuestoIva_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _EditImpuestoIva_vue_vue_type_template_id_5d5460da___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _EditImpuestoIva_vue_vue_type_template_id_5d5460da___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -116890,54 +118498,123 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/Administracion/Impuestos/ListImpuesto.vue"
+component.options.__file = "resources/js/components/Administracion/Impuestos/Iva/EditImpuestoIva.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/Administracion/Impuestos/ListImpuesto.vue?vue&type=script&lang=js&":
-/*!****************************************************************************************************!*\
-  !*** ./resources/js/components/Administracion/Impuestos/ListImpuesto.vue?vue&type=script&lang=js& ***!
-  \****************************************************************************************************/
+/***/ "./resources/js/components/Administracion/Impuestos/Iva/EditImpuestoIva.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************!*\
+  !*** ./resources/js/components/Administracion/Impuestos/Iva/EditImpuestoIva.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ListImpuesto_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./ListImpuesto.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Administracion/Impuestos/ListImpuesto.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ListImpuesto_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EditImpuestoIva_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./EditImpuestoIva.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Administracion/Impuestos/Iva/EditImpuestoIva.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EditImpuestoIva_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/Administracion/Impuestos/ListImpuesto.vue?vue&type=template&id=e78e203a&":
-/*!**********************************************************************************************************!*\
-  !*** ./resources/js/components/Administracion/Impuestos/ListImpuesto.vue?vue&type=template&id=e78e203a& ***!
-  \**********************************************************************************************************/
+/***/ "./resources/js/components/Administracion/Impuestos/Iva/EditImpuestoIva.vue?vue&type=template&id=5d5460da&":
+/*!*****************************************************************************************************************!*\
+  !*** ./resources/js/components/Administracion/Impuestos/Iva/EditImpuestoIva.vue?vue&type=template&id=5d5460da& ***!
+  \*****************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ListImpuesto_vue_vue_type_template_id_e78e203a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./ListImpuesto.vue?vue&type=template&id=e78e203a& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Administracion/Impuestos/ListImpuesto.vue?vue&type=template&id=e78e203a&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ListImpuesto_vue_vue_type_template_id_e78e203a___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditImpuestoIva_vue_vue_type_template_id_5d5460da___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./EditImpuestoIva.vue?vue&type=template&id=5d5460da& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Administracion/Impuestos/Iva/EditImpuestoIva.vue?vue&type=template&id=5d5460da&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditImpuestoIva_vue_vue_type_template_id_5d5460da___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ListImpuesto_vue_vue_type_template_id_e78e203a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditImpuestoIva_vue_vue_type_template_id_5d5460da___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
 /***/ }),
 
-/***/ "./resources/js/components/Administracion/Impuestos/Main.vue":
-/*!*******************************************************************!*\
-  !*** ./resources/js/components/Administracion/Impuestos/Main.vue ***!
-  \*******************************************************************/
+/***/ "./resources/js/components/Administracion/Impuestos/Iva/ListImpuestoIva.vue":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/components/Administracion/Impuestos/Iva/ListImpuestoIva.vue ***!
+  \**********************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Main_vue_vue_type_template_id_700c000c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Main.vue?vue&type=template&id=700c000c& */ "./resources/js/components/Administracion/Impuestos/Main.vue?vue&type=template&id=700c000c&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _ListImpuestoIva_vue_vue_type_template_id_0b0db874___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ListImpuestoIva.vue?vue&type=template&id=0b0db874& */ "./resources/js/components/Administracion/Impuestos/Iva/ListImpuestoIva.vue?vue&type=template&id=0b0db874&");
+/* harmony import */ var _ListImpuestoIva_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ListImpuestoIva.vue?vue&type=script&lang=js& */ "./resources/js/components/Administracion/Impuestos/Iva/ListImpuestoIva.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _ListImpuestoIva_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ListImpuestoIva_vue_vue_type_template_id_0b0db874___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ListImpuestoIva_vue_vue_type_template_id_0b0db874___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Administracion/Impuestos/Iva/ListImpuestoIva.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Administracion/Impuestos/Iva/ListImpuestoIva.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************!*\
+  !*** ./resources/js/components/Administracion/Impuestos/Iva/ListImpuestoIva.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ListImpuestoIva_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./ListImpuestoIva.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Administracion/Impuestos/Iva/ListImpuestoIva.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ListImpuestoIva_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Administracion/Impuestos/Iva/ListImpuestoIva.vue?vue&type=template&id=0b0db874&":
+/*!*****************************************************************************************************************!*\
+  !*** ./resources/js/components/Administracion/Impuestos/Iva/ListImpuestoIva.vue?vue&type=template&id=0b0db874& ***!
+  \*****************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ListImpuestoIva_vue_vue_type_template_id_0b0db874___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./ListImpuestoIva.vue?vue&type=template&id=0b0db874& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Administracion/Impuestos/Iva/ListImpuestoIva.vue?vue&type=template&id=0b0db874&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ListImpuestoIva_vue_vue_type_template_id_0b0db874___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ListImpuestoIva_vue_vue_type_template_id_0b0db874___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Administracion/Impuestos/Iva/Main.vue":
+/*!***********************************************************************!*\
+  !*** ./resources/js/components/Administracion/Impuestos/Iva/Main.vue ***!
+  \***********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Main_vue_vue_type_template_id_a5e974f2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Main.vue?vue&type=template&id=a5e974f2& */ "./resources/js/components/Administracion/Impuestos/Iva/Main.vue?vue&type=template&id=a5e974f2&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 var script = {}
 
@@ -116946,8 +118623,8 @@ var script = {}
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
   script,
-  _Main_vue_vue_type_template_id_700c000c___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _Main_vue_vue_type_template_id_700c000c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _Main_vue_vue_type_template_id_a5e974f2___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Main_vue_vue_type_template_id_a5e974f2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -116957,24 +118634,284 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/Administracion/Impuestos/Main.vue"
+component.options.__file = "resources/js/components/Administracion/Impuestos/Iva/Main.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/Administracion/Impuestos/Main.vue?vue&type=template&id=700c000c&":
-/*!**************************************************************************************************!*\
-  !*** ./resources/js/components/Administracion/Impuestos/Main.vue?vue&type=template&id=700c000c& ***!
-  \**************************************************************************************************/
+/***/ "./resources/js/components/Administracion/Impuestos/Iva/Main.vue?vue&type=template&id=a5e974f2&":
+/*!******************************************************************************************************!*\
+  !*** ./resources/js/components/Administracion/Impuestos/Iva/Main.vue?vue&type=template&id=a5e974f2& ***!
+  \******************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Main_vue_vue_type_template_id_700c000c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Main.vue?vue&type=template&id=700c000c& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Administracion/Impuestos/Main.vue?vue&type=template&id=700c000c&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Main_vue_vue_type_template_id_700c000c___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Main_vue_vue_type_template_id_a5e974f2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./Main.vue?vue&type=template&id=a5e974f2& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Administracion/Impuestos/Iva/Main.vue?vue&type=template&id=a5e974f2&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Main_vue_vue_type_template_id_a5e974f2___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Main_vue_vue_type_template_id_700c000c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Main_vue_vue_type_template_id_a5e974f2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Administracion/Impuestos/Retencion/AddImpuestoRetencion.vue":
+/*!*********************************************************************************************!*\
+  !*** ./resources/js/components/Administracion/Impuestos/Retencion/AddImpuestoRetencion.vue ***!
+  \*********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _AddImpuestoRetencion_vue_vue_type_template_id_4798a76f___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AddImpuestoRetencion.vue?vue&type=template&id=4798a76f& */ "./resources/js/components/Administracion/Impuestos/Retencion/AddImpuestoRetencion.vue?vue&type=template&id=4798a76f&");
+/* harmony import */ var _AddImpuestoRetencion_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AddImpuestoRetencion.vue?vue&type=script&lang=js& */ "./resources/js/components/Administracion/Impuestos/Retencion/AddImpuestoRetencion.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _AddImpuestoRetencion_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _AddImpuestoRetencion_vue_vue_type_template_id_4798a76f___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _AddImpuestoRetencion_vue_vue_type_template_id_4798a76f___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Administracion/Impuestos/Retencion/AddImpuestoRetencion.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Administracion/Impuestos/Retencion/AddImpuestoRetencion.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************!*\
+  !*** ./resources/js/components/Administracion/Impuestos/Retencion/AddImpuestoRetencion.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AddImpuestoRetencion_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./AddImpuestoRetencion.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Administracion/Impuestos/Retencion/AddImpuestoRetencion.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AddImpuestoRetencion_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Administracion/Impuestos/Retencion/AddImpuestoRetencion.vue?vue&type=template&id=4798a76f&":
+/*!****************************************************************************************************************************!*\
+  !*** ./resources/js/components/Administracion/Impuestos/Retencion/AddImpuestoRetencion.vue?vue&type=template&id=4798a76f& ***!
+  \****************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddImpuestoRetencion_vue_vue_type_template_id_4798a76f___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./AddImpuestoRetencion.vue?vue&type=template&id=4798a76f& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Administracion/Impuestos/Retencion/AddImpuestoRetencion.vue?vue&type=template&id=4798a76f&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddImpuestoRetencion_vue_vue_type_template_id_4798a76f___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddImpuestoRetencion_vue_vue_type_template_id_4798a76f___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Administracion/Impuestos/Retencion/EditImpuestoRetencion.vue":
+/*!**********************************************************************************************!*\
+  !*** ./resources/js/components/Administracion/Impuestos/Retencion/EditImpuestoRetencion.vue ***!
+  \**********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _EditImpuestoRetencion_vue_vue_type_template_id_4fa89550___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./EditImpuestoRetencion.vue?vue&type=template&id=4fa89550& */ "./resources/js/components/Administracion/Impuestos/Retencion/EditImpuestoRetencion.vue?vue&type=template&id=4fa89550&");
+/* harmony import */ var _EditImpuestoRetencion_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EditImpuestoRetencion.vue?vue&type=script&lang=js& */ "./resources/js/components/Administracion/Impuestos/Retencion/EditImpuestoRetencion.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _EditImpuestoRetencion_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _EditImpuestoRetencion_vue_vue_type_template_id_4fa89550___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _EditImpuestoRetencion_vue_vue_type_template_id_4fa89550___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Administracion/Impuestos/Retencion/EditImpuestoRetencion.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Administracion/Impuestos/Retencion/EditImpuestoRetencion.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************!*\
+  !*** ./resources/js/components/Administracion/Impuestos/Retencion/EditImpuestoRetencion.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EditImpuestoRetencion_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./EditImpuestoRetencion.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Administracion/Impuestos/Retencion/EditImpuestoRetencion.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_EditImpuestoRetencion_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Administracion/Impuestos/Retencion/EditImpuestoRetencion.vue?vue&type=template&id=4fa89550&":
+/*!*****************************************************************************************************************************!*\
+  !*** ./resources/js/components/Administracion/Impuestos/Retencion/EditImpuestoRetencion.vue?vue&type=template&id=4fa89550& ***!
+  \*****************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditImpuestoRetencion_vue_vue_type_template_id_4fa89550___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./EditImpuestoRetencion.vue?vue&type=template&id=4fa89550& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Administracion/Impuestos/Retencion/EditImpuestoRetencion.vue?vue&type=template&id=4fa89550&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditImpuestoRetencion_vue_vue_type_template_id_4fa89550___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_EditImpuestoRetencion_vue_vue_type_template_id_4fa89550___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Administracion/Impuestos/Retencion/ListImpuestoRetencion.vue":
+/*!**********************************************************************************************!*\
+  !*** ./resources/js/components/Administracion/Impuestos/Retencion/ListImpuestoRetencion.vue ***!
+  \**********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ListImpuestoRetencion_vue_vue_type_template_id_821b1188___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ListImpuestoRetencion.vue?vue&type=template&id=821b1188& */ "./resources/js/components/Administracion/Impuestos/Retencion/ListImpuestoRetencion.vue?vue&type=template&id=821b1188&");
+/* harmony import */ var _ListImpuestoRetencion_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ListImpuestoRetencion.vue?vue&type=script&lang=js& */ "./resources/js/components/Administracion/Impuestos/Retencion/ListImpuestoRetencion.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _ListImpuestoRetencion_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ListImpuestoRetencion_vue_vue_type_template_id_821b1188___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ListImpuestoRetencion_vue_vue_type_template_id_821b1188___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Administracion/Impuestos/Retencion/ListImpuestoRetencion.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Administracion/Impuestos/Retencion/ListImpuestoRetencion.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************!*\
+  !*** ./resources/js/components/Administracion/Impuestos/Retencion/ListImpuestoRetencion.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ListImpuestoRetencion_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./ListImpuestoRetencion.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Administracion/Impuestos/Retencion/ListImpuestoRetencion.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ListImpuestoRetencion_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Administracion/Impuestos/Retencion/ListImpuestoRetencion.vue?vue&type=template&id=821b1188&":
+/*!*****************************************************************************************************************************!*\
+  !*** ./resources/js/components/Administracion/Impuestos/Retencion/ListImpuestoRetencion.vue?vue&type=template&id=821b1188& ***!
+  \*****************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ListImpuestoRetencion_vue_vue_type_template_id_821b1188___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./ListImpuestoRetencion.vue?vue&type=template&id=821b1188& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Administracion/Impuestos/Retencion/ListImpuestoRetencion.vue?vue&type=template&id=821b1188&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ListImpuestoRetencion_vue_vue_type_template_id_821b1188___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ListImpuestoRetencion_vue_vue_type_template_id_821b1188___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Administracion/Impuestos/Retencion/Main.vue":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/components/Administracion/Impuestos/Retencion/Main.vue ***!
+  \*****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Main_vue_vue_type_template_id_4ce268a8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Main.vue?vue&type=template&id=4ce268a8& */ "./resources/js/components/Administracion/Impuestos/Retencion/Main.vue?vue&type=template&id=4ce268a8&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+var script = {}
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
+  script,
+  _Main_vue_vue_type_template_id_4ce268a8___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Main_vue_vue_type_template_id_4ce268a8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Administracion/Impuestos/Retencion/Main.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Administracion/Impuestos/Retencion/Main.vue?vue&type=template&id=4ce268a8&":
+/*!************************************************************************************************************!*\
+  !*** ./resources/js/components/Administracion/Impuestos/Retencion/Main.vue?vue&type=template&id=4ce268a8& ***!
+  \************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Main_vue_vue_type_template_id_4ce268a8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./Main.vue?vue&type=template&id=4ce268a8& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Administracion/Impuestos/Retencion/Main.vue?vue&type=template&id=4ce268a8&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Main_vue_vue_type_template_id_4ce268a8___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Main_vue_vue_type_template_id_4ce268a8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -122535,87 +124472,91 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Dashboard_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/Dashboard.vue */ "./resources/js/components/Dashboard.vue");
 /* harmony import */ var _components_Administracion_Empresa_Empresa_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/Administracion/Empresa/Empresa.vue */ "./resources/js/components/Administracion/Empresa/Empresa.vue");
 /* harmony import */ var _components_Administracion_Roles_ListRol_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/Administracion/Roles/ListRol.vue */ "./resources/js/components/Administracion/Roles/ListRol.vue");
-/* harmony import */ var _components_Administracion_Impuestos_Main_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Administracion/Impuestos/Main.vue */ "./resources/js/components/Administracion/Impuestos/Main.vue");
-/* harmony import */ var _components_Administracion_Impuestos_ListImpuesto_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Administracion/Impuestos/ListImpuesto.vue */ "./resources/js/components/Administracion/Impuestos/ListImpuesto.vue");
-/* harmony import */ var _components_Administracion_Impuestos_AddImpuesto_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/Administracion/Impuestos/AddImpuesto.vue */ "./resources/js/components/Administracion/Impuestos/AddImpuesto.vue");
-/* harmony import */ var _components_Administracion_Impuestos_EditImpuesto_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/Administracion/Impuestos/EditImpuesto.vue */ "./resources/js/components/Administracion/Impuestos/EditImpuesto.vue");
-/* harmony import */ var _components_Administracion_Establecimientos_Main_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/Administracion/Establecimientos/Main.vue */ "./resources/js/components/Administracion/Establecimientos/Main.vue");
-/* harmony import */ var _components_Administracion_Establecimientos_ListEstablecimiento_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/Administracion/Establecimientos/ListEstablecimiento.vue */ "./resources/js/components/Administracion/Establecimientos/ListEstablecimiento.vue");
-/* harmony import */ var _components_Administracion_Establecimientos_AddEstablecimiento_vue__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/Administracion/Establecimientos/AddEstablecimiento.vue */ "./resources/js/components/Administracion/Establecimientos/AddEstablecimiento.vue");
-/* harmony import */ var _components_Administracion_Establecimientos_EditEstablecimiento_vue__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/Administracion/Establecimientos/EditEstablecimiento.vue */ "./resources/js/components/Administracion/Establecimientos/EditEstablecimiento.vue");
-/* harmony import */ var _components_Administracion_Empleados_Main_vue__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/Administracion/Empleados/Main.vue */ "./resources/js/components/Administracion/Empleados/Main.vue");
-/* harmony import */ var _components_Administracion_Empleados_ListEmpleado_vue__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/Administracion/Empleados/ListEmpleado.vue */ "./resources/js/components/Administracion/Empleados/ListEmpleado.vue");
-/* harmony import */ var _components_Administracion_Empleados_AddEmpleado_vue__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/Administracion/Empleados/AddEmpleado.vue */ "./resources/js/components/Administracion/Empleados/AddEmpleado.vue");
-/* harmony import */ var _components_Administracion_Empleados_EditEmpleado_vue__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/Administracion/Empleados/EditEmpleado.vue */ "./resources/js/components/Administracion/Empleados/EditEmpleado.vue");
-/* harmony import */ var _components_Administracion_PuntosEmision_Main_vue__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/Administracion/PuntosEmision/Main.vue */ "./resources/js/components/Administracion/PuntosEmision/Main.vue");
-/* harmony import */ var _components_Administracion_PuntosEmision_ListPuntoEmision_vue__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./components/Administracion/PuntosEmision/ListPuntoEmision.vue */ "./resources/js/components/Administracion/PuntosEmision/ListPuntoEmision.vue");
-/* harmony import */ var _components_Administracion_PuntosEmision_AddPuntoEmision_vue__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./components/Administracion/PuntosEmision/AddPuntoEmision.vue */ "./resources/js/components/Administracion/PuntosEmision/AddPuntoEmision.vue");
-/* harmony import */ var _components_Administracion_PuntosEmision_EditPuntoEmision_vue__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./components/Administracion/PuntosEmision/EditPuntoEmision.vue */ "./resources/js/components/Administracion/PuntosEmision/EditPuntoEmision.vue");
-/* harmony import */ var _components_Almacen_Categorias_Main_vue__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./components/Almacen/Categorias/Main.vue */ "./resources/js/components/Almacen/Categorias/Main.vue");
-/* harmony import */ var _components_Almacen_Categorias_ListCategoria_vue__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./components/Almacen/Categorias/ListCategoria.vue */ "./resources/js/components/Almacen/Categorias/ListCategoria.vue");
-/* harmony import */ var _components_Almacen_Categorias_AddCategoria_vue__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./components/Almacen/Categorias/AddCategoria.vue */ "./resources/js/components/Almacen/Categorias/AddCategoria.vue");
-/* harmony import */ var _components_Almacen_Categorias_EditCategoria_vue__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./components/Almacen/Categorias/EditCategoria.vue */ "./resources/js/components/Almacen/Categorias/EditCategoria.vue");
-/* harmony import */ var _components_Almacen_Productos_Main_vue__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./components/Almacen/Productos/Main.vue */ "./resources/js/components/Almacen/Productos/Main.vue");
-/* harmony import */ var _components_Almacen_Productos_ListProducto_vue__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./components/Almacen/Productos/ListProducto.vue */ "./resources/js/components/Almacen/Productos/ListProducto.vue");
-/* harmony import */ var _components_Almacen_Productos_AddProducto_vue__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./components/Almacen/Productos/AddProducto.vue */ "./resources/js/components/Almacen/Productos/AddProducto.vue");
-/* harmony import */ var _components_Almacen_Productos_EditProducto_vue__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./components/Almacen/Productos/EditProducto.vue */ "./resources/js/components/Almacen/Productos/EditProducto.vue");
-/* harmony import */ var _components_Almacen_Unidades_Main_vue__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./components/Almacen/Unidades/Main.vue */ "./resources/js/components/Almacen/Unidades/Main.vue");
-/* harmony import */ var _components_Almacen_Unidades_ListUnidad_vue__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./components/Almacen/Unidades/ListUnidad.vue */ "./resources/js/components/Almacen/Unidades/ListUnidad.vue");
-/* harmony import */ var _components_Almacen_Unidades_AddUnidad_vue__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./components/Almacen/Unidades/AddUnidad.vue */ "./resources/js/components/Almacen/Unidades/AddUnidad.vue");
-/* harmony import */ var _components_Almacen_Unidades_EditUnidad_vue__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./components/Almacen/Unidades/EditUnidad.vue */ "./resources/js/components/Almacen/Unidades/EditUnidad.vue");
-/* harmony import */ var _components_Almacen_Inventarios_Main_vue__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./components/Almacen/Inventarios/Main.vue */ "./resources/js/components/Almacen/Inventarios/Main.vue");
-/* harmony import */ var _components_Almacen_Inventarios_ListInventario_vue__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./components/Almacen/Inventarios/ListInventario.vue */ "./resources/js/components/Almacen/Inventarios/ListInventario.vue");
-/* harmony import */ var _components_Almacen_Inventarios_KarInventario_vue__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./components/Almacen/Inventarios/KarInventario.vue */ "./resources/js/components/Almacen/Inventarios/KarInventario.vue");
-/* harmony import */ var _components_Almacen_Inventarios_ManInventario_vue__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ./components/Almacen/Inventarios/ManInventario.vue */ "./resources/js/components/Almacen/Inventarios/ManInventario.vue");
-/* harmony import */ var _components_Administracion_RolesPago_Main_vue__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ./components/Administracion/RolesPago/Main.vue */ "./resources/js/components/Administracion/RolesPago/Main.vue");
-/* harmony import */ var _components_Administracion_RolesPago_ListRolPago_vue__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ./components/Administracion/RolesPago/ListRolPago.vue */ "./resources/js/components/Administracion/RolesPago/ListRolPago.vue");
-/* harmony import */ var _components_Administracion_RolesPago_AddRolPago_vue__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ./components/Administracion/RolesPago/AddRolPago.vue */ "./resources/js/components/Administracion/RolesPago/AddRolPago.vue");
-/* harmony import */ var _components_Administracion_RolesPago_EditRolPago_vue__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ./components/Administracion/RolesPago/EditRolPago.vue */ "./resources/js/components/Administracion/RolesPago/EditRolPago.vue");
-/* harmony import */ var _components_Administracion_RolesPago_DetRolPago_vue__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ./components/Administracion/RolesPago/DetRolPago.vue */ "./resources/js/components/Administracion/RolesPago/DetRolPago.vue");
-/* harmony import */ var _components_Compras_Proveedores_Main_vue__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! ./components/Compras/Proveedores/Main.vue */ "./resources/js/components/Compras/Proveedores/Main.vue");
-/* harmony import */ var _components_Compras_Proveedores_ListProveedor_vue__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! ./components/Compras/Proveedores/ListProveedor.vue */ "./resources/js/components/Compras/Proveedores/ListProveedor.vue");
-/* harmony import */ var _components_Compras_Proveedores_AddProveedor_vue__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(/*! ./components/Compras/Proveedores/AddProveedor.vue */ "./resources/js/components/Compras/Proveedores/AddProveedor.vue");
-/* harmony import */ var _components_Compras_Proveedores_EditProveedor_vue__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(/*! ./components/Compras/Proveedores/EditProveedor.vue */ "./resources/js/components/Compras/Proveedores/EditProveedor.vue");
-/* harmony import */ var _components_Compras_Compras_Main_vue__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(/*! ./components/Compras/Compras/Main.vue */ "./resources/js/components/Compras/Compras/Main.vue");
-/* harmony import */ var _components_Compras_Compras_ListCompra_vue__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(/*! ./components/Compras/Compras/ListCompra.vue */ "./resources/js/components/Compras/Compras/ListCompra.vue");
-/* harmony import */ var _components_Compras_Compras_AddCompra_vue__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(/*! ./components/Compras/Compras/AddCompra.vue */ "./resources/js/components/Compras/Compras/AddCompra.vue");
-/* harmony import */ var _components_Compras_Compras_DetCompra_vue__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(/*! ./components/Compras/Compras/DetCompra.vue */ "./resources/js/components/Compras/Compras/DetCompra.vue");
-/* harmony import */ var _components_Compras_Deudas_Main_vue__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(/*! ./components/Compras/Deudas/Main.vue */ "./resources/js/components/Compras/Deudas/Main.vue");
-/* harmony import */ var _components_Compras_Deudas_ListDeuda_vue__WEBPACK_IMPORTED_MODULE_51__ = __webpack_require__(/*! ./components/Compras/Deudas/ListDeuda.vue */ "./resources/js/components/Compras/Deudas/ListDeuda.vue");
-/* harmony import */ var _components_Compras_Deudas_DetDeuda_vue__WEBPACK_IMPORTED_MODULE_52__ = __webpack_require__(/*! ./components/Compras/Deudas/DetDeuda.vue */ "./resources/js/components/Compras/Deudas/DetDeuda.vue");
-/* harmony import */ var _components_Ventas_Clientes_Main_vue__WEBPACK_IMPORTED_MODULE_53__ = __webpack_require__(/*! ./components/Ventas/Clientes/Main.vue */ "./resources/js/components/Ventas/Clientes/Main.vue");
-/* harmony import */ var _components_Ventas_Clientes_ListCliente_vue__WEBPACK_IMPORTED_MODULE_54__ = __webpack_require__(/*! ./components/Ventas/Clientes/ListCliente.vue */ "./resources/js/components/Ventas/Clientes/ListCliente.vue");
-/* harmony import */ var _components_Ventas_Clientes_AddCliente_vue__WEBPACK_IMPORTED_MODULE_55__ = __webpack_require__(/*! ./components/Ventas/Clientes/AddCliente.vue */ "./resources/js/components/Ventas/Clientes/AddCliente.vue");
-/* harmony import */ var _components_Ventas_Clientes_EditCliente_vue__WEBPACK_IMPORTED_MODULE_56__ = __webpack_require__(/*! ./components/Ventas/Clientes/EditCliente.vue */ "./resources/js/components/Ventas/Clientes/EditCliente.vue");
-/* harmony import */ var _components_Ventas_Facturacion_Main_vue__WEBPACK_IMPORTED_MODULE_57__ = __webpack_require__(/*! ./components/Ventas/Facturacion/Main.vue */ "./resources/js/components/Ventas/Facturacion/Main.vue");
-/* harmony import */ var _components_Ventas_Facturacion_ListFactura_vue__WEBPACK_IMPORTED_MODULE_58__ = __webpack_require__(/*! ./components/Ventas/Facturacion/ListFactura.vue */ "./resources/js/components/Ventas/Facturacion/ListFactura.vue");
-/* harmony import */ var _components_Ventas_Facturacion_AddFactura_vue__WEBPACK_IMPORTED_MODULE_59__ = __webpack_require__(/*! ./components/Ventas/Facturacion/AddFactura.vue */ "./resources/js/components/Ventas/Facturacion/AddFactura.vue");
-/* harmony import */ var _components_Ventas_Facturacion_DetFactura_vue__WEBPACK_IMPORTED_MODULE_60__ = __webpack_require__(/*! ./components/Ventas/Facturacion/DetFactura.vue */ "./resources/js/components/Ventas/Facturacion/DetFactura.vue");
-/* harmony import */ var _components_Ventas_Creditos_Main_vue__WEBPACK_IMPORTED_MODULE_61__ = __webpack_require__(/*! ./components/Ventas/Creditos/Main.vue */ "./resources/js/components/Ventas/Creditos/Main.vue");
-/* harmony import */ var _components_Ventas_Creditos_ListCredito_vue__WEBPACK_IMPORTED_MODULE_62__ = __webpack_require__(/*! ./components/Ventas/Creditos/ListCredito.vue */ "./resources/js/components/Ventas/Creditos/ListCredito.vue");
-/* harmony import */ var _components_Ventas_Creditos_DetCredito_vue__WEBPACK_IMPORTED_MODULE_63__ = __webpack_require__(/*! ./components/Ventas/Creditos/DetCredito.vue */ "./resources/js/components/Ventas/Creditos/DetCredito.vue");
-/* harmony import */ var _components_Guias_Transportistas_Main_vue__WEBPACK_IMPORTED_MODULE_64__ = __webpack_require__(/*! ./components/Guias/Transportistas/Main.vue */ "./resources/js/components/Guias/Transportistas/Main.vue");
-/* harmony import */ var _components_Guias_Transportistas_ListTransportista_vue__WEBPACK_IMPORTED_MODULE_65__ = __webpack_require__(/*! ./components/Guias/Transportistas/ListTransportista.vue */ "./resources/js/components/Guias/Transportistas/ListTransportista.vue");
-/* harmony import */ var _components_Guias_Transportistas_AddTransportista_vue__WEBPACK_IMPORTED_MODULE_66__ = __webpack_require__(/*! ./components/Guias/Transportistas/AddTransportista.vue */ "./resources/js/components/Guias/Transportistas/AddTransportista.vue");
-/* harmony import */ var _components_Guias_Transportistas_EditTransportista_vue__WEBPACK_IMPORTED_MODULE_67__ = __webpack_require__(/*! ./components/Guias/Transportistas/EditTransportista.vue */ "./resources/js/components/Guias/Transportistas/EditTransportista.vue");
-/* harmony import */ var _components_Guias_GuiasRemision_Main_vue__WEBPACK_IMPORTED_MODULE_68__ = __webpack_require__(/*! ./components/Guias/GuiasRemision/Main.vue */ "./resources/js/components/Guias/GuiasRemision/Main.vue");
-/* harmony import */ var _components_Guias_GuiasRemision_ListGuia_vue__WEBPACK_IMPORTED_MODULE_69__ = __webpack_require__(/*! ./components/Guias/GuiasRemision/ListGuia.vue */ "./resources/js/components/Guias/GuiasRemision/ListGuia.vue");
-/* harmony import */ var _components_Guias_GuiasRemision_AddGuia_vue__WEBPACK_IMPORTED_MODULE_70__ = __webpack_require__(/*! ./components/Guias/GuiasRemision/AddGuia.vue */ "./resources/js/components/Guias/GuiasRemision/AddGuia.vue");
-/* harmony import */ var _components_Guias_GuiasRemision_DetGuia_vue__WEBPACK_IMPORTED_MODULE_71__ = __webpack_require__(/*! ./components/Guias/GuiasRemision/DetGuia.vue */ "./resources/js/components/Guias/GuiasRemision/DetGuia.vue");
-/* harmony import */ var _components_Guias_GuiasRemision_FacGuia_vue__WEBPACK_IMPORTED_MODULE_72__ = __webpack_require__(/*! ./components/Guias/GuiasRemision/FacGuia.vue */ "./resources/js/components/Guias/GuiasRemision/FacGuia.vue");
-/* harmony import */ var _components_Produccion_Plantas_Main_vue__WEBPACK_IMPORTED_MODULE_73__ = __webpack_require__(/*! ./components/Produccion/Plantas/Main.vue */ "./resources/js/components/Produccion/Plantas/Main.vue");
-/* harmony import */ var _components_Produccion_Plantas_ListProduccion_vue__WEBPACK_IMPORTED_MODULE_74__ = __webpack_require__(/*! ./components/Produccion/Plantas/ListProduccion.vue */ "./resources/js/components/Produccion/Plantas/ListProduccion.vue");
-/* harmony import */ var _components_Produccion_Plantas_AddProduccion_vue__WEBPACK_IMPORTED_MODULE_75__ = __webpack_require__(/*! ./components/Produccion/Plantas/AddProduccion.vue */ "./resources/js/components/Produccion/Plantas/AddProduccion.vue");
-/* harmony import */ var _components_Produccion_Plantas_EditProduccion_vue__WEBPACK_IMPORTED_MODULE_76__ = __webpack_require__(/*! ./components/Produccion/Plantas/EditProduccion.vue */ "./resources/js/components/Produccion/Plantas/EditProduccion.vue");
-/* harmony import */ var _components_Produccion_Plantas_FinProduccion_vue__WEBPACK_IMPORTED_MODULE_77__ = __webpack_require__(/*! ./components/Produccion/Plantas/FinProduccion.vue */ "./resources/js/components/Produccion/Plantas/FinProduccion.vue");
-/* harmony import */ var _components_Caja_OpeArqueo_vue__WEBPACK_IMPORTED_MODULE_78__ = __webpack_require__(/*! ./components/Caja/OpeArqueo.vue */ "./resources/js/components/Caja/OpeArqueo.vue");
-/* harmony import */ var _components_Caja_CloArqueo_vue__WEBPACK_IMPORTED_MODULE_79__ = __webpack_require__(/*! ./components/Caja/CloArqueo.vue */ "./resources/js/components/Caja/CloArqueo.vue");
-/* harmony import */ var _components_Caja_Arqueos_Main_vue__WEBPACK_IMPORTED_MODULE_80__ = __webpack_require__(/*! ./components/Caja/Arqueos/Main.vue */ "./resources/js/components/Caja/Arqueos/Main.vue");
-/* harmony import */ var _components_Caja_Arqueos_ListArqueo_vue__WEBPACK_IMPORTED_MODULE_81__ = __webpack_require__(/*! ./components/Caja/Arqueos/ListArqueo.vue */ "./resources/js/components/Caja/Arqueos/ListArqueo.vue");
-/* harmony import */ var _components_Caja_Arqueos_DetArqueo_vue__WEBPACK_IMPORTED_MODULE_82__ = __webpack_require__(/*! ./components/Caja/Arqueos/DetArqueo.vue */ "./resources/js/components/Caja/Arqueos/DetArqueo.vue");
-/* harmony import */ var _components_Reportes_Main_vue__WEBPACK_IMPORTED_MODULE_83__ = __webpack_require__(/*! ./components/Reportes/Main.vue */ "./resources/js/components/Reportes/Main.vue");
-/* harmony import */ var _components_Reportes_RepCompra_vue__WEBPACK_IMPORTED_MODULE_84__ = __webpack_require__(/*! ./components/Reportes/RepCompra.vue */ "./resources/js/components/Reportes/RepCompra.vue");
-/* harmony import */ var _components_Reportes_RepVenta_vue__WEBPACK_IMPORTED_MODULE_85__ = __webpack_require__(/*! ./components/Reportes/RepVenta.vue */ "./resources/js/components/Reportes/RepVenta.vue");
+/* harmony import */ var _components_Administracion_Impuestos_Iva_Main_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Administracion/Impuestos/Iva/Main.vue */ "./resources/js/components/Administracion/Impuestos/Iva/Main.vue");
+/* harmony import */ var _components_Administracion_Impuestos_Iva_ListImpuestoIva_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Administracion/Impuestos/Iva/ListImpuestoIva.vue */ "./resources/js/components/Administracion/Impuestos/Iva/ListImpuestoIva.vue");
+/* harmony import */ var _components_Administracion_Impuestos_Iva_AddImpuestoIva_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/Administracion/Impuestos/Iva/AddImpuestoIva.vue */ "./resources/js/components/Administracion/Impuestos/Iva/AddImpuestoIva.vue");
+/* harmony import */ var _components_Administracion_Impuestos_Iva_EditImpuestoIva_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/Administracion/Impuestos/Iva/EditImpuestoIva.vue */ "./resources/js/components/Administracion/Impuestos/Iva/EditImpuestoIva.vue");
+/* harmony import */ var _components_Administracion_Impuestos_Retencion_Main_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/Administracion/Impuestos/Retencion/Main.vue */ "./resources/js/components/Administracion/Impuestos/Retencion/Main.vue");
+/* harmony import */ var _components_Administracion_Impuestos_Retencion_ListImpuestoRetencion_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/Administracion/Impuestos/Retencion/ListImpuestoRetencion.vue */ "./resources/js/components/Administracion/Impuestos/Retencion/ListImpuestoRetencion.vue");
+/* harmony import */ var _components_Administracion_Impuestos_Retencion_AddImpuestoRetencion_vue__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/Administracion/Impuestos/Retencion/AddImpuestoRetencion.vue */ "./resources/js/components/Administracion/Impuestos/Retencion/AddImpuestoRetencion.vue");
+/* harmony import */ var _components_Administracion_Impuestos_Retencion_EditImpuestoRetencion_vue__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/Administracion/Impuestos/Retencion/EditImpuestoRetencion.vue */ "./resources/js/components/Administracion/Impuestos/Retencion/EditImpuestoRetencion.vue");
+/* harmony import */ var _components_Administracion_Establecimientos_Main_vue__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/Administracion/Establecimientos/Main.vue */ "./resources/js/components/Administracion/Establecimientos/Main.vue");
+/* harmony import */ var _components_Administracion_Establecimientos_ListEstablecimiento_vue__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/Administracion/Establecimientos/ListEstablecimiento.vue */ "./resources/js/components/Administracion/Establecimientos/ListEstablecimiento.vue");
+/* harmony import */ var _components_Administracion_Establecimientos_AddEstablecimiento_vue__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/Administracion/Establecimientos/AddEstablecimiento.vue */ "./resources/js/components/Administracion/Establecimientos/AddEstablecimiento.vue");
+/* harmony import */ var _components_Administracion_Establecimientos_EditEstablecimiento_vue__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/Administracion/Establecimientos/EditEstablecimiento.vue */ "./resources/js/components/Administracion/Establecimientos/EditEstablecimiento.vue");
+/* harmony import */ var _components_Administracion_Empleados_Main_vue__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/Administracion/Empleados/Main.vue */ "./resources/js/components/Administracion/Empleados/Main.vue");
+/* harmony import */ var _components_Administracion_Empleados_ListEmpleado_vue__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./components/Administracion/Empleados/ListEmpleado.vue */ "./resources/js/components/Administracion/Empleados/ListEmpleado.vue");
+/* harmony import */ var _components_Administracion_Empleados_AddEmpleado_vue__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./components/Administracion/Empleados/AddEmpleado.vue */ "./resources/js/components/Administracion/Empleados/AddEmpleado.vue");
+/* harmony import */ var _components_Administracion_Empleados_EditEmpleado_vue__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./components/Administracion/Empleados/EditEmpleado.vue */ "./resources/js/components/Administracion/Empleados/EditEmpleado.vue");
+/* harmony import */ var _components_Administracion_PuntosEmision_Main_vue__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./components/Administracion/PuntosEmision/Main.vue */ "./resources/js/components/Administracion/PuntosEmision/Main.vue");
+/* harmony import */ var _components_Administracion_PuntosEmision_ListPuntoEmision_vue__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./components/Administracion/PuntosEmision/ListPuntoEmision.vue */ "./resources/js/components/Administracion/PuntosEmision/ListPuntoEmision.vue");
+/* harmony import */ var _components_Administracion_PuntosEmision_AddPuntoEmision_vue__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./components/Administracion/PuntosEmision/AddPuntoEmision.vue */ "./resources/js/components/Administracion/PuntosEmision/AddPuntoEmision.vue");
+/* harmony import */ var _components_Administracion_PuntosEmision_EditPuntoEmision_vue__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./components/Administracion/PuntosEmision/EditPuntoEmision.vue */ "./resources/js/components/Administracion/PuntosEmision/EditPuntoEmision.vue");
+/* harmony import */ var _components_Almacen_Categorias_Main_vue__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./components/Almacen/Categorias/Main.vue */ "./resources/js/components/Almacen/Categorias/Main.vue");
+/* harmony import */ var _components_Almacen_Categorias_ListCategoria_vue__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./components/Almacen/Categorias/ListCategoria.vue */ "./resources/js/components/Almacen/Categorias/ListCategoria.vue");
+/* harmony import */ var _components_Almacen_Categorias_AddCategoria_vue__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./components/Almacen/Categorias/AddCategoria.vue */ "./resources/js/components/Almacen/Categorias/AddCategoria.vue");
+/* harmony import */ var _components_Almacen_Categorias_EditCategoria_vue__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./components/Almacen/Categorias/EditCategoria.vue */ "./resources/js/components/Almacen/Categorias/EditCategoria.vue");
+/* harmony import */ var _components_Almacen_Productos_Main_vue__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./components/Almacen/Productos/Main.vue */ "./resources/js/components/Almacen/Productos/Main.vue");
+/* harmony import */ var _components_Almacen_Productos_ListProducto_vue__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./components/Almacen/Productos/ListProducto.vue */ "./resources/js/components/Almacen/Productos/ListProducto.vue");
+/* harmony import */ var _components_Almacen_Productos_AddProducto_vue__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./components/Almacen/Productos/AddProducto.vue */ "./resources/js/components/Almacen/Productos/AddProducto.vue");
+/* harmony import */ var _components_Almacen_Productos_EditProducto_vue__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./components/Almacen/Productos/EditProducto.vue */ "./resources/js/components/Almacen/Productos/EditProducto.vue");
+/* harmony import */ var _components_Almacen_Unidades_Main_vue__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./components/Almacen/Unidades/Main.vue */ "./resources/js/components/Almacen/Unidades/Main.vue");
+/* harmony import */ var _components_Almacen_Unidades_ListUnidad_vue__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./components/Almacen/Unidades/ListUnidad.vue */ "./resources/js/components/Almacen/Unidades/ListUnidad.vue");
+/* harmony import */ var _components_Almacen_Unidades_AddUnidad_vue__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./components/Almacen/Unidades/AddUnidad.vue */ "./resources/js/components/Almacen/Unidades/AddUnidad.vue");
+/* harmony import */ var _components_Almacen_Unidades_EditUnidad_vue__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ./components/Almacen/Unidades/EditUnidad.vue */ "./resources/js/components/Almacen/Unidades/EditUnidad.vue");
+/* harmony import */ var _components_Almacen_Inventarios_Main_vue__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ./components/Almacen/Inventarios/Main.vue */ "./resources/js/components/Almacen/Inventarios/Main.vue");
+/* harmony import */ var _components_Almacen_Inventarios_ListInventario_vue__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ./components/Almacen/Inventarios/ListInventario.vue */ "./resources/js/components/Almacen/Inventarios/ListInventario.vue");
+/* harmony import */ var _components_Almacen_Inventarios_KarInventario_vue__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ./components/Almacen/Inventarios/KarInventario.vue */ "./resources/js/components/Almacen/Inventarios/KarInventario.vue");
+/* harmony import */ var _components_Almacen_Inventarios_ManInventario_vue__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ./components/Almacen/Inventarios/ManInventario.vue */ "./resources/js/components/Almacen/Inventarios/ManInventario.vue");
+/* harmony import */ var _components_Administracion_RolesPago_Main_vue__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ./components/Administracion/RolesPago/Main.vue */ "./resources/js/components/Administracion/RolesPago/Main.vue");
+/* harmony import */ var _components_Administracion_RolesPago_ListRolPago_vue__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! ./components/Administracion/RolesPago/ListRolPago.vue */ "./resources/js/components/Administracion/RolesPago/ListRolPago.vue");
+/* harmony import */ var _components_Administracion_RolesPago_AddRolPago_vue__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! ./components/Administracion/RolesPago/AddRolPago.vue */ "./resources/js/components/Administracion/RolesPago/AddRolPago.vue");
+/* harmony import */ var _components_Administracion_RolesPago_EditRolPago_vue__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(/*! ./components/Administracion/RolesPago/EditRolPago.vue */ "./resources/js/components/Administracion/RolesPago/EditRolPago.vue");
+/* harmony import */ var _components_Administracion_RolesPago_DetRolPago_vue__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(/*! ./components/Administracion/RolesPago/DetRolPago.vue */ "./resources/js/components/Administracion/RolesPago/DetRolPago.vue");
+/* harmony import */ var _components_Compras_Proveedores_Main_vue__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(/*! ./components/Compras/Proveedores/Main.vue */ "./resources/js/components/Compras/Proveedores/Main.vue");
+/* harmony import */ var _components_Compras_Proveedores_ListProveedor_vue__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(/*! ./components/Compras/Proveedores/ListProveedor.vue */ "./resources/js/components/Compras/Proveedores/ListProveedor.vue");
+/* harmony import */ var _components_Compras_Proveedores_AddProveedor_vue__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(/*! ./components/Compras/Proveedores/AddProveedor.vue */ "./resources/js/components/Compras/Proveedores/AddProveedor.vue");
+/* harmony import */ var _components_Compras_Proveedores_EditProveedor_vue__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(/*! ./components/Compras/Proveedores/EditProveedor.vue */ "./resources/js/components/Compras/Proveedores/EditProveedor.vue");
+/* harmony import */ var _components_Compras_Compras_Main_vue__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(/*! ./components/Compras/Compras/Main.vue */ "./resources/js/components/Compras/Compras/Main.vue");
+/* harmony import */ var _components_Compras_Compras_ListCompra_vue__WEBPACK_IMPORTED_MODULE_51__ = __webpack_require__(/*! ./components/Compras/Compras/ListCompra.vue */ "./resources/js/components/Compras/Compras/ListCompra.vue");
+/* harmony import */ var _components_Compras_Compras_AddCompra_vue__WEBPACK_IMPORTED_MODULE_52__ = __webpack_require__(/*! ./components/Compras/Compras/AddCompra.vue */ "./resources/js/components/Compras/Compras/AddCompra.vue");
+/* harmony import */ var _components_Compras_Compras_DetCompra_vue__WEBPACK_IMPORTED_MODULE_53__ = __webpack_require__(/*! ./components/Compras/Compras/DetCompra.vue */ "./resources/js/components/Compras/Compras/DetCompra.vue");
+/* harmony import */ var _components_Compras_Deudas_Main_vue__WEBPACK_IMPORTED_MODULE_54__ = __webpack_require__(/*! ./components/Compras/Deudas/Main.vue */ "./resources/js/components/Compras/Deudas/Main.vue");
+/* harmony import */ var _components_Compras_Deudas_ListDeuda_vue__WEBPACK_IMPORTED_MODULE_55__ = __webpack_require__(/*! ./components/Compras/Deudas/ListDeuda.vue */ "./resources/js/components/Compras/Deudas/ListDeuda.vue");
+/* harmony import */ var _components_Compras_Deudas_DetDeuda_vue__WEBPACK_IMPORTED_MODULE_56__ = __webpack_require__(/*! ./components/Compras/Deudas/DetDeuda.vue */ "./resources/js/components/Compras/Deudas/DetDeuda.vue");
+/* harmony import */ var _components_Ventas_Clientes_Main_vue__WEBPACK_IMPORTED_MODULE_57__ = __webpack_require__(/*! ./components/Ventas/Clientes/Main.vue */ "./resources/js/components/Ventas/Clientes/Main.vue");
+/* harmony import */ var _components_Ventas_Clientes_ListCliente_vue__WEBPACK_IMPORTED_MODULE_58__ = __webpack_require__(/*! ./components/Ventas/Clientes/ListCliente.vue */ "./resources/js/components/Ventas/Clientes/ListCliente.vue");
+/* harmony import */ var _components_Ventas_Clientes_AddCliente_vue__WEBPACK_IMPORTED_MODULE_59__ = __webpack_require__(/*! ./components/Ventas/Clientes/AddCliente.vue */ "./resources/js/components/Ventas/Clientes/AddCliente.vue");
+/* harmony import */ var _components_Ventas_Clientes_EditCliente_vue__WEBPACK_IMPORTED_MODULE_60__ = __webpack_require__(/*! ./components/Ventas/Clientes/EditCliente.vue */ "./resources/js/components/Ventas/Clientes/EditCliente.vue");
+/* harmony import */ var _components_Ventas_Facturacion_Main_vue__WEBPACK_IMPORTED_MODULE_61__ = __webpack_require__(/*! ./components/Ventas/Facturacion/Main.vue */ "./resources/js/components/Ventas/Facturacion/Main.vue");
+/* harmony import */ var _components_Ventas_Facturacion_ListFactura_vue__WEBPACK_IMPORTED_MODULE_62__ = __webpack_require__(/*! ./components/Ventas/Facturacion/ListFactura.vue */ "./resources/js/components/Ventas/Facturacion/ListFactura.vue");
+/* harmony import */ var _components_Ventas_Facturacion_AddFactura_vue__WEBPACK_IMPORTED_MODULE_63__ = __webpack_require__(/*! ./components/Ventas/Facturacion/AddFactura.vue */ "./resources/js/components/Ventas/Facturacion/AddFactura.vue");
+/* harmony import */ var _components_Ventas_Facturacion_DetFactura_vue__WEBPACK_IMPORTED_MODULE_64__ = __webpack_require__(/*! ./components/Ventas/Facturacion/DetFactura.vue */ "./resources/js/components/Ventas/Facturacion/DetFactura.vue");
+/* harmony import */ var _components_Ventas_Creditos_Main_vue__WEBPACK_IMPORTED_MODULE_65__ = __webpack_require__(/*! ./components/Ventas/Creditos/Main.vue */ "./resources/js/components/Ventas/Creditos/Main.vue");
+/* harmony import */ var _components_Ventas_Creditos_ListCredito_vue__WEBPACK_IMPORTED_MODULE_66__ = __webpack_require__(/*! ./components/Ventas/Creditos/ListCredito.vue */ "./resources/js/components/Ventas/Creditos/ListCredito.vue");
+/* harmony import */ var _components_Ventas_Creditos_DetCredito_vue__WEBPACK_IMPORTED_MODULE_67__ = __webpack_require__(/*! ./components/Ventas/Creditos/DetCredito.vue */ "./resources/js/components/Ventas/Creditos/DetCredito.vue");
+/* harmony import */ var _components_Guias_Transportistas_Main_vue__WEBPACK_IMPORTED_MODULE_68__ = __webpack_require__(/*! ./components/Guias/Transportistas/Main.vue */ "./resources/js/components/Guias/Transportistas/Main.vue");
+/* harmony import */ var _components_Guias_Transportistas_ListTransportista_vue__WEBPACK_IMPORTED_MODULE_69__ = __webpack_require__(/*! ./components/Guias/Transportistas/ListTransportista.vue */ "./resources/js/components/Guias/Transportistas/ListTransportista.vue");
+/* harmony import */ var _components_Guias_Transportistas_AddTransportista_vue__WEBPACK_IMPORTED_MODULE_70__ = __webpack_require__(/*! ./components/Guias/Transportistas/AddTransportista.vue */ "./resources/js/components/Guias/Transportistas/AddTransportista.vue");
+/* harmony import */ var _components_Guias_Transportistas_EditTransportista_vue__WEBPACK_IMPORTED_MODULE_71__ = __webpack_require__(/*! ./components/Guias/Transportistas/EditTransportista.vue */ "./resources/js/components/Guias/Transportistas/EditTransportista.vue");
+/* harmony import */ var _components_Guias_GuiasRemision_Main_vue__WEBPACK_IMPORTED_MODULE_72__ = __webpack_require__(/*! ./components/Guias/GuiasRemision/Main.vue */ "./resources/js/components/Guias/GuiasRemision/Main.vue");
+/* harmony import */ var _components_Guias_GuiasRemision_ListGuia_vue__WEBPACK_IMPORTED_MODULE_73__ = __webpack_require__(/*! ./components/Guias/GuiasRemision/ListGuia.vue */ "./resources/js/components/Guias/GuiasRemision/ListGuia.vue");
+/* harmony import */ var _components_Guias_GuiasRemision_AddGuia_vue__WEBPACK_IMPORTED_MODULE_74__ = __webpack_require__(/*! ./components/Guias/GuiasRemision/AddGuia.vue */ "./resources/js/components/Guias/GuiasRemision/AddGuia.vue");
+/* harmony import */ var _components_Guias_GuiasRemision_DetGuia_vue__WEBPACK_IMPORTED_MODULE_75__ = __webpack_require__(/*! ./components/Guias/GuiasRemision/DetGuia.vue */ "./resources/js/components/Guias/GuiasRemision/DetGuia.vue");
+/* harmony import */ var _components_Guias_GuiasRemision_FacGuia_vue__WEBPACK_IMPORTED_MODULE_76__ = __webpack_require__(/*! ./components/Guias/GuiasRemision/FacGuia.vue */ "./resources/js/components/Guias/GuiasRemision/FacGuia.vue");
+/* harmony import */ var _components_Produccion_Plantas_Main_vue__WEBPACK_IMPORTED_MODULE_77__ = __webpack_require__(/*! ./components/Produccion/Plantas/Main.vue */ "./resources/js/components/Produccion/Plantas/Main.vue");
+/* harmony import */ var _components_Produccion_Plantas_ListProduccion_vue__WEBPACK_IMPORTED_MODULE_78__ = __webpack_require__(/*! ./components/Produccion/Plantas/ListProduccion.vue */ "./resources/js/components/Produccion/Plantas/ListProduccion.vue");
+/* harmony import */ var _components_Produccion_Plantas_AddProduccion_vue__WEBPACK_IMPORTED_MODULE_79__ = __webpack_require__(/*! ./components/Produccion/Plantas/AddProduccion.vue */ "./resources/js/components/Produccion/Plantas/AddProduccion.vue");
+/* harmony import */ var _components_Produccion_Plantas_EditProduccion_vue__WEBPACK_IMPORTED_MODULE_80__ = __webpack_require__(/*! ./components/Produccion/Plantas/EditProduccion.vue */ "./resources/js/components/Produccion/Plantas/EditProduccion.vue");
+/* harmony import */ var _components_Produccion_Plantas_FinProduccion_vue__WEBPACK_IMPORTED_MODULE_81__ = __webpack_require__(/*! ./components/Produccion/Plantas/FinProduccion.vue */ "./resources/js/components/Produccion/Plantas/FinProduccion.vue");
+/* harmony import */ var _components_Caja_OpeArqueo_vue__WEBPACK_IMPORTED_MODULE_82__ = __webpack_require__(/*! ./components/Caja/OpeArqueo.vue */ "./resources/js/components/Caja/OpeArqueo.vue");
+/* harmony import */ var _components_Caja_CloArqueo_vue__WEBPACK_IMPORTED_MODULE_83__ = __webpack_require__(/*! ./components/Caja/CloArqueo.vue */ "./resources/js/components/Caja/CloArqueo.vue");
+/* harmony import */ var _components_Caja_Arqueos_Main_vue__WEBPACK_IMPORTED_MODULE_84__ = __webpack_require__(/*! ./components/Caja/Arqueos/Main.vue */ "./resources/js/components/Caja/Arqueos/Main.vue");
+/* harmony import */ var _components_Caja_Arqueos_ListArqueo_vue__WEBPACK_IMPORTED_MODULE_85__ = __webpack_require__(/*! ./components/Caja/Arqueos/ListArqueo.vue */ "./resources/js/components/Caja/Arqueos/ListArqueo.vue");
+/* harmony import */ var _components_Caja_Arqueos_DetArqueo_vue__WEBPACK_IMPORTED_MODULE_86__ = __webpack_require__(/*! ./components/Caja/Arqueos/DetArqueo.vue */ "./resources/js/components/Caja/Arqueos/DetArqueo.vue");
+/* harmony import */ var _components_Reportes_Main_vue__WEBPACK_IMPORTED_MODULE_87__ = __webpack_require__(/*! ./components/Reportes/Main.vue */ "./resources/js/components/Reportes/Main.vue");
+/* harmony import */ var _components_Reportes_RepCompra_vue__WEBPACK_IMPORTED_MODULE_88__ = __webpack_require__(/*! ./components/Reportes/RepCompra.vue */ "./resources/js/components/Reportes/RepCompra.vue");
+/* harmony import */ var _components_Reportes_RepVenta_vue__WEBPACK_IMPORTED_MODULE_89__ = __webpack_require__(/*! ./components/Reportes/RepVenta.vue */ "./resources/js/components/Reportes/RepVenta.vue");
 // Componentes Unitarios
 
 
@@ -122625,6 +124566,12 @@ __webpack_require__.r(__webpack_exports__);
  // Roles
 
  // Impuestos
+// Iva
+
+
+
+
+ // Retención
 
 
 
@@ -122759,328 +124706,344 @@ var routes = [{
   name: 'empresa',
   component: _components_Administracion_Empresa_Empresa_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
 }, {
-  path: '/impuestos',
-  component: _components_Administracion_Impuestos_Main_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
+  path: '/impuestos-iva',
+  component: _components_Administracion_Impuestos_Iva_Main_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
   children: [{
     path: '',
-    name: 'listImpuesto',
-    component: _components_Administracion_Impuestos_ListImpuesto_vue__WEBPACK_IMPORTED_MODULE_6__["default"]
+    name: 'listImpuestoIva',
+    component: _components_Administracion_Impuestos_Iva_ListImpuestoIva_vue__WEBPACK_IMPORTED_MODULE_6__["default"]
   }, {
     path: 'agregar',
-    name: 'addImpuesto',
-    component: _components_Administracion_Impuestos_AddImpuesto_vue__WEBPACK_IMPORTED_MODULE_7__["default"]
+    name: 'addImpuestoIva',
+    component: _components_Administracion_Impuestos_Iva_AddImpuestoIva_vue__WEBPACK_IMPORTED_MODULE_7__["default"]
   }, {
     path: 'editar/:id',
-    name: 'editImpuesto',
-    component: _components_Administracion_Impuestos_EditImpuesto_vue__WEBPACK_IMPORTED_MODULE_8__["default"]
+    name: 'editImpuestoIva',
+    component: _components_Administracion_Impuestos_Iva_EditImpuestoIva_vue__WEBPACK_IMPORTED_MODULE_8__["default"]
+  }]
+}, {
+  path: '/impuestos-retencion',
+  component: _components_Administracion_Impuestos_Retencion_Main_vue__WEBPACK_IMPORTED_MODULE_9__["default"],
+  children: [{
+    path: '',
+    name: 'listImpuestoRetencion',
+    component: _components_Administracion_Impuestos_Retencion_ListImpuestoRetencion_vue__WEBPACK_IMPORTED_MODULE_10__["default"]
+  }, {
+    path: 'agregar',
+    name: 'addImpuestoRetencion',
+    component: _components_Administracion_Impuestos_Retencion_AddImpuestoRetencion_vue__WEBPACK_IMPORTED_MODULE_11__["default"]
+  }, {
+    path: 'editar/:id',
+    name: 'editImpuestoRetencion',
+    component: _components_Administracion_Impuestos_Retencion_EditImpuestoRetencion_vue__WEBPACK_IMPORTED_MODULE_12__["default"]
   }]
 }, {
   path: '/categorias',
-  component: _components_Almacen_Categorias_Main_vue__WEBPACK_IMPORTED_MODULE_21__["default"],
+  component: _components_Almacen_Categorias_Main_vue__WEBPACK_IMPORTED_MODULE_25__["default"],
   children: [{
     path: '',
     name: 'listCategoria',
-    component: _components_Almacen_Categorias_ListCategoria_vue__WEBPACK_IMPORTED_MODULE_22__["default"]
+    component: _components_Almacen_Categorias_ListCategoria_vue__WEBPACK_IMPORTED_MODULE_26__["default"]
   }, {
     path: 'agregar',
     name: 'addCategoria',
-    component: _components_Almacen_Categorias_AddCategoria_vue__WEBPACK_IMPORTED_MODULE_23__["default"]
+    component: _components_Almacen_Categorias_AddCategoria_vue__WEBPACK_IMPORTED_MODULE_27__["default"]
   }, {
     path: 'editar/:id',
     name: 'editCategoria',
-    component: _components_Almacen_Categorias_EditCategoria_vue__WEBPACK_IMPORTED_MODULE_24__["default"]
+    component: _components_Almacen_Categorias_EditCategoria_vue__WEBPACK_IMPORTED_MODULE_28__["default"]
   }]
 }, {
   path: '/unidades',
-  component: _components_Almacen_Unidades_Main_vue__WEBPACK_IMPORTED_MODULE_29__["default"],
+  component: _components_Almacen_Unidades_Main_vue__WEBPACK_IMPORTED_MODULE_33__["default"],
   children: [{
     path: '',
     name: 'listUnidad',
-    component: _components_Almacen_Unidades_ListUnidad_vue__WEBPACK_IMPORTED_MODULE_30__["default"]
+    component: _components_Almacen_Unidades_ListUnidad_vue__WEBPACK_IMPORTED_MODULE_34__["default"]
   }, {
     path: 'agregar',
     name: 'addUnidad',
-    component: _components_Almacen_Unidades_AddUnidad_vue__WEBPACK_IMPORTED_MODULE_31__["default"]
+    component: _components_Almacen_Unidades_AddUnidad_vue__WEBPACK_IMPORTED_MODULE_35__["default"]
   }, {
     path: 'editar/:id',
     name: 'editUnidad',
-    component: _components_Almacen_Unidades_EditUnidad_vue__WEBPACK_IMPORTED_MODULE_32__["default"]
+    component: _components_Almacen_Unidades_EditUnidad_vue__WEBPACK_IMPORTED_MODULE_36__["default"]
   }]
 }, {
   path: '/proveedores',
-  component: _components_Compras_Proveedores_Main_vue__WEBPACK_IMPORTED_MODULE_42__["default"],
+  component: _components_Compras_Proveedores_Main_vue__WEBPACK_IMPORTED_MODULE_46__["default"],
   children: [{
     path: '',
     name: 'listProveedor',
-    component: _components_Compras_Proveedores_ListProveedor_vue__WEBPACK_IMPORTED_MODULE_43__["default"]
+    component: _components_Compras_Proveedores_ListProveedor_vue__WEBPACK_IMPORTED_MODULE_47__["default"]
   }, {
     path: 'agregar',
     name: 'addProveedor',
-    component: _components_Compras_Proveedores_AddProveedor_vue__WEBPACK_IMPORTED_MODULE_44__["default"]
+    component: _components_Compras_Proveedores_AddProveedor_vue__WEBPACK_IMPORTED_MODULE_48__["default"]
   }, {
     path: 'editar/:id',
     name: 'editProveedor',
-    component: _components_Compras_Proveedores_EditProveedor_vue__WEBPACK_IMPORTED_MODULE_45__["default"]
+    component: _components_Compras_Proveedores_EditProveedor_vue__WEBPACK_IMPORTED_MODULE_49__["default"]
   }]
 }, {
   path: '/clientes',
-  component: _components_Ventas_Clientes_Main_vue__WEBPACK_IMPORTED_MODULE_53__["default"],
+  component: _components_Ventas_Clientes_Main_vue__WEBPACK_IMPORTED_MODULE_57__["default"],
   children: [{
     path: '',
     name: 'listCliente',
-    component: _components_Ventas_Clientes_ListCliente_vue__WEBPACK_IMPORTED_MODULE_54__["default"]
+    component: _components_Ventas_Clientes_ListCliente_vue__WEBPACK_IMPORTED_MODULE_58__["default"]
   }, {
     path: 'agregar',
     name: 'addCliente',
-    component: _components_Ventas_Clientes_AddCliente_vue__WEBPACK_IMPORTED_MODULE_55__["default"]
+    component: _components_Ventas_Clientes_AddCliente_vue__WEBPACK_IMPORTED_MODULE_59__["default"]
   }, {
     path: 'editar/:id',
     name: 'editCliente',
-    component: _components_Ventas_Clientes_EditCliente_vue__WEBPACK_IMPORTED_MODULE_56__["default"]
+    component: _components_Ventas_Clientes_EditCliente_vue__WEBPACK_IMPORTED_MODULE_60__["default"]
   }]
 }, {
   path: '/establecimientos',
-  component: _components_Administracion_Establecimientos_Main_vue__WEBPACK_IMPORTED_MODULE_9__["default"],
+  component: _components_Administracion_Establecimientos_Main_vue__WEBPACK_IMPORTED_MODULE_13__["default"],
   children: [{
     path: '',
     name: 'listEstablecimiento',
-    component: _components_Administracion_Establecimientos_ListEstablecimiento_vue__WEBPACK_IMPORTED_MODULE_10__["default"]
+    component: _components_Administracion_Establecimientos_ListEstablecimiento_vue__WEBPACK_IMPORTED_MODULE_14__["default"]
   }, {
     path: 'agregar',
     name: 'addEstablecimiento',
-    component: _components_Administracion_Establecimientos_AddEstablecimiento_vue__WEBPACK_IMPORTED_MODULE_11__["default"]
+    component: _components_Administracion_Establecimientos_AddEstablecimiento_vue__WEBPACK_IMPORTED_MODULE_15__["default"]
   }, {
     path: 'editar/:id',
     name: 'editEstablecimiento',
-    component: _components_Administracion_Establecimientos_EditEstablecimiento_vue__WEBPACK_IMPORTED_MODULE_12__["default"]
+    component: _components_Administracion_Establecimientos_EditEstablecimiento_vue__WEBPACK_IMPORTED_MODULE_16__["default"]
   }]
 }, {
   path: '/empleados',
-  component: _components_Administracion_Empleados_Main_vue__WEBPACK_IMPORTED_MODULE_13__["default"],
+  component: _components_Administracion_Empleados_Main_vue__WEBPACK_IMPORTED_MODULE_17__["default"],
   children: [{
     path: '',
     name: 'listEmpleado',
-    component: _components_Administracion_Empleados_ListEmpleado_vue__WEBPACK_IMPORTED_MODULE_14__["default"]
+    component: _components_Administracion_Empleados_ListEmpleado_vue__WEBPACK_IMPORTED_MODULE_18__["default"]
   }, {
     path: 'agregar',
     name: 'addEmpleado',
-    component: _components_Administracion_Empleados_AddEmpleado_vue__WEBPACK_IMPORTED_MODULE_15__["default"]
+    component: _components_Administracion_Empleados_AddEmpleado_vue__WEBPACK_IMPORTED_MODULE_19__["default"]
   }, {
     path: 'editar/:id',
     name: 'editEmpleado',
-    component: _components_Administracion_Empleados_EditEmpleado_vue__WEBPACK_IMPORTED_MODULE_16__["default"]
+    component: _components_Administracion_Empleados_EditEmpleado_vue__WEBPACK_IMPORTED_MODULE_20__["default"]
   }]
 }, {
   path: '/productos',
-  component: _components_Almacen_Productos_Main_vue__WEBPACK_IMPORTED_MODULE_25__["default"],
+  component: _components_Almacen_Productos_Main_vue__WEBPACK_IMPORTED_MODULE_29__["default"],
   children: [{
     path: '',
     name: 'listProducto',
-    component: _components_Almacen_Productos_ListProducto_vue__WEBPACK_IMPORTED_MODULE_26__["default"]
+    component: _components_Almacen_Productos_ListProducto_vue__WEBPACK_IMPORTED_MODULE_30__["default"]
   }, {
     path: 'agregar',
     name: 'addProducto',
-    component: _components_Almacen_Productos_AddProducto_vue__WEBPACK_IMPORTED_MODULE_27__["default"]
+    component: _components_Almacen_Productos_AddProducto_vue__WEBPACK_IMPORTED_MODULE_31__["default"]
   }, {
     path: 'editar/:id',
     name: 'editProducto',
-    component: _components_Almacen_Productos_EditProducto_vue__WEBPACK_IMPORTED_MODULE_28__["default"]
+    component: _components_Almacen_Productos_EditProducto_vue__WEBPACK_IMPORTED_MODULE_32__["default"]
   }]
 }, {
   path: '/inventarios',
-  component: _components_Almacen_Inventarios_Main_vue__WEBPACK_IMPORTED_MODULE_33__["default"],
+  component: _components_Almacen_Inventarios_Main_vue__WEBPACK_IMPORTED_MODULE_37__["default"],
   children: [{
     path: '',
     name: 'listInventario',
-    component: _components_Almacen_Inventarios_ListInventario_vue__WEBPACK_IMPORTED_MODULE_34__["default"]
+    component: _components_Almacen_Inventarios_ListInventario_vue__WEBPACK_IMPORTED_MODULE_38__["default"]
   }, {
     path: 'gestionar',
     name: 'manInventario',
-    component: _components_Almacen_Inventarios_ManInventario_vue__WEBPACK_IMPORTED_MODULE_36__["default"]
+    component: _components_Almacen_Inventarios_ManInventario_vue__WEBPACK_IMPORTED_MODULE_40__["default"]
   }, {
     path: 'kardex/:id',
     name: 'karInventario',
-    component: _components_Almacen_Inventarios_KarInventario_vue__WEBPACK_IMPORTED_MODULE_35__["default"]
+    component: _components_Almacen_Inventarios_KarInventario_vue__WEBPACK_IMPORTED_MODULE_39__["default"]
   }]
 }, {
   path: '/compras',
-  component: _components_Compras_Compras_Main_vue__WEBPACK_IMPORTED_MODULE_46__["default"],
+  component: _components_Compras_Compras_Main_vue__WEBPACK_IMPORTED_MODULE_50__["default"],
   children: [{
     path: '',
     name: 'listCompra',
-    component: _components_Compras_Compras_ListCompra_vue__WEBPACK_IMPORTED_MODULE_47__["default"]
+    component: _components_Compras_Compras_ListCompra_vue__WEBPACK_IMPORTED_MODULE_51__["default"]
   }, {
     path: 'agregar',
     name: 'addCompra',
-    component: _components_Compras_Compras_AddCompra_vue__WEBPACK_IMPORTED_MODULE_48__["default"]
+    component: _components_Compras_Compras_AddCompra_vue__WEBPACK_IMPORTED_MODULE_52__["default"]
   }, {
     path: 'detalle/:id',
     name: 'detCompra',
-    component: _components_Compras_Compras_DetCompra_vue__WEBPACK_IMPORTED_MODULE_49__["default"]
+    component: _components_Compras_Compras_DetCompra_vue__WEBPACK_IMPORTED_MODULE_53__["default"]
   }]
 }, {
   path: '/deudas',
-  component: _components_Compras_Deudas_Main_vue__WEBPACK_IMPORTED_MODULE_50__["default"],
+  component: _components_Compras_Deudas_Main_vue__WEBPACK_IMPORTED_MODULE_54__["default"],
   children: [{
     path: '',
     name: 'listDeuda',
-    component: _components_Compras_Deudas_ListDeuda_vue__WEBPACK_IMPORTED_MODULE_51__["default"]
+    component: _components_Compras_Deudas_ListDeuda_vue__WEBPACK_IMPORTED_MODULE_55__["default"]
   }, {
     path: 'detalle/:id',
     name: 'detDeuda',
-    component: _components_Compras_Deudas_DetDeuda_vue__WEBPACK_IMPORTED_MODULE_52__["default"]
+    component: _components_Compras_Deudas_DetDeuda_vue__WEBPACK_IMPORTED_MODULE_56__["default"]
   }]
 }, {
   path: '/puntos-emision',
-  component: _components_Administracion_PuntosEmision_Main_vue__WEBPACK_IMPORTED_MODULE_17__["default"],
+  component: _components_Administracion_PuntosEmision_Main_vue__WEBPACK_IMPORTED_MODULE_21__["default"],
   children: [{
     path: '',
     name: 'listPuntoEmision',
-    component: _components_Administracion_PuntosEmision_ListPuntoEmision_vue__WEBPACK_IMPORTED_MODULE_18__["default"]
+    component: _components_Administracion_PuntosEmision_ListPuntoEmision_vue__WEBPACK_IMPORTED_MODULE_22__["default"]
   }, {
     path: 'agregar',
     name: 'addPuntoEmision',
-    component: _components_Administracion_PuntosEmision_AddPuntoEmision_vue__WEBPACK_IMPORTED_MODULE_19__["default"]
+    component: _components_Administracion_PuntosEmision_AddPuntoEmision_vue__WEBPACK_IMPORTED_MODULE_23__["default"]
   }, {
     path: 'editar/:id',
     name: 'editPuntoEmision',
-    component: _components_Administracion_PuntosEmision_EditPuntoEmision_vue__WEBPACK_IMPORTED_MODULE_20__["default"]
+    component: _components_Administracion_PuntosEmision_EditPuntoEmision_vue__WEBPACK_IMPORTED_MODULE_24__["default"]
   }]
 }, {
   path: '/producciones',
-  component: _components_Produccion_Plantas_Main_vue__WEBPACK_IMPORTED_MODULE_73__["default"],
+  component: _components_Produccion_Plantas_Main_vue__WEBPACK_IMPORTED_MODULE_77__["default"],
   children: [{
     path: '',
     name: 'listProduccion',
-    component: _components_Produccion_Plantas_ListProduccion_vue__WEBPACK_IMPORTED_MODULE_74__["default"]
+    component: _components_Produccion_Plantas_ListProduccion_vue__WEBPACK_IMPORTED_MODULE_78__["default"]
   }, {
     path: 'agregar',
     name: 'addProduccion',
-    component: _components_Produccion_Plantas_AddProduccion_vue__WEBPACK_IMPORTED_MODULE_75__["default"]
+    component: _components_Produccion_Plantas_AddProduccion_vue__WEBPACK_IMPORTED_MODULE_79__["default"]
   }, {
     path: 'editar/:id',
     name: 'editProduccion',
-    component: _components_Produccion_Plantas_EditProduccion_vue__WEBPACK_IMPORTED_MODULE_76__["default"]
+    component: _components_Produccion_Plantas_EditProduccion_vue__WEBPACK_IMPORTED_MODULE_80__["default"]
   }, {
     path: 'finalizar/:id',
     name: 'finProduccion',
-    component: _components_Produccion_Plantas_FinProduccion_vue__WEBPACK_IMPORTED_MODULE_77__["default"]
+    component: _components_Produccion_Plantas_FinProduccion_vue__WEBPACK_IMPORTED_MODULE_81__["default"]
   }]
 }, {
   path: '/facturacion',
-  component: _components_Ventas_Facturacion_Main_vue__WEBPACK_IMPORTED_MODULE_57__["default"],
+  component: _components_Ventas_Facturacion_Main_vue__WEBPACK_IMPORTED_MODULE_61__["default"],
   children: [{
     path: '',
     name: 'listFactura',
-    component: _components_Ventas_Facturacion_ListFactura_vue__WEBPACK_IMPORTED_MODULE_58__["default"]
+    component: _components_Ventas_Facturacion_ListFactura_vue__WEBPACK_IMPORTED_MODULE_62__["default"]
   }, {
     path: 'agregar',
     name: 'addFactura',
-    component: _components_Ventas_Facturacion_AddFactura_vue__WEBPACK_IMPORTED_MODULE_59__["default"]
+    component: _components_Ventas_Facturacion_AddFactura_vue__WEBPACK_IMPORTED_MODULE_63__["default"]
   }, {
     path: 'detalle/:id',
     name: 'detFactura',
-    component: _components_Ventas_Facturacion_DetFactura_vue__WEBPACK_IMPORTED_MODULE_60__["default"]
+    component: _components_Ventas_Facturacion_DetFactura_vue__WEBPACK_IMPORTED_MODULE_64__["default"]
   }]
 }, {
   path: '/creditos',
-  component: _components_Ventas_Creditos_Main_vue__WEBPACK_IMPORTED_MODULE_61__["default"],
+  component: _components_Ventas_Creditos_Main_vue__WEBPACK_IMPORTED_MODULE_65__["default"],
   children: [{
     path: '',
     name: 'listCredito',
-    component: _components_Ventas_Creditos_ListCredito_vue__WEBPACK_IMPORTED_MODULE_62__["default"]
+    component: _components_Ventas_Creditos_ListCredito_vue__WEBPACK_IMPORTED_MODULE_66__["default"]
   }, {
     path: 'detalle/:id',
     name: 'detCredito',
-    component: _components_Ventas_Creditos_DetCredito_vue__WEBPACK_IMPORTED_MODULE_63__["default"]
+    component: _components_Ventas_Creditos_DetCredito_vue__WEBPACK_IMPORTED_MODULE_67__["default"]
   }]
 }, {
   path: '/arqueos',
-  component: _components_Caja_Arqueos_Main_vue__WEBPACK_IMPORTED_MODULE_80__["default"],
+  component: _components_Caja_Arqueos_Main_vue__WEBPACK_IMPORTED_MODULE_84__["default"],
   children: [{
     path: '',
     name: 'listArqueo',
-    component: _components_Caja_Arqueos_ListArqueo_vue__WEBPACK_IMPORTED_MODULE_81__["default"]
+    component: _components_Caja_Arqueos_ListArqueo_vue__WEBPACK_IMPORTED_MODULE_85__["default"]
   }, {
     path: 'abrir',
     name: 'opeArqueo',
-    component: _components_Caja_OpeArqueo_vue__WEBPACK_IMPORTED_MODULE_78__["default"]
+    component: _components_Caja_OpeArqueo_vue__WEBPACK_IMPORTED_MODULE_82__["default"]
   }, {
     path: 'cerrar',
     name: 'cloArqueo',
-    component: _components_Caja_CloArqueo_vue__WEBPACK_IMPORTED_MODULE_79__["default"]
+    component: _components_Caja_CloArqueo_vue__WEBPACK_IMPORTED_MODULE_83__["default"]
   }, {
     path: 'detalle/:id',
     name: 'detArqueo',
-    component: _components_Caja_Arqueos_DetArqueo_vue__WEBPACK_IMPORTED_MODULE_82__["default"]
+    component: _components_Caja_Arqueos_DetArqueo_vue__WEBPACK_IMPORTED_MODULE_86__["default"]
   }]
 }, {
   path: '/roles-pago',
-  component: _components_Administracion_RolesPago_Main_vue__WEBPACK_IMPORTED_MODULE_37__["default"],
+  component: _components_Administracion_RolesPago_Main_vue__WEBPACK_IMPORTED_MODULE_41__["default"],
   children: [{
     path: '',
     name: 'listRolPago',
-    component: _components_Administracion_RolesPago_ListRolPago_vue__WEBPACK_IMPORTED_MODULE_38__["default"]
+    component: _components_Administracion_RolesPago_ListRolPago_vue__WEBPACK_IMPORTED_MODULE_42__["default"]
   }, {
     path: 'generar',
     name: 'addRolPago',
-    component: _components_Administracion_RolesPago_AddRolPago_vue__WEBPACK_IMPORTED_MODULE_39__["default"]
+    component: _components_Administracion_RolesPago_AddRolPago_vue__WEBPACK_IMPORTED_MODULE_43__["default"]
   }, {
     path: 'editar/:id',
     name: 'editRolPago',
-    component: _components_Administracion_RolesPago_EditRolPago_vue__WEBPACK_IMPORTED_MODULE_40__["default"]
+    component: _components_Administracion_RolesPago_EditRolPago_vue__WEBPACK_IMPORTED_MODULE_44__["default"]
   }, {
     path: 'detalle/:id',
     name: 'detRolPago',
-    component: _components_Administracion_RolesPago_DetRolPago_vue__WEBPACK_IMPORTED_MODULE_41__["default"]
+    component: _components_Administracion_RolesPago_DetRolPago_vue__WEBPACK_IMPORTED_MODULE_45__["default"]
   }]
 }, {
   path: '/transportistas',
-  component: _components_Guias_Transportistas_Main_vue__WEBPACK_IMPORTED_MODULE_64__["default"],
+  component: _components_Guias_Transportistas_Main_vue__WEBPACK_IMPORTED_MODULE_68__["default"],
   children: [{
     path: '',
     name: 'listTransportista',
-    component: _components_Guias_Transportistas_ListTransportista_vue__WEBPACK_IMPORTED_MODULE_65__["default"]
+    component: _components_Guias_Transportistas_ListTransportista_vue__WEBPACK_IMPORTED_MODULE_69__["default"]
   }, {
     path: 'agregar',
     name: 'addTransportista',
-    component: _components_Guias_Transportistas_AddTransportista_vue__WEBPACK_IMPORTED_MODULE_66__["default"]
+    component: _components_Guias_Transportistas_AddTransportista_vue__WEBPACK_IMPORTED_MODULE_70__["default"]
   }, {
     path: 'editar/:id',
     name: 'editTransportista',
-    component: _components_Guias_Transportistas_EditTransportista_vue__WEBPACK_IMPORTED_MODULE_67__["default"]
+    component: _components_Guias_Transportistas_EditTransportista_vue__WEBPACK_IMPORTED_MODULE_71__["default"]
   }]
 }, {
   path: '/guias',
-  component: _components_Guias_GuiasRemision_Main_vue__WEBPACK_IMPORTED_MODULE_68__["default"],
+  component: _components_Guias_GuiasRemision_Main_vue__WEBPACK_IMPORTED_MODULE_72__["default"],
   children: [{
     path: '',
     name: 'listGuia',
-    component: _components_Guias_GuiasRemision_ListGuia_vue__WEBPACK_IMPORTED_MODULE_69__["default"]
+    component: _components_Guias_GuiasRemision_ListGuia_vue__WEBPACK_IMPORTED_MODULE_73__["default"]
   }, {
     path: 'agregar',
     name: 'addGuia',
-    component: _components_Guias_GuiasRemision_AddGuia_vue__WEBPACK_IMPORTED_MODULE_70__["default"]
+    component: _components_Guias_GuiasRemision_AddGuia_vue__WEBPACK_IMPORTED_MODULE_74__["default"]
   }, {
     path: 'factura/:id',
     name: 'facGuia',
-    component: _components_Guias_GuiasRemision_FacGuia_vue__WEBPACK_IMPORTED_MODULE_72__["default"]
+    component: _components_Guias_GuiasRemision_FacGuia_vue__WEBPACK_IMPORTED_MODULE_76__["default"]
   }, {
     path: 'detalle/:id',
     name: 'detGuia',
-    component: _components_Guias_GuiasRemision_DetGuia_vue__WEBPACK_IMPORTED_MODULE_71__["default"]
+    component: _components_Guias_GuiasRemision_DetGuia_vue__WEBPACK_IMPORTED_MODULE_75__["default"]
   }]
 }, {
   path: '/reporte',
-  component: _components_Reportes_Main_vue__WEBPACK_IMPORTED_MODULE_83__["default"],
+  component: _components_Reportes_Main_vue__WEBPACK_IMPORTED_MODULE_87__["default"],
   children: [{
     path: 'compras',
     name: 'repCompra',
-    component: _components_Reportes_RepCompra_vue__WEBPACK_IMPORTED_MODULE_84__["default"]
+    component: _components_Reportes_RepCompra_vue__WEBPACK_IMPORTED_MODULE_88__["default"]
   }, {
     path: 'ventas',
     name: 'repVenta',
-    component: _components_Reportes_RepVenta_vue__WEBPACK_IMPORTED_MODULE_85__["default"]
+    component: _components_Reportes_RepVenta_vue__WEBPACK_IMPORTED_MODULE_89__["default"]
   }]
 }];
 

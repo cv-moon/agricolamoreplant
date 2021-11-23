@@ -28,8 +28,11 @@ class CreateGuiasTable extends Migration
             $table->string('num_autorizacion', 49);
             $table->date('fec_inicio');
             $table->date('fec_fin');
-            $table->string('motivo', 60);
-            $table->string('ruta', 60);
+            $table->string('des_nombre', 300);
+            $table->string('des_direccion', 300);
+            $table->string('des_identificacion', 13);
+            $table->string('motivo', 300);
+            $table->string('ruta', 300);
             $table->string('observaciones', 255);
             $table->string('respuesta', 50);
             $table->char('estado', 1);

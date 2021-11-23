@@ -20,7 +20,9 @@ class DatabaseSeeder extends Seeder
             ComprobanteSeeder::class,
             ClienteSeeder::class,
             FormaPagoSeeder::class,
-            MesSeeder::class
+            MesSeeder::class,
+            ImpuestoRetencionSeeder::class,
+            TarifaRetencionSeeder::class
         ]);
     }
 }

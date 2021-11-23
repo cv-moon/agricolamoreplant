@@ -15,7 +15,7 @@
       <b class="text-primary">Datos del Cliente</b>
       <hr class="mt-0" />
       <div class="form-group row">
-        <div class="col-6">
+        <div class="col-sm-6">
           <label for="dat_cliente" class="col-sm-12 col-form-label"
             >Cliente:</label
           >
@@ -73,7 +73,7 @@
           <label for="comprobante" class="col-form-label"># Comprobante:</label>
           <p class="col-form-label">{{ datos.comprobante }}</p>
         </div>
-        <div class="col-6">
+        <div class="col-sm-6">
           <label for="num_comprobante" class="col-form-label"
             >Clave de Acceso:</label
           >
@@ -233,34 +233,34 @@
           <div class="card card-success card-outline">
             <div class="card-body">
               <div class="form-group row">
-                <div class="col-6">Subtotal Iva 12%:</div>
-                <div class="col-6 bg-info text-right">
+                <div class="col-sm-6">Subtotal Iva 12%:</div>
+                <div class="col-sm-6 bg-info text-right">
                   $ {{ (factura.sub_iva = subtotalIva.toFixed(2)) }}
                 </div>
               </div>
               <div class="form-group row">
-                <div class="col-6">Subtotal 0%:</div>
-                <div class="col-6 bg-gray-dark text-right">
+                <div class="col-sm-6">Subtotal 0%:</div>
+                <div class="col-sm-6 bg-gray-dark text-right">
                   $ {{ (factura.sub_0 = subtotalCero.toFixed(2)) }}
                 </div>
               </div>
               <div class="form-group row">
-                <div class="col-6">Subtotal no objeto de iva:</div>
-                <div class="col-6 bg-indigo text-right">
+                <div class="col-sm-6">Subtotal no objeto de iva:</div>
+                <div class="col-sm-6 bg-indigo text-right">
                   $ {{ (factura.sub_no_iva = subtotalNoObjeto.toFixed(2)) }}
                 </div>
               </div>
               <div class="form-group row">
-                <div class="col-6">Subtotal exento de iva:</div>
-                <div class="col-6 bg-lightblue text-right">
+                <div class="col-sm-6">Subtotal exento de iva:</div>
+                <div class="col-sm-6 bg-lightblue text-right">
                   $ {{ (factura.sub_exento = subtotalExento.toFixed(2)) }}
                 </div>
               </div>
               <div class="form-group row">
-                <div class="col-6">Subtotal sin Impuestos:</div>
+                <div class="col-sm-6">Subtotal sin Impuestos:</div>
                 <div
                   class="
-                    col-6
+                    col-sm-6
                     solor-palette-set
                     bg-info
                     disabled
@@ -272,38 +272,38 @@
                 </div>
               </div>
               <div class="form-group row">
-                <div class="col-6">Total Descuento:</div>
-                <div class="col-6 bg-success text-right">
+                <div class="col-sm-6">Total Descuento:</div>
+                <div class="col-sm-6 bg-success text-right">
                   $ {{ (factura.tot_descuento = totalDescuento.toFixed(2)) }}
                 </div>
               </div>
               <div class="form-group row">
-                <div class="col-6">Valor ICE:</div>
-                <div class="col-6 bg-secondary text-right">
+                <div class="col-sm-6">Valor ICE:</div>
+                <div class="col-sm-6 bg-secondary text-right">
                   $ {{ factura.val_ice }}
                 </div>
               </div>
               <div class="form-group row">
-                <div class="col-6">Valor Irbpnr:</div>
-                <div class="col-6 bg-gray text-right">
+                <div class="col-sm-6">Valor Irbpnr:</div>
+                <div class="col-sm-6 bg-gray text-right">
                   $ {{ factura.val_irbpnr }}
                 </div>
               </div>
               <div class="form-group row">
-                <div class="col-6">Iva 12%:</div>
-                <div class="col-6 bg-gray text-right">
+                <div class="col-sm-6">Iva 12%:</div>
+                <div class="col-sm-6 bg-gray text-right">
                   $ {{ (factura.val_iva = calcularIva.toFixed(2)) }}
                 </div>
               </div>
               <div class="form-group row">
-                <div class="col-6">Propina 10%:</div>
-                <div class="col-6 bg-gray text-right">
+                <div class="col-sm-6">Propina 10%:</div>
+                <div class="col-sm-6 bg-gray text-right">
                   $ {{ factura.val_propina }}
                 </div>
               </div>
               <div class="form-group row">
-                <div class="col-6">Valor Total:</div>
-                <div class="col-6 bg-gray disabled color-palette text-right">
+                <div class="col-sm-6">Valor Total:</div>
+                <div class="col-sm-6 bg-gray disabled color-palette text-right">
                   $ {{ (factura.val_total = calcularTotal.toFixed(2)) }}
                 </div>
               </div>

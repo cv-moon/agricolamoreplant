@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use DateTimeInterface;
 use Illuminate\Database\Eloquent\Model;
 
 class Kardex extends Model
@@ -12,4 +13,9 @@ class Kardex extends Model
         'concepto',
         'cantidad'
     ];
+    
+    protected function serializeDate(DateTimeInterface $date)
+    {
+        return $date->format('Y-m-d H:i:s');
+    }
 }

@@ -112,7 +112,7 @@
                         </li>
                     </ul>
                 </li>
-                <!-- <li class="nav-item">
+                <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-truck-moving"></i>
                         <p>
@@ -134,7 +134,7 @@
                             </router-link>
                         </li>
                     </ul>
-                </li> -->
+                </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-cash-register"></i>
@@ -261,10 +261,27 @@
                             </router-link>
                         </li>
                         <li class="nav-item">
-                            <router-link to="/impuestos" class="nav-link">
+                            <a href="#" class="nav-link">
                                 <i class="fas fa-percentage nav-icon"></i>
-                                <p>Impuestos</p>
-                            </router-link>
+                                <p>
+                                    Impuestos
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <router-link to="/impuestos-iva" class="nav-link">
+                                        <i class="far fa-dot-circle nav-icon"></i>
+                                        <p>I.V.A.</p>
+                                    </router-link>
+                                </li>
+                                <li class="nav-item">
+                                    <router-link to="/impuestos-retencion" class="nav-link">
+                                        <i class="far fa-dot-circle nav-icon"></i>
+                                        <p>Retención</p>
+                                    </router-link>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
                 </li>

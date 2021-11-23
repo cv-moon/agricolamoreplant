@@ -3,10 +3,10 @@
     <div class="card-header">
       <h3 class="card-title mt-2">
         <i class="fas fa-align-justify"></i>
-        Impuestos
+        Impuestos para Retención
       </h3>
       <div class="card-tools">
-        <router-link to="/impuestos/agregar" class="btn btn-success">
+        <router-link to="/impuestos-retencion/agregar" class="btn btn-success">
           <i class="fas fa-plus"></i> Nuevo
         </router-link>
       </div>
@@ -32,14 +32,14 @@
               <router-link
                 type="button"
                 title="Editar"
-                :to="'/impuestos/editar/' + tarifa.id"
+                :to="'/impuestos-retencion/editar/' + tarifa.id"
                 class="btn btn-warning btn-xs"
               >
                 <i class="fas fa-pen"></i>
               </router-link>
             </td>
             <td v-text="tarifa.impuesto"></td>
-            <td v-text="tarifa.tarifa"></td>
+            <td style="width: 15px" v-text="tarifa.tarifa"></td>
             <td v-text="tarifa.valor"></td>
             <td v-text="tarifa.codigo"></td>
           </tr>
@@ -62,7 +62,7 @@ export default {
       });
     },
     listar() {
-      axios.get("/api/tarifas").then((resp) => {
+      axios.get("/api/tarifas-retencion").then((resp) => {
         this.arrayTarifas = resp.data;
         this.myTable();
       });

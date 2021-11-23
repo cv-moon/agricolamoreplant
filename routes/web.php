@@ -37,13 +37,22 @@ Route::middleware('auth')->group(function () {
     Route::put('api/empresa/editar', 'EmpresaController@update');
 
     // Impuesto
-    Route::get('api/impuestos', 'ImpuestoController@index');
-
-    // Tarifa
-    Route::get('api/tarifas', 'TarifaController@index');
-    Route::post('api/tarifa/guardar', 'TarifaController@store');
-    Route::put('api/tarifa/editar', 'TarifaController@update');
-    Route::get('api/tarifa/detalle', 'TarifaController@detail');
+    Route::get('api/impuestos-iva', 'ImpuestoController@index');
+    
+    // Tarifas IVA
+    Route::get('api/tarifas-iva', 'TarifaController@index');
+    Route::post('api/tarifa-iva/guardar', 'TarifaController@store');
+    Route::put('api/tarifa-iva/editar', 'TarifaController@update');
+    Route::get('api/tarifa-iva/detalle', 'TarifaController@detail');
+    
+    // Impuesto Retención
+    Route::get('api/impuestos-retencion', 'ImpuestoRetencionController@index');
+    
+    // Tarifas Retención
+    Route::get('api/tarifas-retencion', 'TarifaRetencionController@index');
+    Route::post('api/tarifa-retencion/guardar', 'TarifaRetencionController@store');
+    Route::put('api/tarifa-retencion/editar', 'TarifaRetencionController@update');
+    Route::get('api/tarifa-retencion/detalle', 'TarifaRetencionController@detail');
 
     // Establecimientos
     Route::get('api/establecimientos', 'EstablecimientoController@index');
@@ -217,6 +226,8 @@ Route::middleware('auth')->group(function () {
     Route::put('api/guia/editar', 'GuiaController@update');
     Route::get('api/guia/buscar', 'GuiaController@find');
     Route::get('api/guia/comprobante', 'GuiaController@getGuide');
+    Route::get('api/guia/facturas', 'GuiaController@getInvoices');
+    Route::get('api/guia/detalles', 'GuiaController@getDetails');
 
     // Ruta Dashboard
     Route::get('api/dashboard', 'DashboardController');

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DetalleFactura;
 use App\Models\DetalleGuia;
 use App\Models\Empresa;
+use App\Models\Factura;
 use App\Models\Guia;
 use App\Models\PuntoEmision;
 use Illuminate\Http\Request;
@@ -18,8 +20,8 @@ class GuiaController extends Controller
         $mes = date("m");
         if (Auth::user()->rol_id == 1) {
             $guias = Guia::join('facturas', 'guias.factura_id', 'facturas.id')
-                ->join('clientes', 'facturas.cliente_id', 'clientes.id')
-                ->join('puntos_emision', 'facturas.punto_id', 'puntos_emision.id')
+                ->join('transportistas', 'guias.transportista_id', 'transportistas.id')
+                ->join('puntos_emision', 'guias.punto_id', 'puntos_emision.id')
                 ->join('establecimientos', 'puntos_emision.establecimiento_id', 'establecimientos.id')
                 ->join('users', 'facturas.usuario_id', 'users.id')
                 ->select(
@@ -27,10 +29,9 @@ class GuiaController extends Controller
                     'guias.fec_emision',
                     'guias.num_secuencial',
                     'guias.cla_acceso',
+                    'guias.motivo',
                     'guias.respuesta',
-                    'facturas.cla_acceso as factura',
-                    'clientes.nombre as cliente',
-                    'clientes.num_identificacion',
+                    'transportistas.nombre as transportista',
                     'establecimientos.numero as establecimiento',
                     'puntos_emision.codigo as punto',
                     'users.usuario'
@@ -84,23 +85,22 @@ class GuiaController extends Controller
             $guia->num_autorizacion = $request->cla_acceso;
             $guia->fec_inicio = $request->fec_inicio;
             $guia->fec_fin = $request->fec_fin;
-            $guia->motivo = $request->motivo;
-            $guia->ruta = $request->ruta;
-            $guia->observaciones = $request->observaciones;
+            $guia->des_nombre = mb_strtoupper(trim($request->des_nombre));
+            $guia->des_direccion = mb_strtoupper(trim($request->des_direccion));
+            $guia->des_identificacion = mb_strtoupper(trim($request->des_identificacion));
+            $guia->motivo = mb_strtoupper(trim($request->motivo));
+            $guia->ruta = mb_strtoupper(trim($request->ruta));
+            $guia->observaciones = mb_strtoupper(trim($request->observaciones));
             $guia->estado = 'R';
             $guia->save();
 
             $detalles = $request->detalles;
 
-            $punto = PuntoEmision::select('establecimiento_id', 'user_id')
-                ->where('user_id', Auth::user()->id)
-                ->first();
-
             foreach ($detalles as $key => $det) {
                 $detalle = new DetalleGuia();
-                $detalle->factura_id = $guia->id;
-                $detalle->producto_id = $det['producto_id'];
-                $detalle->det_cantidad = $det['cantidad'];
+                $detalle->guia_id = $guia->id;
+                $detalle->producto_id = $det['id'];
+                $detalle->det_cantidad = $det['det_cantidad'];
                 $detalle->save();
             }
 
@@ -108,12 +108,12 @@ class GuiaController extends Controller
             $id = $guia->id;
             return
                 [
-                    'guia' => Guia::join('facturas','guias.factura_id','facturas.id')
-                    ->join('puntos_emision', 'facturas.punto_id', 'puntos_emision.id')
+                    'guia' => Guia::join('facturas', 'guias.factura_id', 'facturas.id')
+                        ->join('puntos_emision', 'facturas.punto_id', 'puntos_emision.id')
                         ->join('establecimientos', 'puntos_emision.establecimiento_id', 'establecimientos.id')
                         ->join('empresas', 'establecimientos.empresa_id', 'empresas.id')
-                        ->join('clientes', 'facturas.cliente_id', 'clientes.id')
-                        ->join('identificaciones', 'clientes.identificacion_id', 'identificaciones.id')
+                        ->join('transportistas', 'guias.transportista_id', 'transportistas.id')
+                        ->join('identificaciones', 'transportistas.identificacion_id', 'identificaciones.id')
                         ->select(
                             'guias.id',
                             'guias.fec_emision',
@@ -121,6 +121,13 @@ class GuiaController extends Controller
                             'guias.tip_emision',
                             'guias.tip_ambiente',
                             'guias.cla_acceso',
+                            'guias.fec_inicio',
+                            'guias.fec_fin',
+                            'guias.des_nombre',
+                            'guias.des_identificacion',
+                            'guias.des_direccion',
+                            'guias.motivo',
+                            'guias.ruta',
                             'facturas.cla_acceso as factura',
                             'puntos_emision.codigo',
                             'establecimientos.numero',
@@ -134,13 +141,10 @@ class GuiaController extends Controller
                             'empresas.age_retencion',
                             'empresas.firma',
                             'empresas.fir_clave',
-                            'clientes.nombre',
-                            'clientes.num_identificacion',
-                            'clientes.direccion as dir_cliente',
-                            'clientes.telefonos',
-                            'clientes.email',
-                            'identificaciones.codigo as tip_cliente',
-                            'formas_pago.codigo as forma'
+                            'transportistas.nombre',
+                            'transportistas.num_identificacion',
+                            'transportistas.placa',
+                            'identificaciones.codigo as tip_transportista'
                         )
                         ->where('guias.id', $id)
                         ->first(),
@@ -162,10 +166,11 @@ class GuiaController extends Controller
                 ];
         } catch (\Throwable $th) {
             DB::rollBack();
+            return $th;
         }
     }
 
-    public function getGuide(Request $request)
+    public function getGuide()
     {
         $sec_inicial = PuntoEmision::join('establecimientos', 'puntos_emision.establecimiento_id', 'establecimientos.id')
             ->join('empresas', 'establecimientos.empresa_id', 'empresas.id')
@@ -196,7 +201,7 @@ class GuiaController extends Controller
         if ($secuencial) {
             $consecutivo = $secuencial->num_secuencial + 1;
         } else {
-            $consecutivo = $sec_inicial->sec_factura + 1;
+            $consecutivo = $sec_inicial->sec_gui_remision + 1;
         }
         if ($sec_inicial->tip_ambiente == 0) {
             $ambiente = '1';
@@ -212,6 +217,7 @@ class GuiaController extends Controller
         return [
             'punto_id' => $sec_inicial->id,
             'tip_ambiente' => $sec_inicial->tip_ambiente,
+            'tip_emision' => $sec_inicial->tip_emision,
             'fec_emision' => $hoy,
             'num_secuencial' => $consecutivo,
             'cla_acceso' => $clave,
@@ -219,6 +225,33 @@ class GuiaController extends Controller
             'comprobante' => $num_comprobante,
             'fir_clave' => $sec_inicial->fir_clave
         ];
+    }
+
+    public function getInvoices()
+    {
+        $comprobantes = DB::select("SELECT f.id, f.num_secuencial, e.nom_referencia FROM facturas f inner JOIN puntos_emision pe on f.punto_id = pe.id inner join establecimientos e on pe.establecimiento_id = e.id WHERE NOT EXISTS(SELECT g.factura_id FROM guias g WHERE f.id = g.factura_id)");
+        return $comprobantes;
+    }
+
+    public function getDetails(Request $request)
+    {
+        $destinatario = Factura::join('clientes', 'facturas.cliente_id', 'clientes.id')
+            ->select(
+                'clientes.nombre',
+                'clientes.num_identificacion',
+                'clientes.direccion'
+            )
+            ->where('facturas.id', $request->factura)
+            ->first();
+        $detalles = DetalleFactura::join('productos', 'detalles_factura.producto_id', 'productos.id')
+            ->select(
+                'productos.id',
+                'productos.nombre',
+                'detalles_factura.det_cantidad'
+            )
+            ->where('detalles_factura.factura_id', $request->factura)
+            ->get();
+        return ['detalles' => $detalles, 'destinatario' => $destinatario];
     }
 
     public function individualPdf(Request $request)

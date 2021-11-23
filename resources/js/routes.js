@@ -11,10 +11,17 @@ import Empresa from './components/Administracion/Empresa/Empresa.vue';
 import Roles from './components/Administracion/Roles/ListRol.vue';
 
 // Impuestos
-import MainImpuesto from './components/Administracion/Impuestos/Main.vue';
-import ListImpuesto from './components/Administracion/Impuestos/ListImpuesto.vue';
-import AddImpuesto from './components/Administracion/Impuestos/AddImpuesto.vue';
-import EditImpuesto from './components/Administracion/Impuestos/EditImpuesto.vue';
+// Iva
+import MainImpuestoIva from './components/Administracion/Impuestos/Iva/Main.vue';
+import ListImpuestoIva from './components/Administracion/Impuestos/Iva/ListImpuestoIva.vue';
+import AddImpuestoIva from './components/Administracion/Impuestos/Iva/AddImpuestoIva.vue';
+import EditImpuestoIva from './components/Administracion/Impuestos/Iva/EditImpuestoIva.vue';
+
+// Retención
+import MainImpuestoRetencion from './components/Administracion/Impuestos/Retencion/Main.vue';
+import ListImpuestoRetencion from './components/Administracion/Impuestos/Retencion/ListImpuestoRetencion.vue';
+import AddImpuestoRetencion from './components/Administracion/Impuestos/Retencion/AddImpuestoRetencion.vue';
+import EditImpuestoRetencion from './components/Administracion/Impuestos/Retencion/EditImpuestoRetencion.vue';
 
 // Establecimientos
 import MainEstablecimiento from './components/Administracion/Establecimientos/Main.vue';
@@ -176,23 +183,44 @@ export const routes = [
         component: Empresa,
     },
     {
-        path: '/impuestos',
-        component: MainImpuesto,
+        path: '/impuestos-iva',
+        component: MainImpuestoIva,
         children: [
             {
                 path: '',
-                name: 'listImpuesto',
-                component: ListImpuesto
+                name: 'listImpuestoIva',
+                component: ListImpuestoIva
             },
             {
                 path: 'agregar',
-                name: 'addImpuesto',
-                component: AddImpuesto
+                name: 'addImpuestoIva',
+                component: AddImpuestoIva
             },
             {
                 path: 'editar/:id',
-                name: 'editImpuesto',
-                component: EditImpuesto
+                name: 'editImpuestoIva',
+                component: EditImpuestoIva
+            },
+        ]
+    },
+    {
+        path: '/impuestos-retencion',
+        component: MainImpuestoRetencion,
+        children: [
+            {
+                path: '',
+                name: 'listImpuestoRetencion',
+                component: ListImpuestoRetencion
+            },
+            {
+                path: 'agregar',
+                name: 'addImpuestoRetencion',
+                component: AddImpuestoRetencion
+            },
+            {
+                path: 'editar/:id',
+                name: 'editImpuestoRetencion',
+                component: EditImpuestoRetencion
             },
         ]
     },
