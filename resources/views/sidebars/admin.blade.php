@@ -137,6 +137,23 @@
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-fist-raised"></i>
+                        <p>
+                            Retenciones
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <router-link to="/retenciones" class="nav-link">
+                                <i class="fas fa-file-invoice-dollar nav-icon"></i>
+                                <p>Rerención</p>
+                            </router-link>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-cash-register"></i>
                         <p>
                             Caja
