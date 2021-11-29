@@ -39,7 +39,7 @@ class CreateFacturasTable extends Migration
             $table->decimal('val_total', 12, 2)->default(0);
             $table->char('for_pago', 1);
             $table->string('estado', 3);
-            $table->string('respuesta', 50);
+            $table->string('respuesta', 50)->nullable();
             $table->timestamps();
 
             $table->foreign('cliente_id')->references('id')->on('clientes');

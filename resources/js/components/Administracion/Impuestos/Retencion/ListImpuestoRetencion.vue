@@ -39,7 +39,7 @@
               </router-link>
             </td>
             <td v-text="tarifa.impuesto"></td>
-            <td style="width: 15px" v-text="tarifa.tarifa"></td>
+            <td v-text="tarifa.tarifa"></td>
             <td v-text="tarifa.valor"></td>
             <td v-text="tarifa.codigo"></td>
           </tr>

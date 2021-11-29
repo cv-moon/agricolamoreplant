@@ -21,10 +21,8 @@ class CreateDetallesRetencionTable extends Migration
             $table->unsignedBigInteger('tarifas_retencion_id');
             $table->string('num_comprobante', 15);
             $table->date('fec_emi_comprobante');
-            $table->tinyInteger('eje_fiscal');
             $table->decimal('bas_imponible', 12, 2);
             $table->decimal('val_retenido', 12, 2);
-            $table->timestamps();
 
             $table->foreign('retencion_id')->references('id')->on('retenciones');
             $table->foreign('compra_id')->references('id')->on('compras');

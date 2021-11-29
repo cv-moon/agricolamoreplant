@@ -147,7 +147,7 @@
                         <li class="nav-item">
                             <router-link to="/retenciones" class="nav-link">
                                 <i class="fas fa-file-invoice-dollar nav-icon"></i>
-                                <p>Rerención</p>
+                                <p>Retención</p>
                             </router-link>
                         </li>
                     </ul>

@@ -25,9 +25,10 @@ class CreateRetencionesTable extends Migration
             $table->tinyInteger('tip_ambiente');
             $table->string('cla_acceso', 49);
             $table->string('num_autorizacion', 49);
+            $table->string('eje_fiscal', 7);
             $table->decimal('tot_retenido', 12, 2)->default(0);
             $table->string('estado', 3);
-            $table->string('respuesta', 50);
+            $table->string('respuesta', 50)->nullable();
             $table->timestamps();
 
             $table->foreign('punto_id')->references('id')->on('puntos_emision');

@@ -83990,10 +83990,7 @@ var render = function() {
                   domProps: { textContent: _vm._s(tarifa.impuesto) }
                 }),
                 _vm._v(" "),
-                _c("td", {
-                  staticStyle: { width: "15px" },
-                  domProps: { textContent: _vm._s(tarifa.tarifa) }
-                }),
+                _c("td", { domProps: { textContent: _vm._s(tarifa.tarifa) } }),
                 _vm._v(" "),
                 _c("td", { domProps: { textContent: _vm._s(tarifa.valor) } }),
                 _vm._v(" "),
@@ -127663,7 +127660,7 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\cristian.chuquitarco\Documents\Documents\Projects\agricolamoreplant\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/cvdev/Documentos/Proyectos/moreplant/resources/js/app.js */"./resources/js/app.js");
 
 
 /***/ }),
