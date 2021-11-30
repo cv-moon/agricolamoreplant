@@ -228,6 +228,17 @@ Route::middleware('auth')->group(function () {
     Route::get('api/guia/comprobante', 'GuiaController@getGuide');
     Route::get('api/guia/facturas', 'GuiaController@getInvoices');
     Route::get('api/guia/detalles', 'GuiaController@getDetails');
+    
+    // Rutas de Retenciones
+    // Retención
+    Route::get('api/retenciones', 'RetencionController@index');
+    Route::post('api/retencion/guardar', 'RetencionController@store');
+    Route::get('api/retencion/detalle', 'RetencionController@detail');
+    Route::put('api/retencion/editar', 'RetencionController@update');
+    Route::get('api/retencion/buscar', 'RetencionController@find');
+    Route::get('api/retencion/comprobante', 'RetencionController@getRetention');
+    Route::get('api/retencion/facturas', 'RetencionController@getInvoices');
+    Route::get('api/retencion/detalles', 'RetencionController@getDetails');
 
     // Ruta Dashboard
     Route::get('api/dashboard', 'DashboardController');

@@ -626,7 +626,7 @@ export const routes = [
                 component: ListRetencion
             },
             {
-                path: "agregar",
+                path: "agregar/:fact?",
                 name: "addRetencion",
                 component: AddRetencion
             },

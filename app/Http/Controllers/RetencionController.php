@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PuntoEmision;
 use App\Models\Retencion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class RetencionController extends Controller
 {
@@ -11,7 +14,7 @@ class RetencionController extends Controller
     {
         $mes = date("m");
         if (Auth::user()->rol_id == 1) {
-            $rentencions = Retencion::join('proveedores', 'retenciones.proveedor_id', 'proveedores.id')
+            $retenciones = Retencion::join('proveedores', 'retenciones.proveedor_id', 'proveedores.id')
                 ->join('puntos_emision', 'retenciones.punto_id', 'puntos_emision.id')
                 ->join('establecimientos','puntos_emision.establecimiento_id','establecimientos.id')
                ->join('users', 'retenciones.usuario_id', 'users.id')
@@ -22,7 +25,6 @@ class RetencionController extends Controller
                     'retenciones.cla_acceso',
                     'retenciones.respuesta',
                     'proveedores.nombre',
-                    'transportistas.nombre as transportista',
                     'establecimientos.numero as establecimiento',
                     'puntos_emision.codigo as punto',
                     'users.usuario'
@@ -32,7 +34,7 @@ class RetencionController extends Controller
                 ->get();
         }
         if (Auth::user()->rol_id == 2) {
-            $rentencions = Retencion::join('proveedores', 'retenciones.proveedor_id', 'proveedores.id')
+            $retenciones = Retencion::join('proveedores', 'retenciones.proveedor_id', 'proveedores.id')
             ->join('puntos_emision', 'retenciones.punto_id', 'puntos_emision.id')
             ->join('establecimientos','puntos_emision.establecimiento_id','establecimientos.id')
            ->join('users', 'retenciones.usuario_id', 'users.id')
@@ -43,7 +45,6 @@ class RetencionController extends Controller
                 'retenciones.cla_acceso',
                 'retenciones.respuesta',
                 'proveedores.nombre',
-                'transportistas.nombre as transportista',
                 'establecimientos.numero as establecimiento',
                 'puntos_emision.codigo as punto',
                 'users.usuario'
@@ -156,14 +157,14 @@ class RetencionController extends Controller
         }
     }
 
-    public function getGuide()
+    public function getRetention()
     {
         $sec_inicial = PuntoEmision::join('establecimientos', 'puntos_emision.establecimiento_id', 'establecimientos.id')
             ->join('empresas', 'establecimientos.empresa_id', 'empresas.id')
             ->select(
                 'puntos_emision.id',
                 'puntos_emision.codigo as punto',
-                'puntos_emision.sec_gui_remision',
+                'puntos_emision.sec_retencion',
                 'puntos_emision.user_id',
                 'establecimientos.numero as establecimiento',
                 'empresas.ruc',
@@ -174,20 +175,20 @@ class RetencionController extends Controller
             )
             ->where('puntos_emision.user_id', Auth::user()->id)
             ->first();
-        $secuencial = Retencion::join('puntos_emision', 'guias.punto_id', 'puntos_emision.id')
+        $secuencial = Retencion::join('puntos_emision', 'retenciones.punto_id', 'puntos_emision.id')
             ->select(
-                'guias.num_secuencial',
-                'guias.created_at'
+                'retenciones.num_secuencial',
+                'retenciones.created_at'
             )
             ->where('puntos_emision.user_id', Auth::user()->id)
-            ->orderBy('guias.created_at', 'desc')
+            ->orderBy('retenciones.created_at', 'desc')
             ->first();
         $n_est = str_pad($sec_inicial->establecimiento, 3, "0", STR_PAD_LEFT);
         $n_pto = str_pad($sec_inicial->punto, 3, "0", STR_PAD_LEFT);
         if ($secuencial) {
             $consecutivo = $secuencial->num_secuencial + 1;
         } else {
-            $consecutivo = $sec_inicial->sec_gui_remision + 1;
+            $consecutivo = $sec_inicial->sec_retencion + 1;
         }
         if ($sec_inicial->tip_ambiente == 0) {
             $ambiente = '1';
@@ -271,5 +272,5 @@ class RetencionController extends Controller
         $email = new sendEmail();
         $email->forwarding('Factura', $datos, $empresa);
     }
-}
+
 }

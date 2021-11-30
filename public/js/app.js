@@ -14416,369 +14416,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       selected: null,
-      guia: {
+      retencion: {
         factura_id: 0,
         punto_id: 0,
         usuario_id: 0,
@@ -14801,7 +14444,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         errors: []
       },
       datos: {
-        tip_comprobante: "GUÍA DE REMISIÓN",
+        tip_comprobante: "RETENCIÓN",
         comprobante: "",
         firma: "",
         fir_clave: ""
@@ -14811,89 +14454,37 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         nombre: "",
         cantidad: 0
       },
-      transportista: {
-        identificacion_id: 0,
-        nombre: "",
-        num_identificacion: "",
-        direccion: "",
-        telefonos: "",
-        email: "",
-        placa: "",
-        errors: []
-      },
       identificacion_id: 0,
-      arrayTransportista: [],
       arrayFacturas: [],
       arrayIdentificaciones: [],
       arrayDetalle: []
     };
   },
-  computed: {
-    getId: function getId() {
-      if (!this.selected) {
-        this.guia.transportista_id = 0;
-      } else {
-        this.guia.transportista_id = this.selected.id;
-      }
-    }
-  },
+  computed: {},
   methods: {
     myTable: function myTable() {
       this.$nextTick(function () {
         $("#tabla").DataTable();
       });
     },
-    getGuia: function getGuia() {
+    getRetencion: function getRetencion() {
       var _this = this;
 
-      axios.get("/api/guia/comprobante").then(function (resp) {
-        _this.guia.cla_acceso = resp.data.cla_acceso + _this.modulo11(resp.data.cla_acceso);
-        _this.guia.fec_emision = resp.data.fec_emision;
-        _this.guia.num_secuencial = resp.data.num_secuencial;
-        _this.guia.punto_id = resp.data.punto_id;
-        _this.guia.tip_ambiente = resp.data.tip_ambiente;
-        _this.guia.tip_emision = resp.data.tip_emision;
+      axios.get("/api/retencion/comprobante").then(function (resp) {
+        _this.retencion.cla_acceso = resp.data.cla_acceso + _this.modulo11(resp.data.cla_acceso);
+        _this.retencion.fec_emision = resp.data.fec_emision;
+        _this.retencion.num_secuencial = resp.data.num_secuencial;
+        _this.retencion.punto_id = resp.data.punto_id;
+        _this.retencion.tip_ambiente = resp.data.tip_ambiente;
+        _this.retencion.tip_emision = resp.data.tip_emision;
         _this.datos.comprobante = resp.data.comprobante;
         _this.datos.firma = resp.data.firma;
         _this.datos.fir_clave = resp.data.fir_clave;
       });
     },
     validaCampos: function validaCampos() {
-      this.guia.errors = [];
-
-      if (!this.guia.transportista_id || this.guia.transportista_id == 0) {
-        this.guia.errors.push("Seleccione Transportista.");
-      }
-
-      if (!this.guia.factura_id || this.guia.factura_id == 0) {
-        this.guia.errors.push("Seleccione Comprobante.");
-      }
-
-      if (this.arrayDetalle.length == 0) {
-        this.guia.errors.push("Agregue Productos a Trasnportar");
-      }
-
-      if (!this.guia.fec_inicio) {
-        this.guia.errors.push("Ingrese Fecha Inicio");
-      }
-
-      if (!this.guia.fec_fin) {
-        this.guia.errors.push("Ingrese Fecha Fin");
-      }
-
-      if (!this.guia.ruta) {
-        this.guia.errors.push("Ingrese Ruta");
-      }
-
-      if (!this.guia.motivo) {
-        this.guia.errors.push("Ingrese Motivo");
-      }
-
-      if (!this.guia.observaciones) {
-        this.guia.errors.push("Ingrese Observaciones");
-      }
-
-      return this.guia.errors;
+      this.retencion.errors = [];
+      return this.retencion.errors;
     },
     guardar: function guardar() {
       var condiciones = this.validaCampos();
@@ -14902,22 +14493,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         return;
       }
 
-      axios.post("/api/guia/guardar", {
-        factura_id: this.guia.factura_id,
-        punto_id: this.guia.punto_id,
-        transportista_id: this.guia.transportista_id,
-        tip_ambiente: this.guia.tip_ambiente,
-        tip_emision: this.guia.tip_emision,
-        num_secuencial: this.guia.num_secuencial,
-        cla_acceso: this.guia.cla_acceso,
-        fec_inicio: this.guia.fec_inicio,
-        fec_fin: this.guia.fec_fin,
-        des_nombre: this.guia.des_nombre,
-        des_direccion: this.guia.des_direccion,
-        des_identificacion: this.guia.des_identificacion,
-        motivo: this.guia.motivo,
-        ruta: this.guia.ruta,
-        observaciones: this.guia.observaciones,
+      axios.post("/api/retencion/guardar", {
+        factura_id: this.retencion.factura_id,
+        punto_id: this.retencion.punto_id,
+        transportista_id: this.retencion.transportista_id,
+        tip_ambiente: this.retencion.tip_ambiente,
+        tip_emision: this.retencion.tip_emision,
+        num_secuencial: this.retencion.num_secuencial,
+        cla_acceso: this.retencion.cla_acceso,
         detalles: this.arrayDetalle
       }).then(function (resp) {
         console.log(resp.data); // axios
@@ -14939,106 +14522,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         Swal.fire("Error!", "No se pudo realizar el registro. " + err, "error");
       });
     },
-    selectTransportista: function selectTransportista(search, loading) {
+    selectComprobantes: function selectComprobantes() {
       var _this2 = this;
 
-      loading(true);
-      axios.get("/api/transportista/buscar?cli=" + search).then(function (resp) {
-        _this2.arrayTransportista = resp.data;
-        loading(false);
-      })["catch"](function (err) {
-        console.log(err);
-      });
-    },
-    selectComprobantes: function selectComprobantes() {
-      var _this3 = this;
-
-      axios.get("/api/guia/facturas").then(function (resp) {
-        _this3.arrayFacturas = resp.data;
+      axios.get("/api/retenciones/compras").then(function (resp) {
+        _this2.arrayFacturas = resp.data;
       });
     },
     // Métodos para los detalles
-    getDetails: function getDetails() {
-      var _this4 = this;
-
-      var id = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
-      axios.get("/api/guia/detalles", {
-        params: {
-          factura: id
-        }
-      }).then(function (resp) {
-        _this4.arrayDetalle = resp.data.detalles;
-        _this4.guia.des_nombre = resp.data.destinatario.nombre;
-        _this4.guia.des_identificacion = resp.data.destinatario.num_identificacion;
-        _this4.guia.des_direccion = resp.data.destinatario.direccion;
-      });
-    },
     eliminarDetalle: function eliminarDetalle(index) {
       this.arrayDetalle.splice(index, 1);
-    },
-    // Estructura para Agregar Transportista
-    abrirModal: function abrirModal() {
-      $("#modal").modal("show");
-      this.selectIdentificaciones();
-    },
-    cerrarModal: function cerrarModal() {
-      $("#modal").modal("hide");
-      this.limpiar();
-    },
-    validaCamposTransportista: function validaCamposTransportista() {
-      this.transportista.errors = [];
-
-      if (!this.transportista.nombre) {
-        this.transportista.errors.push("Ingrese nombre.");
-      }
-
-      if (this.transportista.identificacion_id == "0") {
-        this.transportista.errors.push("Seleccione tipo de identificación.");
-      }
-
-      if (!this.transportista.num_identificacion) {
-        this.transportista.errors.push("Ingrese número de identificación.");
-      }
-
-      if (!this.transportista.placa) {
-        this.transportista.errors.push("Ingrese Placa.");
-      }
-
-      return this.transportista.errors;
-    },
-    guardarTransportista: function guardarTransportista() {
-      var _this5 = this;
-
-      var condiciones = this.validaCamposTransportista();
-
-      if (condiciones.length) {
-        return;
-      }
-
-      axios.post("/api/transportista/guardar", {
-        nombre: this.transportista.nombre,
-        identificacion_id: this.transportista.identificacion_id,
-        num_identificacion: this.transportista.num_identificacion,
-        direccion: this.transportista.direccion,
-        telefonos: this.transportista.telefonos,
-        email: this.transportista.email,
-        placa: this.transportista.placa
-      }).then(function (resp) {
-        Swal.fire("Bien!", "El registro se guardó con éxito.", "success");
-
-        _this5.cerrarModal();
-      })["catch"](function (err) {
-        Swal.fire("Error!", "No se pudo realizar el registro. " + err, "error");
-      });
-    },
-    limpiar: function limpiar() {
-      this.transportista.nombre = "";
-      this.transportista.identificacion_id = "0";
-      this.transportista.num_identificacion = "";
-      this.transportista.direccion = "";
-      this.transportista.telefonos = "";
-      this.transportista.email = "";
-      this.transportista.placa = "";
     },
     // Métodos para la facturación
     zeroFill: function zeroFill(number, width) {
@@ -15067,7 +14560,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return digito_calculado;
     },
     crearfacturacion: function crearfacturacion(firma, password, factura, tipo, id, carpeta) {
-      var _this6 = this;
+      var _this3 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
         var _yield$script_comprob, comprobante, _yield$script_comprob2, contenido, _yield$script_comprob3, certificado, _yield$script_comprob4, quefirma, _yield$script_comprob5, validado, _yield$script_comprob6, recibida, _yield$script_comprob7, registrado;
@@ -15157,11 +14650,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 if (registrado == "enviado") {
                   Swal.fire("Bien!", "La factura se envió exitosamente.", "success");
 
-                  _this6.$router.push("/guias");
+                  _this3.$router.push("/retenciones");
                 } else {
                   Swal.fire("Error!", "La factura no pudo ser enviada, intente mas tarde.", "error");
 
-                  _this6.$router.push("/guias");
+                  _this3.$router.push("/retenciones");
                 }
 
                 _context.next = 36;
@@ -15172,7 +14665,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _context.t0 = _context["catch"](0);
                 Swal.fire("Error!", "Error en el envio al SRI" + _context.t0, "error");
 
-                _this6.$router.push("/guias");
+                _this3.$router.push("/retenciones");
 
               case 36:
               case "end":
@@ -15184,7 +14677,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   mounted: function mounted() {
-    this.getGuia();
+    this.getRetencion();
     this.selectComprobantes();
   }
 });
@@ -99538,7 +99031,7 @@ var render = function() {
             "router-link",
             {
               staticClass: "btn btn-secondary btn-sm",
-              attrs: { to: "/guias" }
+              attrs: { to: "/retenciones" }
             },
             [
               _c("i", { staticClass: "fas fa-arrow-left" }),
@@ -99566,7 +99059,7 @@ var render = function() {
           ),
           _vm._v(" "),
           _c("p", { staticClass: "col-form-label" }, [
-            _vm._v(_vm._s(_vm.guia.fec_emision))
+            _vm._v(_vm._s(_vm.retencion.fec_emision))
           ])
         ]),
         _vm._v(" "),
@@ -99608,501 +99101,22 @@ var render = function() {
           ),
           _vm._v(" "),
           _c("p", { staticClass: "col-form-label" }, [
-            _vm._v("\n          " + _vm._s(_vm.guia.cla_acceso) + "\n        ")
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("b", { staticClass: "text-primary" }, [_vm._v("Datos de Guía")]),
-      _vm._v(" "),
-      _c("hr", { staticClass: "mt-0" }),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group row" }, [
-        _c("div", { staticClass: "col-sm-4" }, [
-          _c(
-            "label",
-            {
-              staticClass: "col-sm-12 col-form-label",
-              attrs: { for: "dat_cliente" }
-            },
-            [_vm._v("Trasnportista:")]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "input-group" }, [
-            _c(
-              "div",
-              { staticClass: "col-sm-11" },
-              [
-                _c("v-select", {
-                  attrs: {
-                    options: _vm.arrayTransportista,
-                    getOptionLabel: function(option) {
-                      return option.nombre + " - " + option.num_identificacion
-                    },
-                    placeholder: "Buscar Transportista..."
-                  },
-                  on: { search: _vm.selectTransportista, input: _vm.getId },
-                  model: {
-                    value: _vm.selected,
-                    callback: function($$v) {
-                      _vm.selected = $$v
-                    },
-                    expression: "selected"
-                  }
-                })
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-success btn-xs",
-                attrs: {
-                  title: "Agregar Cliente",
-                  "data-target": "#modCliente"
-                },
-                on: {
-                  click: function($event) {
-                    return _vm.abrirModal()
-                  }
-                }
-              },
-              [_c("i", { staticClass: "fas fa-plus" })]
+            _vm._v(
+              "\n          " + _vm._s(_vm.retencion.cla_acceso) + "\n        "
             )
           ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-sm-4" }, [
-          _c(
-            "label",
-            {
-              staticClass: "col-sm-12 col-form-label",
-              attrs: { for: "fec_inicio" }
-            },
-            [_vm._v("Fecha Inicio:")]
-          ),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.guia.fec_inicio,
-                expression: "guia.fec_inicio"
-              }
-            ],
-            staticClass: "form-control form-control-sm",
-            attrs: { type: "date" },
-            domProps: { value: _vm.guia.fec_inicio },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.guia, "fec_inicio", $event.target.value)
-              }
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-sm-4" }, [
-          _c(
-            "label",
-            {
-              staticClass: "col-sm-12 col-form-label",
-              attrs: { for: "fec_fin" }
-            },
-            [_vm._v("Fecha Fin:")]
-          ),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.guia.fec_fin,
-                expression: "guia.fec_fin"
-              }
-            ],
-            staticClass: "form-control form-control-sm",
-            attrs: { type: "date" },
-            domProps: { value: _vm.guia.fec_fin },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.guia, "fec_fin", $event.target.value)
-              }
-            }
-          })
         ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "form-group row" }, [
-        _c("div", { staticClass: "col-sm-4" }, [
-          _c(
-            "label",
-            {
-              staticClass: "col-sm-12 col-form-label",
-              attrs: { for: "fec_fin" }
-            },
-            [_vm._v("Ruta:")]
-          ),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.guia.ruta,
-                expression: "guia.ruta"
-              }
-            ],
-            staticClass: "form-control form-control-sm",
-            attrs: { type: "text", placeholder: "Ruta", maxlength: "300" },
-            domProps: { value: _vm.guia.ruta },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.guia, "ruta", $event.target.value)
-              }
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-sm-4" }, [
-          _c(
-            "label",
-            {
-              staticClass: "col-sm-12 col-form-label",
-              attrs: { for: "fec_inicio" }
-            },
-            [_vm._v("Motivo:")]
-          ),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.guia.motivo,
-                expression: "guia.motivo"
-              }
-            ],
-            staticClass: "form-control form-control-sm",
-            attrs: { type: "text", maxlength: "300", placeholder: "Motivo" },
-            domProps: { value: _vm.guia.motivo },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.guia, "motivo", $event.target.value)
-              }
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-sm-4" }, [
-          _c(
-            "label",
-            {
-              staticClass: "col-sm-12 col-form-label",
-              attrs: { for: "comprobante" }
-            },
-            [_vm._v("Comprobante:")]
-          ),
-          _vm._v(" "),
-          _c(
-            "select",
-            {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.guia.factura_id,
-                  expression: "guia.factura_id"
-                }
-              ],
-              staticClass: "form-control form-control-sm",
-              on: {
-                change: [
-                  function($event) {
-                    var $$selectedVal = Array.prototype.filter
-                      .call($event.target.options, function(o) {
-                        return o.selected
-                      })
-                      .map(function(o) {
-                        var val = "_value" in o ? o._value : o.value
-                        return val
-                      })
-                    _vm.$set(
-                      _vm.guia,
-                      "factura_id",
-                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-                    )
-                  },
-                  function($event) {
-                    return _vm.getDetails(_vm.guia.factura_id)
-                  }
-                ]
-              }
-            },
-            [
-              _c("option", { attrs: { value: "0", disabled: "" } }, [
-                _vm._v("Seleccione...")
-              ]),
-              _vm._v(" "),
-              _vm._l(_vm.arrayFacturas, function(factura) {
-                return _c("option", {
-                  key: factura.id,
-                  domProps: {
-                    value: factura.id,
-                    textContent: _vm._s(
-                      factura.nom_referencia +
-                        " Factura " +
-                        factura.num_secuencial
-                    )
-                  }
-                })
-              })
-            ],
-            2
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _c("b", { staticClass: "text-primary" }, [_vm._v("Destino")]),
+      _c("b", { staticClass: "text-primary" }, [_vm._v("Datos de Retención")]),
       _vm._v(" "),
       _c("hr", { staticClass: "mt-0" }),
       _vm._v(" "),
-      _c("div", { staticClass: "form-group row" }, [
-        _c("div", { staticClass: "col-sm-8" }, [
-          _c(
-            "label",
-            {
-              staticClass: "col-sm-12 col-form-label",
-              attrs: { for: "fec_fin" }
-            },
-            [_vm._v("Destinatario:")]
-          ),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.guia.des_nombre,
-                expression: "guia.des_nombre"
-              }
-            ],
-            staticClass: "form-control form-control-sm",
-            attrs: {
-              type: "text",
-              placeholder: "Nombre / Razón Social / Destinatario",
-              maxlength: "300"
-            },
-            domProps: { value: _vm.guia.des_nombre },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.guia, "des_nombre", $event.target.value)
-              }
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-sm-4" }, [
-          _c(
-            "label",
-            {
-              staticClass: "col-sm-12 col-form-label",
-              attrs: { for: "fec_fin" }
-            },
-            [_vm._v("Identificación:")]
-          ),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.guia.des_identificacion,
-                expression: "guia.des_identificacion"
-              }
-            ],
-            staticClass: "form-control form-control-sm",
-            attrs: {
-              type: "text",
-              placeholder: "Cédula / R.U.C.",
-              maxlength: "300"
-            },
-            domProps: { value: _vm.guia.des_identificacion },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.guia, "des_identificacion", $event.target.value)
-              }
-            }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group row" }, [
-        _c("div", { staticClass: "col-sm-12" }, [
-          _c(
-            "label",
-            {
-              staticClass: "col-sm-12 col-form-label",
-              attrs: { for: "fec_fin" }
-            },
-            [_vm._v("Dirección:")]
-          ),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.guia.des_direccion,
-                expression: "guia.des_direccion"
-              }
-            ],
-            staticClass: "form-control form-control-sm",
-            attrs: { type: "text", placeholder: "Dirección", maxlength: "300" },
-            domProps: { value: _vm.guia.des_direccion },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.guia, "des_direccion", $event.target.value)
-              }
-            }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("b", { staticClass: "text-primary" }, [
-        _vm._v("Detalle de Productos a Trasladarse")
-      ]),
-      _vm._v(" "),
-      _c("hr", { staticClass: "mt-0" }),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group row" }, [
-        _c("div", { staticClass: "col-sm-12 table-responsive" }, [
-          _c(
-            "table",
-            { staticClass: "table table-bordered table-striped table-sm" },
-            [
-              _vm._m(1),
-              _vm._v(" "),
-              _vm.arrayDetalle.length
-                ? _c(
-                    "tbody",
-                    _vm._l(_vm.arrayDetalle, function(detalle, index) {
-                      return _c("tr", { key: detalle.id }, [
-                        _c("td", { attrs: { align: "center" } }, [
-                          _c(
-                            "button",
-                            {
-                              staticClass: "btn btn-danger btn-xs",
-                              attrs: {
-                                title: "Eliminar Producto",
-                                type: "button"
-                              },
-                              on: {
-                                click: function($event) {
-                                  return _vm.eliminarDetalle(index)
-                                }
-                              }
-                            },
-                            [_c("i", { staticClass: "fas fa-trash-alt" })]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("td", {
-                          domProps: { textContent: _vm._s(detalle.nombre) }
-                        }),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: detalle.det_cantidad,
-                                expression: "detalle.det_cantidad"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            attrs: { type: "number", min: "1" },
-                            domProps: { value: detalle.det_cantidad },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(
-                                  detalle,
-                                  "det_cantidad",
-                                  $event.target.value
-                                )
-                              }
-                            }
-                          })
-                        ])
-                      ])
-                    }),
-                    0
-                  )
-                : _c("tbody", [_vm._m(2)])
-            ]
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _c("b", { staticClass: "text-primary" }, [_vm._v("Observaciones")]),
-      _vm._v(" "),
-      _c("hr", { staticClass: "mt-0" }),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-group row" }, [
-        _c("textarea", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.guia.observaciones,
-              expression: "guia.observaciones"
-            }
-          ],
-          staticClass: "form-control",
-          attrs: { placeholder: "Observaciones", maxlength: "300", rows: "3" },
-          domProps: { value: _vm.guia.observaciones },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.$set(_vm.guia, "observaciones", $event.target.value)
-            }
-          }
-        })
-      ]),
-      _vm._v(" "),
-      _vm.guia.errors.length
+      _vm.retencion.errors.length
         ? _c("div", { staticClass: "alert alert-danger" }, [
             _c(
               "div",
-              _vm._l(_vm.guia.errors, function(error) {
+              _vm._l(_vm.retencion.errors, function(error) {
                 return _c("div", { key: error }, [
                   _vm._v("\n          " + _vm._s(error) + "\n        ")
                 ])
@@ -100119,7 +99133,7 @@ var render = function() {
       [
         _c(
           "router-link",
-          { staticClass: "btn btn-danger", attrs: { to: "/guias" } },
+          { staticClass: "btn btn-danger", attrs: { to: "/retenciones" } },
           [_vm._v(" Cancelar ")]
         ),
         _vm._v(" "),
@@ -100134,475 +99148,7 @@ var render = function() {
         )
       ],
       1
-    ),
-    _vm._v(" "),
-    _c("div", { staticClass: "modal fade", attrs: { id: "modal" } }, [
-      _c("div", { staticClass: "modal-dialog modal-xl" }, [
-        _c("div", { staticClass: "modal-content" }, [
-          _c("div", { staticClass: "modal-header" }, [
-            _c("h4", { staticClass: "modal-title" }, [
-              _vm._v("Agregar Transportista")
-            ]),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "close",
-                attrs: { type: "button", "aria-label": "Close" },
-                on: { click: _vm.cerrarModal }
-              },
-              [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "modal-body" }, [
-            _c("form", [
-              _c("b", { staticClass: "text-primary" }, [
-                _vm._v("Datos Generales")
-              ]),
-              _vm._v(" "),
-              _c("hr", { staticClass: "mt-0" }),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group row" }, [
-                _c(
-                  "label",
-                  {
-                    staticClass: "col-sm-2 col-form-label",
-                    attrs: { for: "nombre" }
-                  },
-                  [_vm._v("Nombre:")]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-6" }, [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.transportista.nombre,
-                        expression: "transportista.nombre"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: {
-                      type: "text",
-                      placeholder: "Nombre.",
-                      maxlength: "100"
-                    },
-                    domProps: { value: _vm.transportista.nombre },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(
-                          _vm.transportista,
-                          "nombre",
-                          $event.target.value
-                        )
-                      }
-                    }
-                  })
-                ]),
-                _vm._v(" "),
-                _c(
-                  "label",
-                  {
-                    staticClass: "col-sm-1 col-form-label",
-                    attrs: { for: "placa" }
-                  },
-                  [_vm._v("Placa:")]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-3" }, [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.transportista.placa,
-                        expression: "transportista.placa"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: {
-                      type: "text",
-                      placeholder: "Placa.",
-                      maxlength: "7"
-                    },
-                    domProps: { value: _vm.transportista.placa },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(
-                          _vm.transportista,
-                          "placa",
-                          $event.target.value
-                        )
-                      }
-                    }
-                  })
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group row" }, [
-                _c(
-                  "label",
-                  {
-                    staticClass: "col-sm-2 col-form-label",
-                    attrs: { for: "identificacion_id" }
-                  },
-                  [_vm._v("Tipo Identificación:")]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-4" }, [
-                  _c(
-                    "select",
-                    {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.transportista.identificacion_id,
-                          expression: "transportista.identificacion_id"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      on: {
-                        change: function($event) {
-                          var $$selectedVal = Array.prototype.filter
-                            .call($event.target.options, function(o) {
-                              return o.selected
-                            })
-                            .map(function(o) {
-                              var val = "_value" in o ? o._value : o.value
-                              return val
-                            })
-                          _vm.$set(
-                            _vm.transportista,
-                            "identificacion_id",
-                            $event.target.multiple
-                              ? $$selectedVal
-                              : $$selectedVal[0]
-                          )
-                        }
-                      }
-                    },
-                    [
-                      _c("option", { attrs: { value: "0", disabled: "" } }, [
-                        _vm._v("Seleccione...")
-                      ]),
-                      _vm._v(" "),
-                      _vm._l(_vm.arrayIdentificaciones, function(
-                        identificacion
-                      ) {
-                        return _c("option", {
-                          key: identificacion.id,
-                          domProps: {
-                            value: identificacion.id,
-                            textContent: _vm._s(identificacion.nombre)
-                          }
-                        })
-                      })
-                    ],
-                    2
-                  )
-                ]),
-                _vm._v(" "),
-                _c(
-                  "label",
-                  {
-                    staticClass: "col-sm-2 col-form-label",
-                    attrs: { for: "num_identificacion" }
-                  },
-                  [_vm._v("# Identificación:")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "col-sm-4" },
-                  [
-                    _vm.transportista.identificacion_id === 2
-                      ? [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.transportista.num_identificacion,
-                                expression: "transportista.num_identificacion"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            attrs: {
-                              type: "text",
-                              placeholder: "Cédula.",
-                              maxlength: "10"
-                            },
-                            domProps: {
-                              value: _vm.transportista.num_identificacion
-                            },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(
-                                  _vm.transportista,
-                                  "num_identificacion",
-                                  $event.target.value
-                                )
-                              }
-                            }
-                          })
-                        ]
-                      : _vm.transportista.identificacion_id === 1
-                      ? [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.transportista.num_identificacion,
-                                expression: "transportista.num_identificacion"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            attrs: {
-                              type: "text",
-                              placeholder: "RUC.",
-                              maxlength: "13"
-                            },
-                            domProps: {
-                              value: _vm.transportista.num_identificacion
-                            },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(
-                                  _vm.transportista,
-                                  "num_identificacion",
-                                  $event.target.value
-                                )
-                              }
-                            }
-                          })
-                        ]
-                      : _vm.transportista.identificacion_id === 3
-                      ? [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.transportista.num_identificacion,
-                                expression: "transportista.num_identificacion"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            attrs: {
-                              type: "text",
-                              placeholder: "Pasaporte.",
-                              maxlength: "13"
-                            },
-                            domProps: {
-                              value: _vm.transportista.num_identificacion
-                            },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(
-                                  _vm.transportista,
-                                  "num_identificacion",
-                                  $event.target.value
-                                )
-                              }
-                            }
-                          })
-                        ]
-                      : _vm._e()
-                  ],
-                  2
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group row" }, [
-                _c(
-                  "label",
-                  {
-                    staticClass: "col-sm-2 col-form-label",
-                    attrs: { for: "direccion" }
-                  },
-                  [_vm._v("Dirección:")]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-10" }, [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.transportista.direccion,
-                        expression: "transportista.direccion"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: {
-                      type: "text",
-                      placeholder: "Dirección.",
-                      maxlength: "200"
-                    },
-                    domProps: { value: _vm.transportista.direccion },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(
-                          _vm.transportista,
-                          "direccion",
-                          $event.target.value
-                        )
-                      }
-                    }
-                  })
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group row" }, [
-                _c(
-                  "label",
-                  {
-                    staticClass: "col-sm-2 col-form-label",
-                    attrs: { for: "telefonos" }
-                  },
-                  [_vm._v("Teléfonos:")]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-4" }, [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.transportista.telefonos,
-                        expression: "transportista.telefonos"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: {
-                      type: "text",
-                      placeholder: "Teléfonos.",
-                      maxlength: "50"
-                    },
-                    domProps: { value: _vm.transportista.telefonos },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(
-                          _vm.transportista,
-                          "telefonos",
-                          $event.target.value
-                        )
-                      }
-                    }
-                  })
-                ]),
-                _vm._v(" "),
-                _c(
-                  "label",
-                  {
-                    staticClass: "col-sm-2 col-form-label",
-                    attrs: { for: "email" }
-                  },
-                  [_vm._v("Site/e-mail:")]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-4" }, [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.transportista.email,
-                        expression: "transportista.email"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: {
-                      type: "email",
-                      placeholder: "E-mail.",
-                      maxlength: "100"
-                    },
-                    domProps: { value: _vm.transportista.email },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(
-                          _vm.transportista,
-                          "email",
-                          $event.target.value
-                        )
-                      }
-                    }
-                  })
-                ])
-              ]),
-              _vm._v(" "),
-              _vm.transportista.errors.length
-                ? _c("div", { staticClass: "alert alert-danger" }, [
-                    _c(
-                      "div",
-                      _vm._l(_vm.transportista.errors, function(error) {
-                        return _c("div", { key: error }, [
-                          _vm._v(
-                            "\n                  " +
-                              _vm._s(error) +
-                              "\n                "
-                          )
-                        ])
-                      }),
-                      0
-                    )
-                  ])
-                : _vm._e()
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "modal-footer justify-content-between" }, [
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-default",
-                attrs: { type: "button" },
-                on: { click: _vm.cerrarModal }
-              },
-              [_vm._v("\n            Close\n          ")]
-            ),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-success",
-                attrs: { type: "button" },
-                on: { click: _vm.guardarTransportista }
-              },
-              [_vm._v("\n            Guardar\n          ")]
-            )
-          ])
-        ])
-      ])
-    ])
+    )
   ])
 }
 var staticRenderFns = [
@@ -100612,41 +99158,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("h3", { staticClass: "card-title mt-2" }, [
       _c("i", { staticClass: "fas fa-align-justify" }),
-      _vm._v("\n      Guía de Remisión\n    ")
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", { staticClass: "text-center", staticStyle: { width: "5%" } }, [
-          _vm._v("Acción")
-        ]),
-        _vm._v(" "),
-        _c(
-          "th",
-          { staticClass: "text-center", staticStyle: { width: "35%" } },
-          [_vm._v("Producto")]
-        ),
-        _vm._v(" "),
-        _c(
-          "th",
-          { staticClass: "text-center", staticStyle: { width: "10%" } },
-          [_vm._v("Cantidad")]
-        )
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("tr", [
-      _c("td", { staticClass: "text-center", attrs: { colspan: "7" } }, [
-        _vm._v("\n                NO hay artículos agregados\n              ")
-      ])
+      _vm._v("\n      Retención\n    ")
     ])
   }
 ]
@@ -127629,7 +126141,7 @@ var routes = [{
     name: "listRetencion",
     component: _components_Retenciones_Retencion_ListRetencion_vue__WEBPACK_IMPORTED_MODULE_78__["default"]
   }, {
-    path: "agregar",
+    path: "agregar/:fact?",
     name: "addRetencion",
     component: _components_Retenciones_Retencion_AddRetencion_vue__WEBPACK_IMPORTED_MODULE_79__["default"]
   }, {
@@ -127660,7 +126172,7 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/cvdev/Documentos/Proyectos/moreplant/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\cristian.chuquitarco\Documents\Documents\Projects\agricolamoreplant\resources\js\app.js */"./resources/js/app.js");
 
 
 /***/ }),
