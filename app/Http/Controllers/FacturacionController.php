@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Empresa;
 use App\Models\Factura;
+use App\Models\Retencion;
 use DOMDocument;
 use generarPDF;
 use Illuminate\Http\Request;
 use nusoap_client;
+
 include 'class/generarPDF.php';
 include('class/lib/nusoap.php');
 
@@ -20,10 +22,12 @@ class FacturacionController extends Controller
             $fact = Factura::findOrFail($request->id);
             $fact->respuesta = $request->estado;
             $fact->save();
+        } else if ($tipo == 'retencion_compra') {
+            $ret = Retencion::findOrFail($request->id);
+            $ret->respuesta = $request->estado;
+            $ret->save();
         }
-        // else if ($tipo == 'retencion_compra') {
-        //     DB::update("UPDATE factura_compra SET respuesta = '" . $request->estado . "' WHERE id_factcompra = " . $request->id["id_factcompra"]);
-        // } else if ($tipo == 'nota_credito_venta') {
+        // else if ($tipo == 'nota_credito_venta') {
         //     $fact = Notacredito::findOrFail($request->id);
         //     $fact->respuesta = $request->estado;
         //     $fact->save();

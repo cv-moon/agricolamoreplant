@@ -362,6 +362,173 @@ class XmlController extends Controller
         ];
     }
 
+    public function eretencion(Request $request)
+    {
+        if (!file_exists('archivos/comprobantes/retenciones')) {
+            mkdir('archivos/comprobantes/retenciones', 0777, true);
+        }
+
+        file_put_contents("archivos/comprobantes/retenciones/" . $request->retencion['cla_acceso'] . ".xml", "");
+
+        $xml = new XMLWriter();
+        $xml->openUri('archivos/comprobantes/retenciones/' . $request->retencion['cla_acceso'] . ".xml");
+        $xml->setIndent(true);
+        $xml->setIndentString("\t");
+        $xml->startDocument('1.0', 'utf-8');
+
+        $xml->startElement('comprobanteRetencion');
+        $xml->writeAttribute("id", "comprobante");
+        $xml->writeAttribute("version", "1.0.0");
+
+
+        $xml->startElement("infoTributaria");
+
+        if ($request->retencion['tip_ambiente'] == 0) {
+            $xml->startElement("ambiente");
+            $xml->text(1);
+            $xml->endElement();
+        } else if ($request->retencion['tip_ambiente'] == 1) {
+            $xml->startElement("ambiente");
+            $xml->text(2);
+            $xml->endElement();
+        }
+
+        $xml->startElement("tipoEmision");
+        $xml->text($request->retencion['tip_emision']);
+        $xml->endElement();
+
+        $xml->startElement("razonSocial");
+        $xml->text($request->retencion['raz_social']);
+        $xml->endElement();
+
+        $xml->startElement("nombreComercial");
+        $xml->text($request->retencion['nom_comercial']);
+        $xml->endElement();
+
+        $xml->startElement("ruc");
+        $xml->text($request->retencion['ruc']);
+        $xml->endElement();
+
+        $xml->startElement("claveAcceso");
+        $xml->text($request->retencion['cla_acceso']);
+        $xml->endElement();
+
+        $xml->startElement("codDoc");
+        $xml->text('07');
+        $xml->endElement();
+
+        $xml->startElement("estab");
+        $xml->text(str_pad($request->retencion['numero'], 3, "0", STR_PAD_LEFT));
+        $xml->endElement();
+
+        $xml->startElement("ptoEmi");
+        $xml->text(str_pad($request->retencion['codigo'], 3, "0", STR_PAD_LEFT));
+        $xml->endElement();
+
+        $xml->startElement("secuencial");
+        $xml->text(substr($request->retencion['cla_acceso'], -19, -10));
+        $xml->endElement();
+
+        $xml->startElement("dirMatriz");
+        $xml->text($request->retencion['dir_matriz']);
+        $xml->endElement();
+
+        // if ($request->retencion['reg_microempresa'] == 1) {
+        //     $xml->startElement("regimenMicroempresas");
+        //     $xml->text('CONTRIBUYENTE REGIMEN MICROEMPRESAS');
+        //     $xml->endElement();
+        // }
+
+        $xml->endElement();
+
+        $xml->startElement('infoCompRetencion');
+
+        $xml->startElement("fechaEmision");
+        $xml->text(date('d/m/Y', strtotime($request->retencion['fec_emision'])));
+        $xml->endElement();
+
+        $xml->startElement("dirEstablecimiento");
+        $xml->text($request->retencion['dir_establecimiento']);
+        $xml->endElement();
+
+        $xml->startElement("obligadoContabilidad");
+        if ($request->retencion['obli_contabilidad'] == 1) {
+            $xml->text('SI');
+        } elseif ($request->retencion['obli_contabilidad'] == 0) {
+            $xml->text('NO');
+        }
+        $xml->endElement();
+
+        $xml->startElement("tipoIdentificacionSujetoRetenido");
+        $xml->text('04');
+        $xml->endElement();
+
+        $xml->startElement("azonSocialSujetoRetenido");
+        $xml->text($request->retencion['nombre']);
+        $xml->endElement();
+
+        $xml->startElement("identificacionSujetoRetenido");
+        $xml->text($request->retencion['num_identificacion']);
+        $xml->endElement();
+
+        $xml->startElement("periodoFiscal");
+        $xml->text(date('m/Y', strtotime($request->retencion['fec_emision'])));
+        $xml->endElement();
+
+       
+
+        $xml->startElement('impuestos');
+        foreach ($request->detalles as $key => $det) {
+            $xml->startElement('impuesto');
+
+            $xml->startElement('código');
+            $xml->text($det["cod_impuesto"]);
+            $xml->endElement();
+
+            $xml->startElement('codigoRetencion');
+            $xml->text($det["cod_tarifa"]);
+            $xml->endElement();
+
+            $xml->startElement('baseImponible');
+            $xml->text($det["bas_imponible"]);
+            $xml->endElement();
+
+            $xml->startElement('porcentajeRetener');
+            $xml->text($det["valor"]);
+            $xml->endElement();
+
+            $xml->startElement('valorRetenido');
+            $xml->text($det["val_retenido"]);
+            $xml->endElement();
+            
+            $xml->startElement('codDocSustento');
+            $xml->text('01');
+            $xml->endElement();
+            
+            $xml->startElement('numDocSustento');
+            $xml->text($det["num_comprobante"]);
+            $xml->endElement();
+            
+            $xml->startElement('fechaEmisionDocSustent');
+            $xml->text(date('d/m/Y', strtotime($request->retencion['fec_emi_comprobante'])));
+            $xml->endElement();
+
+            $xml->endElement();
+        }
+        $xml->endElement();
+
+        $xml->endElement();
+
+        return [
+            'firma' => $request->retencion['firma'],
+            'clave' => $request->retencion['fir_clave'],
+            'tipo' => 'factura_venta',
+            'archivo' => 'archivos/comprobantes/facturas/' . $request->retencion['cla_acceso'] . ".xml",
+            'carpeta' => 'archivos/comprobantes/facturas/',
+            'id' => $request->retencion['id']
+        ];
+    }
+
     public function e_guia(Request $request)
     {
         $xml = new XMLWriter();
