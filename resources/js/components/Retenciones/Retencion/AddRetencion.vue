@@ -60,7 +60,7 @@
             @search="selectCompra"
             placeholder="Buscar Compra..."
             v-model="selected"
-            @input="getId"
+            @input="addDetalle(selected)"
           >
           </v-select>
         </div>
@@ -68,67 +68,70 @@
       <b class="text-primary">Impuestos</b>
       <hr class="mt-0" />
       <div class="form-group row">
-        <table
-              id="tabla"
-              class="table table-striped table-bordered dt-responsive nowrap"
-              style="width: 100%"
-            >
-              <thead>
-                <tr>
-                  <th class="text-center">Acción</th>
-                  <th class="text-center">T. Comprobante</th>
-                  <th class="text-center"># Comprobante</th>
-                  <th class="text-center">F. Emisión</th>
-                  <th class="text-center">Eje. Fiscal</th>
-                  <th class="text-center">Base Imponible</th>
-                  <th class="text-center">Imp.</th>
-                  <th class="text-center">% Ret.</th>
-                  <th class="text-center">T. Ret.</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="detalle in arrayDetalle" :key="detalle.id">
-                  <td align="center">
-                    <button
-                      type="button"
-                      title="Agregar"
-                      @click="addDetalle(detalle)"
-                      class="btn btn-success btn-xs"
-                    >
-                      <i class="fas fa-shopping-cart"></i>
-                    </button>
-                  </td>
-                  <td>
-                    <input
-                      type="number"
-                      placeholder="0"
-                      min="0"
-                      v-model="detalle.cantidad"
-                      class="form-control"
-                      :max="detalle.dis_stock"
-                    />
-                  </td>
-                  <td v-text="detalle.nombre"></td>
-                  <td v-text="detalle.composicion"></td>
-                  <td align="right" v-text="detalle.pre_venta"></td>
-                  <td align="right" v-text="detalle.valor + ' %'"></td>
-                  <td align="right" v-text="detalle.por_descuento + ' %'"></td>
-                  <td
-                    align="right"
-                    v-text="detalle.dis_stock"
-                    :class="
-                      detalle.dis_stock > 0 &&
-                      detalle.dis_stock <= detalle.min_stock
-                        ? 'table-danger'
-                        : detalle.dis_stock > detalle.min_stock &&
-                          detalle.dis_stock <= detalle.min_stock * 2
-                        ? 'table-warning'
-                        : 'table-success'
-                    "
-                  ></td>
-                </tr>
-              </tbody>
-            </table>
+        <div class="col-sm-12 table-responsive">
+          <table class="table table-bordered table-striped table-sm">
+            <thead>
+              <tr>
+                <th class="text-center">Acción</th>
+                <th class="text-center">T. Comprobante</th>
+                <th class="text-center"># Comprobante</th>
+                <th class="text-center">F. Emisión</th>
+                <th class="text-center">Eje. Fiscal</th>
+                <th class="text-center">Base Imponible</th>
+                <th class="text-center">Imp.</th>
+                <th class="text-center">% Ret.</th>
+                <th class="text-center">T. Ret.</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="detalle in arrayDetalle" :key="detalle.id">
+                <td align="center">
+                  <button
+                    type="button"
+                    title="Agregar"
+                    @click="eliminarDetalle(detalle)"
+                    class="btn btn-danger btn-xs"
+                  >
+                    <i class="fas fa-thrash"></i>
+                  </button>
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    placeholder="0"
+                    min="0"
+                    v-model="detalle.cantidad"
+                    class="form-control"
+                    :max="detalle.dis_stock"
+                  />
+                </td>
+                <td v-text="detalle.nombre"></td>
+                <td v-text="detalle.composicion"></td>
+                <td align="right" v-text="detalle.pre_venta"></td>
+                <td align="right" v-text="detalle.valor + ' %'"></td>
+                <td align="right" v-text="detalle.por_descuento + ' %'"></td>
+                <td
+                  align="right"
+                  v-text="detalle.dis_stock"
+                  :class="
+                    detalle.dis_stock > 0 &&
+                    detalle.dis_stock <= detalle.min_stock
+                      ? 'table-danger'
+                      : detalle.dis_stock > detalle.min_stock &&
+                        detalle.dis_stock <= detalle.min_stock * 2
+                      ? 'table-warning'
+                      : 'table-success'
+                  "
+                ></td>
+              </tr>
+              <tr>
+                <td colspan="9" align="center" v-if="!selected">
+                  Seleccione un comprobante a retener.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
       <div v-if="retencion.errors.length" class="alert alert-danger">
         <div>
@@ -285,6 +288,32 @@ export default {
     },
 
     // Métodos para los detalles
+    addDetalle(data) {
+      console.log(data);
+      // if (this.selected) {
+      //   this.arrayDetalle.push({
+      //     retencion_id: data["retencion_id"],
+      //     compra_id: data["compra_id"],
+      //     comprobante_id: data["comprobante_id"],
+      //     tarifa_retencion_id: data["tarifa_retencion_id"],
+      //     comprobante: data["comprobante"],
+      //     num_comprobante: data["num_comprobante"],
+      //     fec_emi_comprobante: data["fec_emi_comprobante"],
+      //     eje_fiscal: 1,
+      //     bas_imponible: 1,
+      //     val_retenido: 0,
+      //   });
+      // }
+    },
+    encuentra(id) {
+      let sw = 0;
+      for (let i = 0; i < this.arrayDetalle.length; i++) {
+        if (this.arrayDetalle[i].producto_id == id) {
+          sw = true;
+        }
+      }
+      return sw;
+    },
     eliminarDetalle(index) {
       this.arrayDetalle.splice(index, 1);
     },

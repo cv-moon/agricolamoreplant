@@ -14505,6 +14505,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -14631,6 +14634,33 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       });
     },
     // Métodos para los detalles
+    addDetalle: function addDetalle(data) {
+      console.log(data); // if (this.selected) {
+      //   this.arrayDetalle.push({
+      //     retencion_id: data["retencion_id"],
+      //     compra_id: data["compra_id"],
+      //     comprobante_id: data["comprobante_id"],
+      //     tarifa_retencion_id: data["tarifa_retencion_id"],
+      //     comprobante: data["comprobante"],
+      //     num_comprobante: data["num_comprobante"],
+      //     fec_emi_comprobante: data["fec_emi_comprobante"],
+      //     eje_fiscal: 1,
+      //     bas_imponible: 1,
+      //     val_retenido: 0,
+      //   });
+      // }
+    },
+    encuentra: function encuentra(id) {
+      var sw = 0;
+
+      for (var i = 0; i < this.arrayDetalle.length; i++) {
+        if (this.arrayDetalle[i].producto_id == id) {
+          sw = true;
+        }
+      }
+
+      return sw;
+    },
     eliminarDetalle: function eliminarDetalle(index) {
       this.arrayDetalle.splice(index, 1);
     },
@@ -99241,7 +99271,12 @@ var render = function() {
                 },
                 placeholder: "Buscar Compra..."
               },
-              on: { search: _vm.selectCompra, input: _vm.getId },
+              on: {
+                search: _vm.selectCompra,
+                input: function($event) {
+                  return _vm.addDetalle(_vm.selected)
+                }
+              },
               model: {
                 value: _vm.selected,
                 callback: function($$v) {
@@ -99260,109 +99295,118 @@ var render = function() {
       _c("hr", { staticClass: "mt-0" }),
       _vm._v(" "),
       _c("div", { staticClass: "form-group row" }, [
-        _c(
-          "table",
-          {
-            staticClass:
-              "table table-striped table-bordered dt-responsive nowrap",
-            staticStyle: { width: "100%" },
-            attrs: { id: "tabla" }
-          },
-          [
-            _vm._m(1),
-            _vm._v(" "),
-            _c(
-              "tbody",
-              _vm._l(_vm.arrayDetalle, function(detalle) {
-                return _c("tr", { key: detalle.id }, [
-                  _c("td", { attrs: { align: "center" } }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-success btn-xs",
-                        attrs: { type: "button", title: "Agregar" },
-                        on: {
-                          click: function($event) {
-                            return _vm.addDetalle(detalle)
+        _c("div", { staticClass: "col-sm-12 table-responsive" }, [
+          _c(
+            "table",
+            { staticClass: "table table-bordered table-striped table-sm" },
+            [
+              _vm._m(1),
+              _vm._v(" "),
+              _c(
+                "tbody",
+                [
+                  _vm._l(_vm.arrayDetalle, function(detalle) {
+                    return _c("tr", { key: detalle.id }, [
+                      _c("td", { attrs: { align: "center" } }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-danger btn-xs",
+                            attrs: { type: "button", title: "Agregar" },
+                            on: {
+                              click: function($event) {
+                                return _vm.eliminarDetalle(detalle)
+                              }
+                            }
+                          },
+                          [_c("i", { staticClass: "fas fa-thrash" })]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: detalle.cantidad,
+                              expression: "detalle.cantidad"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: {
+                            type: "number",
+                            placeholder: "0",
+                            min: "0",
+                            max: detalle.dis_stock
+                          },
+                          domProps: { value: detalle.cantidad },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(detalle, "cantidad", $event.target.value)
+                            }
                           }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("td", {
+                        domProps: { textContent: _vm._s(detalle.nombre) }
+                      }),
+                      _vm._v(" "),
+                      _c("td", {
+                        domProps: { textContent: _vm._s(detalle.composicion) }
+                      }),
+                      _vm._v(" "),
+                      _c("td", {
+                        attrs: { align: "right" },
+                        domProps: { textContent: _vm._s(detalle.pre_venta) }
+                      }),
+                      _vm._v(" "),
+                      _c("td", {
+                        attrs: { align: "right" },
+                        domProps: { textContent: _vm._s(detalle.valor + " %") }
+                      }),
+                      _vm._v(" "),
+                      _c("td", {
+                        attrs: { align: "right" },
+                        domProps: {
+                          textContent: _vm._s(detalle.por_descuento + " %")
                         }
-                      },
-                      [_c("i", { staticClass: "fas fa-shopping-cart" })]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("td", [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: detalle.cantidad,
-                          expression: "detalle.cantidad"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: {
-                        type: "number",
-                        placeholder: "0",
-                        min: "0",
-                        max: detalle.dis_stock
-                      },
-                      domProps: { value: detalle.cantidad },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(detalle, "cantidad", $event.target.value)
-                        }
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("td", {
-                    domProps: { textContent: _vm._s(detalle.nombre) }
+                      }),
+                      _vm._v(" "),
+                      _c("td", {
+                        class:
+                          detalle.dis_stock > 0 &&
+                          detalle.dis_stock <= detalle.min_stock
+                            ? "table-danger"
+                            : detalle.dis_stock > detalle.min_stock &&
+                              detalle.dis_stock <= detalle.min_stock * 2
+                            ? "table-warning"
+                            : "table-success",
+                        attrs: { align: "right" },
+                        domProps: { textContent: _vm._s(detalle.dis_stock) }
+                      })
+                    ])
                   }),
                   _vm._v(" "),
-                  _c("td", {
-                    domProps: { textContent: _vm._s(detalle.composicion) }
-                  }),
-                  _vm._v(" "),
-                  _c("td", {
-                    attrs: { align: "right" },
-                    domProps: { textContent: _vm._s(detalle.pre_venta) }
-                  }),
-                  _vm._v(" "),
-                  _c("td", {
-                    attrs: { align: "right" },
-                    domProps: { textContent: _vm._s(detalle.valor + " %") }
-                  }),
-                  _vm._v(" "),
-                  _c("td", {
-                    attrs: { align: "right" },
-                    domProps: {
-                      textContent: _vm._s(detalle.por_descuento + " %")
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("td", {
-                    class:
-                      detalle.dis_stock > 0 &&
-                      detalle.dis_stock <= detalle.min_stock
-                        ? "table-danger"
-                        : detalle.dis_stock > detalle.min_stock &&
-                          detalle.dis_stock <= detalle.min_stock * 2
-                        ? "table-warning"
-                        : "table-success",
-                    attrs: { align: "right" },
-                    domProps: { textContent: _vm._s(detalle.dis_stock) }
-                  })
-                ])
-              }),
-              0
-            )
-          ]
-        )
+                  _c("tr", [
+                    !_vm.selected
+                      ? _c("td", { attrs: { colspan: "9", align: "center" } }, [
+                          _vm._v(
+                            "\n                Seleccione un comprobante a retener.\n              "
+                          )
+                        ])
+                      : _vm._e()
+                  ])
+                ],
+                2
+              )
+            ]
+          )
+        ])
       ]),
       _vm._v(" "),
       _vm.retencion.errors.length
@@ -126451,7 +126495,7 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/cvdev/Documentos/Proyectos/moreplant/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\cristian.chuquitarco\Documents\Documents\Projects\agricolamoreplant\resources\js\app.js */"./resources/js/app.js");
 
 
 /***/ }),
