@@ -159,4 +159,15 @@ class CompraController extends Controller
             DB::rollBack();
         }
     }
+
+    public function find(Request $request)
+    {
+        $compras = Compra::join('proveedores', 'compras.proveedor_id', 'proveedores.id')
+            ->select('compras.id', 'compras.num_comprobante', 'compras.fec_emision', 'proveedores.nombre')
+            ->where('compras.num_comprobante', 'like', '%' . $request->q . '%')
+            ->orWhere('proveedores.nombre', 'like', '%' . $request->q . '%')
+            ->orderBy('compras.fec_emision', 'asc')
+            ->get();
+        return $compras;
+    }
 }

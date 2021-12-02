@@ -140,12 +140,13 @@ Route::middleware('auth')->group(function () {
     Route::get('api/proveedor/detalle', 'ProveedorController@detail');
     Route::put('api/proveedor/editar', 'ProveedorController@update');
     Route::get('api/proveedor/buscar', 'ProveedorController@find');
-
+    
     // Compras
     Route::get('api/compras', 'CompraController@index');
     Route::post('api/compra/guardar', 'CompraController@store');
     Route::put('api/compra/anular', 'CompraController@cancel');
     Route::get('api/compra/detalle', 'CompraController@detail');
+    Route::get('api/compra/buscar', 'CompraController@find');
 
     // Cuentas Por Pagar - Deudas
     Route::get('api/deudas', 'DeudaController@index');
@@ -167,7 +168,7 @@ Route::middleware('auth')->group(function () {
     Route::get('api/cliente/detalle', 'ClienteController@detail');
     Route::put('api/cliente/editar', 'ClienteController@update');
     Route::get('api/cliente/buscar', 'ClienteController@find');
-
+    
     // Factura
     Route::get('api/facturas', 'FacturaController@index');
     Route::post('api/factura/guardar', 'FacturaController@store');
@@ -176,12 +177,12 @@ Route::middleware('auth')->group(function () {
     Route::get('api/factura/pdf/{clave}', 'FacturaController@individualPdf');
     Route::get('api/factura/xml/{clave}', 'FacturaController@individualXml');
     Route::post('api/factura/reenvio', 'FacturaController@forwardingInvoice');
-
+    
     // Cuentas por Cobrar - Créditos
     Route::get('api/creditos', 'CreditoController@index');
     Route::get('api/credito/detalle', 'CreditoController@detail');
     Route::post('api/credito/abonar', 'CreditoController@payment');
-
+    
     // Facturación - Proceso
     Route::post('api/leerFacturaphp', 'FacturacionController@leerFactura');
     Route::post('api/firmaphp', 'FacturacionController@firmaphp');
@@ -189,14 +190,14 @@ Route::middleware('auth')->group(function () {
     Route::post('api/autorizacionComprobantephp', 'FacturacionController@autorizacionComprobantephp');
     Route::post('api/validarFechaCertificadophp', 'FacturacionController@validarFechaCertificadophp');
     Route::post('api/respfactura', 'FacturacionController@respfactura');
-
+    
     // Rutas de XML
     Route::post('api/factura/xml_factura', 'XmlController@efactura');
     Route::post('api/factura/xml_guia', 'XmlController@e_guia');
     Route::post('api/factura/xml_nota_credito', 'XmlController@enotacredito');
     Route::post('api/factura/xml_nota_debito', 'XmlController@enotadebito');
     Route::post('api/factura/xml_compro_retenc', 'XmlController@e_comproretenc');
-
+    
     // Rutas de Arqueos - "Cajas"
     Route::get('api/arqueos', 'ArqueoController@index');
     Route::post('api/arqueo/guardar', 'ArqueoController@store');
@@ -205,12 +206,12 @@ Route::middleware('auth')->group(function () {
     Route::get('api/arqueo/validar', 'ArqueoController@validateToday');
     Route::get('api/arqueo/datos', 'ArqueoController@getArqueo');
     Route::get('api/arqueo/reporte/{id}', 'ArqueoController@printArqueo');
-
+    
     // Rutas Egresos
     Route::get('api/egresos', 'EgresoController@index');
     Route::post('api/egreso/guardar', 'EgresoController@store');
     Route::get('api/egreso/eliminar/{id}', 'EgresoController@drop');
-
+    
     // Rutas de Guías
     // Transportistas
     Route::get('api/transportistas', 'TransportistaController@index');
@@ -218,7 +219,7 @@ Route::middleware('auth')->group(function () {
     Route::get('api/transportista/detalle', 'TransportistaController@detail');
     Route::put('api/transportista/editar', 'TransportistaController@update');
     Route::get('api/transportista/buscar', 'TransportistaController@find');
-
+    
     // Guías de Remisión
     Route::get('api/guias', 'GuiaController@index');
     Route::post('api/guia/guardar', 'GuiaController@store');
@@ -239,11 +240,11 @@ Route::middleware('auth')->group(function () {
     Route::get('api/retencion/comprobante', 'RetencionController@getRetention');
     Route::get('api/retencion/facturas', 'RetencionController@getInvoices');
     Route::get('api/retencion/detalles', 'RetencionController@getDetails');
-
+    
     // Ruta Dashboard
     Route::get('api/dashboard', 'DashboardController');
     Route::get('api/dashboard/datos', 'DashboardController@index');
-
+    
     // Rutas de Reportes
     Route::get('api/reporte/ventas', 'ReporteController@reportSales');
     Route::get('api/reporte/compras', 'ReporteController@reportPurchases');

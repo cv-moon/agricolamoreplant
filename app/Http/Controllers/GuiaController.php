@@ -213,7 +213,7 @@ class GuiaController extends Controller
         $n_cons = str_pad($consecutivo, 9, "0", STR_PAD_LEFT);
         $hoy = date('d/m/Y');
         $num_comprobante = $n_est . '-' . $n_pto . '-' . $n_cons;
-        $clave = $fecha . '01' . $sec_inicial->ruc . $ambiente . $n_est . $n_pto . $n_cons . '12345678' . '1';
+        $clave = $fecha . '06' . $sec_inicial->ruc . $ambiente . $n_est . $n_pto . $n_cons . '12345678' . '1';
         return [
             'punto_id' => $sec_inicial->id,
             'tip_ambiente' => $sec_inicial->tip_ambiente,

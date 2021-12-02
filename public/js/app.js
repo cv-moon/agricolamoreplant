@@ -14416,13 +14416,102 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       selected: null,
       retencion: {
-        factura_id: 0,
+        compra_id: 0,
         punto_id: 0,
         usuario_id: 0,
         transportista_id: 0,
@@ -14454,32 +14543,44 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         nombre: "",
         cantidad: 0
       },
-      identificacion_id: 0,
-      arrayFacturas: [],
-      arrayIdentificaciones: [],
+      arrayCompras: [],
       arrayDetalle: []
     };
   },
-  computed: {},
+  computed: {
+    getId: function getId() {
+      if (!this.selected) {
+        this.retencion.compra_id = 0;
+      } else {
+        this.retencion.compra_id = this.selected.id;
+      }
+    }
+  },
   methods: {
-    myTable: function myTable() {
-      this.$nextTick(function () {
-        $("#tabla").DataTable();
+    selectCompra: function selectCompra(search, loading) {
+      var _this = this;
+
+      loading(true);
+      axios.get("/api/compra/buscar?q=" + search).then(function (resp) {
+        _this.arrayCompras = resp.data;
+        loading(false);
+      })["catch"](function (err) {
+        console.log(err);
       });
     },
     getRetencion: function getRetencion() {
-      var _this = this;
+      var _this2 = this;
 
       axios.get("/api/retencion/comprobante").then(function (resp) {
-        _this.retencion.cla_acceso = resp.data.cla_acceso + _this.modulo11(resp.data.cla_acceso);
-        _this.retencion.fec_emision = resp.data.fec_emision;
-        _this.retencion.num_secuencial = resp.data.num_secuencial;
-        _this.retencion.punto_id = resp.data.punto_id;
-        _this.retencion.tip_ambiente = resp.data.tip_ambiente;
-        _this.retencion.tip_emision = resp.data.tip_emision;
-        _this.datos.comprobante = resp.data.comprobante;
-        _this.datos.firma = resp.data.firma;
-        _this.datos.fir_clave = resp.data.fir_clave;
+        _this2.retencion.cla_acceso = resp.data.cla_acceso + _this2.modulo11(resp.data.cla_acceso);
+        _this2.retencion.fec_emision = resp.data.fec_emision;
+        _this2.retencion.num_secuencial = resp.data.num_secuencial;
+        _this2.retencion.punto_id = resp.data.punto_id;
+        _this2.retencion.tip_ambiente = resp.data.tip_ambiente;
+        _this2.retencion.tip_emision = resp.data.tip_emision;
+        _this2.datos.comprobante = resp.data.comprobante;
+        _this2.datos.firma = resp.data.firma;
+        _this2.datos.fir_clave = resp.data.fir_clave;
       });
     },
     validaCampos: function validaCampos() {
@@ -14523,10 +14624,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       });
     },
     selectComprobantes: function selectComprobantes() {
-      var _this2 = this;
+      var _this3 = this;
 
       axios.get("/api/retenciones/compras").then(function (resp) {
-        _this2.arrayFacturas = resp.data;
+        _this3.arrayFacturas = resp.data;
       });
     },
     // Métodos para los detalles
@@ -14560,7 +14661,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return digito_calculado;
     },
     crearfacturacion: function crearfacturacion(firma, password, factura, tipo, id, carpeta) {
-      var _this3 = this;
+      var _this4 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
         var _yield$script_comprob, comprobante, _yield$script_comprob2, contenido, _yield$script_comprob3, certificado, _yield$script_comprob4, quefirma, _yield$script_comprob5, validado, _yield$script_comprob6, recibida, _yield$script_comprob7, registrado;
@@ -14650,11 +14751,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 if (registrado == "enviado") {
                   Swal.fire("Bien!", "La factura se envió exitosamente.", "success");
 
-                  _this3.$router.push("/retenciones");
+                  _this4.$router.push("/retenciones");
                 } else {
                   Swal.fire("Error!", "La factura no pudo ser enviada, intente mas tarde.", "error");
 
-                  _this3.$router.push("/retenciones");
+                  _this4.$router.push("/retenciones");
                 }
 
                 _context.next = 36;
@@ -14665,7 +14766,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _context.t0 = _context["catch"](0);
                 Swal.fire("Error!", "Error en el envio al SRI" + _context.t0, "error");
 
-                _this3.$router.push("/retenciones");
+                _this4.$router.push("/retenciones");
 
               case 36:
               case "end":
@@ -99112,6 +99213,158 @@ var render = function() {
       _vm._v(" "),
       _c("hr", { staticClass: "mt-0" }),
       _vm._v(" "),
+      _c("div", { staticClass: "form-group row" }, [
+        _c(
+          "div",
+          { staticClass: "col-sm-6" },
+          [
+            _c(
+              "label",
+              {
+                staticClass: "col-sm-12 col-form-label",
+                attrs: { for: "fac_compra" }
+              },
+              [_vm._v("Factura Compra:")]
+            ),
+            _vm._v(" "),
+            _c("v-select", {
+              attrs: {
+                options: _vm.arrayCompras,
+                getOptionLabel: function(option) {
+                  return (
+                    option.num_comprobante +
+                    " / " +
+                    option.fec_emision +
+                    " / " +
+                    option.nombre
+                  )
+                },
+                placeholder: "Buscar Compra..."
+              },
+              on: { search: _vm.selectCompra, input: _vm.getId },
+              model: {
+                value: _vm.selected,
+                callback: function($$v) {
+                  _vm.selected = $$v
+                },
+                expression: "selected"
+              }
+            })
+          ],
+          1
+        )
+      ]),
+      _vm._v(" "),
+      _c("b", { staticClass: "text-primary" }, [_vm._v("Impuestos")]),
+      _vm._v(" "),
+      _c("hr", { staticClass: "mt-0" }),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group row" }, [
+        _c(
+          "table",
+          {
+            staticClass:
+              "table table-striped table-bordered dt-responsive nowrap",
+            staticStyle: { width: "100%" },
+            attrs: { id: "tabla" }
+          },
+          [
+            _vm._m(1),
+            _vm._v(" "),
+            _c(
+              "tbody",
+              _vm._l(_vm.arrayDetalle, function(detalle) {
+                return _c("tr", { key: detalle.id }, [
+                  _c("td", { attrs: { align: "center" } }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-success btn-xs",
+                        attrs: { type: "button", title: "Agregar" },
+                        on: {
+                          click: function($event) {
+                            return _vm.addDetalle(detalle)
+                          }
+                        }
+                      },
+                      [_c("i", { staticClass: "fas fa-shopping-cart" })]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: detalle.cantidad,
+                          expression: "detalle.cantidad"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "number",
+                        placeholder: "0",
+                        min: "0",
+                        max: detalle.dis_stock
+                      },
+                      domProps: { value: detalle.cantidad },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(detalle, "cantidad", $event.target.value)
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("td", {
+                    domProps: { textContent: _vm._s(detalle.nombre) }
+                  }),
+                  _vm._v(" "),
+                  _c("td", {
+                    domProps: { textContent: _vm._s(detalle.composicion) }
+                  }),
+                  _vm._v(" "),
+                  _c("td", {
+                    attrs: { align: "right" },
+                    domProps: { textContent: _vm._s(detalle.pre_venta) }
+                  }),
+                  _vm._v(" "),
+                  _c("td", {
+                    attrs: { align: "right" },
+                    domProps: { textContent: _vm._s(detalle.valor + " %") }
+                  }),
+                  _vm._v(" "),
+                  _c("td", {
+                    attrs: { align: "right" },
+                    domProps: {
+                      textContent: _vm._s(detalle.por_descuento + " %")
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("td", {
+                    class:
+                      detalle.dis_stock > 0 &&
+                      detalle.dis_stock <= detalle.min_stock
+                        ? "table-danger"
+                        : detalle.dis_stock > detalle.min_stock &&
+                          detalle.dis_stock <= detalle.min_stock * 2
+                        ? "table-warning"
+                        : "table-success",
+                    attrs: { align: "right" },
+                    domProps: { textContent: _vm._s(detalle.dis_stock) }
+                  })
+                ])
+              }),
+              0
+            )
+          ]
+        )
+      ]),
+      _vm._v(" "),
       _vm.retencion.errors.length
         ? _c("div", { staticClass: "alert alert-danger" }, [
             _c(
@@ -99134,7 +99387,7 @@ var render = function() {
         _c(
           "router-link",
           { staticClass: "btn btn-danger", attrs: { to: "/retenciones" } },
-          [_vm._v(" Cancelar ")]
+          [_vm._v("\n      Cancelar\n    ")]
         ),
         _vm._v(" "),
         _c(
@@ -99159,6 +99412,32 @@ var staticRenderFns = [
     return _c("h3", { staticClass: "card-title mt-2" }, [
       _c("i", { staticClass: "fas fa-align-justify" }),
       _vm._v("\n      Retención\n    ")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { staticClass: "text-center" }, [_vm._v("Acción")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("T. Comprobante")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("# Comprobante")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("F. Emisión")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Eje. Fiscal")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Base Imponible")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Imp.")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("% Ret.")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("T. Ret.")])
+      ])
     ])
   }
 ]
@@ -126172,7 +126451,7 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\cristian.chuquitarco\Documents\Documents\Projects\agricolamoreplant\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/cvdev/Documentos/Proyectos/moreplant/resources/js/app.js */"./resources/js/app.js");
 
 
 /***/ }),

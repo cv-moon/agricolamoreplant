@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DetalleRetencion;
+use App\Models\Empresa;
 use App\Models\PuntoEmision;
 use App\Models\Retencion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use sendEmail;
 
 class RetencionController extends Controller
 {
@@ -78,7 +81,7 @@ class RetencionController extends Controller
             $detalles = $request->detalles;
 
             foreach ($detalles as $key => $det) {
-                $detalle = new DetalleGuia();
+                $detalle = new DetalleRetencion();
                 $detalle->retencion_id = $rentencion->id;
                 $detalle->compra_id = $det['compra_id'];
                 $detalle->comprobante_id = $det['comprobante_id'];
@@ -200,7 +203,7 @@ class RetencionController extends Controller
         $n_cons = str_pad($consecutivo, 9, "0", STR_PAD_LEFT);
         $hoy = date('d/m/Y');
         $num_comprobante = $n_est . '-' . $n_pto . '-' . $n_cons;
-        $clave = $fecha . '01' . $sec_inicial->ruc . $ambiente . $n_est . $n_pto . $n_cons . '12345678' . '1';
+        $clave = $fecha . '07' . $sec_inicial->ruc . $ambiente . $n_est . $n_pto . $n_cons . '12345678' . '1';
         return [
             'punto_id' => $sec_inicial->id,
             'tip_ambiente' => $sec_inicial->tip_ambiente,
@@ -222,7 +225,7 @@ class RetencionController extends Controller
 
     public function getDetails(Request $request)
     {
-        $destinatario = Factura::join('clientes', 'facturas.cliente_id', 'clientes.id')
+        $destinatario = Retencion::join('clientes', 'facturas.cliente_id', 'clientes.id')
             ->select(
                 'clientes.nombre',
                 'clientes.num_identificacion',
@@ -230,7 +233,7 @@ class RetencionController extends Controller
             )
             ->where('facturas.id', $request->factura)
             ->first();
-        $detalles = DetalleFactura::join('productos', 'detalles_factura.producto_id', 'productos.id')
+        $detalles = DetalleRetencion::join('productos', 'detalles_factura.producto_id', 'productos.id')
             ->select(
                 'productos.id',
                 'productos.nombre',

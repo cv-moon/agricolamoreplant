@@ -42,7 +42,94 @@
       </div>
       <b class="text-primary">Datos de Retención</b>
       <hr class="mt-0" />
-      
+      <div class="form-group row">
+        <div class="col-sm-6">
+          <label for="fac_compra" class="col-sm-12 col-form-label"
+            >Factura Compra:</label
+          >
+          <v-select
+            :options="arrayCompras"
+            :getOptionLabel="
+              (option) =>
+                option.num_comprobante +
+                ' / ' +
+                option.fec_emision +
+                ' / ' +
+                option.nombre
+            "
+            @search="selectCompra"
+            placeholder="Buscar Compra..."
+            v-model="selected"
+            @input="getId"
+          >
+          </v-select>
+        </div>
+      </div>
+      <b class="text-primary">Impuestos</b>
+      <hr class="mt-0" />
+      <div class="form-group row">
+        <table
+              id="tabla"
+              class="table table-striped table-bordered dt-responsive nowrap"
+              style="width: 100%"
+            >
+              <thead>
+                <tr>
+                  <th class="text-center">Acción</th>
+                  <th class="text-center">T. Comprobante</th>
+                  <th class="text-center"># Comprobante</th>
+                  <th class="text-center">F. Emisión</th>
+                  <th class="text-center">Eje. Fiscal</th>
+                  <th class="text-center">Base Imponible</th>
+                  <th class="text-center">Imp.</th>
+                  <th class="text-center">% Ret.</th>
+                  <th class="text-center">T. Ret.</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="detalle in arrayDetalle" :key="detalle.id">
+                  <td align="center">
+                    <button
+                      type="button"
+                      title="Agregar"
+                      @click="addDetalle(detalle)"
+                      class="btn btn-success btn-xs"
+                    >
+                      <i class="fas fa-shopping-cart"></i>
+                    </button>
+                  </td>
+                  <td>
+                    <input
+                      type="number"
+                      placeholder="0"
+                      min="0"
+                      v-model="detalle.cantidad"
+                      class="form-control"
+                      :max="detalle.dis_stock"
+                    />
+                  </td>
+                  <td v-text="detalle.nombre"></td>
+                  <td v-text="detalle.composicion"></td>
+                  <td align="right" v-text="detalle.pre_venta"></td>
+                  <td align="right" v-text="detalle.valor + ' %'"></td>
+                  <td align="right" v-text="detalle.por_descuento + ' %'"></td>
+                  <td
+                    align="right"
+                    v-text="detalle.dis_stock"
+                    :class="
+                      detalle.dis_stock > 0 &&
+                      detalle.dis_stock <= detalle.min_stock
+                        ? 'table-danger'
+                        : detalle.dis_stock > detalle.min_stock &&
+                          detalle.dis_stock <= detalle.min_stock * 2
+                        ? 'table-warning'
+                        : 'table-success'
+                    "
+                  ></td>
+                </tr>
+              </tbody>
+            </table>
+      </div>
       <div v-if="retencion.errors.length" class="alert alert-danger">
         <div>
           <div v-for="error in retencion.errors" :key="error">
@@ -52,7 +139,9 @@
       </div>
     </div>
     <div class="modal-footer">
-      <router-link to="/retenciones" class="btn btn-danger"> Cancelar </router-link>
+      <router-link to="/retenciones" class="btn btn-danger">
+        Cancelar
+      </router-link>
       <button type="button" class="btn btn-success" @click="guardar">
         Guardar
       </button>
@@ -67,7 +156,7 @@ export default {
       selected: null,
 
       retencion: {
-        factura_id: 0,
+        compra_id: 0,
         punto_id: 0,
         usuario_id: 0,
         transportista_id: 0,
@@ -102,19 +191,31 @@ export default {
         cantidad: 0,
       },
 
-      identificacion_id: 0,
-      arrayFacturas: [],
-      arrayIdentificaciones: [],
+      arrayCompras: [],
       arrayDetalle: [],
     };
   },
   computed: {
+    getId() {
+      if (!this.selected) {
+        this.retencion.compra_id = 0;
+      } else {
+        this.retencion.compra_id = this.selected.id;
+      }
+    },
   },
   methods: {
-    myTable() {
-      this.$nextTick(() => {
-        $("#tabla").DataTable();
-      });
+    selectCompra(search, loading) {
+      loading(true);
+      axios
+        .get("/api/compra/buscar?q=" + search)
+        .then((resp) => {
+          this.arrayCompras = resp.data;
+          loading(false);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
     getRetencion() {
       axios.get("/api/retencion/comprobante").then((resp) => {
@@ -132,7 +233,7 @@ export default {
     },
     validaCampos() {
       this.retencion.errors = [];
-      
+
       return this.retencion.errors;
     },
     guardar() {
