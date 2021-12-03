@@ -10064,7 +10064,7 @@ __webpack_require__.r(__webpack_exports__);
       var resultado = 0.0;
 
       for (var i = 0; i < this.arrayDetalle.length; i++) {
-        if (this.arrayDetalle[i].impuesto === 1) {
+        if (this.arrayDetalle[i].impuesto === 12) {
           resultado = resultado + (this.arrayDetalle[i].precio - this.arrayDetalle[i].precio * this.arrayDetalle[i].descuento / 100) * this.arrayDetalle[i].cantidad / 1.12;
         }
       }

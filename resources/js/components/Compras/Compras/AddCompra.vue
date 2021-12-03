@@ -597,9 +597,9 @@ export default {
       }
     },
     calcularSubTotalDoce() {
-      var resultado = 0.0;
-      for (var i = 0; i < this.arrayDetalle.length; i++) {
-        if (this.arrayDetalle[i].impuesto === 1) {
+      let resultado = 0.0;
+      for (let i = 0; i < this.arrayDetalle.length; i++) {
+        if (this.arrayDetalle[i].impuesto === 12) {
           resultado =
             resultado +
             ((this.arrayDetalle[i].precio -
@@ -612,8 +612,8 @@ export default {
       return resultado;
     },
     calcularSubTotalCero() {
-      var resultado = 0.0;
-      for (var i = 0; i < this.arrayDetalle.length; i++) {
+      let resultado = 0.0;
+      for (let i = 0; i < this.arrayDetalle.length; i++) {
         if (this.arrayDetalle[i].impuesto === 0) {
           resultado =
             resultado +
@@ -626,8 +626,8 @@ export default {
       return resultado;
     },
     calcularDescuento() {
-      var resultado = 0.0;
-      for (var i = 0; i < this.arrayDetalle.length; i++) {
+      let resultado = 0.0;
+      for (let i = 0; i < this.arrayDetalle.length; i++) {
         resultado =
           resultado +
           ((this.arrayDetalle[i].precio * this.arrayDetalle[i].descuento) /
@@ -637,12 +637,12 @@ export default {
       return resultado;
     },
     calcularImpuesto() {
-      var resultado = 0.0;
+      let resultado = 0.0;
       resultado = this.sub_12 * 0.12;
       return resultado;
     },
     calcularTotal() {
-      var resultado = 0.0;
+      let resultado = 0.0;
       resultado =
         parseFloat(this.sub_0) +
         parseFloat(this.sub_12) +

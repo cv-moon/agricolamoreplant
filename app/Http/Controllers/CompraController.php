@@ -163,7 +163,13 @@ class CompraController extends Controller
     public function find(Request $request)
     {
         $compras = Compra::join('proveedores', 'compras.proveedor_id', 'proveedores.id')
-            ->select('compras.id', 'compras.num_comprobante', 'compras.fec_emision', 'proveedores.nombre')
+            ->select('compras.id',
+            'compras.num_comprobante',
+            'compras.fec_emision',
+            'proveedores.nombre',
+            'compras.sub_0',
+            'compras.sub_12'
+            )
             ->where('compras.num_comprobante', 'like', '%' . $request->q . '%')
             ->orWhere('proveedores.nombre', 'like', '%' . $request->q . '%')
             ->orderBy('compras.fec_emision', 'asc')
