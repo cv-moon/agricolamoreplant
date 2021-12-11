@@ -162,16 +162,33 @@ class CompraController extends Controller
 
     public function find(Request $request)
     {
+        // $compras = Compra::join('proveedores', 'compras.proveedor_id', 'proveedores.id')
+        //     ->select(
+        //         'compras.id',
+        //         'compras.tip_comprobante',
+        //         'compras.num_comprobante',
+        //         'compras.fec_emision',
+        //         'proveedores.nombre',
+        //         'compras.sub_0',
+        //         'compras.sub_12'
+        //     )
+        //     ->where('compras.num_comprobante', 'like', '%' . $request->q . '%')
+        //     ->orWhere('proveedores.nombre', 'like', '%' . $request->q . '%')
+        //     ->where('compras.tip_comprobante', "FAC")
+        //     ->orderBy('compras.fec_emision', 'asc')
+        //     ->get();
         $compras = Compra::join('proveedores', 'compras.proveedor_id', 'proveedores.id')
-            ->select('compras.id',
-            'compras.num_comprobante',
-            'compras.fec_emision',
-            'proveedores.nombre',
-            'compras.sub_0',
-            'compras.sub_12'
+            ->select(
+                'compras.id',
+                'compras.tip_comprobante',
+                'compras.num_comprobante',
+                'compras.fec_emision',
+                'proveedores.nombre',
+                'compras.sub_0',
+                'compras.sub_12'
             )
-            ->where('compras.num_comprobante', 'like', '%' . $request->q . '%')
-            ->orWhere('proveedores.nombre', 'like', '%' . $request->q . '%')
+            ->where('compras.tip_comprobante', "FAC")
+            ->where('compras.estado', 1)
             ->orderBy('compras.fec_emision', 'asc')
             ->get();
         return $compras;

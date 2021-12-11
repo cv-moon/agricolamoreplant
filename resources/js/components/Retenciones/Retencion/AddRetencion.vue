@@ -47,7 +47,7 @@
           <label for="fac_compra" class="col-sm-12 col-form-label"
             >Factura Compra:</label
           >
-          <v-select
+          <!-- <v-select
             :options="arrayCompras"
             :getOptionLabel="
               (option) =>
@@ -62,7 +62,22 @@
             v-model="selected"
             @input="addDetalle(selected)"
           >
-          </v-select>
+          </v-select> -->
+          <select v-model="selected" class="form-control" @change="addDetalle(selected)">
+            <option value="0" disabled>Seleccione...</option>
+            <option
+              v-for="compra in arrayCompras"
+              :key="compra.id"
+              :value="compra.id"
+              v-text="
+                compra.num_comprobante +
+                ' / ' +
+                compra.fec_emision +
+                ' / ' +
+                compra.nombre
+              "
+            ></option>
+          </select>
         </div>
       </div>
       <b class="text-primary">Impuestos</b>
@@ -72,7 +87,6 @@
           <table class="table table-bordered table-striped table-sm">
             <thead>
               <tr>
-                <th class="text-center">Acción</th>
                 <th class="text-center">T. Comprobante</th>
                 <th class="text-center"># Comprobante</th>
                 <th class="text-center">F. Emisión</th>
@@ -85,47 +99,17 @@
             </thead>
             <tbody>
               <tr v-for="detalle in arrayDetalle" :key="detalle.id">
-                <td align="center">
-                  <button
-                    type="button"
-                    title="Agregar"
-                    @click="eliminarDetalle(detalle)"
-                    class="btn btn-danger btn-xs"
-                  >
-                    <i class="fas fa-thrash"></i>
-                  </button>
-                </td>
-                <td>
-                  <input
-                    type="number"
-                    placeholder="0"
-                    min="0"
-                    v-model="detalle.cantidad"
-                    class="form-control"
-                    :max="detalle.dis_stock"
-                  />
-                </td>
-                <td v-text="detalle.nombre"></td>
-                <td v-text="detalle.composicion"></td>
-                <td align="right" v-text="detalle.pre_venta"></td>
-                <td align="right" v-text="detalle.valor + ' %'"></td>
-                <td align="right" v-text="detalle.por_descuento + ' %'"></td>
-                <td
-                  align="right"
-                  v-text="detalle.dis_stock"
-                  :class="
-                    detalle.dis_stock > 0 &&
-                    detalle.dis_stock <= detalle.min_stock
-                      ? 'table-danger'
-                      : detalle.dis_stock > detalle.min_stock &&
-                        detalle.dis_stock <= detalle.min_stock * 2
-                      ? 'table-warning'
-                      : 'table-success'
-                  "
-                ></td>
+                <td v-text="detalle.tip_comprobante"></td>
+                <td v-text="detalle.num_comprobante"></td>
+                <td v-text="detalle.fec_emi_comprobante"></td>
+                <td align="right" v-text="detalle.eje_fiscal"></td>
+                <td align="right" v-text="detalle.bas_imponible"></td>
+                <td align="right" v-text="detalle.tarifa_retencion_id"></td>
+                <td align="right" v-text="detalle.por_retener"></td>
+                <td align="right" v-text="detalle.val_retenido"></td>
               </tr>
               <tr>
-                <td colspan="9" align="center" v-if="!selected">
+                <td colspan="8" align="center" v-if="!selected">
                   Seleccione un comprobante a retener.
                 </td>
               </tr>
@@ -199,26 +183,29 @@ export default {
     };
   },
   computed: {
-    getId() {
-      if (!this.selected) {
-        this.retencion.compra_id = 0;
-      } else {
-        this.retencion.compra_id = this.selected.id;
-      }
-    },
+    // getId() {
+    //   if (!this.selected) {
+    //     this.retencion.compra_id = 0;
+    //   } else {
+    //     this.retencion.compra_id = this.selected.id;
+    //   }
+    // },
   },
   methods: {
-    selectCompra(search, loading) {
-      loading(true);
-      axios
-        .get("/api/compra/buscar?q=" + search)
-        .then((resp) => {
-          this.arrayCompras = resp.data;
-          loading(false);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+    selectCompra() {
+      // loading(true);
+      // axios
+      //   .get("/api/compra/buscar?q=" + search)
+      //   .then((resp) => {
+      //     this.arrayCompras = resp.data;
+      //     loading(false);
+      //   })
+      //   .catch((err) => {
+      //     console.log(err);
+      //   });
+      axios.get("/api/compra/buscar").then((resp) => {
+        this.arrayCompras = resp.data;
+      });
     },
     getRetencion() {
       axios.get("/api/retencion/comprobante").then((resp) => {
@@ -290,20 +277,29 @@ export default {
     // Métodos para los detalles
     addDetalle(data) {
       console.log(data);
-      // if (this.selected) {
-      //   this.arrayDetalle.push({
-      //     retencion_id: data["retencion_id"],
-      //     compra_id: data["compra_id"],
-      //     comprobante_id: data["comprobante_id"],
-      //     tarifa_retencion_id: data["tarifa_retencion_id"],
-      //     comprobante: data["comprobante"],
-      //     num_comprobante: data["num_comprobante"],
-      //     fec_emi_comprobante: data["fec_emi_comprobante"],
-      //     eje_fiscal: 1,
-      //     bas_imponible: 1,
-      //     val_retenido: 0,
-      //   });
-      // }
+      if (data) {
+        if (data.sub_0 >= 0) {
+          this.arrayDetalle.push({
+            tarifa_retencion_id: 0,
+            comprobante: data.tip_comprobante,
+            num_comprobante: data.num_comprobante,
+            fec_emi_comprobante: data["fec_emi_comprobante"],
+            bas_imponible: data.sub_0,
+            val_retenido: 0,
+          });
+        }
+        if (data.sub_12 >= 0) {
+          this.arrayDetalle.push({
+            tarifa_retencion_id: 0,
+            comprobante: data.tip_comprobante,
+            num_comprobante: data.num_comprobante,
+            fec_emi_comprobante: data["fec_emi_comprobante"],
+            bas_imponible: data.sub_12,
+            val_retenido: 0,
+          });
+        }
+      }
+      console.log(this.arrayDetalle);
     },
     encuentra(id) {
       let sw = 0;
@@ -418,6 +414,7 @@ export default {
   mounted() {
     this.getRetencion();
     this.selectComprobantes();
+    this.selectCompra();
   },
 };
 </script>
