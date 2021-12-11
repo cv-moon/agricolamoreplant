@@ -14492,6 +14492,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -14623,27 +14627,35 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       });
     },
     // Métodos para los detalles
-    addDetalle: function addDetalle(data) {
+    addDetalle: function addDetalle(id) {
+      this.arrayDetalle = [];
+      var data = this.arrayCompras.find(function (e) {
+        return id == e.id;
+      });
       console.log(data);
 
       if (data) {
-        if (data.sub_0 >= 0) {
+        var eje = new Date(data.fec_emision.toString);
+
+        if (data.sub_0 > 0) {
           this.arrayDetalle.push({
             tarifa_retencion_id: 0,
             comprobante: data.tip_comprobante,
             num_comprobante: data.num_comprobante,
-            fec_emi_comprobante: data["fec_emi_comprobante"],
+            fec_emi_comprobante: data.fec_emision,
+            eje_fiscal: eje.getMonth + "/" + eje.getFullYear,
             bas_imponible: data.sub_0,
             val_retenido: 0
           });
         }
 
-        if (data.sub_12 >= 0) {
+        if (data.sub_12 > 0) {
           this.arrayDetalle.push({
             tarifa_retencion_id: 0,
             comprobante: data.tip_comprobante,
             num_comprobante: data.num_comprobante,
-            fec_emi_comprobante: data["fec_emi_comprobante"],
+            fec_emi_comprobante: data.fec_emision,
+            eje_fiscal: eje.getMonth + "/" + eje.getFullYear,
             bas_imponible: data.sub_12,
             val_retenido: 0
           });
@@ -99334,9 +99346,7 @@ var render = function() {
                   _vm._l(_vm.arrayDetalle, function(detalle) {
                     return _c("tr", { key: detalle.id }, [
                       _c("td", {
-                        domProps: {
-                          textContent: _vm._s(detalle.tip_comprobante)
-                        }
+                        domProps: { textContent: _vm._s(detalle.comprobante) }
                       }),
                       _vm._v(" "),
                       _c("td", {
@@ -126481,7 +126491,7 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\cristian.chuquitarco\Documents\Documents\Projects\agricolamoreplant\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/cvdev/Documentos/Proyectos/moreplant/resources/js/app.js */"./resources/js/app.js");
 
 
 /***/ }),

@@ -63,7 +63,11 @@
             @input="addDetalle(selected)"
           >
           </v-select> -->
-          <select v-model="selected" class="form-control" @change="addDetalle(selected)">
+          <select
+            v-model="selected"
+            class="form-control"
+            @change="addDetalle(selected)"
+          >
             <option value="0" disabled>Seleccione...</option>
             <option
               v-for="compra in arrayCompras"
@@ -99,7 +103,7 @@
             </thead>
             <tbody>
               <tr v-for="detalle in arrayDetalle" :key="detalle.id">
-                <td v-text="detalle.tip_comprobante"></td>
+                <td v-text="detalle.comprobante"></td>
                 <td v-text="detalle.num_comprobante"></td>
                 <td v-text="detalle.fec_emi_comprobante"></td>
                 <td align="right" v-text="detalle.eje_fiscal"></td>
@@ -275,25 +279,30 @@ export default {
     },
 
     // Métodos para los detalles
-    addDetalle(data) {
+    addDetalle(id) {
+      this.arrayDetalle = [];
+      let data = this.arrayCompras.find((e) => id == e.id);
       console.log(data);
       if (data) {
-        if (data.sub_0 >= 0) {
+        let eje = new Date(data.fec_emision.toString);
+        if (data.sub_0 > 0) {
           this.arrayDetalle.push({
             tarifa_retencion_id: 0,
             comprobante: data.tip_comprobante,
             num_comprobante: data.num_comprobante,
-            fec_emi_comprobante: data["fec_emi_comprobante"],
+            fec_emi_comprobante: data.fec_emision,
+            eje_fiscal: eje.getMonth + "/" + eje.getFullYear,
             bas_imponible: data.sub_0,
             val_retenido: 0,
           });
         }
-        if (data.sub_12 >= 0) {
+        if (data.sub_12 > 0) {
           this.arrayDetalle.push({
             tarifa_retencion_id: 0,
             comprobante: data.tip_comprobante,
             num_comprobante: data.num_comprobante,
-            fec_emi_comprobante: data["fec_emi_comprobante"],
+            fec_emi_comprobante: data.fec_emision,
+            eje_fiscal: eje.getMonth + "/" + eje.getFullYear,
             bas_imponible: data.sub_12,
             val_retenido: 0,
           });
