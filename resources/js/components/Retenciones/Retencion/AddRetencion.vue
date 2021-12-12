@@ -91,7 +91,6 @@
           <table class="table table-bordered table-striped table-sm">
             <thead>
               <tr>
-                <th class="text-center">T. Comprobante</th>
                 <th class="text-center"># Comprobante</th>
                 <th class="text-center">F. Emisión</th>
                 <th class="text-center">Eje. Fiscal</th>
@@ -103,18 +102,45 @@
             </thead>
             <tbody>
               <tr v-for="detalle in arrayDetalle" :key="detalle.id">
-                <td v-text="detalle.comprobante"></td>
-                <td v-text="detalle.num_comprobante"></td>
+                <td
+                  v-text="detalle.comprobante + ' ' + detalle.num_comprobante"
+                ></td>
                 <td v-text="detalle.fec_emi_comprobante"></td>
-                <td align="right" v-text="detalle.eje_fiscal"></td>
+                <td align="center" v-text="detalle.eje_fiscal"></td>
                 <td align="right" v-text="detalle.bas_imponible"></td>
-                <td align="right" v-text="detalle.tarifa_retencion_id"></td>
-                <td align="right" v-text="detalle.por_retener"></td>
-                <td align="right" v-text="detalle.val_retenido"></td>
+                <td align="center" v-text="detalle.imp_retencion"></td>
+                <td>
+                  <select
+                    v-model="detalle.tarifa_retencion_id"
+                    class="form-control"
+                  >
+                    <option value="0" disabled>Seleccione...</option>
+                    <option
+                      v-for="tarifa in arrayTarifas"
+                      :key="tarifa.id"
+                      :value="tarifa.id"
+                      v-text="
+                        'IMPUESTO: ' +
+                        tarifa.impuesto +
+                        ' TARIFA: ' +
+                        tarifa.valor
+                      "
+                    ></option>
+                  </select>
+                </td>
+                <td align="right">
+                  {{ (detalle.val_Retenido = calculaRetencionInd) }}
+                </td>
               </tr>
               <tr>
                 <td colspan="8" align="center" v-if="!selected">
                   Seleccione un comprobante a retener.
+                </td>
+              </tr>
+              <tr>
+                <td colspan="7">Total a Retener</td>
+                <td>
+                  {{ (tot_retener = calculaRetencion) }}
                 </td>
               </tr>
             </tbody>
@@ -184,16 +210,20 @@ export default {
 
       arrayCompras: [],
       arrayDetalle: [],
+      arrayTarifas: [],
     };
   },
   computed: {
-    // getId() {
-    //   if (!this.selected) {
-    //     this.retencion.compra_id = 0;
-    //   } else {
-    //     this.retencion.compra_id = this.selected.id;
-    //   }
-    // },
+    calculaRetencionInd() {
+      let res = 0;
+      res = this.arrayDetalle.forEach(
+        (e) => e.bas_imponible * this.arrayTarifas.find((e) => e.tarifa / 100)
+      );
+      return res;
+    },
+    calculaRetencion(){
+      
+    }
   },
   methods: {
     selectCompra() {
@@ -282,17 +312,19 @@ export default {
     addDetalle(id) {
       this.arrayDetalle = [];
       let data = this.arrayCompras.find((e) => id == e.id);
-      console.log(data);
       if (data) {
-        let eje = new Date(data.fec_emision.toString);
+        let eje_fiscal =
+          new Date().getMonth() + 1 + "/" + new Date().getFullYear();
+        this.selectTarifa();
         if (data.sub_0 > 0) {
           this.arrayDetalle.push({
             tarifa_retencion_id: 0,
             comprobante: data.tip_comprobante,
             num_comprobante: data.num_comprobante,
             fec_emi_comprobante: data.fec_emision,
-            eje_fiscal: eje.getMonth + "/" + eje.getFullYear,
+            eje_fiscal,
             bas_imponible: data.sub_0,
+            imp_retencion: "RENTA",
             val_retenido: 0,
           });
         }
@@ -302,13 +334,13 @@ export default {
             comprobante: data.tip_comprobante,
             num_comprobante: data.num_comprobante,
             fec_emi_comprobante: data.fec_emision,
-            eje_fiscal: eje.getMonth + "/" + eje.getFullYear,
+            eje_fiscal,
             bas_imponible: data.sub_12,
+            imp_retencion: "IVA",
             val_retenido: 0,
           });
         }
       }
-      console.log(this.arrayDetalle);
     },
     encuentra(id) {
       let sw = 0;
@@ -321,6 +353,12 @@ export default {
     },
     eliminarDetalle(index) {
       this.arrayDetalle.splice(index, 1);
+    },
+
+    selectTarifa() {
+      axios.get("/api/tarifas-retencion").then((resp) => {
+        this.arrayTarifas = resp.data;
+      });
     },
 
     // Métodos para la facturación
