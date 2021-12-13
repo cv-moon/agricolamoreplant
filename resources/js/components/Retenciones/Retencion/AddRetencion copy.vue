@@ -87,18 +87,6 @@
       <b class="text-primary">Impuestos</b>
       <hr class="mt-0" />
       <div class="form-group row">
-        <div class="col-sm-4">
-          <button
-            type="button"
-            class="btn btn-success"
-            data-target="#modal"
-            @click="abrirModal()"
-          >
-            <i class="fas fa-plus"> Agregar Impuestos </i>
-          </button>
-        </div>
-      </div>
-      <div class="form-group row">
         <div class="col-sm-12 table-responsive">
           <table class="table table-bordered table-striped table-sm">
             <thead>
@@ -121,7 +109,27 @@
                 <td align="center" v-text="detalle.eje_fiscal"></td>
                 <td align="right" v-text="detalle.bas_imponible"></td>
                 <td align="center" v-text="detalle.imp_retencion"></td>
-                <td></td>
+                <td>
+                  <select
+                    v-model="detalle.tarifa_retencion_id"
+                    class="form-control"
+                  >
+                    <option value="0" disabled>Seleccione...</option>
+                    <option
+                      v-for="tarifa in arrayTarifas"
+                      :key="tarifa.id"
+                      :value="tarifa.id"
+                      v-text="
+                        tarifa.codigo +
+                        ' - ' +
+                        tarifa.impuesto +
+                        ' - ' +
+                        tarifa.valor +
+                        '%'
+                      "
+                    ></option>
+                  </select>
+                </td>
                 <td align="right">
                   {{ (detalle.val_Retenido = calculaRetencionInd) }}
                 </td>
@@ -156,32 +164,6 @@
       <button type="button" class="btn btn-success" @click="guardar">
         Guardar
       </button>
-    </div>
-    <!-- Start Modal Impuesto a retener -->
-    <div class="modal fade" id="modal">
-      <div class="modal-dialog modal-xl">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h4 class="modal-title">Agregar Impuestos a Retener</h4>
-            <button
-              type="button"
-              class="close"
-              aria-label="Close"
-              @click="cerrarModal"
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body"></div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" @click="cerrarModal">
-              Close
-            </button>
-          </div>
-        </div>
-        <!-- /.modal-content -->
-      </div>
-      <!-- /.modal-dialog -->
     </div>
   </div>
 </template>
