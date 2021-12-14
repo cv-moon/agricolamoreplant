@@ -14542,6 +14542,47 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -14679,7 +14720,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         _this4.arrayFacturas = resp.data;
       });
     },
-    // Métodos para los detalles
+    // Modal detalles impuestos
+    // Estructura para aggregar productos al detalle
+    abrirModal: function abrirModal() {
+      $("#modal").modal("show");
+    },
+    cerrarModal: function cerrarModal() {
+      $("#modal").modal("hide");
+    },
     addDetalle: function addDetalle(id) {
       this.arrayDetalle = [];
       var data = this.arrayCompras.find(function (e) {
@@ -99540,7 +99588,7 @@ var render = function() {
     ),
     _vm._v(" "),
     _c("div", { staticClass: "modal fade", attrs: { id: "modal" } }, [
-      _c("div", { staticClass: "modal-dialog modal-xl" }, [
+      _c("div", { staticClass: "modal-dialog modal-md" }, [
         _c("div", { staticClass: "modal-content" }, [
           _c("div", { staticClass: "modal-header" }, [
             _c("h4", { staticClass: "modal-title" }, [
@@ -99558,7 +99606,123 @@ var render = function() {
             )
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "modal-body" }),
+          _c("div", { staticClass: "modal-body" }, [
+            _c("div", { staticClass: "form-group row" }, [
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.selected,
+                      expression: "selected"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  on: {
+                    change: [
+                      function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.selected = $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      },
+                      function($event) {
+                        return _vm.addDetalle(_vm.selected)
+                      }
+                    ]
+                  }
+                },
+                [
+                  _c("option", { attrs: { value: "0", disabled: "" } }, [
+                    _vm._v("Seleccione...")
+                  ]),
+                  _vm._v(" "),
+                  _vm._l(_vm.arrayCompras, function(compra) {
+                    return _c("option", {
+                      key: compra.id,
+                      domProps: {
+                        value: compra.id,
+                        textContent: _vm._s(
+                          compra.num_comprobante +
+                            " / " +
+                            compra.fec_emision +
+                            " / " +
+                            compra.nombre
+                        )
+                      }
+                    })
+                  })
+                ],
+                2
+              ),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.selected,
+                      expression: "selected"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  on: {
+                    change: [
+                      function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.selected = $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      },
+                      function($event) {
+                        return _vm.addDetalle(_vm.selected)
+                      }
+                    ]
+                  }
+                },
+                [
+                  _c("option", { attrs: { value: "0", disabled: "" } }, [
+                    _vm._v("Seleccione...")
+                  ]),
+                  _vm._v(" "),
+                  _vm._l(_vm.arrayCompras, function(compra) {
+                    return _c("option", {
+                      key: compra.id,
+                      domProps: {
+                        value: compra.id,
+                        textContent: _vm._s(
+                          compra.num_comprobante +
+                            " / " +
+                            compra.fec_emision +
+                            " / " +
+                            compra.nombre
+                        )
+                      }
+                    })
+                  })
+                ],
+                2
+              )
+            ])
+          ]),
           _vm._v(" "),
           _c("div", { staticClass: "modal-footer" }, [
             _c(
@@ -126619,7 +126783,7 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\cristian.chuquitarco\Documents\Documents\Projects\agricolamoreplant\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\crist\Documents\Projects\agricolamoreplant\resources\js\app.js */"./resources/js/app.js");
 
 
 /***/ }),

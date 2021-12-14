@@ -159,7 +159,7 @@
     </div>
     <!-- Start Modal Impuesto a retener -->
     <div class="modal fade" id="modal">
-      <div class="modal-dialog modal-xl">
+      <div class="modal-dialog modal-md">
         <div class="modal-content">
           <div class="modal-header">
             <h4 class="modal-title">Agregar Impuestos a Retener</h4>
@@ -172,7 +172,48 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="modal-body"></div>
+          <div class="modal-body">
+            <div class="form-group row">
+              <select
+                v-model="selected"
+                class="form-control"
+                @change="addDetalle(selected)"
+              >
+                <option value="0" disabled>Seleccione...</option>
+                <option
+                  v-for="compra in arrayCompras"
+                  :key="compra.id"
+                  :value="compra.id"
+                  v-text="
+                    compra.num_comprobante +
+                    ' / ' +
+                    compra.fec_emision +
+                    ' / ' +
+                    compra.nombre
+                  "
+                ></option>
+              </select>
+              <select
+                v-model="selected"
+                class="form-control"
+                @change="addDetalle(selected)"
+              >
+                <option value="0" disabled>Seleccione...</option>
+                <option
+                  v-for="compra in arrayCompras"
+                  :key="compra.id"
+                  :value="compra.id"
+                  v-text="
+                    compra.num_comprobante +
+                    ' / ' +
+                    compra.fec_emision +
+                    ' / ' +
+                    compra.nombre
+                  "
+                ></option>
+              </select>
+            </div>
+          </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" @click="cerrarModal">
               Close
@@ -326,7 +367,14 @@ export default {
       });
     },
 
-    // Métodos para los detalles
+    // Modal detalles impuestos
+    // Estructura para aggregar productos al detalle
+    abrirModal() {
+      $("#modal").modal("show");
+    },
+    cerrarModal() {
+      $("#modal").modal("hide");
+    },
     addDetalle(id) {
       this.arrayDetalle = [];
       let data = this.arrayCompras.find((e) => id == e.id);
