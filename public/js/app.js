@@ -14583,6 +14583,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -14723,7 +14725,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     // Modal detalles impuestos
     // Estructura para aggregar productos al detalle
     abrirModal: function abrirModal() {
-      $("#modal").modal("show");
+      if (this.selected) {
+        $("#modal").modal("show");
+      } else {
+        Swal.fire("Error!", "No se ha seleccionado comprobante a retener", "error");
+      }
     },
     cerrarModal: function cerrarModal() {
       $("#modal").modal("hide");
@@ -99470,80 +99476,78 @@ var render = function() {
             [
               _vm._m(1),
               _vm._v(" "),
-              _c(
-                "tbody",
-                [
-                  _vm._l(_vm.arrayDetalle, function(detalle) {
-                    return _c("tr", { key: detalle.id }, [
-                      _c("td", {
-                        domProps: {
-                          textContent: _vm._s(
-                            detalle.comprobante + " " + detalle.num_comprobante
-                          )
-                        }
+              _vm.selected
+                ? _c(
+                    "tbody",
+                    [
+                      _vm._l(_vm.arrayDetalle, function(detalle) {
+                        return _c("tr", { key: detalle.id }, [
+                          _c("td", {
+                            domProps: {
+                              textContent: _vm._s(
+                                detalle.comprobante +
+                                  " " +
+                                  detalle.num_comprobante
+                              )
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("td", {
+                            domProps: {
+                              textContent: _vm._s(detalle.fec_emi_comprobante)
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("td", {
+                            attrs: { align: "center" },
+                            domProps: {
+                              textContent: _vm._s(detalle.eje_fiscal)
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("td", {
+                            attrs: { align: "right" },
+                            domProps: {
+                              textContent: _vm._s(detalle.bas_imponible)
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("td", {
+                            attrs: { align: "center" },
+                            domProps: {
+                              textContent: _vm._s(detalle.imp_retencion)
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("td")
+                        ])
                       }),
                       _vm._v(" "),
-                      _c("td", {
-                        domProps: {
-                          textContent: _vm._s(detalle.fec_emi_comprobante)
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("td", {
-                        attrs: { align: "center" },
-                        domProps: { textContent: _vm._s(detalle.eje_fiscal) }
-                      }),
-                      _vm._v(" "),
-                      _c("td", {
-                        attrs: { align: "right" },
-                        domProps: { textContent: _vm._s(detalle.bas_imponible) }
-                      }),
-                      _vm._v(" "),
-                      _c("td", {
-                        attrs: { align: "center" },
-                        domProps: { textContent: _vm._s(detalle.imp_retencion) }
-                      }),
-                      _vm._v(" "),
-                      _c("td"),
-                      _vm._v(" "),
-                      _c("td", { attrs: { align: "right" } }, [
-                        _vm._v(
-                          "\n                " +
-                            _vm._s(
-                              (detalle.val_Retenido = _vm.calculaRetencionInd)
-                            ) +
-                            "\n              "
-                        )
-                      ])
-                    ])
-                  }),
-                  _vm._v(" "),
-                  _c("tr", [
-                    !_vm.selected
-                      ? _c("td", { attrs: { colspan: "8", align: "center" } }, [
+                      _c("tr", { staticClass: "table-info" }, [
+                        _c("td", { attrs: { align: "right" } }, [
                           _vm._v(
-                            "\n                Seleccione un comprobante a retener.\n              "
+                            "\n                " +
+                              _vm._s(_vm.calculaRetencionInd) +
+                              "\n              "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("td", { attrs: { colspan: "6" } }, [
+                          _vm._v("Total a Retener")
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(
+                            "\n                " +
+                              _vm._s((_vm.tot_retener = _vm.calculaRetencion)) +
+                              "\n              "
                           )
                         ])
-                      : _vm._e()
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("td", { attrs: { colspan: "7" } }, [
-                      _vm._v("Total a Retener")
-                    ]),
-                    _vm._v(" "),
-                    _c("td", [
-                      _vm._v(
-                        "\n                " +
-                          _vm._s((_vm.tot_retener = _vm.calculaRetencion)) +
-                          "\n              "
-                      )
-                    ])
-                  ])
-                ],
-                2
-              )
+                      ])
+                    ],
+                    2
+                  )
+                : _c("tbody", [_vm._m(2)])
             ]
           )
         ])
@@ -99769,6 +99773,18 @@ var staticRenderFns = [
         _c("th", { staticClass: "text-center" }, [_vm._v("% Ret.")]),
         _vm._v(" "),
         _c("th", { staticClass: "text-center" }, [_vm._v("T. Ret.")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("td", { attrs: { colspan: "8", align: "center" } }, [
+        _vm._v(
+          "\n                Seleccione un comprobante a retener.\n              "
+        )
       ])
     ])
   }
@@ -126783,7 +126799,7 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\crist\Documents\Projects\agricolamoreplant\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\cristian.chuquitarco\Documents\Documents\Projects\agricolamoreplant\resources\js\app.js */"./resources/js/app.js");
 
 
 /***/ }),

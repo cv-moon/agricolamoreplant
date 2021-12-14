@@ -112,7 +112,7 @@
                 <th class="text-center">T. Ret.</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody v-if="selected">
               <tr v-for="detalle in arrayDetalle" :key="detalle.id">
                 <td
                   v-text="detalle.comprobante + ' ' + detalle.num_comprobante"
@@ -122,19 +122,21 @@
                 <td align="right" v-text="detalle.bas_imponible"></td>
                 <td align="center" v-text="detalle.imp_retencion"></td>
                 <td></td>
+              </tr>
+              <tr class="table-info">
                 <td align="right">
-                  {{ (detalle.val_Retenido = calculaRetencionInd) }}
+                  {{ calculaRetencionInd }}
                 </td>
-              </tr>
-              <tr>
-                <td colspan="8" align="center" v-if="!selected">
-                  Seleccione un comprobante a retener.
-                </td>
-              </tr>
-              <tr>
-                <td colspan="7">Total a Retener</td>
+                <td colspan="6">Total a Retener</td>
                 <td>
                   {{ (tot_retener = calculaRetencion) }}
+                </td>
+              </tr>
+            </tbody>
+            <tbody v-else>
+              <tr>
+                <td colspan="8" align="center">
+                  Seleccione un comprobante a retener.
                 </td>
               </tr>
             </tbody>
@@ -370,7 +372,15 @@ export default {
     // Modal detalles impuestos
     // Estructura para aggregar productos al detalle
     abrirModal() {
+      if (this.selected) {
       $("#modal").modal("show");
+      }else{
+        Swal.fire(
+            "Error!",
+            "No se ha seleccionado comprobante a retener",
+            "error"
+          );
+      }
     },
     cerrarModal() {
       $("#modal").modal("hide");
