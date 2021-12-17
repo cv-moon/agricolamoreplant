@@ -57,11 +57,13 @@ export default {
         num_secuencial: "",
         tip_ambiente: 0,
         tip_emision: 0,
+        detalle:[]
       },
       datos: {
-        comprobante: "RETENCIÓN",
+        comprobante: "",
         firma: "",
         fir_clave: "",
+        tip_comprobante: "RETENCIÓN",
       },
     };
   },
@@ -100,6 +102,73 @@ export default {
         digito_calculado = digito_calculado == 10 ? 1 : digito_calculado; //según ficha técnica
       }
       return digito_calculado;
+    },
+
+    async crearfacturacion(firma, password, factura, tipo, id, carpeta) {
+      try {
+        let { data: comprobante } =
+          await script_comprobantes.obtener_comprobante_firmado.getAll({
+            factura: factura,
+            id_factura: id,
+            tipo: tipo,
+          });
+        let { resultado: contenido } =
+          await script_comprobantes.lectura_firma.getAll({
+            firma: firma,
+            id_factura: id,
+            tipo: tipo,
+          });
+        let { data: certificado } =
+          await script_comprobantes.firmar_comprobante.getAll({
+            contenido: contenido[0],
+            password: password,
+            comprobante: comprobante,
+            id_factura: id,
+            tipo: tipo,
+          });
+        let { data: quefirma } =
+          await script_comprobantes.verificar_firma.getAll({
+            mensaje: certificado,
+            tipo: tipo,
+            id_factura: id,
+            carpeta: carpeta,
+          });
+        let { data: validado } =
+          await script_comprobantes.validar_comprobante.getAll({
+            comprobante: comprobante,
+            tipo: tipo,
+            id_factura: id,
+            carpeta: carpeta,
+          });
+        let { data: recibida } =
+          await script_comprobantes.autorizar_comprobante.getAll({
+            comprobante: comprobante,
+            validado: validado,
+            tipo: tipo,
+            id_factura: id,
+            carpeta: carpeta,
+          });
+        let { data: registrado } =
+          await script_comprobantes.autorizado_comprobante.getAll({
+            recibida: recibida,
+            tipo: tipo,
+            id_factura: id,
+          });
+        if (registrado == "enviado") {
+          Swal.fire("Bien!", "La factura se envió exitosamente.", "success");
+          this.$router.push("/retenciones");
+        } else {
+          Swal.fire(
+            "Error!",
+            "La factura no pudo ser enviada, intente mas tarde.",
+            "error"
+          );
+          this.$router.push("/retenciones");
+        }
+      } catch (err) {
+        Swal.fire("Error!", "Error en el envio al SRI" + err, "error");
+        this.$router.push("/retenciones");
+      }
     },
   },
   mounted() {

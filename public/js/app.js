@@ -14346,7 +14346,15 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _factura__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../factura */ "./resources/js/factura.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _factura__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../factura */ "./resources/js/factura.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 //
 //
 //
@@ -14404,12 +14412,14 @@ __webpack_require__.r(__webpack_exports__);
         fec_emision: "",
         num_secuencial: "",
         tip_ambiente: 0,
-        tip_emision: 0
+        tip_emision: 0,
+        detalle: []
       },
       datos: {
-        comprobante: "RETENCIÓN",
+        comprobante: "",
         firma: "",
-        fir_clave: ""
+        fir_clave: "",
+        tip_comprobante: "RETENCIÓN"
       }
     };
   },
@@ -14430,7 +14440,7 @@ __webpack_require__.r(__webpack_exports__);
         _this.datos.fir_clave = resp.data.fir_clave;
       });
     },
-    // Métodos para facturación.
+    // Métodos para retencion electronica.
     modulo11: function modulo11(numero) {
       var digito_calculado = -1;
 
@@ -14446,6 +14456,122 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       return digito_calculado;
+    },
+    crearfacturacion: function crearfacturacion(firma, password, factura, tipo, id, carpeta) {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var _yield$script_comprob, comprobante, _yield$script_comprob2, contenido, _yield$script_comprob3, certificado, _yield$script_comprob4, quefirma, _yield$script_comprob5, validado, _yield$script_comprob6, recibida, _yield$script_comprob7, registrado;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.prev = 0;
+                _context.next = 3;
+                return _factura__WEBPACK_IMPORTED_MODULE_1__["default"].obtener_comprobante_firmado.getAll({
+                  factura: factura,
+                  id_factura: id,
+                  tipo: tipo
+                });
+
+              case 3:
+                _yield$script_comprob = _context.sent;
+                comprobante = _yield$script_comprob.data;
+                _context.next = 7;
+                return _factura__WEBPACK_IMPORTED_MODULE_1__["default"].lectura_firma.getAll({
+                  firma: firma,
+                  id_factura: id,
+                  tipo: tipo
+                });
+
+              case 7:
+                _yield$script_comprob2 = _context.sent;
+                contenido = _yield$script_comprob2.resultado;
+                _context.next = 11;
+                return _factura__WEBPACK_IMPORTED_MODULE_1__["default"].firmar_comprobante.getAll({
+                  contenido: contenido[0],
+                  password: password,
+                  comprobante: comprobante,
+                  id_factura: id,
+                  tipo: tipo
+                });
+
+              case 11:
+                _yield$script_comprob3 = _context.sent;
+                certificado = _yield$script_comprob3.data;
+                _context.next = 15;
+                return _factura__WEBPACK_IMPORTED_MODULE_1__["default"].verificar_firma.getAll({
+                  mensaje: certificado,
+                  tipo: tipo,
+                  id_factura: id,
+                  carpeta: carpeta
+                });
+
+              case 15:
+                _yield$script_comprob4 = _context.sent;
+                quefirma = _yield$script_comprob4.data;
+                _context.next = 19;
+                return _factura__WEBPACK_IMPORTED_MODULE_1__["default"].validar_comprobante.getAll({
+                  comprobante: comprobante,
+                  tipo: tipo,
+                  id_factura: id,
+                  carpeta: carpeta
+                });
+
+              case 19:
+                _yield$script_comprob5 = _context.sent;
+                validado = _yield$script_comprob5.data;
+                _context.next = 23;
+                return _factura__WEBPACK_IMPORTED_MODULE_1__["default"].autorizar_comprobante.getAll({
+                  comprobante: comprobante,
+                  validado: validado,
+                  tipo: tipo,
+                  id_factura: id,
+                  carpeta: carpeta
+                });
+
+              case 23:
+                _yield$script_comprob6 = _context.sent;
+                recibida = _yield$script_comprob6.data;
+                _context.next = 27;
+                return _factura__WEBPACK_IMPORTED_MODULE_1__["default"].autorizado_comprobante.getAll({
+                  recibida: recibida,
+                  tipo: tipo,
+                  id_factura: id
+                });
+
+              case 27:
+                _yield$script_comprob7 = _context.sent;
+                registrado = _yield$script_comprob7.data;
+
+                if (registrado == "enviado") {
+                  Swal.fire("Bien!", "La factura se envió exitosamente.", "success");
+
+                  _this2.$router.push("/retenciones");
+                } else {
+                  Swal.fire("Error!", "La factura no pudo ser enviada, intente mas tarde.", "error");
+
+                  _this2.$router.push("/retenciones");
+                }
+
+                _context.next = 36;
+                break;
+
+              case 32:
+                _context.prev = 32;
+                _context.t0 = _context["catch"](0);
+                Swal.fire("Error!", "Error en el envio al SRI" + _context.t0, "error");
+
+                _this2.$router.push("/retenciones");
+
+              case 36:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, null, [[0, 32]]);
+      }))();
     }
   },
   mounted: function mounted() {
@@ -125906,7 +126032,7 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/cvdev/Documentos/Proyectos/moreplant/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\cristian.chuquitarco\Documents\Documents\Projects\agricolamoreplant\resources\js\app.js */"./resources/js/app.js");
 
 
 /***/ }),
