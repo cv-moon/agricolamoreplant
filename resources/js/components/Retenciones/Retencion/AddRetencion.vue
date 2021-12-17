@@ -82,7 +82,7 @@ export default {
       });
     },
 
-    // Métodos para facturación.
+    // Métodos para retencion electronica.
     modulo11(numero) {
       let digito_calculado = -1;
 
