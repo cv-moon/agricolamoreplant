@@ -81,7 +81,7 @@
               </tr>
             </thead>
             <tbody v-if="arrayDetalle.length">
-              <tr v-for="detalle in arrayDetalle" :key="detalle.id">
+              <tr v-for="(detalle, index) in arrayDetalle" :key="detalle.id">
                 <td
                   v-text="detalle.comprobante + ' ' + detalle.num_comprobante"
                 ></td>
@@ -93,24 +93,26 @@
                   <select
                     v-model="detalle.tarifa_retencion_id"
                     class="form-control"
+                    @change="calcularIndividual(index)"
                   >
                     <option value="0" disabled>Seleccione...</option>
                     <option
                       v-for="tarifa in detalle.arrayImpuesto"
                       :key="tarifa.id"
                       :value="tarifa.id"
-                      v-text="
-                        tarifa.codigo +
-                        ' - ' +
-                        tarifa.impuesto +
-                        ' - ' +
-                        tarifa.valor +
-                        '%'
-                      "
+                      v-text="tarifa.codigo + ' - ' + tarifa.valor + '%'"
                     ></option>
                   </select>
                 </td>
                 <td align="right">hola</td>
+              </tr>
+              <tr style="background-color: #ceecf5">
+                <td colspan="6" align="right">
+                  <strong>Total a Retener:</strong>
+                </td>
+                <td align="right">
+                  $ {{ (tot_retenido = calculaTotalRetencion) }}
+                </td>
               </tr>
             </tbody>
             <tbody v-else>
@@ -146,6 +148,7 @@ export default {
         tip_ambiente: 0,
         tip_emision: 0,
         eje_fiscal: "",
+        tot_retenido: 0,
         // variables de los detalles
         detalle: [],
         compra_id: 0,
@@ -161,7 +164,15 @@ export default {
       arrayTarifas: [],
     };
   },
-  computed: {},
+  computed: {
+    calculaTotalRetencion() {
+      let res = 0;
+      for (let i = 0; i < this.arrayDetalle.length; i++) {
+        res = res + this.arrayDetalle[i].val_retenido;
+      }
+      return res.toFixed(2);
+    },
+  },
   methods: {
     selectCompra() {
       axios.get("/api/compra/buscar").then((resp) => {
@@ -174,7 +185,6 @@ export default {
         : (this.retencion.compra_id = 0);
     },
     getData(id = 0) {
-      this.getTarifas();
       this.arrayDetalle = [];
       let data = null;
       data = this.arrayCompras.find((e) => e.id == id);
@@ -227,6 +237,17 @@ export default {
         this.datos.firma = resp.data.firma;
         this.datos.fir_clave = resp.data.fir_clave;
       });
+    },
+    calculaIndividual(index = 0, id = 0) {
+      let res = 0;
+      let data= [];
+      let tarifa=[];
+      if (index != 0 && id != 0) {
+        data = this.arrayTarifas.indexOf(index);
+        array.forEach(element => {
+          
+        });
+      }
     },
 
     // Métodos para retencion electronica.
@@ -319,6 +340,7 @@ export default {
   mounted() {
     this.getRetencion();
     this.getCompra();
+    this.getTarifas();
   },
   created() {
     this.selectCompra();

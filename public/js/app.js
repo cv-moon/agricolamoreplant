@@ -14489,6 +14489,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -14502,6 +14504,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         tip_ambiente: 0,
         tip_emision: 0,
         eje_fiscal: "",
+        tot_retenido: 0,
         // variables de los detalles
         detalle: [],
         compra_id: 0
@@ -14517,7 +14520,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       arrayTarifas: []
     };
   },
-  computed: {},
+  computed: {
+    calculaTotalRetencion: function calculaTotalRetencion() {
+      var res = 0;
+
+      for (var i = 0; i < this.arrayDetalle.length; i++) {
+        res = res + this.arrayDetalle[i].val_retenido;
+      }
+
+      return res.toFixed(2);
+    }
+  },
   methods: {
     selectCompra: function selectCompra() {
       var _this = this;
@@ -14531,7 +14544,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     getData: function getData() {
       var id = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
-      this.getTarifas();
       this.arrayDetalle = [];
       var data = null;
       data = this.arrayCompras.find(function (e) {
@@ -14595,6 +14607,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         _this3.datos.firma = resp.data.firma;
         _this3.datos.fir_clave = resp.data.fir_clave;
       });
+    },
+    calculaIndividual: function calculaIndividual() {
+      var index = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+      var id = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+      var res = 0;
+      var data = [];
+      var tarifa = [];
+
+      if (index != 0 && id != 0) {
+        data = this.arrayTarifas.indexOf(index);
+        array.forEach(function (element) {});
+      }
     },
     // Métodos para retencion electronica.
     modulo11: function modulo11(numero) {
@@ -14733,6 +14757,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   mounted: function mounted() {
     this.getRetencion();
     this.getCompra();
+    this.getTarifas();
   },
   created: function created() {
     this.selectCompra();
@@ -99249,113 +99274,140 @@ var render = function() {
               _vm.arrayDetalle.length
                 ? _c(
                     "tbody",
-                    _vm._l(_vm.arrayDetalle, function(detalle) {
-                      return _c("tr", { key: detalle.id }, [
-                        _c("td", {
-                          domProps: {
-                            textContent: _vm._s(
-                              detalle.comprobante +
-                                " " +
-                                detalle.num_comprobante
-                            )
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("td", {
-                          domProps: {
-                            textContent: _vm._s(detalle.fec_emi_comprobante)
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("td", {
-                          attrs: { align: "center" },
-                          domProps: { textContent: _vm._s(detalle.eje_fiscal) }
-                        }),
-                        _vm._v(" "),
-                        _c("td", {
-                          attrs: { align: "right" },
-                          domProps: {
-                            textContent: _vm._s(detalle.bas_imponible)
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("td", {
-                          attrs: { align: "center" },
-                          domProps: {
-                            textContent: _vm._s(detalle.imp_retencion)
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c(
-                            "select",
-                            {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: detalle.tarifa_retencion_id,
-                                  expression: "detalle.tarifa_retencion_id"
-                                }
-                              ],
-                              staticClass: "form-control",
-                              on: {
-                                change: function($event) {
-                                  var $$selectedVal = Array.prototype.filter
-                                    .call($event.target.options, function(o) {
-                                      return o.selected
-                                    })
-                                    .map(function(o) {
-                                      var val =
-                                        "_value" in o ? o._value : o.value
-                                      return val
-                                    })
-                                  _vm.$set(
-                                    detalle,
-                                    "tarifa_retencion_id",
-                                    $event.target.multiple
-                                      ? $$selectedVal
-                                      : $$selectedVal[0]
-                                  )
-                                }
-                              }
-                            },
-                            [
-                              _c(
-                                "option",
-                                { attrs: { value: "0", disabled: "" } },
-                                [_vm._v("Seleccione...")]
-                              ),
-                              _vm._v(" "),
-                              _vm._l(detalle.arrayImpuesto, function(tarifa) {
-                                return _c("option", {
-                                  key: tarifa.id,
-                                  domProps: {
-                                    value: tarifa.id,
-                                    textContent: _vm._s(
-                                      tarifa.codigo +
-                                        " - " +
-                                        tarifa.impuesto +
-                                        " - " +
-                                        tarifa.valor +
-                                        "%"
-                                    )
+                    [
+                      _vm._l(_vm.arrayDetalle, function(detalle, index) {
+                        return _c("tr", { key: detalle.id }, [
+                          _c("td", {
+                            domProps: {
+                              textContent: _vm._s(
+                                detalle.comprobante +
+                                  " " +
+                                  detalle.num_comprobante
+                              )
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("td", {
+                            domProps: {
+                              textContent: _vm._s(detalle.fec_emi_comprobante)
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("td", {
+                            attrs: { align: "center" },
+                            domProps: {
+                              textContent: _vm._s(detalle.eje_fiscal)
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("td", {
+                            attrs: { align: "right" },
+                            domProps: {
+                              textContent: _vm._s(detalle.bas_imponible)
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("td", {
+                            attrs: { align: "center" },
+                            domProps: {
+                              textContent: _vm._s(detalle.imp_retencion)
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c(
+                              "select",
+                              {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: detalle.tarifa_retencion_id,
+                                    expression: "detalle.tarifa_retencion_id"
                                   }
+                                ],
+                                staticClass: "form-control",
+                                on: {
+                                  change: [
+                                    function($event) {
+                                      var $$selectedVal = Array.prototype.filter
+                                        .call($event.target.options, function(
+                                          o
+                                        ) {
+                                          return o.selected
+                                        })
+                                        .map(function(o) {
+                                          var val =
+                                            "_value" in o ? o._value : o.value
+                                          return val
+                                        })
+                                      _vm.$set(
+                                        detalle,
+                                        "tarifa_retencion_id",
+                                        $event.target.multiple
+                                          ? $$selectedVal
+                                          : $$selectedVal[0]
+                                      )
+                                    },
+                                    function($event) {
+                                      return _vm.calcularIndividual(index)
+                                    }
+                                  ]
+                                }
+                              },
+                              [
+                                _c(
+                                  "option",
+                                  { attrs: { value: "0", disabled: "" } },
+                                  [_vm._v("Seleccione...")]
+                                ),
+                                _vm._v(" "),
+                                _vm._l(detalle.arrayImpuesto, function(tarifa) {
+                                  return _c("option", {
+                                    key: tarifa.id,
+                                    domProps: {
+                                      value: tarifa.id,
+                                      textContent: _vm._s(
+                                        tarifa.codigo +
+                                          " - " +
+                                          tarifa.valor +
+                                          "%"
+                                      )
+                                    }
+                                  })
                                 })
-                              })
-                            ],
-                            2
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("td", { attrs: { align: "right" } }, [
-                          _vm._v("hola")
+                              ],
+                              2
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("td", { attrs: { align: "right" } }, [
+                            _vm._v("hola")
+                          ])
                         ])
-                      ])
-                    }),
-                    0
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "tr",
+                        { staticStyle: { "background-color": "#ceecf5" } },
+                        [
+                          _vm._m(2),
+                          _vm._v(" "),
+                          _c("td", { attrs: { align: "right" } }, [
+                            _vm._v(
+                              "\n                $ " +
+                                _vm._s(
+                                  (_vm.tot_retenido = _vm.calculaTotalRetencion)
+                                ) +
+                                "\n              "
+                            )
+                          ])
+                        ]
+                      )
+                    ],
+                    2
                   )
-                : _c("tbody", [_vm._m(2)])
+                : _c("tbody", [_vm._m(3)])
             ]
           )
         ])
@@ -99412,6 +99464,14 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { staticClass: "text-center" }, [_vm._v("T. Ret.")])
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", { attrs: { colspan: "6", align: "right" } }, [
+      _c("strong", [_vm._v("Total a Retener:")])
     ])
   },
   function() {
@@ -126437,7 +126497,7 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/cvdev/Documentos/Proyectos/moreplant/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\cristian.chuquitarco\Documents\Documents\Projects\agricolamoreplant\resources\js\app.js */"./resources/js/app.js");
 
 
 /***/ }),
