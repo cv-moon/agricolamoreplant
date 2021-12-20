@@ -14402,42 +14402,198 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       retencion: {
         punto_id: 0,
+        proveedor_id: 0,
         cla_acceso: "",
         fec_emision: "",
         num_secuencial: "",
         tip_ambiente: 0,
         tip_emision: 0,
-        detalle: []
+        eje_fiscal: "",
+        // variables de los detalles
+        detalle: [],
+        compra_id: 0
       },
       datos: {
         comprobante: "",
         firma: "",
         fir_clave: "",
         tip_comprobante: "RETENCIÓN"
-      }
+      },
+      arrayCompras: [],
+      arrayDetalle: [],
+      arrayTarifas: []
     };
   },
   computed: {},
   methods: {
-    getRetencion: function getRetencion() {
+    selectCompra: function selectCompra() {
       var _this = this;
 
+      axios.get("/api/compra/buscar").then(function (resp) {
+        _this.arrayCompras = resp.data;
+      });
+    },
+    getCompra: function getCompra() {
+      this.$route.params.fact ? this.retencion.compra_id = this.$route.params.fact : this.retencion.compra_id = 0;
+    },
+    getData: function getData() {
+      var id = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+      this.getTarifas();
+      this.arrayDetalle = [];
+      var data = null;
+      data = this.arrayCompras.find(function (e) {
+        return e.id == id;
+      });
+      this.retencion.eje_fiscal = new Date().getMonth() + 1 + "/" + new Date().getFullYear();
+
+      if (data.sub_0 > 0) {
+        var arrayImpuesto = this.arrayTarifas.filter(function (e) {
+          return e.impuesto_id == 1;
+        });
+        this.arrayDetalle.push({
+          tarifa_retencion_id: 0,
+          comprobante: data.tip_comprobante,
+          num_comprobante: data.num_comprobante,
+          fec_emi_comprobante: data.fec_emision,
+          eje_fiscal: this.retencion.eje_fiscal,
+          bas_imponible: data.sub_0,
+          imp_retencion: "RENTA",
+          arrayImpuesto: arrayImpuesto,
+          val_retenido: 0
+        });
+      }
+
+      if (data.sub_12 > 0) {
+        var _arrayImpuesto = this.arrayTarifas.filter(function (e) {
+          return e.impuesto_id == 2;
+        });
+
+        this.arrayDetalle.push({
+          tarifa_retencion_id: 0,
+          comprobante: data.tip_comprobante,
+          num_comprobante: data.num_comprobante,
+          fec_emi_comprobante: data.fec_emision,
+          eje_fiscal: this.retencion.eje_fiscal,
+          bas_imponible: data.sub_12,
+          imp_retencion: "IVA",
+          arrayImpuesto: _arrayImpuesto,
+          val_retenido: 0
+        });
+      }
+    },
+    getTarifas: function getTarifas() {
+      var _this2 = this;
+
+      axios.get("/api/tarifa-retencion/impuesto").then(function (resp) {
+        _this2.arrayTarifas = resp.data;
+      });
+    },
+    getRetencion: function getRetencion() {
+      var _this3 = this;
+
       axios.get("/api/retencion/comprobante").then(function (resp) {
-        _this.retencion.cla_acceso = resp.data.cla_acceso + _this.modulo11(resp.data.cla_acceso);
-        _this.retencion.fec_emision = resp.data.fec_emision;
-        _this.retencion.num_secuencial = resp.data.num_secuencial;
-        _this.retencion.punto_id = resp.data.punto_id;
-        _this.retencion.tip_ambiente = resp.data.tip_ambiente;
-        _this.retencion.tip_emision = resp.data.tip_emision;
-        _this.datos.comprobante = resp.data.comprobante;
-        _this.datos.firma = resp.data.firma;
-        _this.datos.fir_clave = resp.data.fir_clave;
+        _this3.retencion.cla_acceso = resp.data.cla_acceso + _this3.modulo11(resp.data.cla_acceso);
+        _this3.retencion.fec_emision = resp.data.fec_emision;
+        _this3.retencion.num_secuencial = resp.data.num_secuencial;
+        _this3.retencion.punto_id = resp.data.punto_id;
+        _this3.retencion.tip_ambiente = resp.data.tip_ambiente;
+        _this3.retencion.tip_emision = resp.data.tip_emision;
+        _this3.datos.comprobante = resp.data.comprobante;
+        _this3.datos.firma = resp.data.firma;
+        _this3.datos.fir_clave = resp.data.fir_clave;
       });
     },
     // Métodos para retencion electronica.
@@ -14458,7 +14614,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return digito_calculado;
     },
     crearfacturacion: function crearfacturacion(firma, password, factura, tipo, id, carpeta) {
-      var _this2 = this;
+      var _this4 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
         var _yield$script_comprob, comprobante, _yield$script_comprob2, contenido, _yield$script_comprob3, certificado, _yield$script_comprob4, quefirma, _yield$script_comprob5, validado, _yield$script_comprob6, recibida, _yield$script_comprob7, registrado;
@@ -14548,11 +14704,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 if (registrado == "enviado") {
                   Swal.fire("Bien!", "La factura se envió exitosamente.", "success");
 
-                  _this2.$router.push("/retenciones");
+                  _this4.$router.push("/retenciones");
                 } else {
                   Swal.fire("Error!", "La factura no pudo ser enviada, intente mas tarde.", "error");
 
-                  _this2.$router.push("/retenciones");
+                  _this4.$router.push("/retenciones");
                 }
 
                 _context.next = 36;
@@ -14563,7 +14719,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _context.t0 = _context["catch"](0);
                 Swal.fire("Error!", "Error en el envio al SRI" + _context.t0, "error");
 
-                _this2.$router.push("/retenciones");
+                _this4.$router.push("/retenciones");
 
               case 36:
               case "end":
@@ -14576,6 +14732,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   mounted: function mounted() {
     this.getRetencion();
+    this.getCompra();
+  },
+  created: function created() {
+    this.selectCompra();
   }
 });
 
@@ -99007,8 +99167,219 @@ var render = function() {
       _vm._v(" "),
       _c("b", { staticClass: "text-primary" }, [_vm._v("Datos de Retención")]),
       _vm._v(" "),
-      _c("hr", { staticClass: "mt-0" })
-    ])
+      _c("hr", { staticClass: "mt-0" }),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group row" }, [
+        _c("div", { staticClass: "col-sm-12" }, [
+          _c(
+            "label",
+            { staticClass: "ol-form-label", attrs: { for: "compra" } },
+            [_vm._v("Factura Compra:")]
+          ),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.retencion.compra_id,
+                  expression: "retencion.compra_id"
+                }
+              ],
+              staticClass: "form-control",
+              on: {
+                change: [
+                  function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.$set(
+                      _vm.retencion,
+                      "compra_id",
+                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                    )
+                  },
+                  function($event) {
+                    return _vm.getData(_vm.retencion.compra_id)
+                  }
+                ]
+              }
+            },
+            [
+              _c("option", { attrs: { value: "0", disabled: "" } }, [
+                _vm._v("Seleccione...")
+              ]),
+              _vm._v(" "),
+              _vm._l(_vm.arrayCompras, function(compra) {
+                return _c("option", {
+                  key: compra.id,
+                  domProps: {
+                    value: compra.id,
+                    textContent: _vm._s(
+                      compra.num_comprobante +
+                        " / " +
+                        compra.fec_emision +
+                        " / " +
+                        compra.nombre
+                    )
+                  }
+                })
+              })
+            ],
+            2
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group row" }, [
+        _c("div", { staticClass: "col-sm-12 table-responsive" }, [
+          _c(
+            "table",
+            { staticClass: "table table-bordered table-striped table-sm" },
+            [
+              _vm._m(1),
+              _vm._v(" "),
+              _vm.arrayDetalle.length
+                ? _c(
+                    "tbody",
+                    _vm._l(_vm.arrayDetalle, function(detalle) {
+                      return _c("tr", { key: detalle.id }, [
+                        _c("td", {
+                          domProps: {
+                            textContent: _vm._s(
+                              detalle.comprobante +
+                                " " +
+                                detalle.num_comprobante
+                            )
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("td", {
+                          domProps: {
+                            textContent: _vm._s(detalle.fec_emi_comprobante)
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("td", {
+                          attrs: { align: "center" },
+                          domProps: { textContent: _vm._s(detalle.eje_fiscal) }
+                        }),
+                        _vm._v(" "),
+                        _c("td", {
+                          attrs: { align: "right" },
+                          domProps: {
+                            textContent: _vm._s(detalle.bas_imponible)
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("td", {
+                          attrs: { align: "center" },
+                          domProps: {
+                            textContent: _vm._s(detalle.imp_retencion)
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("td", [
+                          _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: detalle.tarifa_retencion_id,
+                                  expression: "detalle.tarifa_retencion_id"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              on: {
+                                change: function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    detalle,
+                                    "tarifa_retencion_id",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                }
+                              }
+                            },
+                            [
+                              _c(
+                                "option",
+                                { attrs: { value: "0", disabled: "" } },
+                                [_vm._v("Seleccione...")]
+                              ),
+                              _vm._v(" "),
+                              _vm._l(detalle.arrayImpuesto, function(tarifa) {
+                                return _c("option", {
+                                  key: tarifa.id,
+                                  domProps: {
+                                    value: tarifa.id,
+                                    textContent: _vm._s(
+                                      tarifa.codigo +
+                                        " - " +
+                                        tarifa.impuesto +
+                                        " - " +
+                                        tarifa.valor +
+                                        "%"
+                                    )
+                                  }
+                                })
+                              })
+                            ],
+                            2
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("td", { attrs: { align: "right" } }, [
+                          _vm._v("hola")
+                        ])
+                      ])
+                    }),
+                    0
+                  )
+                : _c("tbody", [_vm._m(2)])
+            ]
+          )
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "card-footer" },
+      [
+        _c(
+          "router-link",
+          { staticClass: "btn btn-danger", attrs: { to: "/retenciones" } },
+          [_vm._v("\n      Cancelar\n    ")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          { staticClass: "btn btn-success", attrs: { type: "button" } },
+          [_vm._v("Guardar")]
+        )
+      ],
+      1
+    )
   ])
 }
 var staticRenderFns = [
@@ -99019,6 +99390,40 @@ var staticRenderFns = [
     return _c("h3", { staticClass: "card-title mt-2" }, [
       _c("i", { staticClass: "fas fa-align-justify" }),
       _vm._v("\n      Retención\n    ")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { staticClass: "text-center" }, [_vm._v("# Comprobante")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("F. Emisión")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Eje. Fiscal")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Base Imponible")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Imp.")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("% Ret.")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("T. Ret.")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("td", { staticClass: "text-center", attrs: { colspan: "7" } }, [
+        _vm._v(
+          "\n                NO se ha seleccionado un comprobante de compra.\n              "
+        )
+      ])
     ])
   }
 ]
@@ -126032,7 +126437,7 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\cristian.chuquitarco\Documents\Documents\Projects\agricolamoreplant\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/cvdev/Documentos/Proyectos/moreplant/resources/js/app.js */"./resources/js/app.js");
 
 
 /***/ }),

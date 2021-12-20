@@ -53,6 +53,7 @@ Route::middleware('auth')->group(function () {
     Route::post('api/tarifa-retencion/guardar', 'TarifaRetencionController@store');
     Route::put('api/tarifa-retencion/editar', 'TarifaRetencionController@update');
     Route::get('api/tarifa-retencion/detalle', 'TarifaRetencionController@detail');
+    Route::get('api/tarifa-retencion/impuesto', 'TarifaRetencionController@taxes');
 
     // Establecimientos
     Route::get('api/establecimientos', 'EstablecimientoController@index');

@@ -183,6 +183,7 @@ class CompraController extends Controller
                 'compras.tip_comprobante',
                 'compras.num_comprobante',
                 'compras.fec_emision',
+                'proveedores.id as proveedor_id',
                 'proveedores.nombre',
                 'compras.sub_0',
                 'compras.sub_12'

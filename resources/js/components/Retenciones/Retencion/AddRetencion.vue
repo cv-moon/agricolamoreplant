@@ -42,6 +42,93 @@
       </div>
       <b class="text-primary">Datos de Retención</b>
       <hr class="mt-0" />
+      <div class="form-group row">
+        <div class="col-sm-12">
+          <label for="compra" class="ol-form-label">Factura Compra:</label>
+          <select
+            v-model="retencion.compra_id"
+            class="form-control"
+            @change="getData(retencion.compra_id)"
+          >
+            <option value="0" disabled>Seleccione...</option>
+            <option
+              v-for="compra in arrayCompras"
+              :key="compra.id"
+              :value="compra.id"
+              v-text="
+                compra.num_comprobante +
+                ' / ' +
+                compra.fec_emision +
+                ' / ' +
+                compra.nombre
+              "
+            ></option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-sm-12 table-responsive">
+          <table class="table table-bordered table-striped table-sm">
+            <thead>
+              <tr>
+                <th class="text-center"># Comprobante</th>
+                <th class="text-center">F. Emisión</th>
+                <th class="text-center">Eje. Fiscal</th>
+                <th class="text-center">Base Imponible</th>
+                <th class="text-center">Imp.</th>
+                <th class="text-center">% Ret.</th>
+                <th class="text-center">T. Ret.</th>
+              </tr>
+            </thead>
+            <tbody v-if="arrayDetalle.length">
+              <tr v-for="detalle in arrayDetalle" :key="detalle.id">
+                <td
+                  v-text="detalle.comprobante + ' ' + detalle.num_comprobante"
+                ></td>
+                <td v-text="detalle.fec_emi_comprobante"></td>
+                <td align="center" v-text="detalle.eje_fiscal"></td>
+                <td align="right" v-text="detalle.bas_imponible"></td>
+                <td align="center" v-text="detalle.imp_retencion"></td>
+                <td>
+                  <select
+                    v-model="detalle.tarifa_retencion_id"
+                    class="form-control"
+                  >
+                    <option value="0" disabled>Seleccione...</option>
+                    <option
+                      v-for="tarifa in detalle.arrayImpuesto"
+                      :key="tarifa.id"
+                      :value="tarifa.id"
+                      v-text="
+                        tarifa.codigo +
+                        ' - ' +
+                        tarifa.impuesto +
+                        ' - ' +
+                        tarifa.valor +
+                        '%'
+                      "
+                    ></option>
+                  </select>
+                </td>
+                <td align="right">hola</td>
+              </tr>
+            </tbody>
+            <tbody v-else>
+              <tr>
+                <td colspan="7" class="text-center">
+                  NO se ha seleccionado un comprobante de compra.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <router-link to="/retenciones" class="btn btn-danger">
+        Cancelar
+      </router-link>
+      <button type="button" class="btn btn-success">Guardar</button>
     </div>
   </div>
 </template>
@@ -52,12 +139,16 @@ export default {
     return {
       retencion: {
         punto_id: 0,
+        proveedor_id: 0,
         cla_acceso: "",
         fec_emision: "",
         num_secuencial: "",
         tip_ambiente: 0,
         tip_emision: 0,
-        detalle:[]
+        eje_fiscal: "",
+        // variables de los detalles
+        detalle: [],
+        compra_id: 0,
       },
       datos: {
         comprobante: "",
@@ -65,10 +156,64 @@ export default {
         fir_clave: "",
         tip_comprobante: "RETENCIÓN",
       },
+      arrayCompras: [],
+      arrayDetalle: [],
+      arrayTarifas: [],
     };
   },
   computed: {},
   methods: {
+    selectCompra() {
+      axios.get("/api/compra/buscar").then((resp) => {
+        this.arrayCompras = resp.data;
+      });
+    },
+    getCompra() {
+      this.$route.params.fact
+        ? (this.retencion.compra_id = this.$route.params.fact)
+        : (this.retencion.compra_id = 0);
+    },
+    getData(id = 0) {
+      this.getTarifas();
+      this.arrayDetalle = [];
+      let data = null;
+      data = this.arrayCompras.find((e) => e.id == id);
+      this.retencion.eje_fiscal =
+        new Date().getMonth() + 1 + "/" + new Date().getFullYear();
+      if (data.sub_0 > 0) {
+        let arrayImpuesto = this.arrayTarifas.filter((e) => e.impuesto_id == 1);
+        this.arrayDetalle.push({
+          tarifa_retencion_id: 0,
+          comprobante: data.tip_comprobante,
+          num_comprobante: data.num_comprobante,
+          fec_emi_comprobante: data.fec_emision,
+          eje_fiscal: this.retencion.eje_fiscal,
+          bas_imponible: data.sub_0,
+          imp_retencion: "RENTA",
+          arrayImpuesto,
+          val_retenido: 0,
+        });
+      }
+      if (data.sub_12 > 0) {
+        let arrayImpuesto = this.arrayTarifas.filter((e) => e.impuesto_id == 2);
+        this.arrayDetalle.push({
+          tarifa_retencion_id: 0,
+          comprobante: data.tip_comprobante,
+          num_comprobante: data.num_comprobante,
+          fec_emi_comprobante: data.fec_emision,
+          eje_fiscal: this.retencion.eje_fiscal,
+          bas_imponible: data.sub_12,
+          imp_retencion: "IVA",
+          arrayImpuesto,
+          val_retenido: 0,
+        });
+      }
+    },
+    getTarifas() {
+      axios.get("/api/tarifa-retencion/impuesto").then((resp) => {
+        this.arrayTarifas = resp.data;
+      });
+    },
     getRetencion() {
       axios.get("/api/retencion/comprobante").then((resp) => {
         this.retencion.cla_acceso =
@@ -173,6 +318,10 @@ export default {
   },
   mounted() {
     this.getRetencion();
+    this.getCompra();
+  },
+  created() {
+    this.selectCompra();
   },
 };
 </script>
