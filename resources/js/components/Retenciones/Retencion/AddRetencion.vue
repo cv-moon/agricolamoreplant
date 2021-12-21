@@ -155,7 +155,18 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="modal-body"></div>
+          <div class="modal-body">
+            <div class="form-group row">
+          <label for="comprobante" class="col-form-label">Comprobante:</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Nombre."
+              readonly
+              v-model="nombre"
+            />
+        </div>
+          </div>
           <div class="modal-footer justify-content-between">
             <button type="button" class="btn btn-default" @click="cerrarModal">
               Close
