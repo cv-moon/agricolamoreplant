@@ -14491,6 +14491,48 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -14520,16 +14562,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       arrayTarifas: []
     };
   },
-  computed: {
-    calculaTotalRetencion: function calculaTotalRetencion() {
-      var res = 0;
-
-      for (var i = 0; i < this.arrayDetalle.length; i++) {
-        res = res + this.arrayDetalle[i].val_retenido;
-      }
-
-      return res.toFixed(2);
-    }
+  computed: {// calculaTotalRetencion() {
+    //   let res = 0;
+    //   for (let i = 0; i < this.arrayDetalle.length; i++) {
+    //     res = res + this.arrayDetalle[i].val_retenido;
+    //   }
+    //   return res.toFixed(2);
+    // },
   },
   methods: {
     selectCompra: function selectCompra() {
@@ -14608,18 +14647,27 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         _this3.datos.fir_clave = resp.data.fir_clave;
       });
     },
-    calculaIndividual: function calculaIndividual() {
-      var index = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
-      var id = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-      var res = 0;
-      var data = [];
-      var tarifa = [];
-
-      if (index != 0 && id != 0) {
-        data = this.arrayTarifas.indexOf(index);
-        array.forEach(function (element) {});
-      }
+    // calcularIndividual(index = 0, id = 0) {
+    //   let res = 0;
+    //   let data = [];
+    //   let tarifa = [];
+    //   data = this.arrayDetalle.indexOf(index);
+    //   if (data.tarifa_retencion_id != 0) {
+    //     tarifa = this.arrayTarifas.find(
+    //       (e) => e.id == data.tarifa_retencion_id
+    //     );
+    //     res = res + data.bas_imponible * (tarifa.valor / 100);
+    //   }
+    //   return res.toFixed(2);
+    // },
+    // Estructura para aggregar productos al detalle
+    abrirModal: function abrirModal() {
+      $("#modal").modal("show");
     },
+    cerrarModal: function cerrarModal() {
+      $("#modal").modal("hide");
+    },
+    agregarImpuesto: function agregarImpuesto() {},
     // Métodos para retencion electronica.
     modulo11: function modulo11(numero) {
       var digito_calculado = -1;
@@ -99215,26 +99263,21 @@ var render = function() {
               ],
               staticClass: "form-control",
               on: {
-                change: [
-                  function($event) {
-                    var $$selectedVal = Array.prototype.filter
-                      .call($event.target.options, function(o) {
-                        return o.selected
-                      })
-                      .map(function(o) {
-                        var val = "_value" in o ? o._value : o.value
-                        return val
-                      })
-                    _vm.$set(
-                      _vm.retencion,
-                      "compra_id",
-                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-                    )
-                  },
-                  function($event) {
-                    return _vm.getData(_vm.retencion.compra_id)
-                  }
-                ]
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.$set(
+                    _vm.retencion,
+                    "compra_id",
+                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                  )
+                }
               }
             },
             [
@@ -99271,11 +99314,11 @@ var render = function() {
             [
               _vm._m(1),
               _vm._v(" "),
-              _vm.arrayDetalle.length
+              _vm.retencion.compra_id
                 ? _c(
                     "tbody",
                     [
-                      _vm._l(_vm.arrayDetalle, function(detalle, index) {
+                      _vm._l(_vm.arrayDetalle, function(detalle) {
                         return _c("tr", { key: detalle.id }, [
                           _c("td", {
                             domProps: {
@@ -99328,31 +99371,24 @@ var render = function() {
                                 ],
                                 staticClass: "form-control",
                                 on: {
-                                  change: [
-                                    function($event) {
-                                      var $$selectedVal = Array.prototype.filter
-                                        .call($event.target.options, function(
-                                          o
-                                        ) {
-                                          return o.selected
-                                        })
-                                        .map(function(o) {
-                                          var val =
-                                            "_value" in o ? o._value : o.value
-                                          return val
-                                        })
-                                      _vm.$set(
-                                        detalle,
-                                        "tarifa_retencion_id",
-                                        $event.target.multiple
-                                          ? $$selectedVal
-                                          : $$selectedVal[0]
-                                      )
-                                    },
-                                    function($event) {
-                                      return _vm.calcularIndividual(index)
-                                    }
-                                  ]
+                                  change: function($event) {
+                                    var $$selectedVal = Array.prototype.filter
+                                      .call($event.target.options, function(o) {
+                                        return o.selected
+                                      })
+                                      .map(function(o) {
+                                        var val =
+                                          "_value" in o ? o._value : o.value
+                                        return val
+                                      })
+                                    _vm.$set(
+                                      detalle,
+                                      "tarifa_retencion_id",
+                                      $event.target.multiple
+                                        ? $$selectedVal
+                                        : $$selectedVal[0]
+                                    )
+                                  }
                                 }
                               },
                               [
@@ -99382,7 +99418,7 @@ var render = function() {
                           ]),
                           _vm._v(" "),
                           _c("td", { attrs: { align: "right" } }, [
-                            _vm._v("hola")
+                            _vm._v(_vm._s(_vm.calcularIndividual))
                           ])
                         ])
                       }),
@@ -99396,14 +99432,40 @@ var render = function() {
                           _c("td", { attrs: { align: "right" } }, [
                             _vm._v(
                               "\n                $ " +
-                                _vm._s(
-                                  (_vm.tot_retenido = _vm.calculaTotalRetencion)
-                                ) +
+                                _vm._s(_vm.retencion.tot_retenido) +
                                 "\n              "
                             )
                           ])
                         ]
-                      )
+                      ),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c(
+                          "td",
+                          {
+                            staticClass: "text-center",
+                            attrs: { colspan: "7" }
+                          },
+                          [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-success",
+                                attrs: {
+                                  type: "button",
+                                  "data-target": "#modal"
+                                },
+                                on: { click: _vm.abrirModal }
+                              },
+                              [
+                                _c("i", { staticClass: "fas fa-plus" }, [
+                                  _vm._v(" Agregar Impuestos ")
+                                ])
+                              ]
+                            )
+                          ]
+                        )
+                      ])
                     ],
                     2
                   )
@@ -99431,7 +99493,53 @@ var render = function() {
         )
       ],
       1
-    )
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "modal fade", attrs: { id: "modal" } }, [
+      _c("div", { staticClass: "modal-dialog modal-md" }, [
+        _c("div", { staticClass: "modal-content" }, [
+          _c("div", { staticClass: "modal-header" }, [
+            _c("h4", { staticClass: "modal-title" }, [
+              _vm._v("Agregar Impuesto")
+            ]),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "close",
+                attrs: { type: "button", "aria-label": "Close" },
+                on: { click: _vm.cerrarModal }
+              },
+              [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "modal-body" }),
+          _vm._v(" "),
+          _c("div", { staticClass: "modal-footer justify-content-between" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-default",
+                attrs: { type: "button" },
+                on: { click: _vm.cerrarModal }
+              },
+              [_vm._v("\n            Close\n          ")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-success",
+                attrs: { type: "button" },
+                on: { click: _vm.agregarImpuesto }
+              },
+              [_vm._v("\n            Guardar\n          ")]
+            )
+          ])
+        ])
+      ])
+    ])
   ])
 }
 var staticRenderFns = [
@@ -99480,9 +99588,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("tr", [
       _c("td", { staticClass: "text-center", attrs: { colspan: "7" } }, [
-        _vm._v(
-          "\n                NO se ha seleccionado un comprobante de compra.\n              "
-        )
+        _vm._v("No se ha seleccionado ningún comprobante")
       ])
     ])
   }
@@ -126497,7 +126603,7 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\cristian.chuquitarco\Documents\Documents\Projects\agricolamoreplant\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/cvdev/Documentos/Proyectos/moreplant/resources/js/app.js */"./resources/js/app.js");
 
 
 /***/ }),
