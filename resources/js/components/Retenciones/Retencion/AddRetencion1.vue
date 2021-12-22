@@ -45,11 +45,7 @@
       <div class="form-group row">
         <div class="col-sm-12">
           <label for="compra" class="ol-form-label">Factura Compra:</label>
-          <select
-            v-model="retencion.compra_id"
-            class="form-control"
-            @change="getData(retencion.compra_id)"
-          >
+          <select v-model="retencion.compra_id" class="form-control">
             <option value="0" disabled>Seleccione...</option>
             <option
               v-for="compra in arrayCompras"
@@ -71,6 +67,7 @@
           <table class="table table-bordered table-striped table-sm">
             <thead>
               <tr>
+                <th class="text-center">Acción</th>
                 <th class="text-center"># Comprobante</th>
                 <th class="text-center">F. Emisión</th>
                 <th class="text-center">Eje. Fiscal</th>
@@ -80,8 +77,18 @@
                 <th class="text-center">T. Ret.</th>
               </tr>
             </thead>
-            <tbody v-if="arrayDetalle.length">
-              <tr v-for="(detalle,index) in arrayDetalle" :key="detalle.id">
+            <tbody v-if="retencion.compra_id">
+              <tr v-for="(detalle, index) in arrayDetalle" :key="detalle.id">
+                <td align="center">
+                  <button
+                    @click="eliminarDetalle(index)"
+                    title="Eliminar"
+                    type="button"
+                    class="btn btn-danger btn-xs"
+                  >
+                    <i class="fas fa-trash-alt"></i>
+                  </button>
+                </td>
                 <td
                   v-text="detalle.comprobante + ' ' + detalle.num_comprobante"
                 ></td>
@@ -93,7 +100,6 @@
                   <select
                     v-model="detalle.tarifa_retencion_id"
                     class="form-control"
-                    @change="calcularIndividual(index, detalle.tarifa_retencion_id)"
                   >
                     <option value="0" disabled>Seleccione...</option>
                     <option
@@ -107,18 +113,28 @@
                 <td align="right">{{ calcularIndividual }}</td>
               </tr>
               <tr style="background-color: #ceecf5">
-                <td colspan="6" align="right">
+                <td colspan="7" align="right">
                   <strong>Total a Retener:</strong>
                 </td>
-                <td align="right">
-                  $ {{ (detalle.tot_retenido = calculaTotalRetencion) }}
+                <td align="right">$ {{ retencion.tot_retenido }}</td>
+              </tr>
+              <tr>
+                <td colspan="8" class="text-center">
+                  <button
+                    type="button"
+                    class="btn btn-success"
+                    data-target="#modal"
+                    @click="abrirModal"
+                  >
+                    <i class="fas fa-plus"> Agregar Impuestos </i>
+                  </button>
                 </td>
               </tr>
             </tbody>
             <tbody v-else>
               <tr>
-                <td colspan="7" class="text-center">
-                  NO se ha seleccionado un comprobante de compra.
+                <td colspan="8" class="text-center">
+                  No se ha seleccionado ningún comprobante
                 </td>
               </tr>
             </tbody>
@@ -132,6 +148,65 @@
       </router-link>
       <button type="button" class="btn btn-success">Guardar</button>
     </div>
+    <!-- Start Impuesto Modal -->
+    <div class="modal fade" id="modal">
+      <div class="modal-dialog modal-md">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Agregar Impuesto</h4>
+            <button
+              type="button"
+              class="close"
+              aria-label="Close"
+              @click="cerrarModal"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group row">
+              <label for="tipo_comprobante" class="col-form-label"
+                >Tipo de Comprobante:</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Nombre."
+                readonly
+                v-model="modal.tip_comprobante"
+              />
+            </div>
+            <div class="form-group row">
+              <label for="comprobante" class="col-form-label"
+                >Comprobante:</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Nombre."
+                readonly
+                v-model="modal.comprobante"
+              />
+            </div>
+          </div>
+          <div class="modal-footer justify-content-between">
+            <button type="button" class="btn btn-default" @click="cerrarModal">
+              Close
+            </button>
+            <button
+              type="button"
+              class="btn btn-success"
+              @click="agregarImpuesto"
+            >
+              Guardar
+            </button>
+          </div>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
   </div>
 </template>
 <script>
@@ -159,19 +234,25 @@ export default {
         fir_clave: "",
         tip_comprobante: "RETENCIÓN",
       },
+      modal: {
+        tarifa_retencion_id: 0,
+        comprobante: "",
+        bas_imponible: 0,
+        val_retenido: 0,
+      },
       arrayCompras: [],
       arrayDetalle: [],
       arrayTarifas: [],
     };
   },
   computed: {
-    calculaTotalRetencion() {
-      let res = 0;
-      for (let i = 0; i < this.arrayDetalle.length; i++) {
-        res = res + this.arrayDetalle[i].val_retenido;
-      }
-      return res.toFixed(2);
-    },
+    // calculaTotalRetencion() {
+    //   let res = 0;
+    //   for (let i = 0; i < this.arrayDetalle.length; i++) {
+    //     res = res + this.arrayDetalle[i].val_retenido;
+    //   }
+    //   return res.toFixed(2);
+    // },
   },
   methods: {
     selectCompra() {
@@ -239,19 +320,31 @@ export default {
       });
     },
 
-    calcularIndividual(index=0,id=0) {
-      let res = 0;
-      let data = [];
-      let tarifa=[];
-      data = this.arrayDetalle.indexOf(index)
-        if (data.tarifa_retencion_id != 0) {
-          tarifa = this.arrayTarifas.find(
-            (e) => e.id == data.tarifa_retencion_id
-          );
-          res = res + data.bas_imponible * (tarifa.valor / 100);
-        }
-      
-      return res.toFixed(2);
+    // calcularIndividual(index = 0, id = 0) {
+    //   let res = 0;
+    //   let data = [];
+    //   let tarifa = [];
+    //   data = this.arrayDetalle.indexOf(index);
+    //   if (data.tarifa_retencion_id != 0) {
+    //     tarifa = this.arrayTarifas.find(
+    //       (e) => e.id == data.tarifa_retencion_id
+    //     );
+    //     res = res + data.bas_imponible * (tarifa.valor / 100);
+    //   }
+
+    //   return res.toFixed(2);
+    // },
+
+    // Estructura para aggregar productos al detalle
+    abrirModal() {
+      $("#modal").modal("show");
+    },
+    cerrarModal() {
+      $("#modal").modal("hide");
+    },
+    agregarImpuesto() {},
+    eliminarDetalle(index) {
+      this.arrayDetalle.splice(index, 1);
     },
 
     // Métodos para retencion electronica.

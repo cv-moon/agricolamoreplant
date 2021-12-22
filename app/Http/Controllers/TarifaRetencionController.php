@@ -58,7 +58,7 @@ class TarifaRetencionController extends Controller
 
     public function taxes()
     {
-        $tarifas = TarifaRetencion::select('impuesto_id', 'nombre', 'codigo', 'valor')
+        $tarifas = TarifaRetencion::select('id', 'impuesto_id', 'nombre', 'codigo', 'valor')
             ->get();
         return $tarifas;
     }

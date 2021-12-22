@@ -14493,57 +14493,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -14573,15 +14522,43 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       arrayTarifas: []
     };
   },
-  computed: {// calculaTotalRetencion() {
-    //   let res = 0;
-    //   for (let i = 0; i < this.arrayDetalle.length; i++) {
-    //     res = res + this.arrayDetalle[i].val_retenido;
-    //   }
-    //   return res.toFixed(2);
-    // },
+  computed: {
+    obtenerPorcentaje: function obtenerPorcentaje() {
+      var res = 0;
+      var data = [];
+
+      for (var i = 0; i < this.arrayDetalle.length; i++) {
+        // data = this.arrayTarifas.find(
+        //   (e) => e.id == this.arrayDetalle[i].tarifa_retencion_id
+        // );
+        // res = data.valor;
+        // console.log(res);
+        return res;
+      }
+    },
+    calculaTotalRetencion: function calculaTotalRetencion() {
+      var res = 0;
+
+      for (var i = 0; i < this.arrayDetalle.length; i++) {
+        res = res + parseFloat(this.arrayDetalle[i].val_retenido);
+      }
+
+      return res;
+    }
   },
   methods: {
+    obtener: function obtener() {
+      var index = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+      var id = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+      var res = 0;
+      var data = []; // console.log(this.arrayTarifas.find((e) => e.id == id))
+
+      data = this.arrayTarifas.find(function (e) {
+        return e.id == id;
+      });
+      res = this.arrayDetalle[index].bas_imponible * (data.valor / 100);
+      return this.arrayDetalle[index].val_retenido = res.toFixed(2);
+    },
     selectCompra: function selectCompra() {
       var _this = this;
 
@@ -14614,6 +14591,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           bas_imponible: data.sub_0,
           imp_retencion: "RENTA",
           arrayImpuesto: arrayImpuesto,
+          porcentaje: 0,
           val_retenido: 0
         });
       }
@@ -14632,6 +14610,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           bas_imponible: data.sub_12,
           imp_retencion: "IVA",
           arrayImpuesto: _arrayImpuesto,
+          porcentaje: 0,
           val_retenido: 0
         });
       }
@@ -14658,27 +14637,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         _this3.datos.fir_clave = resp.data.fir_clave;
       });
     },
-    // calcularIndividual(index = 0, id = 0) {
-    //   let res = 0;
-    //   let data = [];
-    //   let tarifa = [];
-    //   data = this.arrayDetalle.indexOf(index);
-    //   if (data.tarifa_retencion_id != 0) {
-    //     tarifa = this.arrayTarifas.find(
-    //       (e) => e.id == data.tarifa_retencion_id
-    //     );
-    //     res = res + data.bas_imponible * (tarifa.valor / 100);
-    //   }
-    //   return res.toFixed(2);
-    // },
-    // Estructura para aggregar productos al detalle
-    abrirModal: function abrirModal() {
-      $("#modal").modal("show");
-    },
-    cerrarModal: function cerrarModal() {
-      $("#modal").modal("hide");
-    },
-    agregarImpuesto: function agregarImpuesto() {},
     // Métodos para retencion electronica.
     modulo11: function modulo11(numero) {
       var digito_calculado = -1;
@@ -99274,21 +99232,26 @@ var render = function() {
               ],
               staticClass: "form-control",
               on: {
-                change: function($event) {
-                  var $$selectedVal = Array.prototype.filter
-                    .call($event.target.options, function(o) {
-                      return o.selected
-                    })
-                    .map(function(o) {
-                      var val = "_value" in o ? o._value : o.value
-                      return val
-                    })
-                  _vm.$set(
-                    _vm.retencion,
-                    "compra_id",
-                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-                  )
-                }
+                change: [
+                  function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.$set(
+                      _vm.retencion,
+                      "compra_id",
+                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                    )
+                  },
+                  function($event) {
+                    return _vm.getData(_vm.retencion.compra_id)
+                  }
+                ]
               }
             },
             [
@@ -99325,11 +99288,11 @@ var render = function() {
             [
               _vm._m(1),
               _vm._v(" "),
-              _vm.retencion.compra_id
+              _vm.arrayDetalle.length
                 ? _c(
                     "tbody",
                     [
-                      _vm._l(_vm.arrayDetalle, function(detalle) {
+                      _vm._l(_vm.arrayDetalle, function(detalle, index) {
                         return _c("tr", { key: detalle.id }, [
                           _c("td", {
                             domProps: {
@@ -99382,24 +99345,34 @@ var render = function() {
                                 ],
                                 staticClass: "form-control",
                                 on: {
-                                  change: function($event) {
-                                    var $$selectedVal = Array.prototype.filter
-                                      .call($event.target.options, function(o) {
-                                        return o.selected
-                                      })
-                                      .map(function(o) {
-                                        var val =
-                                          "_value" in o ? o._value : o.value
-                                        return val
-                                      })
-                                    _vm.$set(
-                                      detalle,
-                                      "tarifa_retencion_id",
-                                      $event.target.multiple
-                                        ? $$selectedVal
-                                        : $$selectedVal[0]
-                                    )
-                                  }
+                                  change: [
+                                    function($event) {
+                                      var $$selectedVal = Array.prototype.filter
+                                        .call($event.target.options, function(
+                                          o
+                                        ) {
+                                          return o.selected
+                                        })
+                                        .map(function(o) {
+                                          var val =
+                                            "_value" in o ? o._value : o.value
+                                          return val
+                                        })
+                                      _vm.$set(
+                                        detalle,
+                                        "tarifa_retencion_id",
+                                        $event.target.multiple
+                                          ? $$selectedVal
+                                          : $$selectedVal[0]
+                                      )
+                                    },
+                                    function($event) {
+                                      return _vm.obtener(
+                                        index,
+                                        detalle.tarifa_retencion_id
+                                      )
+                                    }
+                                  ]
                                 }
                               },
                               [
@@ -99429,7 +99402,15 @@ var render = function() {
                           ]),
                           _vm._v(" "),
                           _c("td", { attrs: { align: "right" } }, [
-                            _vm._v(_vm._s(_vm.calcularIndividual))
+                            _vm._v(
+                              "\n                " +
+                                _vm._s(detalle.porcentaje) +
+                                "\n              "
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("td", { attrs: { align: "right" } }, [
+                            _vm._v(_vm._s(_vm.obtenerPorcentaje.toFixed(2)))
                           ])
                         ])
                       }),
@@ -99441,42 +99422,10 @@ var render = function() {
                           _vm._m(2),
                           _vm._v(" "),
                           _c("td", { attrs: { align: "right" } }, [
-                            _vm._v(
-                              "\n                $ " +
-                                _vm._s(_vm.retencion.tot_retenido) +
-                                "\n              "
-                            )
+                            _vm._v("$ " + _vm._s(_vm.calculaTotalRetencion))
                           ])
                         ]
-                      ),
-                      _vm._v(" "),
-                      _c("tr", [
-                        _c(
-                          "td",
-                          {
-                            staticClass: "text-center",
-                            attrs: { colspan: "7" }
-                          },
-                          [
-                            _c(
-                              "button",
-                              {
-                                staticClass: "btn btn-success",
-                                attrs: {
-                                  type: "button",
-                                  "data-target": "#modal"
-                                },
-                                on: { click: _vm.abrirModal }
-                              },
-                              [
-                                _c("i", { staticClass: "fas fa-plus" }, [
-                                  _vm._v(" Agregar Impuestos ")
-                                ])
-                              ]
-                            )
-                          ]
-                        )
-                      ])
+                      )
                     ],
                     2
                   )
@@ -99504,86 +99453,7 @@ var render = function() {
         )
       ],
       1
-    ),
-    _vm._v(" "),
-    _c("div", { staticClass: "modal fade", attrs: { id: "modal" } }, [
-      _c("div", { staticClass: "modal-dialog modal-md" }, [
-        _c("div", { staticClass: "modal-content" }, [
-          _c("div", { staticClass: "modal-header" }, [
-            _c("h4", { staticClass: "modal-title" }, [
-              _vm._v("Agregar Impuesto")
-            ]),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "close",
-                attrs: { type: "button", "aria-label": "Close" },
-                on: { click: _vm.cerrarModal }
-              },
-              [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "modal-body" }, [
-            _c("div", { staticClass: "form-group row" }, [
-              _c(
-                "label",
-                {
-                  staticClass: "col-form-label",
-                  attrs: { for: "comprobante" }
-                },
-                [_vm._v("Comprobante:")]
-              ),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.nombre,
-                    expression: "nombre"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { type: "text", placeholder: "Nombre.", readonly: "" },
-                domProps: { value: _vm.nombre },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.nombre = $event.target.value
-                  }
-                }
-              })
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "modal-footer justify-content-between" }, [
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-default",
-                attrs: { type: "button" },
-                on: { click: _vm.cerrarModal }
-              },
-              [_vm._v("\n            Close\n          ")]
-            ),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-success",
-                attrs: { type: "button" },
-                on: { click: _vm.agregarImpuesto }
-              },
-              [_vm._v("\n            Guardar\n          ")]
-            )
-          ])
-        ])
-      ])
-    ])
+    )
   ])
 }
 var staticRenderFns = [
@@ -99612,6 +99482,8 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { staticClass: "text-center" }, [_vm._v("Imp.")]),
         _vm._v(" "),
+        _c("th", { staticClass: "text-center" }, [_vm._v("Tarifa")]),
+        _vm._v(" "),
         _c("th", { staticClass: "text-center" }, [_vm._v("% Ret.")]),
         _vm._v(" "),
         _c("th", { staticClass: "text-center" }, [_vm._v("T. Ret.")])
@@ -99622,7 +99494,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("td", { attrs: { colspan: "6", align: "right" } }, [
+    return _c("td", { attrs: { colspan: "7", align: "right" } }, [
       _c("strong", [_vm._v("Total a Retener:")])
     ])
   },
@@ -99631,8 +99503,10 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("tr", [
-      _c("td", { staticClass: "text-center", attrs: { colspan: "7" } }, [
-        _vm._v("No se ha seleccionado ningún comprobante")
+      _c("td", { staticClass: "text-center", attrs: { colspan: "8" } }, [
+        _vm._v(
+          "\n                NO se ha seleccionado un comprobante de compra.\n              "
+        )
       ])
     ])
   }
