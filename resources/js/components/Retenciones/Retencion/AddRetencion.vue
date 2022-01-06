@@ -136,6 +136,7 @@
         type="button"
         class="btn btn-success"
         :disabled="retencion.compra_id == 0"
+        @click="guardar"
       >
         Guardar
       </button>
@@ -148,6 +149,7 @@ export default {
   data() {
     return {
       retencion: {
+        compra_id: 0,
         punto_id: 0,
         proveedor_id: 0,
         cla_acceso: "",
@@ -205,9 +207,12 @@ export default {
       data = this.arrayCompras.find((e) => e.id == id);
       this.retencion.eje_fiscal =
         new Date().getMonth() + 1 + "/" + new Date().getFullYear();
+      this.retencion.proveedor_id = data.proveedor_id;
       if (data.sub_0 > 0) {
         let arrayImpuesto = this.arrayTarifas.filter((e) => e.impuesto_id == 1);
         this.arrayDetalle.push({
+          compra_id: data.id,
+          comprobante_id: 1,
           tarifa_retencion_id: 0,
           comprobante: data.tip_comprobante,
           num_comprobante: data.num_comprobante,
@@ -223,6 +228,8 @@ export default {
       if (data.sub_12 > 0) {
         let arrayImpuesto = this.arrayTarifas.filter((e) => e.impuesto_id == 2);
         this.arrayDetalle.push({
+          compra_id: data.id,
+          comprobante_id: 1,
           tarifa_retencion_id: 0,
           comprobante: data.tip_comprobante,
           num_comprobante: data.num_comprobante,
@@ -257,14 +264,15 @@ export default {
     },
 
     guardar() {
-      const condiciones = this.validaCampos();
-      if (condiciones.length) {
-        return;
-      }
+      // const condiciones = this.validaCampos();
+      // if (condiciones.length) {
+      //   return;
+      // }
+      console.log(this.arrayDetalle);
       axios
         .post("/api/retencion/guardar", {
           punto_id: this.retencion.punto_id,
-          for_pago_id: this.pago.forma_id,
+          proveedor_id: this.retencion.proveedor_id,
           fec_emision: this.retencion.fec_emision,
           num_secuencial: this.retencion.num_secuencial,
           tip_ambiente: this.retencion.tip_ambiente,
@@ -276,20 +284,20 @@ export default {
         })
         .then((resp) => {
           axios
-            .post("/api/factura/xml_factura", {
-              factura: resp.data.factura,
-              detalles: resp.data.detalles,
-              credito: resp.data.credito,
+            .post("/api/factura/xml_retencion", {
+              retencion: resp.data.retencion,
+              detalles: resp.data.detalles
             })
             .then((res) => {
-              this.crearfacturacion(
-                "/" + res.data.firma,
-                res.data.clave,
-                res.data.archivo,
-                res.data.tipo,
-                res.data.id,
-                res.data.carpeta
-              );
+              console.log(res)
+              // this.crearfacturacion(
+              //   "/" + res.data.firma,
+              //   res.data.clave,
+              //   res.data.archivo,
+              //   res.data.tipo,
+              //   res.data.id,
+              //   res.data.carpeta
+              // );
             });
         })
         .catch((err) => {

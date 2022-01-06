@@ -362,7 +362,7 @@ class XmlController extends Controller
         ];
     }
 
-    public function eretencion(Request $request)
+    public function eRetencion(Request $request)
     {
         if (!file_exists('archivos/comprobantes/retenciones')) {
             mkdir('archivos/comprobantes/retenciones', 0777, true);

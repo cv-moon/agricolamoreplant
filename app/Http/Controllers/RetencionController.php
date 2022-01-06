@@ -19,8 +19,8 @@ class RetencionController extends Controller
         if (Auth::user()->rol_id == 1) {
             $retenciones = Retencion::join('proveedores', 'retenciones.proveedor_id', 'proveedores.id')
                 ->join('puntos_emision', 'retenciones.punto_id', 'puntos_emision.id')
-                ->join('establecimientos','puntos_emision.establecimiento_id','establecimientos.id')
-               ->join('users', 'retenciones.usuario_id', 'users.id')
+                ->join('establecimientos', 'puntos_emision.establecimiento_id', 'establecimientos.id')
+                ->join('users', 'retenciones.usuario_id', 'users.id')
                 ->select(
                     'retenciones.id',
                     'retenciones.fec_emision',
@@ -38,20 +38,20 @@ class RetencionController extends Controller
         }
         if (Auth::user()->rol_id == 2) {
             $retenciones = Retencion::join('proveedores', 'retenciones.proveedor_id', 'proveedores.id')
-            ->join('puntos_emision', 'retenciones.punto_id', 'puntos_emision.id')
-            ->join('establecimientos','puntos_emision.establecimiento_id','establecimientos.id')
-           ->join('users', 'retenciones.usuario_id', 'users.id')
-            ->select(
-                'retenciones.id',
-                'retenciones.fec_emision',
-                'retenciones.num_secuencial',
-                'retenciones.cla_acceso',
-                'retenciones.respuesta',
-                'proveedores.nombre',
-                'establecimientos.numero as establecimiento',
-                'puntos_emision.codigo as punto',
-                'users.usuario'
-            )
+                ->join('puntos_emision', 'retenciones.punto_id', 'puntos_emision.id')
+                ->join('establecimientos', 'puntos_emision.establecimiento_id', 'establecimientos.id')
+                ->join('users', 'retenciones.usuario_id', 'users.id')
+                ->select(
+                    'retenciones.id',
+                    'retenciones.fec_emision',
+                    'retenciones.num_secuencial',
+                    'retenciones.cla_acceso',
+                    'retenciones.respuesta',
+                    'proveedores.nombre',
+                    'establecimientos.numero as establecimiento',
+                    'puntos_emision.codigo as punto',
+                    'users.usuario'
+                )
                 ->where('retenciones.usuario_id', Auth::user()->id)
                 ->whereMonth('retenciones.fec_emision', $mes)
                 ->orderBy('retenciones.num_secuencial', 'desc')
@@ -75,6 +75,8 @@ class RetencionController extends Controller
             $rentencion->tip_ambiente = $request->tip_ambiente;
             $rentencion->cla_acceso = $request->cla_acceso;
             $rentencion->num_autorizacion = $request->cla_acceso;
+            $rentencion->eje_fiscal = $request->eje_fiscal;
+            $rentencion->tot_retenido = $request->tot_retenido;
             $rentencion->estado = 'R';
             $rentencion->save();
 
@@ -85,25 +87,22 @@ class RetencionController extends Controller
                 $detalle->retencion_id = $rentencion->id;
                 $detalle->compra_id = $det['compra_id'];
                 $detalle->comprobante_id = $det['comprobante_id'];
-                $detalle->tarifas_retencion_id = $det['tarifas_retencion_id'];
-                $detalle->num_comprobante = $det['num_comprobante'];
+                $detalle->tarifas_retencion_id = $det['tarifa_retencion_id'];
+                $detalle->num_comprobante = str_replace('-', '', $det['num_comprobante']);
                 $detalle->fec_emi_comprobante = $det['fec_emi_comprobante'];
-                $detalle->eje_fiscal = $det['eje_fiscal'];
                 $detalle->bas_imponible = $det['bas_imponible'];
-                $detalle->val_Retenido = $det['val_Retenido'];
+                $detalle->val_retenido = $det['val_retenido'];
                 $detalle->save();
             }
 
             DB::commit();
             $id = $rentencion->id;
-            return
+            return 
                 [
-                    'retencion' => Retencion::join('facturas', 'retenciones.factura_id', 'facturas.id')
-                        ->join('puntos_emision', 'facturas.punto_id', 'puntos_emision.id')
+                    'retencion' => Retencion::join('puntos_emision', 'retenciones.punto_id', 'puntos_emision.id')
                         ->join('establecimientos', 'puntos_emision.establecimiento_id', 'establecimientos.id')
                         ->join('empresas', 'establecimientos.empresa_id', 'empresas.id')
-                        ->join('transportistas', 'retenciones.transportista_id', 'transportistas.id')
-                        ->join('identificaciones', 'transportistas.identificacion_id', 'identificaciones.id')
+                        ->join('proveedores', 'retenciones.proveedor_id', 'proveedores.id')
                         ->select(
                             'retenciones.id',
                             'retenciones.fec_emision',
@@ -111,14 +110,6 @@ class RetencionController extends Controller
                             'retenciones.tip_emision',
                             'retenciones.tip_ambiente',
                             'retenciones.cla_acceso',
-                            'retenciones.fec_inicio',
-                            'retenciones.fec_fin',
-                            'retenciones.des_nombre',
-                            'retenciones.des_identificacion',
-                            'retenciones.des_direccion',
-                            'retenciones.motivo',
-                            'retenciones.ruta',
-                            'facturas.cla_acceso as factura',
                             'puntos_emision.codigo',
                             'establecimientos.numero',
                             'establecimientos.nom_comercial',
@@ -131,21 +122,19 @@ class RetencionController extends Controller
                             'empresas.age_retencion',
                             'empresas.firma',
                             'empresas.fir_clave',
-                            'transportistas.nombre',
-                            'transportistas.num_identificacion',
-                            'transportistas.placa',
-                            'identificaciones.codigo as tip_transportista'
+                            'proveedores.nombre',
                         )
                         ->where('retenciones.id', $id)
                         ->first(),
-                    'detalles' => Retencion::join('productos', 'detalles_factura.producto_id', 'productos.id')
-                        ->join('tarifas', 'productos.tarifa_id', 'tarifas.id')
+                    'detalles' => DetalleRetencion::join('retencion', 'detalles_retencion.producto_id', 'retenciones.id')
+                        ->join('compras', 'detalles_retencion.compras_id', 'compras.id')
+                        ->join('tarifas_retencion','detalles_retencion.tarifas_retencion_id','tarifas_retencion.id')
                         ->select(
-                            'detalles_factura.factura_id',
-                            'productos.cod_principal',
-                            'productos.nombre',
-                            'productos.pre_venta',
-                            'detalles_factura.det_cantidad',
+                            'detalles_retencion.retencion_id',
+                            'detalles_retencion.num_comprobante',
+                            'detalles_retencion.fec_emi_comprobante',
+                            'detalles_retencion.bas_imponible',
+                            'detalles_retencion.val_retenido',
                             'detalles_factura.det_descuento',
                             'detalles_factura.det_total',
                             'tarifas.valor',
@@ -275,5 +264,4 @@ class RetencionController extends Controller
         $email = new sendEmail();
         $email->forwarding('Factura', $datos, $empresa);
     }
-
 }
