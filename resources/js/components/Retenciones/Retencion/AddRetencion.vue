@@ -108,7 +108,7 @@
                 <td align="right">
                   {{ detalle.porcentaje }}
                 </td>
-                <td align="right">{{ obtenerPorcentaje.toFixed(2) }}</td>
+                <td align="right">{{ detalle.val_retenido }}</td>
               </tr>
               <tr style="background-color: #ceecf5">
                 <td colspan="7" align="right">
@@ -132,7 +132,13 @@
       <router-link to="/retenciones" class="btn btn-danger">
         Cancelar
       </router-link>
-      <button type="button" class="btn btn-success">Guardar</button>
+      <button
+        type="button"
+        class="btn btn-success"
+        :disabled="retencion.compra_id == 0"
+      >
+        Guardar
+      </button>
     </div>
   </div>
 </template>
@@ -151,9 +157,6 @@ export default {
         tip_emision: 0,
         eje_fiscal: "",
         tot_retenido: 0,
-        // variables de los detalles
-        detalle: [],
-        compra_id: 0,
       },
       datos: {
         comprobante: "",
@@ -167,18 +170,6 @@ export default {
     };
   },
   computed: {
-    obtenerPorcentaje() {
-      let res = 0;
-      let data = [];
-      for (let i = 0; i < this.arrayDetalle.length; i++) {
-        // data = this.arrayTarifas.find(
-        //   (e) => e.id == this.arrayDetalle[i].tarifa_retencion_id
-        // );
-        // res = data.valor;
-        // console.log(res);
-        return res;
-      }
-    },
     calculaTotalRetencion() {
       let res = 0;
       for (let i = 0; i < this.arrayDetalle.length; i++) {
@@ -191,10 +182,12 @@ export default {
     obtener(index = 0, id = 0) {
       let res = 0;
       let data = [];
-      // console.log(this.arrayTarifas.find((e) => e.id == id))
       data = this.arrayTarifas.find((e) => e.id == id);
       res = this.arrayDetalle[index].bas_imponible * (data.valor / 100);
-      return (this.arrayDetalle[index].val_retenido = res.toFixed(2));
+      return (
+        (this.arrayDetalle[index].val_retenido = res.toFixed(2)),
+        (this.arrayDetalle[index].porcentaje = data.valor)
+      );
     },
     selectCompra() {
       axios.get("/api/compra/buscar").then((resp) => {
@@ -261,6 +254,51 @@ export default {
         this.datos.firma = resp.data.firma;
         this.datos.fir_clave = resp.data.fir_clave;
       });
+    },
+
+    guardar() {
+      const condiciones = this.validaCampos();
+      if (condiciones.length) {
+        return;
+      }
+      axios
+        .post("/api/retencion/guardar", {
+          punto_id: this.retencion.punto_id,
+          for_pago_id: this.pago.forma_id,
+          fec_emision: this.retencion.fec_emision,
+          num_secuencial: this.retencion.num_secuencial,
+          tip_ambiente: this.retencion.tip_ambiente,
+          tip_emision: this.retencion.tip_emision,
+          cla_acceso: this.retencion.cla_acceso,
+          eje_fiscal: this.retencion.eje_fiscal,
+          tot_retenido: this.retencion.tot_retenido,
+          detalles: this.arrayDetalle,
+        })
+        .then((resp) => {
+          axios
+            .post("/api/factura/xml_factura", {
+              factura: resp.data.factura,
+              detalles: resp.data.detalles,
+              credito: resp.data.credito,
+            })
+            .then((res) => {
+              this.crearfacturacion(
+                "/" + res.data.firma,
+                res.data.clave,
+                res.data.archivo,
+                res.data.tipo,
+                res.data.id,
+                res.data.carpeta
+              );
+            });
+        })
+        .catch((err) => {
+          Swal.fire(
+            "Error!",
+            "No se pudo realizar el registro. " + err,
+            "error"
+          );
+        });
     },
 
     // Métodos para retencion electronica.

@@ -14493,6 +14493,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -14506,10 +14512,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         tip_ambiente: 0,
         tip_emision: 0,
         eje_fiscal: "",
-        tot_retenido: 0,
-        // variables de los detalles
-        detalle: [],
-        compra_id: 0
+        tot_retenido: 0
       },
       datos: {
         comprobante: "",
@@ -14523,19 +14526,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     };
   },
   computed: {
-    obtenerPorcentaje: function obtenerPorcentaje() {
-      var res = 0;
-      var data = [];
-
-      for (var i = 0; i < this.arrayDetalle.length; i++) {
-        // data = this.arrayTarifas.find(
-        //   (e) => e.id == this.arrayDetalle[i].tarifa_retencion_id
-        // );
-        // res = data.valor;
-        // console.log(res);
-        return res;
-      }
-    },
     calculaTotalRetencion: function calculaTotalRetencion() {
       var res = 0;
 
@@ -14551,13 +14541,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var index = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
       var id = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
       var res = 0;
-      var data = []; // console.log(this.arrayTarifas.find((e) => e.id == id))
-
+      var data = [];
       data = this.arrayTarifas.find(function (e) {
         return e.id == id;
       });
       res = this.arrayDetalle[index].bas_imponible * (data.valor / 100);
-      return this.arrayDetalle[index].val_retenido = res.toFixed(2);
+      return this.arrayDetalle[index].val_retenido = res.toFixed(2), this.arrayDetalle[index].porcentaje = data.valor;
     },
     selectCompra: function selectCompra() {
       var _this = this;
@@ -14637,6 +14626,38 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         _this3.datos.fir_clave = resp.data.fir_clave;
       });
     },
+    guardar: function guardar() {
+      var _this4 = this;
+
+      var condiciones = this.validaCampos();
+
+      if (condiciones.length) {
+        return;
+      }
+
+      axios.post("/api/retencion/guardar", {
+        punto_id: this.retencion.punto_id,
+        for_pago_id: this.pago.forma_id,
+        fec_emision: this.retencion.fec_emision,
+        num_secuencial: this.retencion.num_secuencial,
+        tip_ambiente: this.retencion.tip_ambiente,
+        tip_emision: this.retencion.tip_emision,
+        cla_acceso: this.retencion.cla_acceso,
+        eje_fiscal: this.retencion.eje_fiscal,
+        tot_retenido: this.retencion.tot_retenido,
+        detalles: this.arrayDetalle
+      }).then(function (resp) {
+        axios.post("/api/factura/xml_factura", {
+          factura: resp.data.factura,
+          detalles: resp.data.detalles,
+          credito: resp.data.credito
+        }).then(function (res) {
+          _this4.crearfacturacion("/" + res.data.firma, res.data.clave, res.data.archivo, res.data.tipo, res.data.id, res.data.carpeta);
+        });
+      })["catch"](function (err) {
+        Swal.fire("Error!", "No se pudo realizar el registro. " + err, "error");
+      });
+    },
     // Métodos para retencion electronica.
     modulo11: function modulo11(numero) {
       var digito_calculado = -1;
@@ -14655,7 +14676,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return digito_calculado;
     },
     crearfacturacion: function crearfacturacion(firma, password, factura, tipo, id, carpeta) {
-      var _this4 = this;
+      var _this5 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
         var _yield$script_comprob, comprobante, _yield$script_comprob2, contenido, _yield$script_comprob3, certificado, _yield$script_comprob4, quefirma, _yield$script_comprob5, validado, _yield$script_comprob6, recibida, _yield$script_comprob7, registrado;
@@ -14745,11 +14766,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 if (registrado == "enviado") {
                   Swal.fire("Bien!", "La factura se envió exitosamente.", "success");
 
-                  _this4.$router.push("/retenciones");
+                  _this5.$router.push("/retenciones");
                 } else {
                   Swal.fire("Error!", "La factura no pudo ser enviada, intente mas tarde.", "error");
 
-                  _this4.$router.push("/retenciones");
+                  _this5.$router.push("/retenciones");
                 }
 
                 _context.next = 36;
@@ -14760,7 +14781,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _context.t0 = _context["catch"](0);
                 Swal.fire("Error!", "Error en el envio al SRI" + _context.t0, "error");
 
-                _this4.$router.push("/retenciones");
+                _this5.$router.push("/retenciones");
 
               case 36:
               case "end":
@@ -99410,7 +99431,7 @@ var render = function() {
                           ]),
                           _vm._v(" "),
                           _c("td", { attrs: { align: "right" } }, [
-                            _vm._v(_vm._s(_vm.obtenerPorcentaje.toFixed(2)))
+                            _vm._v(_vm._s(detalle.val_retenido))
                           ])
                         ])
                       }),
@@ -99448,8 +99469,11 @@ var render = function() {
         _vm._v(" "),
         _c(
           "button",
-          { staticClass: "btn btn-success", attrs: { type: "button" } },
-          [_vm._v("Guardar")]
+          {
+            staticClass: "btn btn-success",
+            attrs: { type: "button", disabled: _vm.retencion.compra_id == 0 }
+          },
+          [_vm._v("\n      Guardar\n    ")]
         )
       ],
       1
@@ -126521,7 +126545,7 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\cristian.chuquitarco\Documents\Documents\Projects\agricolamoreplant\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/cvdev/Documentos/Proyectos/moreplant/resources/js/app.js */"./resources/js/app.js");
 
 
 /***/ }),
