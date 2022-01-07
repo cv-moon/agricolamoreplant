@@ -268,7 +268,6 @@ export default {
       // if (condiciones.length) {
       //   return;
       // }
-      console.log(this.arrayDetalle);
       axios
         .post("/api/retencion/guardar", {
           punto_id: this.retencion.punto_id,
@@ -289,15 +288,14 @@ export default {
               detalles: resp.data.detalles
             })
             .then((res) => {
-              console.log(res)
-              // this.crearfacturacion(
-              //   "/" + res.data.firma,
-              //   res.data.clave,
-              //   res.data.archivo,
-              //   res.data.tipo,
-              //   res.data.id,
-              //   res.data.carpeta
-              // );
+              this.crearfacturacion(
+                "/" + res.data.firma,
+                res.data.clave,
+                res.data.archivo,
+                res.data.tipo,
+                res.data.id,
+                res.data.carpeta
+              );
             });
         })
         .catch((err) => {

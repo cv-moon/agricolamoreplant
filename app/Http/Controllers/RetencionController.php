@@ -97,7 +97,7 @@ class RetencionController extends Controller
 
             DB::commit();
             $id = $rentencion->id;
-            return 
+            return
                 [
                     'retencion' => Retencion::join('puntos_emision', 'retenciones.punto_id', 'puntos_emision.id')
                         ->join('establecimientos', 'puntos_emision.establecimiento_id', 'establecimientos.id')
@@ -123,24 +123,27 @@ class RetencionController extends Controller
                             'empresas.firma',
                             'empresas.fir_clave',
                             'proveedores.nombre',
+                            'proveedores.num_identificacion'
                         )
                         ->where('retenciones.id', $id)
                         ->first(),
-                    'detalles' => DetalleRetencion::join('retencion', 'detalles_retencion.producto_id', 'retenciones.id')
-                        ->join('compras', 'detalles_retencion.compras_id', 'compras.id')
-                        ->join('tarifas_retencion','detalles_retencion.tarifas_retencion_id','tarifas_retencion.id')
+                    'detalles' => DetalleRetencion::join('retenciones', 'detalles_retencion.retencion_id', 'retenciones.id')
+                        ->join('compras', 'detalles_retencion.compra_id', 'compras.id')
+                        ->join('tarifas_retencion', 'detalles_retencion.tarifas_retencion_id', 'tarifas_retencion.id')
+                        ->join('impuestos_retencion', 'tarifas_retencion.impuesto_id', 'impuestos_retencion.id')
+                        ->join('comprobantes', 'detalles_retencion.comprobante_id', 'comprobantes.id')
                         ->select(
                             'detalles_retencion.retencion_id',
                             'detalles_retencion.num_comprobante',
                             'detalles_retencion.fec_emi_comprobante',
                             'detalles_retencion.bas_imponible',
                             'detalles_retencion.val_retenido',
-                            'detalles_factura.det_descuento',
-                            'detalles_factura.det_total',
-                            'tarifas.valor',
-                            'tarifas.codigo'
+                            'impuestos_retencion.codigo as cod_impuesto',
+                            'tarifas_retencion.codigo as cod_tarifa',
+                            'tarifas_retencion.valor as por_retener',
+                            'comprobantes.codigo as cod_doc_sustento'
                         )
-                        ->where('detalles_factura.factura_id', $id)
+                        ->where('detalles_retencion.retencion_id', $id)
                         ->get()
                 ];
         } catch (\Throwable $th) {

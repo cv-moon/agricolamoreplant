@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<comprobanteRetencion id="comprobante" version="1.0.0">
+	<infoTributaria>
+		<ambiente>1</ambiente>
+		<tipoEmision>1</tipoEmision>
+		<razonSocial>MANGUI ICHINA CHRISTIAN ORLANDO</razonSocial>
+		<nombreComercial>AGRICOLA MOREPLANT</nombreComercial>
+		<ruc>1804474375001</ruc>
+		<claveAcceso>0701202207180447437500110010010000000021234567811</claveAcceso>
+		<codDoc>07</codDoc>
+		<estab>001</estab>
+		<ptoEmi>001</ptoEmi>
+		<secuencial>000000002</secuencial>
+		<dirMatriz>CAMILO CIENFUEGOS S/N</dirMatriz>
+	</infoTributaria>
+	<infoCompRetencion>
+		<fechaEmision>07/01/2022</fechaEmision>
+		<dirEstablecimiento>CAMILO CIENFUEGOS S/N ATRÁS DEL AEROPUERTO</dirEstablecimiento>
+		<obligadoContabilidad>SI</obligadoContabilidad>
+		<tipoIdentificacionSujetoRetenido>04</tipoIdentificacionSujetoRetenido>
+		<razonSocialSujetoRetenido>DORLIAGRO</razonSocialSujetoRetenido>
+		<identificacionSujetoRetenido>1793071538001</identificacionSujetoRetenido>
+		<periodoFiscal>01/2022</periodoFiscal>
+	</infoCompRetencion>
+	<impuestos>
+		<impuesto>
+			<código>1</código>
+			<codigoRetencion>303</codigoRetencion>
+			<baseImponible>90.00</baseImponible>
+			<porcentajeRetener>10</porcentajeRetener>
+			<valorRetenido>9.00</valorRetenido>
+			<codDocSustento>01</codDocSustento>
+			<numDocSustento>001001000023432</numDocSustento>
+			<fechaEmisionDocSustent>07/01/2022</fechaEmisionDocSustent>
+		</impuesto>
+		<impuesto>
+			<código>2</código>
+			<codigoRetencion>9</codigoRetencion>
+			<baseImponible>55.13</baseImponible>
+			<porcentajeRetener>10</porcentajeRetener>
+			<valorRetenido>5.51</valorRetenido>
+			<codDocSustento>01</codDocSustento>
+			<numDocSustento>001001000023432</numDocSustento>
+			<fechaEmisionDocSustent>07/01/2022</fechaEmisionDocSustent>
+		</impuesto>
+	</impuestos>
+</comprobanteRetencion>

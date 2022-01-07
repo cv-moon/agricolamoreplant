@@ -22,7 +22,7 @@ class FacturacionController extends Controller
             $fact = Factura::findOrFail($request->id);
             $fact->respuesta = $request->estado;
             $fact->save();
-        } else if ($tipo == 'retencion_compra') {
+        } else if ($tipo == 'retencion') {
             $ret = Retencion::findOrFail($request->id);
             $ret->respuesta = $request->estado;
             $ret->save();
@@ -39,6 +39,7 @@ class FacturacionController extends Controller
     }
     public function leerFactura(Request $request)
     {
+        // return $request;
         session_start();
         $ruta = $request->factura;
         $myxmlfilecontent = file_get_contents($ruta);

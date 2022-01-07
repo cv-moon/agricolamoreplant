@@ -376,10 +376,9 @@ class XmlController extends Controller
         $xml->setIndentString("\t");
         $xml->startDocument('1.0', 'utf-8');
 
-        $xml->startElement('comprobanteRetencion');
+        $xml->startElement("comprobanteRetencion");
         $xml->writeAttribute("id", "comprobante");
         $xml->writeAttribute("version", "1.0.0");
-
 
         $xml->startElement("infoTributaria");
 
@@ -463,7 +462,7 @@ class XmlController extends Controller
         $xml->text('04');
         $xml->endElement();
 
-        $xml->startElement("azonSocialSujetoRetenido");
+        $xml->startElement("razonSocialSujetoRetenido");
         $xml->text($request->retencion['nombre']);
         $xml->endElement();
 
@@ -474,8 +473,9 @@ class XmlController extends Controller
         $xml->startElement("periodoFiscal");
         $xml->text(date('m/Y', strtotime($request->retencion['fec_emision'])));
         $xml->endElement();
-
-       
+        
+        
+        $xml->endElement();
 
         $xml->startElement('impuestos');
         foreach ($request->detalles as $key => $det) {
@@ -494,23 +494,23 @@ class XmlController extends Controller
             $xml->endElement();
 
             $xml->startElement('porcentajeRetener');
-            $xml->text($det["valor"]);
+            $xml->text($det["por_retener"]);
             $xml->endElement();
 
             $xml->startElement('valorRetenido');
             $xml->text($det["val_retenido"]);
             $xml->endElement();
-            
+
             $xml->startElement('codDocSustento');
-            $xml->text('01');
+            $xml->text($det["cod_doc_sustento"]);
             $xml->endElement();
-            
+
             $xml->startElement('numDocSustento');
             $xml->text($det["num_comprobante"]);
             $xml->endElement();
-            
+
             $xml->startElement('fechaEmisionDocSustent');
-            $xml->text(date('d/m/Y', strtotime($request->retencion['fec_emi_comprobante'])));
+            $xml->text(date('d/m/Y', strtotime($request->retencion['fec_emision'])));
             $xml->endElement();
 
             $xml->endElement();
@@ -519,14 +519,15 @@ class XmlController extends Controller
 
         $xml->endElement();
 
-        return [
-            'firma' => $request->retencion['firma'],
-            'clave' => $request->retencion['fir_clave'],
-            'tipo' => 'factura_venta',
-            'archivo' => 'archivos/comprobantes/facturas/' . $request->retencion['cla_acceso'] . ".xml",
-            'carpeta' => 'archivos/comprobantes/facturas/',
-            'id' => $request->retencion['id']
-        ];
+        return
+            [
+                'firma' => $request->retencion['firma'],
+                'clave' => $request->retencion['fir_clave'],
+                'tipo' => 'retencion',
+                'archivo' => 'archivos/comprobantes/retenciones/' . $request->retencion['cla_acceso'] . ".xml",
+                'carpeta' => 'archivos/comprobantes/retenciones/',
+                'id' => $request->retencion['id']
+            ];
     }
 
     public function e_guia(Request $request)

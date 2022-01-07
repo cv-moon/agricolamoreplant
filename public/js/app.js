@@ -14634,11 +14634,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       });
     },
     guardar: function guardar() {
+      var _this4 = this;
+
       // const condiciones = this.validaCampos();
       // if (condiciones.length) {
       //   return;
       // }
-      console.log(this.arrayDetalle);
       axios.post("/api/retencion/guardar", {
         punto_id: this.retencion.punto_id,
         proveedor_id: this.retencion.proveedor_id,
@@ -14655,14 +14656,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           retencion: resp.data.retencion,
           detalles: resp.data.detalles
         }).then(function (res) {
-          console.log(res); // this.crearfacturacion(
-          //   "/" + res.data.firma,
-          //   res.data.clave,
-          //   res.data.archivo,
-          //   res.data.tipo,
-          //   res.data.id,
-          //   res.data.carpeta
-          // );
+          _this4.crearfacturacion("/" + res.data.firma, res.data.clave, res.data.archivo, res.data.tipo, res.data.id, res.data.carpeta);
         });
       })["catch"](function (err) {
         Swal.fire("Error!", "No se pudo realizar el registro. " + err, "error");
@@ -14686,7 +14680,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return digito_calculado;
     },
     crearfacturacion: function crearfacturacion(firma, password, factura, tipo, id, carpeta) {
-      var _this4 = this;
+      var _this5 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
         var _yield$script_comprob, comprobante, _yield$script_comprob2, contenido, _yield$script_comprob3, certificado, _yield$script_comprob4, quefirma, _yield$script_comprob5, validado, _yield$script_comprob6, recibida, _yield$script_comprob7, registrado;
@@ -14776,11 +14770,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 if (registrado == "enviado") {
                   Swal.fire("Bien!", "La factura se envió exitosamente.", "success");
 
-                  _this4.$router.push("/retenciones");
+                  _this5.$router.push("/retenciones");
                 } else {
                   Swal.fire("Error!", "La factura no pudo ser enviada, intente mas tarde.", "error");
 
-                  _this4.$router.push("/retenciones");
+                  _this5.$router.push("/retenciones");
                 }
 
                 _context.next = 36;
@@ -14791,7 +14785,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _context.t0 = _context["catch"](0);
                 Swal.fire("Error!", "Error en el envio al SRI" + _context.t0, "error");
 
-                _this4.$router.push("/retenciones");
+                _this5.$router.push("/retenciones");
 
               case 36:
               case "end":
@@ -126556,7 +126550,7 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/cvdev/Documentos/Proyectos/moreplant/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\cristian.chuquitarco\Documents\Documents\Projects\agricolamoreplant\resources\js\app.js */"./resources/js/app.js");
 
 
 /***/ }),
