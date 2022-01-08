@@ -108,6 +108,9 @@ class FacturacionController extends Controller
         if (!file_exists('archivos/comprobantes/facturas/errores')) {
             mkdir('archivos/comprobantes/facturas/errores', 0777, true);
         }
+        if (!file_exists('archivos/comprobantes/retenciones/errores')) {
+            mkdir('archivos/comprobantes/retenciones/errores', 0777, true);
+        }
         header("Content-Type: text/plain");
         //session_start();
 
@@ -253,14 +256,9 @@ class FacturacionController extends Controller
                         fwrite($file_comprobante, $xml . PHP_EOL);
                         fclose($file_comprobante);
                         $dataComprobante = simplexml_load_string($result['autorizaciones']['autorizacion']['comprobante']);
-                        echo 'DATA COMPROBANTE: ' . $dataComprobante;
+                        //echo 'DATA COMPROBANTE: ' . $dataComprobante;
                         if ($dataComprobante->infoFactura) {
                             $facturaPDF = new generarPDF();
-                            echo 'dataComprobante: ' . $dataComprobante;
-                            echo 'claveAcceso: ' . $claveAcceso;
-                            echo 'id_empresa: ' . $id_empresa;
-                            echo 'imagen: ' . $imagen;
-                            echo 'empresas: ' . $empresas;
                             $facturaPDF->facturaPDF($dataComprobante, $claveAcceso, $id_empresa, $imagen, $empresas);
                         }
                         if ($dataComprobante->infoNotaCredito) {

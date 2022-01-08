@@ -87,7 +87,7 @@ class generarPDF
         $pdf->Cell(88, 5, utf8_decode('CLAVE DE ACCESO'), 0, 2, 'L', 0);
         $pdf->SetFont('Helvetica', '', 8);
         $pdf->Cell(88, 5, $claveAcceso, 0, 2, 'L', 0);
-        $this->generarCodigoBarras($claveAcceso);
+        $this->generarCodigoBarras($claveAcceso, 'facturas');
         $pdf->image('archivos/comprobantes/facturas/codigosbarras/codigo' . $claveAcceso . '.png', 115, null, 80);
 
         $cli_guias = '';
@@ -571,105 +571,107 @@ class generarPDF
     }
     public function comprobanteRetencionPDF($document, $claveAcceso, $id_empresa, $imagen, $empresas)
     {
-        $pdf = new FPDF('P', 'mm', 'A4');
+        ob_end_clean();
+        $pdf = new OwnPdf('P', 'mm', 'A4');
         $fecha_actual = date("d/m/Y H:i:s");
         $pdf->AddPage();
         $pdf->AliasNbPages();
 
-        //$pdf->Cell(20);
-        $pdf->SetXY(20, 15);
-        if (file_exists(constant("DATA_EMPRESA") . $id_empresa . '/imagen/' . $imagen)) {
-            $pdf->Image(constant("DATA_EMPRESA") . $id_empresa . '/imagen/' . $imagen, 20, 10, 80, 30);
+        if (file_exists($imagen)) {
+            $pdf->Image($imagen, 30, 10, 60, 50);
         }
-
-        //variables de empresa que emite
-        $emp_dir_sucursal = '';
-        $emp_contri_especial = '';
-
+        $pdf->RoundedRect(110, 10, 90, 71, 2, '1234', 'D');
+        $pdf->RoundedRect(10, 50, 97, 31, 2, '1234', 'D');
         //cuadros detalle empresa que emite
         $pdf->Ln(30);
-        $pdf->SetXY(10, 41);
+        $pdf->SetXY(10, 50);
         $pdf->SetFont('Helvetica', 'B', 10);
-        $pdf->Cell(96, 6, utf8_decode($document->infoTributaria->razonSocial), 0, 2, 'C', 0);
-        $pdf->SetFont('Helvetica', 'B', 7);
-        $pdf->Cell(22, 5, utf8_decode('Dirección Matriz: '), 0, 0, 'L', 0);
-        $pdf->SetFont('Helvetica', '', 7);
-        $pdf->Cell(29, 5, utf8_decode($document->infoTributaria->dirMatriz), 0, 1, 'L', 0);
-        $pdf->SetFont('Helvetica', 'B', 7);
-        $pdf->Cell(25, 5, utf8_decode('Dirección Sucursal: '), 0, 0, 'L', 0);
-        $pdf->SetFont('Helvetica', '', 7);
-        $pdf->Cell(23, 5, utf8_decode($emp_dir_sucursal), 0, 1, 'L', 0);
-        $pdf->SetFont('Helvetica', 'B', 7);
-        $pdf->Cell(36, 5, utf8_decode('Contribuyente Especial Nro.: '), 0, 0, 'L', 0);
-        $pdf->SetFont('Helvetica', '', 7);
-        $pdf->Cell(29, 5, utf8_decode($emp_contri_especial), 0, 1, 'L', 0);
-        $pdf->SetFont('Helvetica', 'B', 7);
-        if ($document->infoCompRetencion->obligadoContabilidad == 'SI') {
+        $pdf->Cell(100, 6, utf8_decode($document->infoTributaria->razonSocial), 0, 2, 'C', 0);
+        $pdf->SetFont('Helvetica', 'B', 8);
+        $pdf->Cell(30, 5, utf8_decode('Dirección Matriz:'), 0, 0, 'L', 0);
+        $pdf->SetFont('Helvetica', '', 8);
+        $pdf->MultiCell(70, 5, utf8_decode($document->infoTributaria->dirMatriz), 0, 'L');
+        $pdf->SetFont('Helvetica', 'B', 8);
+        $pdf->Cell(30, 5, utf8_decode('Dirección Sucursal:'), 0, 0, 'L', 0);
+        $pdf->SetFont('Helvetica', '', 8);
+        $pdf->MultiCell(70, 5, utf8_decode($document->infoCompRetencion->dirEstablecimiento), 0, 'L');
+        ($document->infoCompRetencion->obligadoContabilidad == 'SI') ? $contabilidad = 'SI' : $contabilidad = 'NO';
+        $pdf->SetFont('Helvetica', 'B', 8);
+        $pdf->Cell(55, 5, utf8_decode('OBLIGADO A LLEVAR CONTABILIDAD:'), 0, 0, 'L', 0);
+        $pdf->SetFont('Helvetica', '', 8);
+        $pdf->Cell(45, 5, utf8_decode($contabilidad), 0, 1, 'L', 0);
+        $pdf->SetFont('Helvetica', 'B', 8);
+        $pdf->Cell(55, 5, utf8_decode('CONTRIBUYENTE RÉGIMEN MICROEMPRESAS'), 0, 0, 'L', 0);
+        // $pdf->SetFont('Helvetica', '', 8);
+        // $pdf->Cell(45, 5, utf8_decode($contabilidad), 0, 2, 'L', 0);
 
-            $contabilidad = "Obligado a llevar contabilidad : SI";
-        } else {
-            $contabilidad = "Obligado a llevar contabilidad : NO";
-        }
-        $pdf->Cell(39, 5, utf8_decode('Obligado A Llevar Contabilidad: '), 0, 0, 'L', 0);
-        $pdf->SetFont('Helvetica', '', 7);
-        $pdf->Cell(29, 5, utf8_decode($contabilidad), 0, 2, 'L', 0);
-
-        $pdf->SetXY(111, 38);
-        $pdf->SetFont('Helvetica', 'B', 7);
-        $pdf->Cell(45, 5, utf8_decode('FECHA Y HORA DE AUTORIZACION: '), 0, 0, 'L', 0);
-        $pdf->SetFont('Helvetica', '', 7);
-        $pdf->Cell(30, 5, $fecha_actual, 0, 1, 'L', 0);
-        $pdf->SetXY(111, 42);
-        $pdf->SetFont('Helvetica', 'B', 7);
+        //cuadro detalle factura
+        $pdf->SetXY(111, 11);
+        $pdf->SetFont('Helvetica', '', 8);
+        $pdf->Cell(88, 5, utf8_decode('R.U.C: ') . $document->infoTributaria->ruc, 0, 2, 'L', 0);
+        $pdf->SetFont('Helvetica', 'B', 8);
+        $pdf->SetFillColor(125, 234, 134);
+        $pdf->Cell(88, 5, utf8_decode('RETENCIÓN '), 0, 2, 'L', 1);
+        $pdf->SetFont('Helvetica', '', 8);
+        $pdf->SetFont('Helvetica', 'B', 8);
+        $pdf->Cell(88, 5, utf8_decode('No. ') . $document->infoTributaria->estab . '-' . $document->infoTributaria->ptoEmi . '-' . $document->infoTributaria->secuencial, 0, 2, 'L', 0);
+        $pdf->SetFont('Helvetica', 'B', 8);
+        $pdf->Cell(88, 5, utf8_decode('NUMERO DE AUTORIZACION: '), 0, 2, 'L', 0);
+        $pdf->SetFont('Helvetica', '', 8);
+        $pdf->Cell(88, 5, utf8_decode($claveAcceso), 0, 2, 'L', 0);
+        $pdf->SetFont('Helvetica', 'B', 8);
+        $pdf->Cell(88, 5, utf8_decode('FECHA Y HORA DE AUTORIZACION:'), 0, 2, 'L', 0);
+        $pdf->SetFont('Helvetica', '', 8);
+        $pdf->Cell(88, 5, utf8_decode($fecha_actual), 0, 2, 'L', 0);
         if ($document->infoTributaria->ambiente == 2) {
             $ambiente = 'PRODUCCION';
         } else {
             $ambiente = 'PRUEBAS';
         }
-        $pdf->Cell(16, 5, utf8_decode('AMBIENTE: '), 0, 0, 'L', 0);
-        $pdf->SetFont('Helvetica', '', 7);
-        $pdf->Cell(58, 5, utf8_decode($ambiente), 0, 1, 'L', 0);
-        $pdf->SetXY(111, 46);
-        $pdf->SetFont('Helvetica', 'B', 7);
+        $pdf->SetFont('Helvetica', 'B', 8);
+        $pdf->Cell(20, 5, utf8_decode('AMBIENTE:'), 0, 0, 'L', 0);
+        $pdf->SetFont('Helvetica', '', 8);
+        $pdf->Cell(68, 5, utf8_decode($ambiente), 0, 1, 'L', 0);
         if ($document->infoTributaria->tipoEmision == 1) {
             $emision = 'NORMAL';
         } else {
             $emision = 'NORMAL';
         }
-        $pdf->Cell(13, 5, utf8_decode('EMISIÓN: '), 0, 0, 'L', 0);
-        $pdf->SetFont('Helvetica', '', 7);
-        $pdf->Cell(88, 5, utf8_decode($emision), 0, 1, 'L', 0);
-        $pdf->SetXY(111, 50);
-        $pdf->SetFont('Helvetica', 'B', 7);
-        $pdf->Cell(88, 5, utf8_decode('CLAVE DE ACCESO'), 0, 2, 'C', 0);
-        $this->generarCodigoBarras($claveAcceso, $id_empresa);
-        $pdf->image(constant("DATA_EMPRESA") . $id_empresa . '/comprobantes/factura/codigosbarras/codigo_' . $claveAcceso . '.png', null, null, 85, 12);
-        $pdf->SetXY(111, 65);
-        $pdf->SetFont('Helvetica', '', 7);
-        $pdf->Cell(88, 5, $claveAcceso, 0, 2, 'C', 0);
-        //cuadro detalle factura
-        $pdf->SetXY(111, 11);
-        $pdf->SetFont('Helvetica', '', 12);
-        $pdf->Cell(88, 6, utf8_decode('R.U.C: ') . $document->infoTributaria->ruc, 0, 2, 'C', 0);
-        $pdf->SetFont('Helvetica', 'B', 12);
-        $pdf->Cell(88, 6, utf8_decode('COMPROBANTE DE RETENCIÓN'), 0, 2, 'C', 0);
-        $pdf->Cell(88, 6, utf8_decode('No. ') . $document->infoTributaria->estab . $document->infoTributaria->ptoEmi . $document->infoTributaria->secuencial, 0, 2, 'C', 0);
-        $pdf->SetFont('Helvetica', 'B', 7);
-        $pdf->Cell(88, 5, utf8_decode('NUMERO DE AUTORIZACION: '), 0, 2, 'C', 0);
-        $pdf->SetFont('Helvetica', '', 9);
-        $pdf->Cell(88, 5, utf8_decode($claveAcceso), 0, 2, 'C', 0);
-        $pdf->SetFont('Helvetica', 'B', 7);
-
+        $pdf->SetX(111);
+        $pdf->SetFont('Helvetica', 'B', 8);
+        $pdf->Cell(20, 5, utf8_decode('EMISIÓN:'), 0, 0, 'L', 0);
+        $pdf->SetFont('Helvetica', '', 8);
+        $pdf->Cell(68, 5, utf8_decode($emision), 0, 1, 'L', 0);
+        $pdf->SetFont('Helvetica', 'B', 8);
+        $pdf->SetX(111);
+        $pdf->Cell(88, 5, utf8_decode('CLAVE DE ACCESO'), 0, 2, 'L', 0);
+        $pdf->SetFont('Helvetica', '', 8);
+        $pdf->Cell(88, 5, $claveAcceso, 0, 2, 'L', 0);
+        $this->generarCodigoBarras($claveAcceso, 'retenciones');
+        $pdf->image('archivos/comprobantes/retenciones/codigosbarras/codigo' . $claveAcceso . '.png', 115, null, 80);
 
         //cuadro de datos del cliente
-        $pdf->SetXY(10, 73);
+        $pdf->RoundedRect(10, 84, 190, 17, 2, '1234', 'D');
+        $pdf->SetXY(10, 85);
+        $pdf->SetFont('Helvetica', 'B', 8);
+        $pdf->Cell(50, 5, utf8_decode('Razón Social / Nombres y Apellidos:'), 0, 0, 'L', 0);
         $pdf->SetFont('Helvetica', '', 8);
-        $pdf->Cell(110, 5, utf8_decode('Razón Social / Nombres y Apellidos: ' . $document->infoCompRetencion->razonSocialSujetoRetenido), 0, 0, 'L', 0);
-        $pdf->Cell(29, 5, utf8_decode('Identificación: ' . $document->infoCompRetencion->identificacionSujetoRetenido), 0, 1, 'L', 0);
-        $pdf->Cell(110, 5, utf8_decode('Fecha de Emisión: ' . $document->infoCompRetencion->fechaEmision), 0, 0, 'L', 0);
+        $pdf->Cell(80, 5, utf8_decode($document->infoCompRetencion->razonSocialSujetoRetenido), 0, 0, 'L', 0);
+        $pdf->SetFont('Helvetica', 'B', 8);
+        $pdf->Cell(30, 5, utf8_decode('RUC / CI.:'), 0, 0, 'L', 0);
+        $pdf->SetFont('Helvetica', '', 8);
+        $pdf->Cell(30, 5, utf8_decode($document->infoCompRetencion->identificacionSujetoRetenido), 0, 1, 'L', 0);
+        $pdf->SetFont('Helvetica', 'B', 8);
+        $pdf->Cell(15, 5, utf8_decode('Dirección:'), 0, 0, 'L', 0);
+        $pdf->SetFont('Helvetica', '', 8);
+        $pdf->Cell(115, 5, utf8_decode($document->infoCompRetencion->direccionComprador), 0, 0, 'L', 0);
+        $pdf->SetFont('Helvetica', 'B', 8);
+        $pdf->Cell(30, 5, utf8_decode('Fecha de Emisión:'), 0, 0, 'L', 0);
+        $pdf->SetFont('Helvetica', '', 8);
+        $pdf->Cell(30, 5, utf8_decode($document->infoCompRetencion->fechaEmision), 0, 1, 'L', 0);
 
         //tabla de productos
-        $pdf->SetXY(10, 86);
+        //$pdf->SetXY(10, 86);
         $pdf->SetFillColor(240, 240, 240);
         $pdf->SetFont('Helvetica', 'B', 8);
         //header de tabla
@@ -716,32 +718,16 @@ class generarPDF
             $pdf->Ln();
             $total += floatval($b->valorRetenido);
         }
-        $infoAdicional = "";
-        $correo = "";
-        foreach ($document->infoAdicional->campoAdicional as $a) {
-            foreach ($a->attributes() as $b) {
-                if ($b == 'Email' || $b == 'email' || $b == '=correo' || $b == 'Correo') {
-                    $correo = $a;
-                    $infoAdicional .= $b . ': ' . $a . "\n";
-                } else {
-                    $infoAdicional .= $b . ': ' . $a . "\n";
-                }
-            }
-        }
         $pdf->Ln(2);
         $pdf->SetFont('Helvetica', 'B', 8);
-        $pdf->Cell(125, 6, utf8_decode('Información Adicional'), 1, 0, 'L', 0);
         $pdf->Cell(40, 6, 'Total', 'LTB', 0, 'R', 0);
         $pdf->Cell(25, 6, number_format(floatval($total), 2), 'TBR', 1, 'R', 0);
-        $pdf->SetFont('Helvetica', '', 8);
-        $pdf->Cell(125, 6, utf8_decode('Correo: ' . $correo), 'LR', 2, 'L', 0);
-        $pdf->Cell(125, 6, utf8_decode('Observaciones: ' . $infoAdicional), 'LR', 2, 'L', 0);
-        $pdf->Cell(125, 6, utf8_decode('Retencion aplicada a la factura No.: ' . $b->codDocSustento), 'LBR', 2, 'L', 0);
-
-        $pdf->Output(constant("DATA_EMPRESA") . $id_empresa . '/comprobantes/retencioncompra/' . $claveAcceso . '.pdf', 'F');
-        $email = new sendEmail();
-        $email->enviarCorreo('Comprobante de Retencion', $document->infoCompRetencion->razonSocialSujetoRetenido, $claveAcceso, $correo, $id_empresa, $empresas);
-        //$pdf->Output("ejemplo.pdf", "I");
+        if (!file_exists('archivos/comprobantes/retenciones/pdf/')) {
+            mkdir('archivos/comprobantes/retenciones/pdf', 0777, true);
+        }
+        $pdf->Output('archivos/comprobantes/retenciones/pdf/' . $claveAcceso . '.pdf', 'F');
+        // $email = new sendEmail();
+        // $valor = $email->enviarCorreo('Factura', $document->infoFactura->razonSocialComprador, $claveAcceso, $correo, $id_empresa, $empresas);
     }
 
     public function cierreCaja($arqueo, $efectivo, $credito, $egresos)
@@ -1397,7 +1383,7 @@ class generarPDF
         $pdf->Cell(25, 5, $factura->val_total, 0, 1, 'R', 1);
         $pdf->Output('FACT-' . $factura->cla_acceso . '.pdf', 'I');
     }
-    public function generarCodigoBarras($claveAcceso)
+    public function generarCodigoBarras($claveAcceso, $tipo)
     {
         $colorFront = new BCGColor(0, 0, 0);
         $colorBack = new BCGColor(255, 255, 255);
@@ -1407,10 +1393,10 @@ class generarPDF
         $code->setForegroundColor($colorFront);
         $code->setBackgroundColor($colorBack);
         $code->parse($claveAcceso);
-        if (!file_exists('archivos/comprobantes/facturas/codigosbarras/')) {
-            mkdir('archivos/comprobantes/facturas/codigosbarras/', 0777, true);
+        if (!file_exists('archivos/comprobantes/' . $tipo . '/codigosbarras/')) {
+            mkdir('archivos/comprobantes/' . $tipo . '/codigosbarras/', 0777, true);
         }
-        $drawing = new BCGDrawing('archivos/comprobantes/facturas/codigosbarras/codigo' . $claveAcceso . '.png', $colorBack);
+        $drawing = new BCGDrawing('archivos/comprobantes/' . $tipo . '/codigosbarras/codigo' . $claveAcceso . '.png', $colorBack);
         $drawing->setBarcode($code);
         $drawing->draw();
         $drawing->finish(BCGDrawing::IMG_FORMAT_PNG);

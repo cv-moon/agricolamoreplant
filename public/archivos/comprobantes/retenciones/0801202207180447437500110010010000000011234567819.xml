@@ -6,15 +6,15 @@
 		<razonSocial>MANGUI ICHINA CHRISTIAN ORLANDO</razonSocial>
 		<nombreComercial>AGRICOLA MOREPLANT</nombreComercial>
 		<ruc>1804474375001</ruc>
-		<claveAcceso>0701202207180447437500110010010000000031234567815</claveAcceso>
+		<claveAcceso>0801202207180447437500110010010000000011234567819</claveAcceso>
 		<codDoc>07</codDoc>
 		<estab>001</estab>
 		<ptoEmi>001</ptoEmi>
-		<secuencial>000000003</secuencial>
+		<secuencial>000000001</secuencial>
 		<dirMatriz>CAMILO CIENFUEGOS S/N</dirMatriz>
 	</infoTributaria>
 	<infoCompRetencion>
-		<fechaEmision>07/01/2022</fechaEmision>
+		<fechaEmision>08/01/2022</fechaEmision>
 		<dirEstablecimiento>CAMILO CIENFUEGOS S/N ATRÁS DEL AEROPUERTO</dirEstablecimiento>
 		<obligadoContabilidad>SI</obligadoContabilidad>
 		<tipoIdentificacionSujetoRetenido>04</tipoIdentificacionSujetoRetenido>
@@ -24,24 +24,24 @@
 	</infoCompRetencion>
 	<impuestos>
 		<impuesto>
-			<código>1</código>
-			<codigoRetencion>303</codigoRetencion>
+			<codigo>1</codigo>
+			<codigoRetencion>312</codigoRetencion>
 			<baseImponible>90.00</baseImponible>
-			<porcentajeRetener>10</porcentajeRetener>
-			<valorRetenido>9.00</valorRetenido>
+			<porcentajeRetener>2</porcentajeRetener>
+			<valorRetenido>1.80</valorRetenido>
 			<codDocSustento>01</codDocSustento>
-			<numDocSustento>001001000023432</numDocSustento>
-			<fechaEmisionDocSustent>07/01/2022</fechaEmisionDocSustent>
+			<numDocSustento>001001000025478</numDocSustento>
+			<fechaEmisionDocSustent>08/01/2022</fechaEmisionDocSustent>
 		</impuesto>
 		<impuesto>
-			<código>2</código>
+			<codigo>2</codigo>
 			<codigoRetencion>9</codigoRetencion>
-			<baseImponible>55.13</baseImponible>
+			<baseImponible>50.89</baseImponible>
 			<porcentajeRetener>10</porcentajeRetener>
-			<valorRetenido>5.51</valorRetenido>
+			<valorRetenido>5.09</valorRetenido>
 			<codDocSustento>01</codDocSustento>
-			<numDocSustento>001001000023432</numDocSustento>
-			<fechaEmisionDocSustent>07/01/2022</fechaEmisionDocSustent>
+			<numDocSustento>001001000025478</numDocSustento>
+			<fechaEmisionDocSustent>08/01/2022</fechaEmisionDocSustent>
 		</impuesto>
 	</impuestos>
 </comprobanteRetencion>

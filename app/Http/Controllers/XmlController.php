@@ -371,7 +371,7 @@ class XmlController extends Controller
         file_put_contents("archivos/comprobantes/retenciones/" . $request->retencion['cla_acceso'] . ".xml", "");
 
         $xml = new XMLWriter();
-        $xml->openUri('archivos/comprobantes/retenciones/' . $request->retencion['cla_acceso'] . ".xml");
+        $xml->openUri("archivos/comprobantes/retenciones/" . $request->retencion['cla_acceso'] . ".xml");
         $xml->setIndent(true);
         $xml->setIndentString("\t");
         $xml->startDocument('1.0', 'utf-8');
@@ -481,7 +481,7 @@ class XmlController extends Controller
         foreach ($request->detalles as $key => $det) {
             $xml->startElement('impuesto');
 
-            $xml->startElement('código');
+            $xml->startElement('codigo');
             $xml->text($det["cod_impuesto"]);
             $xml->endElement();
 
@@ -509,7 +509,7 @@ class XmlController extends Controller
             $xml->text($det["num_comprobante"]);
             $xml->endElement();
 
-            $xml->startElement('fechaEmisionDocSustent');
+            $xml->startElement('fechaEmisionDocSustento');
             $xml->text(date('d/m/Y', strtotime($request->retencion['fec_emision'])));
             $xml->endElement();
 
