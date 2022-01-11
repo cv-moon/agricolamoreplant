@@ -611,7 +611,7 @@ class generarPDF
         $pdf->Cell(88, 5, utf8_decode('R.U.C: ') . $document->infoTributaria->ruc, 0, 2, 'L', 0);
         $pdf->SetFont('Helvetica', 'B', 8);
         $pdf->SetFillColor(125, 234, 134);
-        $pdf->Cell(88, 5, utf8_decode('RETENCIÓN '), 0, 2, 'L', 1);
+        $pdf->Cell(88, 5, utf8_decode('COMPROBANTE DE RETENCIÓN'), 0, 2, 'L', 1);
         $pdf->SetFont('Helvetica', '', 8);
         $pdf->SetFont('Helvetica', 'B', 8);
         $pdf->Cell(88, 5, utf8_decode('No. ') . $document->infoTributaria->estab . '-' . $document->infoTributaria->ptoEmi . '-' . $document->infoTributaria->secuencial, 0, 2, 'L', 0);
@@ -651,7 +651,7 @@ class generarPDF
         $pdf->image('archivos/comprobantes/retenciones/codigosbarras/codigo' . $claveAcceso . '.png', 115, null, 80);
 
         //cuadro de datos del cliente
-        $pdf->RoundedRect(10, 84, 190, 17, 2, '1234', 'D');
+        $pdf->RoundedRect(10, 84, 190, 12, 2, '1234', 'D');
         $pdf->SetXY(10, 85);
         $pdf->SetFont('Helvetica', 'B', 8);
         $pdf->Cell(50, 5, utf8_decode('Razón Social / Nombres y Apellidos:'), 0, 0, 'L', 0);
@@ -662,35 +662,32 @@ class generarPDF
         $pdf->SetFont('Helvetica', '', 8);
         $pdf->Cell(30, 5, utf8_decode($document->infoCompRetencion->identificacionSujetoRetenido), 0, 1, 'L', 0);
         $pdf->SetFont('Helvetica', 'B', 8);
-        $pdf->Cell(15, 5, utf8_decode('Dirección:'), 0, 0, 'L', 0);
-        $pdf->SetFont('Helvetica', '', 8);
-        $pdf->Cell(115, 5, utf8_decode($document->infoCompRetencion->direccionComprador), 0, 0, 'L', 0);
-        $pdf->SetFont('Helvetica', 'B', 8);
         $pdf->Cell(30, 5, utf8_decode('Fecha de Emisión:'), 0, 0, 'L', 0);
         $pdf->SetFont('Helvetica', '', 8);
         $pdf->Cell(30, 5, utf8_decode($document->infoCompRetencion->fechaEmision), 0, 1, 'L', 0);
+        $pdf->Ln();
 
         //tabla de productos
-        //$pdf->SetXY(10, 86);
-        $pdf->SetFillColor(240, 240, 240);
+        $posY = $pdf->GetY();
+        $pdf->SetXY(10, $posY);
+        $pdf->SetFillColor(125, 234, 134);
         $pdf->SetFont('Helvetica', 'B', 8);
         //header de tabla
-        $pdf->MultiCell(25, 8, utf8_decode('Comprobante'), 1, 'C', 1);
-        $pdf->SetXY(35, 86);
-        $pdf->MultiCell(30, 8, utf8_decode('Número'), 1, 'C', 1);
-        $pdf->SetXY(65, 86);
-        $pdf->MultiCell(25, 8, utf8_decode('Fecha Emisión'), 1, 'C', 1);
-        $pdf->SetXY(90, 86);
-        $pdf->MultiCell(20, 4, utf8_decode('Ejercicio Fiscal'), 1, 'C', 1);
-        $pdf->SetXY(110, 86);
-        $pdf->MultiCell(25, 8, utf8_decode('Base Imponible'), 1, 'C', 1);
-        $pdf->SetXY(135, 86);
-        $pdf->MultiCell(20, 8, utf8_decode('Impuesto'), 1, 'C', 1);
-        $pdf->SetXY(155, 86);
-        $pdf->MultiCell(20, 4, utf8_decode('Porcentaje de Retención'), 1, 'C', 1);
-        $pdf->SetXY(175, 86);
-        $pdf->MultiCell(25, 8, utf8_decode('Valor Retenido'), 1, 'C', 1);
-        //$pdf->Ln();
+        $pdf->MultiCell(25, 8, utf8_decode('Comprobante'), 0, 'C', 1);
+        $pdf->SetXY(35, $posY);
+        $pdf->MultiCell(30, 8, utf8_decode('Número'), 0, 'C', 1);
+        $pdf->SetXY(65, $posY);
+        $pdf->MultiCell(25, 8, utf8_decode('Fecha Emisión'), 0, 'C', 1);
+        $pdf->SetXY(90, $posY);
+        $pdf->MultiCell(20, 4, utf8_decode('Ejercicio Fiscal'), 0, 'C', 1);
+        $pdf->SetXY(110, $posY);
+        $pdf->MultiCell(25, 8, utf8_decode('Base Imponible'), 0, 'C', 1);
+        $pdf->SetXY(135, $posY);
+        $pdf->MultiCell(20, 8, utf8_decode('Impuesto'), 0, 'C', 1);
+        $pdf->SetXY(155, $posY);
+        $pdf->MultiCell(20, 4, utf8_decode('Porcentaje de Retención'), 0, 'C', 1);
+        $pdf->SetXY(175, $posY);
+        $pdf->MultiCell(25, 8, utf8_decode('Valor Retenido'), 0, 'C', 1);
 
         //rellenado de campos
 
@@ -698,11 +695,11 @@ class generarPDF
         $total = 0;
         foreach ($document->impuestos->impuesto as $a => $b) {
             if ($b->codDocSustento = '01') {
-                $pdf->Cell(20, 6, 'FACTURA', 1, 0, "L", 0);
+                $pdf->Cell(25, 6, 'FACTURA', 1, 0, "L", 0);
             } else {
-                $pdf->Cell(20, 6, $b->codDocSustento, 1, 0, "L", 0);
+                $pdf->Cell(25, 6, $b->codDocSustento, 1, 0, "L", 0);
             }
-            $pdf->Cell(30, 6, $b->codDocSustento, 1, 0, 'R', 0);
+            $pdf->Cell(30, 6, $b->numDocSustento, 1, 0, 'R', 0);
             $pdf->Cell(25, 6, $b->fechaEmisionDocSustento, 1, 0, 'C', 0);
             $pdf->Cell(20, 6, date("Y"), 1, 0, 'C', 0);
             $pdf->Cell(25, 6, $b->baseImponible, 1, 0, 'R', 0);
@@ -718,16 +715,40 @@ class generarPDF
             $pdf->Ln();
             $total += floatval($b->valorRetenido);
         }
-        $pdf->Ln(2);
+        $pdf->Ln();
+
+        $y = $pdf->GetY();
+        $pdf->SetX(10);
         $pdf->SetFont('Helvetica', 'B', 8);
-        $pdf->Cell(40, 6, 'Total', 'LTB', 0, 'R', 0);
-        $pdf->Cell(25, 6, number_format(floatval($total), 2), 'TBR', 1, 'R', 0);
+        $pdf->SetFillColor(125, 234, 134);
+        $pdf->Cell(110, 5, utf8_decode('Información Adicional'), 0, 1, 'C', 1);
+
+        foreach ($document->infoAdicional->campoAdicional as $a) {
+            foreach ($a->attributes() as $b) {
+                $pdf->SetFillColor(220, 220, 220);
+                $pdf->SetFont('Helvetica', 'B', 8);
+                $pdf->Cell(15, 5, utf8_decode($b) . ':', 0, 0, 'L', 1);
+                $pdf->SetFont('Helvetica', '', 8);
+                $pdf->Cell(95, 5, utf8_decode($a), 0, 1, 'L', 1);
+                if ($b == 'Email' || $b == 'email' || $b == 'correo' || $b == 'Correo') {
+                    $correo = $a;
+                }
+            }
+        }
+        $pdf->SetXY(135, $y);
+        $pdf->SetFillColor(125, 234, 134);
+        $pdf->SetFont('Helvetica', 'B', 8);
+        $pdf->Cell(40, 6, 'Total a retener', 0, 0, 'R', 1);
+        $pdf->SetFillColor(220, 220, 220);
+        $pdf->Cell(25, 6, number_format(floatval($total), 2), 0, 1, 'R', 1);
+
+
         if (!file_exists('archivos/comprobantes/retenciones/pdf/')) {
             mkdir('archivos/comprobantes/retenciones/pdf', 0777, true);
         }
         $pdf->Output('archivos/comprobantes/retenciones/pdf/' . $claveAcceso . '.pdf', 'F');
-        // $email = new sendEmail();
-        // $valor = $email->enviarCorreo('Factura', $document->infoFactura->razonSocialComprador, $claveAcceso, $correo, $id_empresa, $empresas);
+        $email = new sendEmail();
+        $valor = $email->enviarCorreo('Retención', $document->infoCompRetencion->razonSocialSujetoRetenido, $claveAcceso, $correo, $id_empresa, $empresas);
     }
 
     public function cierreCaja($arqueo, $efectivo, $credito, $egresos)
@@ -1383,6 +1404,7 @@ class generarPDF
         $pdf->Cell(25, 5, $factura->val_total, 0, 1, 'R', 1);
         $pdf->Output('FACT-' . $factura->cla_acceso . '.pdf', 'I');
     }
+
     public function generarCodigoBarras($claveAcceso, $tipo)
     {
         $colorFront = new BCGColor(0, 0, 0);

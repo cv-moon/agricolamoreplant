@@ -241,6 +241,8 @@ Route::middleware('auth')->group(function () {
     Route::get('api/retencion/comprobante', 'RetencionController@getRetention');
     Route::get('api/retencion/facturas', 'RetencionController@getInvoices');
     Route::get('api/retencion/detalles', 'RetencionController@getDetails');
+    Route::get('api/retencion/pdf/{clave}', 'RetencionController@individualPdf');
+    Route::get('api/retencion/xml/{clave}', 'RetencionController@individualXml');
     
     // Ruta Dashboard
     Route::get('api/dashboard', 'DashboardController');

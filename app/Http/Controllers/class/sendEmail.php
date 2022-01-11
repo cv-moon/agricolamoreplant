@@ -32,9 +32,9 @@ class sendEmail
             } else if ($tipo == 'Notacredito') {
                 $mail->addAttachment('/comprobantes/notacredito/' . $claveAcceso . '.pdf');
                 $mail->addAttachment('/comprobantes/notacredito/facturaFirmada.xml');
-            } else if ($tipo == 'Comprobante de Retencion') {
-                $mail->addAttachment('/comprobantes/retencioncompra/' . $claveAcceso . '.pdf');
-                $mail->addAttachment('/comprobantes/retencioncompra/facturaFirmada.xml');
+            } else if ($tipo == 'Retención') {
+                $mail->addAttachment('archivos/comprobantes/retenciones/pdf/' . $claveAcceso . '.pdf');
+                $mail->addAttachment('archivos/comprobantes/retenciones/' . $claveAcceso . '.xml');
             }  //Optional name
 
             //Content
@@ -78,9 +78,9 @@ class sendEmail
             } else if ($tipo == 'Notacredito') {
                 $mail->addAttachment('/comprobantes/notacredito/' . $datos->cla_acceso . '.pdf');
                 $mail->addAttachment('/comprobantes/notacredito/facturaFirmada.xml');
-            } else if ($tipo == 'Comprobante de Retencion') {
-                $mail->addAttachment('/comprobantes/retencioncompra/' . $datos->cla_acceso . '.pdf');
-                $mail->addAttachment('/comprobantes/retencioncompra/facturaFirmada.xml');
+            } else if ($tipo == 'Retencion') {
+                $mail->addAttachment('archivos/comprobantes/retenciones/' . $datos->cla_acceso . '.pdf');
+                $mail->addAttachment('archivos/comprobantes/retenciones/' . $datos->cla_acceso . '.xml');
             }  //Optional name
 
             //Content

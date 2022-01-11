@@ -516,6 +516,14 @@ class XmlController extends Controller
             $xml->endElement();
         }
         $xml->endElement();
+        $xml->startElement('infoAdicional');
+        
+        $xml->startElement('campoAdicional');
+        $xml->writeAttribute("nombre", "Email");
+        $xml->text($request->retencion['email']);
+        $xml->endElement();
+        
+        $xml->endElement();
 
         $xml->endElement();
 

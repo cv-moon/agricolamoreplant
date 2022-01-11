@@ -6,10 +6,13 @@ use App\Models\DetalleRetencion;
 use App\Models\Empresa;
 use App\Models\PuntoEmision;
 use App\Models\Retencion;
+use generarPDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use sendEmail;
+
+include 'class/generarPDF.php';
 
 class RetencionController extends Controller
 {
@@ -123,7 +126,8 @@ class RetencionController extends Controller
                             'empresas.firma',
                             'empresas.fir_clave',
                             'proveedores.nombre',
-                            'proveedores.num_identificacion'
+                            'proveedores.num_identificacion',
+                            'proveedores.email'
                         )
                         ->where('retenciones.id', $id)
                         ->first(),
@@ -238,24 +242,24 @@ class RetencionController extends Controller
 
     public function individualPdf(Request $request)
     {
-        return response()->file('archivos/comprobantes/facturas/pdf/' . $request->clave . '.pdf');
+        return response()->file('archivos/comprobantes/retenciones/pdf/' . $request->clave . '.pdf');
     }
 
     public function individualXml(Request $request)
     {
-        return response()->file('archivos/comprobantes/facturas/' . $request->clave . '.xml');
+        return response()->file('archivos/comprobantes/retenciones/' . $request->clave . '.xml');
     }
 
     public function forwardingInvoice(Request $request)
     {
-        $datos = Retencion::join('clientes', 'facturas.cliente_id', 'clientes.id')
+        $datos = Retencion::join('proveedores', 'retenciones.proveedor_id', 'proveedores.id')
             ->select(
-                'facturas.id',
-                'facturas.cla_acceso',
-                'clientes.nombre',
-                'clientes.email'
+                'retenciones.id',
+                'retenciones.cla_acceso',
+                'proveedores.nombre',
+                'proveedores.email'
             )
-            ->where('facturas.id', $request->id)
+            ->where('retenciones.id', $request->id)
             ->first();
         $empresa = Empresa::select(
             'corr_servidor',
@@ -265,6 +269,6 @@ class RetencionController extends Controller
         )
             ->first();
         $email = new sendEmail();
-        $email->forwarding('Factura', $datos, $empresa);
+        $email->forwarding('Retencion', $datos, $empresa);
     }
 }
