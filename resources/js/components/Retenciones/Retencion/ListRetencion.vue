@@ -43,8 +43,8 @@
                   .padStart(9, 0)}`
               "
             ></td>
-            <td v-text="retencion.suj_retenido"></td>
-            <td v-text="retencion.tot_retenido"></td>
+            <td v-text="retencion.nombre"></td>
+            <td align="right" v-text="retencion.tot_retenido"></td>
             <td v-text="retencion.usuario"></td>
             <td v-text="retencion.respuesta"></td>
             <td>

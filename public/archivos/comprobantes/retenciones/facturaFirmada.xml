@@ -1,31 +1,31 @@
-<?xml version="1.0" encoding="UTF-8"?><comprobanteRetencion id="comprobante" version="1.0.0"><infoTributaria><ambiente>1</ambiente><tipoEmision>1</tipoEmision><razonSocial>MANGUI ICHINA CHRISTIAN ORLANDO</razonSocial><nombreComercial>AGRICOLA MOREPLANT</nombreComercial><ruc>1804474375001</ruc><claveAcceso>1101202207180447437500110010010000000301234567819</claveAcceso><codDoc>07</codDoc><estab>001</estab><ptoEmi>001</ptoEmi><secuencial>000000030</secuencial><dirMatriz>CAMILO CIENFUEGOS S/N</dirMatriz></infoTributaria><infoCompRetencion><fechaEmision>11/01/2022</fechaEmision><dirEstablecimiento>CAMILO CIENFUEGOS S/N ATRAS DEL AEROPUERTO</dirEstablecimiento><obligadoContabilidad>SI</obligadoContabilidad><tipoIdentificacionSujetoRetenido>04</tipoIdentificacionSujetoRetenido><razonSocialSujetoRetenido>DORLIAGRO</razonSocialSujetoRetenido><identificacionSujetoRetenido>1793071538001</identificacionSujetoRetenido><periodoFiscal>01/2022</periodoFiscal></infoCompRetencion><impuestos><impuesto><codigo>1</codigo><codigoRetencion>303</codigoRetencion><baseImponible>90.00</baseImponible><porcentajeRetener>10</porcentajeRetener><valorRetenido>9.00</valorRetenido><codDocSustento>01</codDocSustento><numDocSustento>001001000023432</numDocSustento><fechaEmisionDocSustento>11/01/2022</fechaEmisionDocSustento></impuesto><impuesto><codigo>2</codigo><codigoRetencion>9</codigoRetencion><baseImponible>55.13</baseImponible><porcentajeRetener>10</porcentajeRetener><valorRetenido>5.51</valorRetenido><codDocSustento>01</codDocSustento><numDocSustento>001001000023432</numDocSustento><fechaEmisionDocSustento>11/01/2022</fechaEmisionDocSustento></impuesto></impuestos><infoAdicional><campoAdicional nombre="Email">cv.chuquitarco@outlook.com</campoAdicional></infoAdicional><ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:etsi="http://uri.etsi.org/01903/v1.3.2#" Id="Signature44128">
-<ds:SignedInfo Id="Signature-SignedInfo572342">
+<?xml version="1.0" encoding="UTF-8"?><comprobanteRetencion id="comprobante" version="1.0.0"><infoTributaria><ambiente>1</ambiente><tipoEmision>1</tipoEmision><razonSocial>MANGUI ICHINA CHRISTIAN ORLANDO</razonSocial><nombreComercial>AGRICOLA MOREPLANT</nombreComercial><ruc>1804474375001</ruc><claveAcceso>1201202207180447437500110010010000000311234567819</claveAcceso><codDoc>07</codDoc><estab>001</estab><ptoEmi>001</ptoEmi><secuencial>000000031</secuencial><dirMatriz>CAMILO CIENFUEGOS S/N</dirMatriz></infoTributaria><infoCompRetencion><fechaEmision>12/01/2022</fechaEmision><dirEstablecimiento>CAMILO CIENFUEGOS S/N ATRAS DEL AEROPUERTO</dirEstablecimiento><obligadoContabilidad>SI</obligadoContabilidad><tipoIdentificacionSujetoRetenido>04</tipoIdentificacionSujetoRetenido><razonSocialSujetoRetenido>DORLIAGRO</razonSocialSujetoRetenido><identificacionSujetoRetenido>1793071538001</identificacionSujetoRetenido><periodoFiscal>01/2022</periodoFiscal></infoCompRetencion><impuestos><impuesto><codigo>1</codigo><codigoRetencion>312</codigoRetencion><baseImponible>90.00</baseImponible><porcentajeRetener>2</porcentajeRetener><valorRetenido>1.80</valorRetenido><codDocSustento>01</codDocSustento><numDocSustento>001001000025478</numDocSustento><fechaEmisionDocSustento>12/01/2022</fechaEmisionDocSustento></impuesto><impuesto><codigo>2</codigo><codigoRetencion>9</codigoRetencion><baseImponible>50.89</baseImponible><porcentajeRetener>10</porcentajeRetener><valorRetenido>5.09</valorRetenido><codDocSustento>01</codDocSustento><numDocSustento>001001000025478</numDocSustento><fechaEmisionDocSustento>12/01/2022</fechaEmisionDocSustento></impuesto></impuestos><infoAdicional><campoAdicional nombre="Email">cv.chuquitarco@outlook.com</campoAdicional></infoAdicional><ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:etsi="http://uri.etsi.org/01903/v1.3.2#" Id="Signature174903">
+<ds:SignedInfo Id="Signature-SignedInfo981862">
 <ds:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"></ds:CanonicalizationMethod>
 <ds:SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"></ds:SignatureMethod>
-<ds:Reference Id="SignedPropertiesID622743" Type="http://uri.etsi.org/01903#SignedProperties" URI="#Signature44128-SignedProperties986104">
+<ds:Reference Id="SignedPropertiesID300610" Type="http://uri.etsi.org/01903#SignedProperties" URI="#Signature174903-SignedProperties60491">
 <ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"></ds:DigestMethod>
-<ds:DigestValue>vQC3uddJ9FgiWeqhSSC5fhQOUPc=</ds:DigestValue>
+<ds:DigestValue>hp5VVK95y3ydRhiAdLbJ+lOaPZU=</ds:DigestValue>
 </ds:Reference>
-<ds:Reference URI="#Certificate703939">
+<ds:Reference URI="#Certificate749473">
 <ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"></ds:DigestMethod>
-<ds:DigestValue>F65U3h4MHp3L85v4dVI2D4rxe/Y=</ds:DigestValue>
+<ds:DigestValue>NOR68UpL6LVA64mo/4+gsm0V2UI=</ds:DigestValue>
 </ds:Reference>
-<ds:Reference Id="Reference-ID-892155" URI="#comprobante">
+<ds:Reference Id="Reference-ID-553249" URI="#comprobante">
 <ds:Transforms>
 <ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"></ds:Transform>
 </ds:Transforms>
 <ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"></ds:DigestMethod>
-<ds:DigestValue>qdUFZ7iRavpk2m2xhDZIzwcLIDE=</ds:DigestValue>
+<ds:DigestValue>TLYfW6g76Ijp/agvBhYCdw4z7O0=</ds:DigestValue>
 </ds:Reference>
 </ds:SignedInfo>
-<ds:SignatureValue Id="SignatureValue212262">
-ZnhjbkMI8YaCTPI3J+Tc14Ha0kHhf32eFj/ZSUvNudY8fduxVcg+pu9KN0Db/MEjpR7lb26nuJKx
-PeZTAfbV2nYezjaBXNEPlTYA6239AFhUDjwWusW6+uVl7iz4LqurGchtkH7bBS4IXU78YERrGypt
-Yc2Hh3FG7d5lxpMLbgHspwV18/NrMqG4yxw1zyXWYc77IedkpvgszISNQJJDaUndISsaIVWgPvc+
-U0Ef8QLPCKbt5pXYrr7pyt/gsX06WKkDZNBgcemBGV4SoiQN3z/2I0/5GsymXBxMv/eS2WKQe0vj
-ZkbIVuouVSTC7nKNsypp/EiNPCcgo0RqyJ6L1Q==
+<ds:SignatureValue Id="SignatureValue779689">
+GctrYbCzSESErN5d9AJwVjnwaX1KVjC1655SL2fjb2Uxqmw9p/vkJyNn3biQU5N+AIoY9i8i5j+I
+DXWaRDvjLAq11NiT8FzJxAcow66JC7L0V5+Nxs7ETZ4rv7lVmrY61RK2tyU79FUM4jxQwcV/klkj
+/fSsF9tDOBrxq2zqxqXlEyfiu2A70Ri6P5BqdtdTUIlYpSEBMAUOoiSKCq4bt9F4dXIz3OjLi4N3
+7TnF2Q2ULgJ7pXpzYaGhOnRxbFRjp519FEiNZFErAQjpGTRmsEBMe2g1l3ZikRj15EKOlDSPuPew
+Qbu8VLxfdsDTynVNHNTta//oOXIwFj1/QRlQvQ==
 </ds:SignatureValue>
-<ds:KeyInfo Id="Certificate703939">
+<ds:KeyInfo Id="Certificate749473">
 <ds:X509Data>
 <ds:X509Certificate>
 MIIJuTCCB6GgAwIBAgIEW2itnTANBgkqhkiG9w0BAQsFADCBoTELMAkGA1UEBhMCRUMxIjAgBgNV
@@ -87,4 +87,4 @@ UWLM3ELyoVcNjEHMfPpP2bnRst6F1NNGW8NopQ==
 </ds:RSAKeyValue>
 </ds:KeyValue>
 </ds:KeyInfo>
-<ds:Object Id="Signature44128-Object918661"><etsi:QualifyingProperties Target="#Signature44128"><etsi:SignedProperties Id="Signature44128-SignedProperties986104"><etsi:SignedSignatureProperties><etsi:SigningTime>2022-01-11T15:01:35-05:00</etsi:SigningTime><etsi:SigningCertificate><etsi:Cert><etsi:CertDigest><ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"></ds:DigestMethod><ds:DigestValue>TPZ4p+Mlku++qDn6JEKei6Oll6A=</ds:DigestValue></etsi:CertDigest><etsi:IssuerSerial><ds:X509IssuerName>CN=AC BANCO CENTRAL DEL ECUADOR,L=QUITO,OU=ENTIDAD DE CERTIFICACION DE INFORMACION-ECIBCE,O=BANCO CENTRAL DEL ECUADOR,C=EC</ds:X509IssuerName><ds:X509SerialNumber>1533586845</ds:X509SerialNumber></etsi:IssuerSerial></etsi:Cert></etsi:SigningCertificate></etsi:SignedSignatureProperties><etsi:SignedDataObjectProperties><etsi:DataObjectFormat ObjectReference="#Reference-ID-892155"><etsi:Description>contenido comprobante</etsi:Description><etsi:MimeType>text/xml</etsi:MimeType></etsi:DataObjectFormat></etsi:SignedDataObjectProperties></etsi:SignedProperties></etsi:QualifyingProperties></ds:Object></ds:Signature></comprobanteRetencion>
+<ds:Object Id="Signature174903-Object222454"><etsi:QualifyingProperties Target="#Signature174903"><etsi:SignedProperties Id="Signature174903-SignedProperties60491"><etsi:SignedSignatureProperties><etsi:SigningTime>2022-01-12T19:31:26-05:00</etsi:SigningTime><etsi:SigningCertificate><etsi:Cert><etsi:CertDigest><ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"></ds:DigestMethod><ds:DigestValue>TPZ4p+Mlku++qDn6JEKei6Oll6A=</ds:DigestValue></etsi:CertDigest><etsi:IssuerSerial><ds:X509IssuerName>CN=AC BANCO CENTRAL DEL ECUADOR,L=QUITO,OU=ENTIDAD DE CERTIFICACION DE INFORMACION-ECIBCE,O=BANCO CENTRAL DEL ECUADOR,C=EC</ds:X509IssuerName><ds:X509SerialNumber>1533586845</ds:X509SerialNumber></etsi:IssuerSerial></etsi:Cert></etsi:SigningCertificate></etsi:SignedSignatureProperties><etsi:SignedDataObjectProperties><etsi:DataObjectFormat ObjectReference="#Reference-ID-553249"><etsi:Description>contenido comprobante</etsi:Description><etsi:MimeType>text/xml</etsi:MimeType></etsi:DataObjectFormat></etsi:SignedDataObjectProperties></etsi:SignedProperties></etsi:QualifyingProperties></ds:Object></ds:Signature></comprobanteRetencion>

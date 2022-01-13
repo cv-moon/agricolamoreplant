@@ -148,20 +148,14 @@ class GuiaController extends Controller
                         )
                         ->where('guias.id', $id)
                         ->first(),
-                    'detalles' => DetalleGuia::join('productos', 'detalles_factura.producto_id', 'productos.id')
+                    'detalles' => DetalleGuia::join('productos', 'detalles_guia.producto_id', 'productos.id')
                         ->join('tarifas', 'productos.tarifa_id', 'tarifas.id')
                         ->select(
-                            'detalles_factura.factura_id',
                             'productos.cod_principal',
                             'productos.nombre',
-                            'productos.pre_venta',
-                            'detalles_factura.det_cantidad',
-                            'detalles_factura.det_descuento',
-                            'detalles_factura.det_total',
-                            'tarifas.valor',
-                            'tarifas.codigo'
+                            'detalles_guia.det_cantidad',
                         )
-                        ->where('detalles_factura.factura_id', $id)
+                        ->where('detalles_guia.guia_id', $id)
                         ->get()
                 ];
         } catch (\Throwable $th) {

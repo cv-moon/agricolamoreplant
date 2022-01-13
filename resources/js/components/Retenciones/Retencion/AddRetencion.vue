@@ -114,7 +114,9 @@
                 <td colspan="7" align="right">
                   <strong>Total a Retener:</strong>
                 </td>
-                <td align="right">$ {{ calculaTotalRetencion }}</td>
+                <td align="right">
+                  $ {{ (retencion.tot_retenido = calculaTotalRetencion) }}
+                </td>
               </tr>
             </tbody>
             <tbody v-else>
@@ -177,7 +179,7 @@ export default {
       for (let i = 0; i < this.arrayDetalle.length; i++) {
         res = res + parseFloat(this.arrayDetalle[i].val_retenido);
       }
-      return res;
+      return res.toFixed(2);
     },
   },
   methods: {
@@ -285,7 +287,7 @@ export default {
           axios
             .post("/api/factura/xml_retencion", {
               retencion: resp.data.retencion,
-              detalles: resp.data.detalles
+              detalles: resp.data.detalles,
             })
             .then((res) => {
               this.crearfacturacion(

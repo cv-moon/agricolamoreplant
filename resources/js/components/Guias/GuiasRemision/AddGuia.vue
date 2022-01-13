@@ -43,7 +43,7 @@
       <b class="text-primary">Datos de Guía</b>
       <hr class="mt-0" />
       <div class="form-group row">
-        <div class="col-sm-4">
+        <div class="col-sm-6">
           <label for="dat_cliente" class="col-sm-12 col-form-label"
             >Trasnportista:</label
           >
@@ -71,7 +71,7 @@
             </button>
           </div>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-3">
           <label for="fec_inicio" class="col-sm-12 col-form-label"
             >Fecha Inicio:</label
           >
@@ -81,7 +81,7 @@
             v-model="guia.fec_inicio"
           />
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-3">
           <label for="fec_fin" class="col-sm-12 col-form-label"
             >Fecha Fin:</label
           >

@@ -14500,6 +14500,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -14535,7 +14537,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         res = res + parseFloat(this.arrayDetalle[i].val_retenido);
       }
 
-      return res;
+      return res.toFixed(2);
     }
   },
   methods: {
@@ -95417,7 +95419,7 @@ var render = function() {
       _c("hr", { staticClass: "mt-0" }),
       _vm._v(" "),
       _c("div", { staticClass: "form-group row" }, [
-        _c("div", { staticClass: "col-sm-4" }, [
+        _c("div", { staticClass: "col-sm-6" }, [
           _c(
             "label",
             {
@@ -95472,7 +95474,7 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-sm-4" }, [
+        _c("div", { staticClass: "col-sm-3" }, [
           _c(
             "label",
             {
@@ -95505,7 +95507,7 @@ var render = function() {
           })
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-sm-4" }, [
+        _c("div", { staticClass: "col-sm-3" }, [
           _c(
             "label",
             {
@@ -99447,7 +99449,14 @@ var render = function() {
                           _vm._m(2),
                           _vm._v(" "),
                           _c("td", { attrs: { align: "right" } }, [
-                            _vm._v("$ " + _vm._s(_vm.calculaTotalRetencion))
+                            _vm._v(
+                              "\n                $ " +
+                                _vm._s(
+                                  (_vm.retencion.tot_retenido =
+                                    _vm.calculaTotalRetencion)
+                                ) +
+                                "\n              "
+                            )
                           ])
                         ]
                       )
@@ -99616,10 +99625,11 @@ var render = function() {
                 }),
                 _vm._v(" "),
                 _c("td", {
-                  domProps: { textContent: _vm._s(retencion.suj_retenido) }
+                  domProps: { textContent: _vm._s(retencion.nombre) }
                 }),
                 _vm._v(" "),
                 _c("td", {
+                  attrs: { align: "right" },
                   domProps: { textContent: _vm._s(retencion.tot_retenido) }
                 }),
                 _vm._v(" "),
@@ -126551,7 +126561,7 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\cristian.chuquitarco\Documents\Documents\Projects\agricolamoreplant\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/cvdev/Documentos/Proyectos/moreplant/resources/js/app.js */"./resources/js/app.js");
 
 
 /***/ }),
