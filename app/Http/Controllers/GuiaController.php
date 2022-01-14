@@ -141,7 +141,7 @@ class GuiaController extends Controller
                             'empresas.age_retencion',
                             'empresas.firma',
                             'empresas.fir_clave',
-                            'transportistas.nombre',
+                            'transportistas.nombre as transportista',
                             'transportistas.num_identificacion',
                             'transportistas.placa',
                             'identificaciones.codigo as tip_transportista'
@@ -277,6 +277,6 @@ class GuiaController extends Controller
         )
             ->first();
         $email = new sendEmail();
-        $email->forwarding('Factura', $datos, $empresa);
+        $email->forwarding('Guia', $datos, $empresa);
     }
 }

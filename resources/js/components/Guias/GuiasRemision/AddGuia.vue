@@ -559,13 +559,13 @@ export default {
           detalles: this.arrayDetalle,
         })
         .then((resp) => {
-          console.log(resp.data);
-          // axios
-          //   .post("/api/factura/xml_guia", {
-          //     guia: resp.data.guia,
-          //     detalles: resp.data.detalles,
-          //   })
-          //   .then((res) => {
+          axios
+            .post("/api/xml_guia", {
+              guia: resp.data.guia,
+              detalles: resp.data.detalles,
+            })
+            .then((res) => {
+              console.log(res)
           //     this.crearfacturacion(
           //       "/" + res.data.firma,
           //       res.data.clave,
@@ -574,7 +574,7 @@ export default {
           //       res.data.id,
           //       res.data.carpeta
           //     );
-          //   });
+            });
         })
         .catch((err) => {
           Swal.fire(

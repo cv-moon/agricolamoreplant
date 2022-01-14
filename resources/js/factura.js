@@ -267,7 +267,6 @@ function verificar_firma() {
 
 function validar_comprobante() {
     const getAll = ({ comprobante, tipo, id_factura, carpeta }) => {
-        console.log(carpeta)
         return new Promise(async (resolve, reject) => {
             try {
                 var service = 'Validar Comprobante';

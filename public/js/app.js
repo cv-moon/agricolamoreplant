@@ -12553,21 +12553,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         observaciones: this.guia.observaciones,
         detalles: this.arrayDetalle
       }).then(function (resp) {
-        console.log(resp.data); // axios
-        //   .post("/api/factura/xml_guia", {
-        //     guia: resp.data.guia,
-        //     detalles: resp.data.detalles,
-        //   })
-        //   .then((res) => {
-        //     this.crearfacturacion(
-        //       "/" + res.data.firma,
-        //       res.data.clave,
-        //       res.data.archivo,
-        //       res.data.tipo,
-        //       res.data.id,
-        //       res.data.carpeta
-        //     );
-        //   });
+        axios.post("/api/xml_guia", {
+          guia: resp.data.guia,
+          detalles: resp.data.detalles
+        }).then(function (res) {
+          console.log(res); //     this.crearfacturacion(
+          //       "/" + res.data.firma,
+          //       res.data.clave,
+          //       res.data.archivo,
+          //       res.data.tipo,
+          //       res.data.id,
+          //       res.data.carpeta
+          //     );
+        });
       })["catch"](function (err) {
         Swal.fire("Error!", "No se pudo realizar el registro. " + err, "error");
       });
@@ -14654,7 +14652,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         tot_retenido: this.retencion.tot_retenido,
         detalles: this.arrayDetalle
       }).then(function (resp) {
-        axios.post("/api/factura/xml_retencion", {
+        axios.post("/api/xml_retencion", {
           retencion: resp.data.retencion,
           detalles: resp.data.detalles
         }).then(function (res) {
@@ -16951,7 +16949,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         dias_credito: this.pago.plazo,
         detalles: this.arrayDetalle
       }).then(function (resp) {
-        axios.post("/api/factura/xml_factura", {
+        axios.post("/api/xml_factura", {
           factura: resp.data.factura,
           detalles: resp.data.detalles,
           credito: resp.data.credito
@@ -125358,7 +125356,6 @@ function validar_comprobante() {
         tipo = _ref9.tipo,
         id_factura = _ref9.id_factura,
         carpeta = _ref9.carpeta;
-    console.log(carpeta);
     return new Promise( /*#__PURE__*/function () {
       var _ref10 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5(resolve, reject) {
         var service, xmlDoc, $xml, $claveAcceso, _yield$axios$post3, data;

@@ -193,11 +193,11 @@ Route::middleware('auth')->group(function () {
     Route::post('api/respfactura', 'FacturacionController@respfactura');
     
     // Rutas de XML
-    Route::post('api/factura/xml_factura', 'XmlController@efactura');
-    Route::post('api/factura/xml_guia', 'XmlController@e_guia');
-    Route::post('api/factura/xml_nota_credito', 'XmlController@enotacredito');
-    Route::post('api/factura/xml_nota_debito', 'XmlController@enotadebito');
-    Route::post('api/factura/xml_retencion', 'XmlController@eRetencion');
+    Route::post('api/xml_factura', 'XmlController@efactura');
+    Route::post('api/xml_retencion', 'XmlController@eRetencion');
+    Route::post('api/xml_guia', 'XmlController@eGuia');
+    Route::post('api/xml_nota_credito', 'XmlController@enotacredito');
+    Route::post('api/xml_nota_debito', 'XmlController@enotadebito');
     
     // Rutas de Arqueos - "Cajas"
     Route::get('api/arqueos', 'ArqueoController@index');

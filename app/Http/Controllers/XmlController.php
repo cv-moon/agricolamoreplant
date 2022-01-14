@@ -538,99 +538,104 @@ class XmlController extends Controller
             ];
     }
 
-    public function e_guia(Request $request)
+    public function eGuia(Request $request)
     {
+        if (!file_exists('archivos/comprobantes/guias')) {
+            mkdir('archivos/comprobantes/guias', 0777, true);
+        }
+
+        file_put_contents("archivos/comprobantes/guias/" . $request->retencion['cla_acceso'] . ".xml", "");
+
         $xml = new XMLWriter();
-        $xml->openUri(constant("DATA_EMPRESA") . $request->id_empresa . '/comprobantes/guia/' . $request->clave_acceso . ".xml");
+        $xml->openUri("archivos/comprobantes/guias/" . $request->retencion['cla_acceso'] . ".xml");
         $xml->setIndent(true);
         $xml->setIndentString("\t");
         $xml->startDocument('1.0', 'utf-8');
+
         $xml->startElement("guiaRemision");
         $xml->writeAttribute("id", "comprobante");
         $xml->writeAttribute("version", "1.0.0");
         //infoTributaria
 
         $xml->startElement("infoTributaria");
-
-        $xml->startElement("ambiente");
-        $xml->text($request->ambiente);
-        $xml->endElement();
+        if ($request->retencion['tip_ambiente'] == 0) {
+            $xml->startElement("ambiente");
+            $xml->text(1);
+            $xml->endElement();
+        } else if ($request->retencion['tip_ambiente'] == 1) {
+            $xml->startElement("ambiente");
+            $xml->text(2);
+            $xml->endElement();
+        }
 
         $xml->startElement("tipoEmision");
-        $xml->text($request->tipo_emision);
+        $xml->text($request->retencion['tip_emision']);
         $xml->endElement();
 
         $xml->startElement("razonSocial");
-        $xml->text($request->razon_social);
+        $xml->text($request->retencion['raz_social']);
         $xml->endElement();
 
         $xml->startElement("nombreComercial");
-        $xml->text($request->nombre_empresa);
+        $xml->text($request->retencion['nom_comercial']);
         $xml->endElement();
 
         $xml->startElement("ruc");
-        $xml->text($request->ruc_empresa);
+        $xml->text($request->retencion['ruc']);
         $xml->endElement();
 
         $xml->startElement("claveAcceso");
-        $xml->text($request->clave_acceso);
+        $xml->text($request->retencion['cla_acceso']);
         $xml->endElement();
+
         $xml->startElement("codDoc");
-        $xml->text('01');
+        $xml->text('06');
         $xml->endElement();
 
         $xml->startElement("estab");
-        $xml->text(str_pad($request->codigoes, 3, "0", STR_PAD_LEFT));
+        $xml->text(str_pad($request->retencion['numero'], 3, "0", STR_PAD_LEFT));
         $xml->endElement();
 
         $xml->startElement("ptoEmi");
-        $xml->text(str_pad($request->codigope, 3, "0", STR_PAD_LEFT));
+        $xml->text(str_pad($request->retencion['codigo'], 3, "0", STR_PAD_LEFT));
         $xml->endElement();
 
         $xml->startElement("secuencial");
-        $xml->text(substr($request->clave_acceso, -19, -10));
+        $xml->text(substr($request->retencion['cla_acceso'], -19, -10));
         $xml->endElement();
 
         $xml->startElement("dirMatriz");
-        $xml->text($request->direccion_empresa);
+        $xml->text($request->retencion['dir_matriz']);
         $xml->endElement();
+
+        // if ($request->retencion['reg_microempresa'] == 1) {
+        //     $xml->startElement("regimenMicroempresas");
+        //     $xml->text('CONTRIBUYENTE REGIMEN MICROEMPRESAS');
+        //     $xml->endElement();
+        // }
 
         $xml->endElement();
 
         $xml->startElement("infoGuiaRemision");
 
         $xml->startElement("dirEstablecimiento");
-        $xml->text($request->direccion_empresa);
+        $xml->text($request->retencion['dir_establecimiento']);
         $xml->endElement();
 
         $xml->startElement("dirPartida");
-        $xml->text($request->direccion);
+        $xml->text($request->retencion['dir_establecimiento']);
         $xml->endElement();
 
         $xml->startElement("razonSocialTransportista");
-        $xml->text($request->razon_social_tr);
+        $xml->text($request->retencion['transportista']);
+        $xml->endElement();
+        
+        $xml->startElement("tipoIdentificacionTransportista");
+        $xml->text($request->retencion['tip_transportista']);
         $xml->endElement();
 
-        if ($request->tipo_identificacion_tr == "Cédula de Identidad") {
-            $xml->startElement("tipoIdentificacionTransportista");
-            $xml->text('05');
-            $xml->endElement();
-        } else if ($request->tipo_identificacion_tr == "Ruc") {
-            $xml->startElement("tipoIdentificacionTransportista");
-            $xml->text('04');
-            $xml->endElement();
-        } else if ($request->tipo_identificacion_tr == "Pasaporte") {
-            $xml->startElement("tipoIdentificacionTransportista");
-            $xml->text('06');
-            $xml->endElement();
-        } else if ($request->tipo_identificacion_tr == "Consumidor Final") {
-            $xml->startElement("tipoIdentificacionTransportista");
-            $xml->text('07');
-            $xml->endElement();
-        }
-
         $xml->startElement("rucTransportista");
-        $xml->text($request->identificacion_tr);
+        $xml->text($request->retencion['num_identificacion']);
         $xml->endElement();
 
         if ($request->obligado_contabilidad == 0) {

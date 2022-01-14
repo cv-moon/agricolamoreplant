@@ -285,7 +285,7 @@ export default {
         })
         .then((resp) => {
           axios
-            .post("/api/factura/xml_retencion", {
+            .post("/api/xml_retencion", {
               retencion: resp.data.retencion,
               detalles: resp.data.detalles,
             })

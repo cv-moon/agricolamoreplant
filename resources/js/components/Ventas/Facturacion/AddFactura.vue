@@ -863,7 +863,7 @@ identificacion_id:0,
         })
         .then((resp) => {
           axios
-            .post("/api/factura/xml_factura", {
+            .post("/api/xml_factura", {
               factura: resp.data.factura,
               detalles: resp.data.detalles,
               credito: resp.data.credito,
