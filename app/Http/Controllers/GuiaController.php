@@ -129,6 +129,7 @@ class GuiaController extends Controller
                             'guias.motivo',
                             'guias.ruta',
                             'facturas.cla_acceso as factura',
+                            'facturas.fec_emision as fec_emision_comprobante',
                             'puntos_emision.codigo',
                             'establecimientos.numero',
                             'establecimientos.nom_comercial',
@@ -144,6 +145,9 @@ class GuiaController extends Controller
                             'transportistas.nombre as transportista',
                             'transportistas.num_identificacion',
                             'transportistas.placa',
+                            'transportistas.telefonos as tra_telefonos',
+                            'transportistas.email as tra_email',
+                            'transportistas.direccion as tra_direccion',
                             'identificaciones.codigo as tip_transportista'
                         )
                         ->where('guias.id', $id)

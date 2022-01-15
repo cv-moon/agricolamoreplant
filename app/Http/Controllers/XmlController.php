@@ -239,69 +239,7 @@ class XmlController extends Controller
             $xml->text($det["det_cantidad"]);
             $xml->endElement();
 
-            $xml->startElement('precioUnitario');
-            $xml->text($det["pre_venta"]);
-            $xml->endElement();
-
-            if ($det["det_descuento"]) {
-                $xml->startElement('descuento');
-                $xml->text($det["det_descuento"]);
-                $xml->endElement();
-            } else {
-                $xml->startElement('descuento');
-                $xml->text('0.00');
-                $xml->endElement();
-            }
-
-            $xml->startElement('precioTotalSinImpuesto');
-            $xml->text($det["det_total"]);
-            $xml->endElement();
-
-            // if ($det["descripcion"]) {
-            //     $xml->startElement('detallesAdicionales');
-            //     $xml->startElement('detAdicional');
-            //     $xml->writeAttribute("nombre", "descripcion");
-            //     $xml->writeAttribute("valor", $det["descripcion"]);
-            //     $xml->endElement();
-            //     $xml->endElement();
-            // }
-
-            $xml->startElement('impuestos');
-            $xml->startElement('impuesto');
-
-            $xml->startElement('codigo');
-            $xml->text(2);
-            $xml->endElement();
-
-            $xml->startElement("codigoPorcentaje");
-            $xml->text($det["codigo"]);
-            $xml->endElement();
-
-            if ($det["codigo"] == 2) {
-                $xml->startElement("tarifa");
-                $xml->text('12.00');
-                $xml->endElement();
-            } else {
-                $xml->startElement("tarifa");
-                $xml->text('0.00');
-                $xml->endElement();
-            }
-
-            $xml->startElement('baseImponible');
-            $xml->text($det['det_total']);
-            $xml->endElement();
-
-            if ($det["codigo"] == 2) {
-                $xml->startElement("valor");
-                $xml->text(number_format($det['det_total'] * 0.12, 2));
-                $xml->endElement();
-            } else {
-                $xml->startElement("valor");
-                $xml->text('0.00');
-                $xml->endElement();
-            }
-            $xml->endElement();
-            $xml->endElement();
+            
             $xml->endElement();
         }
         $xml->endElement();
@@ -544,10 +482,10 @@ class XmlController extends Controller
             mkdir('archivos/comprobantes/guias', 0777, true);
         }
 
-        file_put_contents("archivos/comprobantes/guias/" . $request->retencion['cla_acceso'] . ".xml", "");
+        file_put_contents("archivos/comprobantes/guias/" . $request->guia['cla_acceso'] . ".xml", "");
 
         $xml = new XMLWriter();
-        $xml->openUri("archivos/comprobantes/guias/" . $request->retencion['cla_acceso'] . ".xml");
+        $xml->openUri("archivos/comprobantes/guias/" . $request->guia['cla_acceso'] . ".xml");
         $xml->setIndent(true);
         $xml->setIndentString("\t");
         $xml->startDocument('1.0', 'utf-8');
@@ -558,34 +496,34 @@ class XmlController extends Controller
         //infoTributaria
 
         $xml->startElement("infoTributaria");
-        if ($request->retencion['tip_ambiente'] == 0) {
+        if ($request->guia['tip_ambiente'] == 0) {
             $xml->startElement("ambiente");
             $xml->text(1);
             $xml->endElement();
-        } else if ($request->retencion['tip_ambiente'] == 1) {
+        } else if ($request->guia['tip_ambiente'] == 1) {
             $xml->startElement("ambiente");
             $xml->text(2);
             $xml->endElement();
         }
 
         $xml->startElement("tipoEmision");
-        $xml->text($request->retencion['tip_emision']);
+        $xml->text($request->guia['tip_emision']);
         $xml->endElement();
 
         $xml->startElement("razonSocial");
-        $xml->text($request->retencion['raz_social']);
+        $xml->text($request->guia['raz_social']);
         $xml->endElement();
 
         $xml->startElement("nombreComercial");
-        $xml->text($request->retencion['nom_comercial']);
+        $xml->text($request->guia['nom_comercial']);
         $xml->endElement();
 
         $xml->startElement("ruc");
-        $xml->text($request->retencion['ruc']);
+        $xml->text($request->guia['ruc']);
         $xml->endElement();
 
         $xml->startElement("claveAcceso");
-        $xml->text($request->retencion['cla_acceso']);
+        $xml->text($request->guia['cla_acceso']);
         $xml->endElement();
 
         $xml->startElement("codDoc");
@@ -593,22 +531,22 @@ class XmlController extends Controller
         $xml->endElement();
 
         $xml->startElement("estab");
-        $xml->text(str_pad($request->retencion['numero'], 3, "0", STR_PAD_LEFT));
+        $xml->text(str_pad($request->guia['numero'], 3, "0", STR_PAD_LEFT));
         $xml->endElement();
 
         $xml->startElement("ptoEmi");
-        $xml->text(str_pad($request->retencion['codigo'], 3, "0", STR_PAD_LEFT));
+        $xml->text(str_pad($request->guia['codigo'], 3, "0", STR_PAD_LEFT));
         $xml->endElement();
 
         $xml->startElement("secuencial");
-        $xml->text(substr($request->retencion['cla_acceso'], -19, -10));
+        $xml->text(substr($request->guia['cla_acceso'], -19, -10));
         $xml->endElement();
 
         $xml->startElement("dirMatriz");
-        $xml->text($request->retencion['dir_matriz']);
+        $xml->text($request->guia['dir_matriz']);
         $xml->endElement();
 
-        // if ($request->retencion['reg_microempresa'] == 1) {
+        // if ($request->guia['reg_microempresa'] == 1) {
         //     $xml->startElement("regimenMicroempresas");
         //     $xml->text('CONTRIBUYENTE REGIMEN MICROEMPRESAS');
         //     $xml->endElement();
@@ -619,44 +557,43 @@ class XmlController extends Controller
         $xml->startElement("infoGuiaRemision");
 
         $xml->startElement("dirEstablecimiento");
-        $xml->text($request->retencion['dir_establecimiento']);
+        $xml->text($request->guia['dir_establecimiento']);
         $xml->endElement();
 
         $xml->startElement("dirPartida");
-        $xml->text($request->retencion['dir_establecimiento']);
+        $xml->text($request->guia['dir_establecimiento']);
         $xml->endElement();
 
         $xml->startElement("razonSocialTransportista");
-        $xml->text($request->retencion['transportista']);
+        $xml->text($request->guia['transportista']);
         $xml->endElement();
         
         $xml->startElement("tipoIdentificacionTransportista");
-        $xml->text($request->retencion['tip_transportista']);
+        $xml->text($request->guia['tip_transportista']);
         $xml->endElement();
 
         $xml->startElement("rucTransportista");
-        $xml->text($request->retencion['num_identificacion']);
+        $xml->text($request->guia['num_identificacion']);
         $xml->endElement();
 
-        if ($request->obligado_contabilidad == 0) {
-            $obligado = "NO";
-        } else {
-            $obligado = "SI";
-        }
         $xml->startElement("obligadoContabilidad");
-        $xml->text($obligado);
+        if ($request->guia['obli_contabilidad'] == 1) {
+            $xml->text('SI');
+        } elseif ($request->guia['obli_contabilidad'] == 0) {
+            $xml->text('NO');
+        }
         $xml->endElement();
 
         $xml->startElement("fechaIniTransporte");
-        $xml->text(date('d/m/Y', strtotime($request->fecha_inicio_tr)));
+        $xml->text(date('d/m/Y', strtotime($request->guia['fec_inicio'])));
         $xml->endElement();
 
         $xml->startElement("fechaFinTransporte");
-        $xml->text(date('d/m/Y', strtotime($request->fecha_fin_tr)));
+        $xml->text(date('d/m/Y', strtotime($request->guia['fec_fin'])));
         $xml->endElement();
 
         $xml->startElement("placa");
-        $xml->text($request->placa_tr);
+        $xml->text($request->guia['placa']);
         $xml->endElement();
 
         $xml->endElement();
@@ -665,74 +602,75 @@ class XmlController extends Controller
         $xml->startElement("destinatario");
 
         $xml->startElement("identificacionDestinatario");
-        $xml->text($request->identificacion);
+        $xml->text($request->guia['des_identificacion']);
         $xml->endElement();
 
         $xml->startElement("razonSocialDestinatario");
-        $xml->text($request->nombre);
+        $xml->text($request->guia['des_nombre']);
         $xml->endElement();
 
         $xml->startElement("dirDestinatario");
-        $xml->text($request->direccion);
+        $xml->text($request->guia['des_direccion']);
         $xml->endElement();
 
         $xml->startElement("motivoTraslado");
-        $xml->text($request->motivo_translado_tr);
+        $xml->text($request->guia['motivo']);
         $xml->endElement();
 
         $xml->startElement("docAduaneroUnico");
         $xml->text($request->doc_aduanero_tr);
         $xml->endElement();
-        if ($request->cod_establecimiento_tr) {
+
+        if ($request->guia['des_establecimiento']) {
             $xml->startElement("codEstabDestino");
-            $xml->text($request->cod_establecimiento_tr);
-            $xml->endElement();
-        }
-        if ($request->ruta_tr) {
-            $xml->startElement("ruta");
-            $xml->text($request->ruta_tr);
-            $xml->endElement();
-        }
-        if ($request->cod_sustento_tr) {
-            $xml->startElement("codDocSustento");
-            $xml->text(str_pad($request->cod_sustento_tr, 2, "0", STR_PAD_LEFT));
+            $xml->text($request->guia['des_establecimiento']);
             $xml->endElement();
         }
 
+        if ($request->guia['ruta']) {
+            $xml->startElement("ruta");
+            $xml->text($request->guia['ruta']);
+            $xml->endElement();
+        }
+        
+            $xml->startElement("codDocSustento");
+            $xml->text('01');
+            $xml->endElement();
+        
+
         $xml->startElement("numDocSustento");
-        $xml->text(str_pad($request->codigoes, 3, "0", STR_PAD_LEFT) . '-' . str_pad($request->codigope, 3, "0", STR_PAD_LEFT) . "-" . "000000001");
+        $xml->text(substr($request->guia['factura'], 24, 26). '-' . substr($request->guia['factura'], 27, 29) . "-" . substr($request->guia['factura'], 30, 38));
         $xml->endElement();
-        $rand = rand(000000001, 9999999999);
+        
         if ($request->num_aut_sustento_tr) {
             $xml->startElement("numAutDocSustento");
-            $xml->text($rand);
+            $xml->text($request->guia['factura']);
             $xml->endElement();
         }
 
         $xml->startElement("fechaEmisionDocSustento");
-        $xml->text(date('d/m/Y', strtotime($request->fcrea)));
+        $xml->text(date('d/m/Y', strtotime($request->guia['fec_emision_comprobante'])));
         $xml->endElement();
 
         $xml->startElement("detalles");
 
-        // $det = DetalleGuiaRemision::select("*")->where("id_guia_remision", "=", $request->id_guia)->get();
-        // for ($i = 0; $i < count($det); $i++) {
-        //     $xml->startElement("detalle");
+        for ($i = 0; $i < count($request->detalles); $i++) {
+            $xml->startElement("detalle");
 
-        //     $xml->startElement("codigoInterno");
-        //     $xml->text($det[$i]["codigo_interno"]);
-        //     $xml->endElement();
+            $xml->startElement("codigoInterno");
+            $xml->text($det[$i]["codigo_interno"]);
+            $xml->endElement();
 
-        //     $xml->startElement("descripcion");
-        //     $xml->text($det[$i]["descripcion"]);
-        //     $xml->endElement();
+            $xml->startElement("descripcion");
+            $xml->text($det[$i]["descripcion"]);
+            $xml->endElement();
 
-        //     $xml->startElement("cantidad");
-        //     $xml->text($det[$i]["cantidad"]);
-        //     $xml->endElement();
+            $xml->startElement("cantidad");
+            $xml->text($det[$i]["cantidad"]);
+            $xml->endElement();
 
-        //     $xml->endElement();
-        // }
+            $xml->endElement();
+        }
 
         $xml->endElement();
 
