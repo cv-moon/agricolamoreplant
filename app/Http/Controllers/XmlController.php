@@ -239,7 +239,7 @@ class XmlController extends Controller
             $xml->text($det["det_cantidad"]);
             $xml->endElement();
 
-            
+
             $xml->endElement();
         }
         $xml->endElement();
@@ -411,8 +411,8 @@ class XmlController extends Controller
         $xml->startElement("periodoFiscal");
         $xml->text(date('m/Y', strtotime($request->retencion['fec_emision'])));
         $xml->endElement();
-        
-        
+
+
         $xml->endElement();
 
         $xml->startElement('impuestos');
@@ -455,12 +455,12 @@ class XmlController extends Controller
         }
         $xml->endElement();
         $xml->startElement('infoAdicional');
-        
+
         $xml->startElement('campoAdicional');
         $xml->writeAttribute("nombre", "Email");
         $xml->text($request->retencion['email']);
         $xml->endElement();
-        
+
         $xml->endElement();
 
         $xml->endElement();
@@ -567,7 +567,7 @@ class XmlController extends Controller
         $xml->startElement("razonSocialTransportista");
         $xml->text($request->guia['transportista']);
         $xml->endElement();
-        
+
         $xml->startElement("tipoIdentificacionTransportista");
         $xml->text($request->guia['tip_transportista']);
         $xml->endElement();
@@ -632,16 +632,16 @@ class XmlController extends Controller
             $xml->text($request->guia['ruta']);
             $xml->endElement();
         }
-        
-            $xml->startElement("codDocSustento");
-            $xml->text('01');
-            $xml->endElement();
-        
+
+        $xml->startElement("codDocSustento");
+        $xml->text('01');
+        $xml->endElement();
+
 
         $xml->startElement("numDocSustento");
-        $xml->text(substr($request->guia['factura'], 24, 26). '-' . substr($request->guia['factura'], 27, 29) . "-" . substr($request->guia['factura'], 30, 38));
+        $xml->text(substr($request->guia['factura'], 24, 26) . '-' . substr($request->guia['factura'], 27, 29) . "-" . substr($request->guia['factura'], 30, 38));
         $xml->endElement();
-        
+
         if ($request->num_aut_sustento_tr) {
             $xml->startElement("numAutDocSustento");
             $xml->text($request->guia['factura']);
@@ -654,19 +654,19 @@ class XmlController extends Controller
 
         $xml->startElement("detalles");
 
-        for ($i = 0; $i < count($request->detalles); $i++) {
+        foreach ($request->detalles as $key => $det) {
             $xml->startElement("detalle");
 
             $xml->startElement("codigoInterno");
-            $xml->text($det[$i]["codigo_interno"]);
+            $xml->text($det["codigo_interno"]);
             $xml->endElement();
 
             $xml->startElement("descripcion");
-            $xml->text($det[$i]["descripcion"]);
+            $xml->text($det["descripcion"]);
             $xml->endElement();
 
             $xml->startElement("cantidad");
-            $xml->text($det[$i]["cantidad"]);
+            $xml->text($det["cantidad"]);
             $xml->endElement();
 
             $xml->endElement();
@@ -676,11 +676,27 @@ class XmlController extends Controller
 
         $xml->endElement();
         $xml->endElement();
-        $xml->startElement("infoAdicional");
-        $xml->startElement("campoAdicional");
-        $xml->writeAttribute("nombre", "email");
-        $xml->text($request->email);
+        $xml->startElement('infoAdicional');
+        $xml->startElement('campoAdicional');
+        $xml->writeAttribute("nombre", "Dirección");
+        $xml->text($request->guia['dir_cliente']);
         $xml->endElement();
+
+        if ($request->guia['telefonos']) {
+
+            $xml->startElement('campoAdicional');
+            $xml->writeAttribute("nombre", "Teléfono");
+            $xml->text($request->guia['telefonos']);
+            $xml->endElement();
+        } else {
+            $xml->startElement('campoAdicional');
+            $xml->writeAttribute("nombre", "Teléfono");
+            $xml->text('sin número');
+            $xml->endElement();
+        }
+        $xml->startElement('campoAdicional');
+        $xml->writeAttribute("nombre", "Email");
+        $xml->text($request->guia['email']);
         $xml->endElement();
         $xml->endElement();
         $xml->endDocument();
