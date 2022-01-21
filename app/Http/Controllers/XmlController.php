@@ -617,15 +617,13 @@ class XmlController extends Controller
         $xml->text($request->guia['motivo']);
         $xml->endElement();
 
-        $xml->startElement("docAduaneroUnico");
-        $xml->text($request->doc_aduanero_tr);
-        $xml->endElement();
+        // $xml->startElement("docAduaneroUnico");
+        // $xml->text($request->doc_aduanero_tr);
+        // $xml->endElement();
 
-        if ($request->guia['des_establecimiento']) {
-            $xml->startElement("codEstabDestino");
-            $xml->text($request->guia['des_establecimiento']);
-            $xml->endElement();
-        }
+        $xml->startElement("codEstabDestino");
+        $xml->text(str_pad($request->guia['numero'], 3, "0", STR_PAD_LEFT));
+        $xml->endElement();
 
         if ($request->guia['ruta']) {
             $xml->startElement("ruta");
@@ -639,7 +637,7 @@ class XmlController extends Controller
 
 
         $xml->startElement("numDocSustento");
-        $xml->text(substr($request->guia['factura'], 24, 26) . '-' . substr($request->guia['factura'], 27, 29) . "-" . substr($request->guia['factura'], 30, 38));
+        $xml->text(substr($request->guia['factura'], 24, 3) . substr($request->guia['factura'], 27, 3) . substr($request->guia['factura'], 30, 9));
         $xml->endElement();
 
         if ($request->num_aut_sustento_tr) {
@@ -658,15 +656,15 @@ class XmlController extends Controller
             $xml->startElement("detalle");
 
             $xml->startElement("codigoInterno");
-            $xml->text($det["codigo_interno"]);
+            $xml->text($det["cod_principal"]);
             $xml->endElement();
 
             $xml->startElement("descripcion");
-            $xml->text($det["descripcion"]);
+            $xml->text($det["nombre"]);
             $xml->endElement();
 
             $xml->startElement("cantidad");
-            $xml->text($det["cantidad"]);
+            $xml->text($det["det_cantidad"]);
             $xml->endElement();
 
             $xml->endElement();
@@ -679,14 +677,14 @@ class XmlController extends Controller
         $xml->startElement('infoAdicional');
         $xml->startElement('campoAdicional');
         $xml->writeAttribute("nombre", "Dirección");
-        $xml->text($request->guia['dir_cliente']);
+        $xml->text($request->guia['tra_direccion']);
         $xml->endElement();
 
-        if ($request->guia['telefonos']) {
+        if ($request->guia['tra_telefonos']) {
 
             $xml->startElement('campoAdicional');
             $xml->writeAttribute("nombre", "Teléfono");
-            $xml->text($request->guia['telefonos']);
+            $xml->text($request->guia['tra_telefonos']);
             $xml->endElement();
         } else {
             $xml->startElement('campoAdicional');
@@ -696,9 +694,18 @@ class XmlController extends Controller
         }
         $xml->startElement('campoAdicional');
         $xml->writeAttribute("nombre", "Email");
-        $xml->text($request->guia['email']);
+        $xml->text($request->guia['tra_email']);
         $xml->endElement();
         $xml->endElement();
         $xml->endDocument();
+
+        return [
+            'firma' => $request->guia['firma'],
+            'clave' => $request->guia['fir_clave'],
+            'tipo' => 'guia',
+            'archivo' => 'archivos/comprobantes/guias/' . $request->guia['cla_acceso'] . ".xml",
+            'carpeta' => 'archivos/comprobantes/guias/',
+            'id' => $request->guia['id']
+        ];
     }
 }
