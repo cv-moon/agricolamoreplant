@@ -637,7 +637,7 @@ class XmlController extends Controller
 
 
         $xml->startElement("numDocSustento");
-        $xml->text(substr($request->guia['factura'], 24, 3) . substr($request->guia['factura'], 27, 3) . substr($request->guia['factura'], 30, 9));
+        $xml->text(substr($request->guia['factura'], 24, 3) . '-' . substr($request->guia['factura'], 27, 3) . '-' . substr($request->guia['factura'], 30, 9));
         $xml->endElement();
 
         if ($request->num_aut_sustento_tr) {

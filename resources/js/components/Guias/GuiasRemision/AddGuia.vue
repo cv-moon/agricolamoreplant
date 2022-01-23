@@ -244,7 +244,12 @@
     </div>
     <div class="modal-footer">
       <router-link to="/guias" class="btn btn-danger"> Cancelar </router-link>
-      <button type="button" class="btn btn-success" @click="guardar">
+      <button
+        type="button"
+        class="btn btn-success"
+        @click="guardar"
+        :disabled="disabled"
+      >
         Guardar
       </button>
     </div>
@@ -422,6 +427,7 @@ export default {
   data() {
     return {
       selected: null,
+      disabled: false,
 
       guia: {
         factura_id: 0,
@@ -539,6 +545,7 @@ export default {
       if (condiciones.length) {
         return;
       }
+      this.disabled = true;
       axios
         .post("/api/guia/guardar", {
           factura_id: this.guia.factura_id,
@@ -565,15 +572,14 @@ export default {
               detalles: resp.data.detalles,
             })
             .then((res) => {
-              console.log(res)
-          //     this.crearfacturacion(
-          //       "/" + res.data.firma,
-          //       res.data.clave,
-          //       res.data.archivo,
-          //       res.data.tipo,
-          //       res.data.id,
-          //       res.data.carpeta
-          //     );
+              this.crearfacturacion(
+                "/" + res.data.firma,
+                res.data.clave,
+                res.data.archivo,
+                res.data.tipo,
+                res.data.id,
+                res.data.carpeta
+              );
             });
         })
         .catch((err) => {

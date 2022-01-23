@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Empresa;
 use App\Models\Factura;
+use App\Models\Guia;
 use App\Models\Retencion;
 use DOMDocument;
 use generarPDF;
@@ -31,11 +32,12 @@ class FacturacionController extends Controller
         //     $fact = Notacredito::findOrFail($request->id);
         //     $fact->respuesta = $request->estado;
         //     $fact->save();
-        // } else if ($tipo == 'guia_remision_venta') {
-        //     $fact = Guia_remision::findOrFail($request->id);
-        //     $fact->respuesta = $request->estado;
-        //     $fact->save();
-        // }
+        //} 
+        else if ($tipo == 'guia') {
+            $guia = Guia::findOrFail($request->id);
+            $guia->respuesta = $request->estado;
+            $guia->save();
+        }
     }
     public function leerFactura(Request $request)
     {
@@ -111,6 +113,9 @@ class FacturacionController extends Controller
         if (!file_exists('archivos/comprobantes/retenciones/errores')) {
             mkdir('archivos/comprobantes/retenciones/errores', 0777, true);
         }
+        if (!file_exists('archivos/comprobantes/guias/errores')) {
+            mkdir('archivos/comprobantes/guias/errores', 0777, true);
+        }
         header("Content-Type: text/plain");
         //session_start();
 
@@ -182,9 +187,9 @@ class FacturacionController extends Controller
     public function autorizacionComprobantephp(Request $request)
     {
         //session_start();
-        if (!file_exists('archivos/comprobantes/facturas/errores')) {
-            mkdir('archivos/comprobantes/facturas/errores', 0777, true);
-        }
+        // if (!file_exists('archivos/comprobantes/facturas/errores')) {
+        //     mkdir('archivos/comprobantes/facturas/errores', 0777, true);
+        // }
         $claveAcceso = $request->claveAcceso;
         $service = $request->service;
         $carpeta = $request->carpeta;
@@ -261,18 +266,18 @@ class FacturacionController extends Controller
                             $facturaPDF = new generarPDF();
                             $facturaPDF->facturaPDF($dataComprobante, $claveAcceso, $id_empresa, $imagen, $empresas);
                         }
-                        if ($dataComprobante->infoNotaCredito) {
-                            $facturaPDF = new generarPDF();
-                            $facturaPDF->notaCreditoPDF($dataComprobante, $claveAcceso, $id_empresa, $imagen, $empresas);
-                        }
+                        // if ($dataComprobante->infoNotaCredito) {
+                        //     $facturaPDF = new generarPDF();
+                        //     $facturaPDF->notaCreditoPDF($dataComprobante, $claveAcceso, $id_empresa, $imagen, $empresas);
+                        // }
                         if ($dataComprobante->infoCompRetencion) {
                             $facturaPDF = new generarPDF();
                             $facturaPDF->comprobanteRetencionPDF($dataComprobante, $claveAcceso, $id_empresa, $imagen, $empresas);
                         }
-                        // if ($dataComprobante->infoGuiaRemision) {
-                        //     $facturaPDF = new generarPDF();
-                        //     $facturaPDF->guiaRemisionPDF($dataComprobante, $claveAcceso, $id_empresa, $imagen, $empresas);
-                        // }
+                        if ($dataComprobante->infoGuiaRemision) {
+                            $guiaPDF = new generarPDF();
+                            $guiaPDF->guiaRemisionPDF($dataComprobante, $claveAcceso, $id_empresa, $imagen, $empresas);
+                        }
                         // if ($dataComprobante->infoNotaDebito) {
                         //     $facturaPDF = new generarPDF();
                         //     $facturaPDF->notaDebitoPDF($dataComprobante, $claveAcceso, $id_empresa, $imagen, $empresas);

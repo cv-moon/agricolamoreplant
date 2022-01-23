@@ -12406,11 +12406,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       selected: null,
+      disabled: false,
       guia: {
         factura_id: 0,
         punto_id: 0,
@@ -12529,12 +12535,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return this.guia.errors;
     },
     guardar: function guardar() {
+      var _this2 = this;
+
       var condiciones = this.validaCampos();
 
       if (condiciones.length) {
         return;
       }
 
+      this.disabled = true;
       axios.post("/api/guia/guardar", {
         factura_id: this.guia.factura_id,
         punto_id: this.guia.punto_id,
@@ -12557,40 +12566,33 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           guia: resp.data.guia,
           detalles: resp.data.detalles
         }).then(function (res) {
-          console.log(res); //     this.crearfacturacion(
-          //       "/" + res.data.firma,
-          //       res.data.clave,
-          //       res.data.archivo,
-          //       res.data.tipo,
-          //       res.data.id,
-          //       res.data.carpeta
-          //     );
+          _this2.crearfacturacion("/" + res.data.firma, res.data.clave, res.data.archivo, res.data.tipo, res.data.id, res.data.carpeta);
         });
       })["catch"](function (err) {
         Swal.fire("Error!", "No se pudo realizar el registro. " + err, "error");
       });
     },
     selectTransportista: function selectTransportista(search, loading) {
-      var _this2 = this;
+      var _this3 = this;
 
       loading(true);
       axios.get("/api/transportista/buscar?cli=" + search).then(function (resp) {
-        _this2.arrayTransportista = resp.data;
+        _this3.arrayTransportista = resp.data;
         loading(false);
       })["catch"](function (err) {
         console.log(err);
       });
     },
     selectComprobantes: function selectComprobantes() {
-      var _this3 = this;
+      var _this4 = this;
 
       axios.get("/api/guia/facturas").then(function (resp) {
-        _this3.arrayFacturas = resp.data;
+        _this4.arrayFacturas = resp.data;
       });
     },
     // Métodos para los detalles
     getDetails: function getDetails() {
-      var _this4 = this;
+      var _this5 = this;
 
       var id = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
       axios.get("/api/guia/detalles", {
@@ -12598,10 +12600,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           factura: id
         }
       }).then(function (resp) {
-        _this4.arrayDetalle = resp.data.detalles;
-        _this4.guia.des_nombre = resp.data.destinatario.nombre;
-        _this4.guia.des_identificacion = resp.data.destinatario.num_identificacion;
-        _this4.guia.des_direccion = resp.data.destinatario.direccion;
+        _this5.arrayDetalle = resp.data.detalles;
+        _this5.guia.des_nombre = resp.data.destinatario.nombre;
+        _this5.guia.des_identificacion = resp.data.destinatario.num_identificacion;
+        _this5.guia.des_direccion = resp.data.destinatario.direccion;
       });
     },
     eliminarDetalle: function eliminarDetalle(index) {
@@ -12638,7 +12640,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return this.transportista.errors;
     },
     guardarTransportista: function guardarTransportista() {
-      var _this5 = this;
+      var _this6 = this;
 
       var condiciones = this.validaCamposTransportista();
 
@@ -12657,7 +12659,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }).then(function (resp) {
         Swal.fire("Bien!", "El registro se guardó con éxito.", "success");
 
-        _this5.cerrarModal();
+        _this6.cerrarModal();
       })["catch"](function (err) {
         Swal.fire("Error!", "No se pudo realizar el registro. " + err, "error");
       });
@@ -12698,7 +12700,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return digito_calculado;
     },
     crearfacturacion: function crearfacturacion(firma, password, factura, tipo, id, carpeta) {
-      var _this6 = this;
+      var _this7 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
         var _yield$script_comprob, comprobante, _yield$script_comprob2, contenido, _yield$script_comprob3, certificado, _yield$script_comprob4, quefirma, _yield$script_comprob5, validado, _yield$script_comprob6, recibida, _yield$script_comprob7, registrado;
@@ -12788,11 +12790,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 if (registrado == "enviado") {
                   Swal.fire("Bien!", "La factura se envió exitosamente.", "success");
 
-                  _this6.$router.push("/guias");
+                  _this7.$router.push("/guias");
                 } else {
                   Swal.fire("Error!", "La factura no pudo ser enviada, intente mas tarde.", "error");
 
-                  _this6.$router.push("/guias");
+                  _this7.$router.push("/guias");
                 }
 
                 _context.next = 36;
@@ -12803,7 +12805,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _context.t0 = _context["catch"](0);
                 Swal.fire("Error!", "Error en el envio al SRI" + _context.t0, "error");
 
-                _this6.$router.push("/guias");
+                _this7.$router.push("/guias");
 
               case 36:
               case "end":
@@ -95926,7 +95928,7 @@ var render = function() {
           "button",
           {
             staticClass: "btn btn-success",
-            attrs: { type: "button" },
+            attrs: { type: "button", disabled: _vm.disabled },
             on: { click: _vm.guardar }
           },
           [_vm._v("\n      Guardar\n    ")]
