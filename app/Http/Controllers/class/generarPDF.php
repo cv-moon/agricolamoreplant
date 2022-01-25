@@ -1540,7 +1540,7 @@ class generarPDF
         $pdf->Cell(88, 5, utf8_decode('CLAVE DE ACCESO'), 0, 2, 'L', 0);
         $pdf->SetFont('Helvetica', '', 8);
         $pdf->Cell(88, 5, $factura->cla_acceso, 0, 2, 'L', 0);
-        $this->generarCodigoBarras($factura->cla_acceso);
+        //$this->generarCodigoBarras($factura->cla_acceso);
         $pdf->image('archivos/comprobantes/facturas/codigosbarras/codigo' . $factura->cla_acceso . '.png', 115, null, 80);
 
 
