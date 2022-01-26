@@ -392,35 +392,47 @@ class generarPDF
         $pdf->Cell(88, 5, utf8_decode('CLAVE DE ACCESO'), 0, 2, 'L', 0);
         $pdf->SetFont('Helvetica', '', 8);
         $pdf->Cell(88, 5, $claveAcceso, 0, 2, 'L', 0);
-        $this->generarCodigoBarras($claveAcceso, 'facturas');
-        $pdf->image('archivos/comprobantes/facturas/codigosbarras/codigo' . $claveAcceso . '.png', 115, null, 80);
-
-        $cli_guias = '';
+        $this->generarCodigoBarras($claveAcceso, 'guias');
+        $pdf->image('archivos/comprobantes/guias/codigosbarras/codigo' . $claveAcceso . '.png', 115, null, 80);
 
         //cuadro de datos del cliente
         $pdf->RoundedRect(10, 84, 190, 17, 2, '1234', 'D');
         $pdf->SetXY(10, 85);
         $pdf->SetFont('Helvetica', 'B', 8);
+        $pdf->Cell(30, 5, utf8_decode('Identificación (Transportista):'), 0, 0, 'L', 0);
+        $pdf->SetFont('Helvetica', '', 8);
+        $pdf->Cell(30, 5, utf8_decode($document->infoGuiaRemision->rucTransportista), 0, 1, 'L', 0);
+        $pdf->SetFont('Helvetica', 'B', 8);
         $pdf->Cell(50, 5, utf8_decode('Razón Social / Nombres y Apellidos:'), 0, 0, 'L', 0);
         $pdf->SetFont('Helvetica', '', 8);
-        $pdf->Cell(80, 5, utf8_decode($document->infoFactura->razonSocialComprador), 0, 0, 'L', 0);
+        $pdf->Cell(80, 5, utf8_decode($document->infoGuiaRemision->razonSocialTransportista), 0, 0, 'L', 0);
         $pdf->SetFont('Helvetica', 'B', 8);
-        $pdf->Cell(30, 5, utf8_decode('RUC / CI.:'), 0, 0, 'L', 0);
+        $pdf->Cell(15, 5, utf8_decode('Placa:'), 0, 0, 'L', 0);
         $pdf->SetFont('Helvetica', '', 8);
-        $pdf->Cell(30, 5, utf8_decode($document->infoFactura->identificacionComprador), 0, 1, 'L', 0);
+        $pdf->Cell(115, 5, utf8_decode($document->infoGuiaRemision->placa), 0, 0, 'L', 0);
         $pdf->SetFont('Helvetica', 'B', 8);
-        $pdf->Cell(15, 5, utf8_decode('Dirección:'), 0, 0, 'L', 0);
+        $pdf->Cell(30, 5, utf8_decode('Punto de Partida:'), 0, 0, 'L', 0);
         $pdf->SetFont('Helvetica', '', 8);
-        $pdf->Cell(115, 5, utf8_decode($document->infoFactura->direccionComprador), 0, 0, 'L', 0);
+        $pdf->Cell(30, 5, utf8_decode($document->infoGuiaRemision->dirPartida), 0, 1, 'L', 0);
+        $pdf->SetFont('Helvetica', 'B', 8);
+        $pdf->Cell(25, 5, utf8_decode('Fecha Inicio Transporte:'), 0, 0, 'L', 0);
+        $pdf->SetFont('Helvetica', '', 8);
+        $pdf->Cell(30, 5, utf8_decode($document->infoGuiaRemision->fechaIniTransporte), 0, 0, 'L', 0);
+        $pdf->SetFont('Helvetica', 'B', 8);
+        $pdf->Cell(25, 5, utf8_decode('Fecha Fin Transporte:'), 0, 0, 'L', 0);
+        $pdf->SetFont('Helvetica', '', 8);
+        $pdf->Cell(30, 5, utf8_decode($document->infoGuiaRemision->fechaFinTransporte), 0, 0, 'L', 0);
+        $pdf->Ln();
+        
+        $pdf->SetFont('Helvetica', 'B', 8);
+        $pdf->Cell(30, 5, utf8_decode('Comprobante de Venta:'), 0, 0, 'L', 0);
+        $pdf->SetFont('Helvetica', '', 8);
+        $pdf->Cell(30, 5, utf8_decode($document->infoGuiaRemision->rucTransportista), 0, 1, 'L', 0);
         $pdf->SetFont('Helvetica', 'B', 8);
         $pdf->Cell(30, 5, utf8_decode('Fecha de Emisión:'), 0, 0, 'L', 0);
         $pdf->SetFont('Helvetica', '', 8);
-        $pdf->Cell(30, 5, utf8_decode($document->infoFactura->fechaEmision), 0, 1, 'L', 0);
-        $pdf->SetFont('Helvetica', 'B', 8);
-        $pdf->Cell(25, 5, utf8_decode('Guías Remisión:'), 0, 0, 'L', 0);
-        $pdf->SetFont('Helvetica', '', 8);
-        $pdf->Cell(30, 5, utf8_decode($cli_guias), 0, 0, 'L', 0);
-
+        $pdf->Cell(30, 5, utf8_decode($document->infoGuiaRemision->rucTransportista), 0, 1, 'L', 0);
+        
 
         //tabla de productos
         $pdf->SetXY(10, 104);
@@ -473,32 +485,6 @@ class generarPDF
         // $pdf->Cell(95, 5, utf8_decode($factura->vendedor), 'RB', 1, 'L', 0);
 
 
-        //foreach ($document->infoFactura->pagos->pago as $e => $f) {
-        if ($document->infoFactura->pagos->pago->formaPago == '01') {
-            $formaPago = 'Sin utilizacion del sistema financiero';
-        }
-        if ($document->infoFactura->pagos->pago->formaPago == '15') {
-            $formaPago = 'Compensacion de deudas';
-        }
-        if ($document->infoFactura->pagos->pago->formaPago == '16') {
-            $formaPago = 'Tarjeta debito';
-        }
-        if ($document->infoFactura->pagos->pago->formaPago == '17') {
-            $formaPago = 'Dinero Electronico';
-        }
-        if ($document->infoFactura->pagos->pago->formaPago == '18') {
-            $formaPago = 'Tarjeta Prepago';
-        }
-        if ($document->infoFactura->pagos->pago->formaPago == '19') {
-            $formaPago = 'Tarjeta de credito';
-        }
-        if ($document->infoFactura->pagos->pago->formaPago == '20') {
-            $formaPago = 'Otros con utilizacion del sistema financiero';
-        }
-        if ($document->infoFactura->pagos->pago->formaPago == '21') {
-            $formaPago = 'Endoso de titulos';
-        }
-        //}
         // Cuadro de Forma de Pago
         $pdf->Ln();
         $pdf->SetFont('Helvetica', 'B', 8);
@@ -511,15 +497,15 @@ class generarPDF
         $pdf->SetFont('Helvetica', 'B', 8);
         $pdf->Cell(15, 5, utf8_decode('Valor:'), 0, 0, 'L', 1);
         $pdf->SetFont('Helvetica', '', 8);
-        $pdf->Cell(95, 5, utf8_decode($document->infoFactura->pagos->pago->total), 0, 1, 'L', 1);
+        $pdf->Cell(95, 5, utf8_decode($document->infoGuiaRemision->pagos->pago->total), 0, 1, 'L', 1);
         $pdf->SetFont('Helvetica', 'B', 8);
         $pdf->Cell(15, 5, utf8_decode('Plazo:'), 0, 0, 'L', 1);
         $pdf->SetFont('Helvetica', '', 8);
-        $pdf->Cell(95, 5, utf8_decode($document->infoFactura->pagos->pago->plazo), 0, 1, 'L', 1);
+        $pdf->Cell(95, 5, utf8_decode($document->infoGuiaRemision->pagos->pago->plazo), 0, 1, 'L', 1);
         $pdf->SetFont('Helvetica', 'B', 8);
         $pdf->Cell(15, 5, utf8_decode('Tiempo:'), 0, 0, 'L', 1);
         $pdf->SetFont('Helvetica', '', 8);
-        $pdf->Cell(95, 5, utf8_decode($document->infoFactura->pagos->pago->unidadTiempo), 0, 1, 'L', 1);
+        $pdf->Cell(95, 5, utf8_decode($document->infoGuiaRemision->pagos->pago->unidadTiempo), 0, 1, 'L', 1);
 
         $iva = 0;
         $ice = 0;
@@ -528,7 +514,7 @@ class generarPDF
         $subtotal0 = 0;
         $subtotal_no_objeto = 0;
         $subtotal_exento = 0;
-        foreach ($document->infoFactura->totalConImpuestos->totalImpuesto as $a => $b) {
+        foreach ($document->infoGuiaRemision->totalConImpuestos->totalImpuesto as $a => $b) {
             if ($b->codigo == 2) {
                 if ($b->codigoPorcentaje == 0) {
                     $subtotal0 = $b->baseImponible;
@@ -577,12 +563,12 @@ class generarPDF
         $pdf->SetFont('Helvetica', 'B', 8);
         $pdf->Cell(50, 5, 'SUBTOTAL SIN IMPUESTOS', 0, 0, 'L', 1);
         $pdf->SetFont('Helvetica', '', 8);
-        $pdf->Cell(25, 5, $document->infoFactura->totalSinImpuestos, 0, 1, 'R', 1);
+        $pdf->Cell(25, 5, $document->infoGuiaRemision->totalSinImpuestos, 0, 1, 'R', 1);
         $pdf->SetX(125);
         $pdf->SetFont('Helvetica', 'B', 8);
         $pdf->Cell(50, 5, 'DESCUENTO', 0, 0, 'L', 1);
         $pdf->SetFont('Helvetica', '', 8);
-        $pdf->Cell(25, 5, $document->infoFactura->totalDescuento, 0, 1, 'R', 1);
+        $pdf->Cell(25, 5, $document->infoGuiaRemision->totalDescuento, 0, 1, 'R', 1);
         $pdf->SetX(125);
         $pdf->SetFont('Helvetica', 'B', 8);
         $pdf->Cell(50, 5, 'ICE', 0, 0, 'L', 1);
@@ -602,13 +588,13 @@ class generarPDF
         $pdf->SetFont('Helvetica', 'B', 8);
         $pdf->Cell(50, 5, 'PROPINA', 0, 0, 'L', 1);
         $pdf->SetFont('Helvetica', '', 8);
-        $pdf->Cell(25, 5, $document->infoFactura->propina, 0, 1, 'R', 1);
+        $pdf->Cell(25, 5, $document->infoGuiaRemision->propina, 0, 1, 'R', 1);
         $pdf->SetX(125);
         $pdf->SetFont('Helvetica', 'B', 8);
         $pdf->SetX(125);
         $pdf->Cell(50, 5, 'VALOR TOTAL', 0, 0, 'L', 1);
         $pdf->SetFont('Helvetica', '', 8);
-        $pdf->Cell(25, 5, $document->infoFactura->importeTotal, 0, 1, 'R', 1);
+        $pdf->Cell(25, 5, $document->infoGuiaRemision->importeTotal, 0, 1, 'R', 1);
 
 
         if (!file_exists('archivos/comprobantes/facturas/pdf/')) {
@@ -616,7 +602,7 @@ class generarPDF
         }
         $pdf->Output('archivos/comprobantes/facturas/pdf/' . $claveAcceso . '.pdf', 'F');
         $email = new sendEmail();
-        $valor = $email->enviarCorreo('Factura', $document->infoFactura->razonSocialComprador, $claveAcceso, $correo, $id_empresa, $empresas);
+        $valor = $email->enviarCorreo('Factura', $document->infoGuiaRemision->razonSocialComprador, $claveAcceso, $correo, $id_empresa, $empresas);
     }
 
     public function notaCreditoPDF($document, $claveAcceso, $id_empresa, $imagen, $empresas)
