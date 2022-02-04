@@ -29,9 +29,9 @@ class sendEmail
             if ($tipo == 'Factura') {
                 $mail->addAttachment('archivos/comprobantes/facturas/pdf/' . $claveAcceso . '.pdf');
                 $mail->addAttachment('archivos/comprobantes/facturas/' . $claveAcceso . '.xml');
-            } else if ($tipo == 'Notacredito') {
-                $mail->addAttachment('/comprobantes/notacredito/' . $claveAcceso . '.pdf');
-                $mail->addAttachment('/comprobantes/notacredito/facturaFirmada.xml');
+            } else if ($tipo == 'Guia') {
+                $mail->addAttachment('archivos/comprobantes/guias/pdf/' . $claveAcceso . '.pdf');
+                $mail->addAttachment('archivos/comprobantes/guias/' . $claveAcceso . '.xml');
             } else if ($tipo == 'Retención') {
                 $mail->addAttachment('archivos/comprobantes/retenciones/pdf/' . $claveAcceso . '.pdf');
                 $mail->addAttachment('archivos/comprobantes/retenciones/' . $claveAcceso . '.xml');

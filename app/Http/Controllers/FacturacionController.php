@@ -39,6 +39,7 @@ class FacturacionController extends Controller
             $guia->save();
         }
     }
+
     public function leerFactura(Request $request)
     {
         // return $request;
@@ -98,6 +99,7 @@ class FacturacionController extends Controller
         }
         echo $text;
     }
+
     public function firmaphp(Request $request)
     {
         $mensaje = $request->mensaje;
@@ -105,6 +107,7 @@ class FacturacionController extends Controller
         fwrite($file, $mensaje . PHP_EOL);
         fclose($file);
     }
+
     public function validarComprobantephp(Request $request)
     {
         if (!file_exists('archivos/comprobantes/facturas/errores')) {
@@ -184,6 +187,7 @@ class FacturacionController extends Controller
         fwrite($file, "\n__________________________________________________________________\n" . PHP_EOL);
         fclose($file);
     }
+
     public function autorizacionComprobantephp(Request $request)
     {
         //session_start();
@@ -289,6 +293,7 @@ class FacturacionController extends Controller
         fwrite($file, "\n__________________________________________________________________\n" . PHP_EOL);
         fclose($file);
     }
+    
     public function validarFechaCertificadophp(Request $request)
     {
         $fechaInicio = $request->fechaInicio;

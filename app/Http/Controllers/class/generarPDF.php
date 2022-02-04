@@ -396,98 +396,96 @@ class generarPDF
         $pdf->image('archivos/comprobantes/guias/codigosbarras/codigo' . $claveAcceso . '.png', 115, null, 80);
 
         //cuadro de datos del cliente
-        $pdf->RoundedRect(10, 84, 190, 17, 2, '1234', 'D');
+        $pdf->RoundedRect(10, 84, 190, 26, 2, '1234', 'D');
         $pdf->SetXY(10, 85);
         $pdf->SetFont('Helvetica', 'B', 8);
-        $pdf->Cell(30, 5, utf8_decode('Identificación (Transportista):'), 0, 0, 'L', 0);
+        $pdf->Cell(60, 5, utf8_decode('Identificación (Transportista):'), 0, 0, 'L', 0);
         $pdf->SetFont('Helvetica', '', 8);
-        $pdf->Cell(30, 5, utf8_decode($document->infoGuiaRemision->rucTransportista), 0, 1, 'L', 0);
+        $pdf->Cell(80, 5, utf8_decode($document->infoGuiaRemision->rucTransportista), 0, 1, 'L', 0);
         $pdf->SetFont('Helvetica', 'B', 8);
-        $pdf->Cell(50, 5, utf8_decode('Razón Social / Nombres y Apellidos:'), 0, 0, 'L', 0);
+        $pdf->Cell(60, 5, utf8_decode('Razón Social / Nombres y Apellidos:'), 0, 0, 'L', 0);
         $pdf->SetFont('Helvetica', '', 8);
-        $pdf->Cell(80, 5, utf8_decode($document->infoGuiaRemision->razonSocialTransportista), 0, 0, 'L', 0);
+        $pdf->Cell(80, 5, utf8_decode($document->infoGuiaRemision->razonSocialTransportista), 0, 1, 'L', 0);
         $pdf->SetFont('Helvetica', 'B', 8);
-        $pdf->Cell(15, 5, utf8_decode('Placa:'), 0, 0, 'L', 0);
+        $pdf->Cell(60, 5, utf8_decode('Placa:'), 0, 0, 'L', 0);
         $pdf->SetFont('Helvetica', '', 8);
-        $pdf->Cell(115, 5, utf8_decode($document->infoGuiaRemision->placa), 0, 0, 'L', 0);
+        $pdf->Cell(130, 5, utf8_decode($document->infoGuiaRemision->placa), 0, 1, 'L', 0);
         $pdf->SetFont('Helvetica', 'B', 8);
-        $pdf->Cell(30, 5, utf8_decode('Punto de Partida:'), 0, 0, 'L', 0);
+        $pdf->Cell(60, 5, utf8_decode('Punto de Partida:'), 0, 0, 'L', 0);
         $pdf->SetFont('Helvetica', '', 8);
-        $pdf->Cell(30, 5, utf8_decode($document->infoGuiaRemision->dirPartida), 0, 1, 'L', 0);
+        $pdf->Cell(80, 5, utf8_decode($document->infoGuiaRemision->dirPartida), 0, 1, 'L', 0);
         $pdf->SetFont('Helvetica', 'B', 8);
-        $pdf->Cell(25, 5, utf8_decode('Fecha Inicio Transporte:'), 0, 0, 'L', 0);
+        $pdf->Cell(60, 5, utf8_decode('Fecha Inicio Transporte:'), 0, 0, 'L', 0);
         $pdf->SetFont('Helvetica', '', 8);
-        $pdf->Cell(30, 5, utf8_decode($document->infoGuiaRemision->fechaIniTransporte), 0, 0, 'L', 0);
+        $pdf->Cell(60, 5, utf8_decode($document->infoGuiaRemision->fechaIniTransporte), 0, 0, 'L', 0);
         $pdf->SetFont('Helvetica', 'B', 8);
-        $pdf->Cell(25, 5, utf8_decode('Fecha Fin Transporte:'), 0, 0, 'L', 0);
+        $pdf->Cell(35, 5, utf8_decode('Fecha Fin Transporte:'), 0, 0, 'L', 0);
         $pdf->SetFont('Helvetica', '', 8);
-        $pdf->Cell(30, 5, utf8_decode($document->infoGuiaRemision->fechaFinTransporte), 0, 0, 'L', 0);
+        $pdf->Cell(25, 5, utf8_decode($document->infoGuiaRemision->fechaFinTransporte), 0, 1, 'L', 0);
         $pdf->Ln();
-        
+
+        $pdf->RoundedRect(10, 116, 190, 45, 2, '1234', 'D');
         $pdf->SetFont('Helvetica', 'B', 8);
-        $pdf->Cell(30, 5, utf8_decode('Comprobante de Venta:'), 0, 0, 'L', 0);
+        $pdf->Cell(60, 5, utf8_decode('Comprobante de Venta:'), 0, 0, 'L', 0);
         $pdf->SetFont('Helvetica', '', 8);
-        $pdf->Cell(30, 5, utf8_decode($document->infoGuiaRemision->rucTransportista), 0, 1, 'L', 0);
+        $pdf->Cell(60, 5, utf8_decode('FACTURA ' . $document->destinatarios->destinatario->numDocSustento), 0, 0, 'L', 0);
         $pdf->SetFont('Helvetica', 'B', 8);
-        $pdf->Cell(30, 5, utf8_decode('Fecha de Emisión:'), 0, 0, 'L', 0);
+        $pdf->Cell(35, 5, utf8_decode('Fecha de Emisión:'), 0, 0, 'L', 0);
         $pdf->SetFont('Helvetica', '', 8);
-        $pdf->Cell(30, 5, utf8_decode($document->infoGuiaRemision->rucTransportista), 0, 1, 'L', 0);
+        $pdf->Cell(25, 5, utf8_decode($document->destinatarios->destinatario->fechaEmisionDocSustento), 0, 1, 'L', 0);
         $pdf->SetFont('Helvetica', 'B', 8);
-        $pdf->Cell(30, 5, utf8_decode('Número de Autorización:'), 0, 0, 'L', 0);
+        $pdf->Cell(60, 5, utf8_decode('Número de Autorización:'), 0, 0, 'L', 0);
         $pdf->SetFont('Helvetica', '', 8);
-        $pdf->Cell(30, 5, utf8_decode($document->infoGuiaRemision->rucTransportista), 0, 1, 'L', 0);
+        $pdf->Cell(30, 5, utf8_decode($document->destinatarios->destinatario->numAutDocSustento), 0, 1, 'L', 0);
         $pdf->SetFont('Helvetica', 'B', 8);
-        $pdf->Cell(30, 5, utf8_decode('Motivo Traslado:'), 0, 0, 'L', 0);
+        $pdf->Cell(60, 5, utf8_decode('Motivo Traslado:'), 0, 0, 'L', 0);
         $pdf->SetFont('Helvetica', '', 8);
-        $pdf->Cell(30, 5, utf8_decode($document->infoGuiaRemision->rucTransportista), 0, 1, 'L', 0);
+        $pdf->Cell(30, 5, utf8_decode($document->destinatarios->destinatario->motivoTraslado), 0, 1, 'L', 0);
         $pdf->SetFont('Helvetica', 'B', 8);
-        $pdf->Cell(30, 5, utf8_decode('Destino(Punto de llegada):'), 0, 0, 'L', 0);
+        $pdf->Cell(60, 5, utf8_decode('Destino(Punto de llegada):'), 0, 0, 'L', 0);
         $pdf->SetFont('Helvetica', '', 8);
-        $pdf->Cell(30, 5, utf8_decode($document->infoGuiaRemision->rucTransportista), 0, 1, 'L', 0);
+        $pdf->Cell(30, 5, utf8_decode($document->destinatarios->destinatario->dirDestinatario), 0, 1, 'L', 0);
         $pdf->SetFont('Helvetica', 'B', 8);
-        $pdf->Cell(30, 5, utf8_decode('Identificación(Destinatario):'), 0, 0, 'L', 0);
+        $pdf->Cell(60, 5, utf8_decode('Identificación(Destinatario):'), 0, 0, 'L', 0);
         $pdf->SetFont('Helvetica', '', 8);
-        $pdf->Cell(30, 5, utf8_decode($document->infoGuiaRemision->rucTransportista), 0, 1, 'L', 0);
+        $pdf->Cell(30, 5, utf8_decode($document->destinatarios->destinatario->identificacionDestinatario), 0, 1, 'L', 0);
         $pdf->SetFont('Helvetica', 'B', 8);
-        $pdf->Cell(30, 5, utf8_decode('Razón Social/Nombres Apellidos:'), 0, 0, 'L', 0);
+        $pdf->Cell(60, 5, utf8_decode('Razón Social/Nombres Apellidos:'), 0, 0, 'L', 0);
         $pdf->SetFont('Helvetica', '', 8);
-        $pdf->Cell(30, 5, utf8_decode($document->infoGuiaRemision->rucTransportista), 0, 1, 'L', 0);
+        $pdf->Cell(30, 5, utf8_decode($document->destinatarios->destinatario->razonSocialDestinatario), 0, 1, 'L', 0);
         $pdf->SetFont('Helvetica', 'B', 8);
-        $pdf->Cell(30, 5, utf8_decode('Documento Aduanero:'), 0, 0, 'L', 0);
+        $pdf->Cell(60, 5, utf8_decode('Documento Aduanero:'), 0, 0, 'L', 0);
         $pdf->SetFont('Helvetica', '', 8);
-        $pdf->Cell(30, 5, utf8_decode($document->infoGuiaRemision->rucTransportista), 0, 1, 'L', 0);
+        $pdf->Cell(30, 5, utf8_decode($document->destinatarios->destinatario->docAduaneroUnico), 0, 1, 'L', 0);
         $pdf->SetFont('Helvetica', 'B', 8);
-        $pdf->Cell(30, 5, utf8_decode('Código Establecimiento Destino:'), 0, 0, 'L', 0);
+        $pdf->Cell(60, 5, utf8_decode('Código Establecimiento Destino:'), 0, 0, 'L', 0);
         $pdf->SetFont('Helvetica', '', 8);
-        $pdf->Cell(30, 5, utf8_decode($document->infoGuiaRemision->rucTransportista), 0, 1, 'L', 0);
+        $pdf->Cell(30, 5, utf8_decode($document->destinatarios->destinatario->codEstabDestino), 0, 1, 'L', 0);
         $pdf->SetFont('Helvetica', 'B', 8);
-        $pdf->Cell(30, 5, utf8_decode('Ruta:'), 0, 0, 'L', 0);
+        $pdf->Cell(60, 5, utf8_decode('Ruta:'), 0, 0, 'L', 0);
         $pdf->SetFont('Helvetica', '', 8);
-        $pdf->Cell(30, 5, utf8_decode($document->infoGuiaRemision->rucTransportista), 0, 1, 'L', 0);
-        
+        $pdf->Cell(30, 5, utf8_decode($document->destinatarios->destinatario->ruta), 0, 1, 'L', 0);
+        $pdf->Ln();
 
         //tabla de productos
-        $pdf->SetXY(10, 104);
         $pdf->SetFont('Helvetica', 'B', 8);
         //header de tabla
-        $pdf->Cell(15, 6, utf8_decode('Cant.'), 0, 0, 'C', 1);
-        $pdf->Cell(75, 6, utf8_decode('Descripción'), 0, 0, 'C', 1);
-        $pdf->Cell(25, 6, utf8_decode('Cod. Principal'), 0, 0, 'C', 1);
+        $pdf->Cell(25, 6, utf8_decode('Cant.'), 0, 0, 'C', 1);
+        $pdf->Cell(125, 6, utf8_decode('Descripción'), 0, 0, 'C', 1);
+        $pdf->Cell(35, 6, utf8_decode('Cod. Principal'), 0, 0, 'C', 1);
         $pdf->Ln();
 
         //rellenado de campos
         $pdf->SetFont('Helvetica', '', 8);
-        foreach ($document->detalles->detalle  as $a => $b) {
-            $pdf->Cell(15, 5, $b->cantidad, 0, 0, 'R', 0);
-            $pdf->Cell(75, 5, $b->descripcion, 0, 0, 'L', 0);
-            $pdf->Cell(25, 5, $b->codigoPrincipal, 0, 0, 'L', 0);
+        foreach ($document->destinatarios->destinatario->detalles->detalle  as $a => $b) {
+            $pdf->Cell(25, 5, $b->cantidad, 0, 0, 'R', 0);
+            $pdf->Cell(125, 5, $b->descripcion, 0, 0, 'L', 0);
+            $pdf->Cell(35, 5, $b->codigoInterno, 0, 1, 'L', 0);
         }
 
         // Cuadro Información Adicional
         $pdf->Ln();
 
-        $y = $pdf->GetY();
-        $pdf->SetX(10);
         $pdf->SetFont('Helvetica', 'B', 8);
         $pdf->SetFillColor(125, 234, 134);
         $pdf->Cell(110, 5, utf8_decode('Información Adicional'), 0, 1, 'C', 1);
