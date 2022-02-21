@@ -16,7 +16,7 @@ class CreateTarifasRetencionTable extends Migration
         Schema::create('tarifas_retencion', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('impuesto_id');
-            $table->string('nombre', 300)->unique();
+            $table->string('nombre', 250)->unique();
             $table->string('codigo', 6);
             $table->tinyInteger('valor');
 

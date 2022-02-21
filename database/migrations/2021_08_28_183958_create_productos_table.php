@@ -18,7 +18,7 @@ class CreateProductosTable extends Migration
             $table->unsignedBigInteger('categoria_id');
             $table->unsignedBigInteger('unidad_id');
             $table->unsignedBigInteger('tarifa_id');
-            $table->string('nombre', 300)->unique();
+            $table->string('nombre', 300);
             $table->string('cod_principal', 15)->unique();
             $table->string('cod_auxiliar', 15)->unique()->nullable();
             $table->string('composicion', 300)->nullable();

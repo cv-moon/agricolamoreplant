@@ -3069,6 +3069,47 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3080,9 +3121,9 @@ __webpack_require__.r(__webpack_exports__);
       url: "",
       logo: "",
       cont_resolucion: "",
-      obli_contabilidad: 0,
-      reg_microempresa: 0,
-      age_retencion: 0,
+      obli_contabilidad: "x",
+      reg_microempresa: "x",
+      age_retencion: "x",
       firma: "",
       fir_clave: "",
       fir_vencimiento: "",
@@ -3126,23 +3167,23 @@ __webpack_require__.r(__webpack_exports__);
         this.errors.push("Ingrese Dirección.");
       }
 
-      if (this.obli_contabilidad === "") {
+      if (this.obli_contabilidad === "x") {
         this.errors.push("Seleccione si esta obligado a llevar contabilidad.");
       }
 
-      if (this.reg_microempresa === "") {
+      if (this.reg_microempresa === "x") {
         this.errors.push("Seleccione si pertenece a régimen microempresa.");
       }
 
-      if (this.age_retencion === "") {
+      if (this.age_retencion === "x") {
         this.errors.push("Seleccione si es agente de retención.");
       }
 
-      if (this.tip_ambiente === "") {
+      if (this.tip_ambiente === "x") {
         this.errors.push("Seleccione tipo de ambiente.");
       }
 
-      if (this.tip_emision === "") {
+      if (this.tip_emision === "x") {
         this.errors.push("Seleccione tipo de emision.");
       }
 
@@ -3152,6 +3193,26 @@ __webpack_require__.r(__webpack_exports__);
 
       if (!this.fir_clave) {
         this.errors.push("Ingrese Contraeña de Firma Electronica.");
+      }
+
+      if (!this.corr_servidor) {
+        this.errors.push("Ingrese servidor de correo.");
+      }
+
+      if (!this.corr_puerto) {
+        this.errors.push("Ingrese puerto.");
+      }
+
+      if (!this.corr_seguridad) {
+        this.errors.push("Ingrese tipo de seguridad.");
+      }
+
+      if (!this.corr_usuario) {
+        this.errors.push("Ingrese correo destinatario.");
+      }
+
+      if (!this.corr_password) {
+        this.errors.push("Ingrese contraseña de correo destinatario.");
       }
 
       return this.errors;
@@ -3187,13 +3248,32 @@ __webpack_require__.r(__webpack_exports__);
       form.append("corr_autenticacion", this.corr_autenticacion);
       form.append("corr_usuario", this.corr_usuario);
       form.append("corr_password", this.corr_password);
-      axios.post("/api/empresa/guardar", form).then(function (resp) {
-        Swal.fire("Bien!", "El registro se guardó con éxito.", "success");
+      Swal.fire({
+        title: "Espere...",
+        allowOutsideClick: false,
+        didOpen: function didOpen() {
+          Swal.showLoading();
+          axios.post("/api/empresa/guardar", form).then(function (resp) {
+            Swal.fire("Bien!", "El registro se guardó con éxito.", "success");
 
-        _this2.detalle();
-      })["catch"](function (error) {
-        Swal.fire("Error!", "No se pudo realizar el registro. " + error, "error");
-      });
+            _this2.detalle();
+          })["catch"](function (err) {
+            Swal.fire("Alto!", "Error: ".concat(err), "error");
+          });
+        }
+      }); // axios
+      //   .post("/api/empresa/guardar", form)
+      //   .then((resp) => {
+      //     Swal.fire("Bien!", "El registro se guardó con éxito.", "success");
+      //     this.detalle();
+      //   })
+      //   .catch((error) => {
+      //     Swal.fire(
+      //       "Error!",
+      //       "No se pudo realizar el registro. " + error,
+      //       "error"
+      //     );
+      //   });
     },
     editar: function editar() {
       var _this3 = this;
@@ -80681,7 +80761,7 @@ var render = function() {
                     staticClass: "col-sm-12 col-form-label",
                     attrs: { for: "raz_social" }
                   },
-                  [_vm._v("Razón Social:\n            ")]
+                  [_vm._v("Razón Social:\n                        ")]
                 ),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-sm-12" }, [
@@ -80720,7 +80800,7 @@ var render = function() {
                     staticClass: "col-sm-2 col-form-label",
                     attrs: { for: "ruc" }
                   },
-                  [_vm._v("RUC: ")]
+                  [_vm._v("RUC:\n                        ")]
                 ),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-sm-4" }, [
@@ -80757,7 +80837,7 @@ var render = function() {
                     staticClass: "col-sm-2 col-form-label",
                     attrs: { for: "telefonos" }
                   },
-                  [_vm._v("Teléfonos:\n            ")]
+                  [_vm._v("Teléfonos:\n                        ")]
                 ),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-sm-4" }, [
@@ -80978,7 +81058,7 @@ var render = function() {
                   }
                 },
                 [
-                  _c("option", { attrs: { value: "", disabled: "" } }, [
+                  _c("option", { attrs: { value: "x", disabled: "" } }, [
                     _vm._v("Seleccione...")
                   ]),
                   _vm._v(" "),
@@ -81028,7 +81108,7 @@ var render = function() {
                   }
                 },
                 [
-                  _c("option", { attrs: { value: "", disabled: "" } }, [
+                  _c("option", { attrs: { value: "x", disabled: "" } }, [
                     _vm._v("Seleccione...")
                   ]),
                   _vm._v(" "),
@@ -81080,7 +81160,7 @@ var render = function() {
                   }
                 },
                 [
-                  _c("option", { attrs: { value: "", disabled: "" } }, [
+                  _c("option", { attrs: { value: "x", disabled: "" } }, [
                     _vm._v("Seleccione...")
                   ]),
                   _vm._v(" "),
@@ -81130,7 +81210,7 @@ var render = function() {
                   }
                 },
                 [
-                  _c("option", { attrs: { value: "", disabled: "" } }, [
+                  _c("option", { attrs: { value: "x", disabled: "" } }, [
                     _vm._v("Seleccione...")
                   ]),
                   _vm._v(" "),
@@ -81182,7 +81262,7 @@ var render = function() {
                   }
                 },
                 [
-                  _c("option", { attrs: { value: "", disabled: "" } }, [
+                  _c("option", { attrs: { value: "x", disabled: "" } }, [
                     _vm._v("Seleccione...")
                   ]),
                   _vm._v(" "),
@@ -81288,7 +81368,7 @@ var render = function() {
                 staticClass: "col-sm-4 col-form-label",
                 attrs: { for: "corr_servidor" }
               },
-              [_vm._v("Servidor de Correo SMTP:\n        ")]
+              [_vm._v("Servidor de Correo SMTP:\n                ")]
             ),
             _vm._v(" "),
             _c("div", { staticClass: "col-sm-4" }, [
@@ -81321,7 +81401,7 @@ var render = function() {
                 staticClass: "col-sm-2 col-form-label",
                 attrs: { for: "corr_puerto" }
               },
-              [_vm._v("Puerto:\n        ")]
+              [_vm._v("Puerto:\n                ")]
             ),
             _vm._v(" "),
             _c("div", { staticClass: "col-sm-2" }, [
@@ -81356,7 +81436,7 @@ var render = function() {
                 staticClass: "col-sm-4 col-form-label",
                 attrs: { for: "corr_seguridad" }
               },
-              [_vm._v("Seguridad (ssl/tls o en blanco):\n        ")]
+              [_vm._v("Seguridad (ssl/tls o en blanco):\n                ")]
             ),
             _vm._v(" "),
             _c("div", { staticClass: "col-sm-4" }, [
@@ -81391,7 +81471,7 @@ var render = function() {
                 staticClass: "col-sm-4 col-form-label",
                 attrs: { for: "corr_autenticacion" }
               },
-              [_vm._v("Requiere Autenticación:\n        ")]
+              [_vm._v("Requiere Autenticación:\n                ")]
             ),
             _vm._v(" "),
             _c("div", { staticClass: "col-sm-4" }, [
@@ -81442,7 +81522,7 @@ var render = function() {
                 staticClass: "col-sm-3 col-form-label",
                 attrs: { for: "corr_usuario" }
               },
-              [_vm._v("Correo Destinatario:\n        ")]
+              [_vm._v("Correo Destinatario:\n                ")]
             ),
             _vm._v(" "),
             _c("div", { staticClass: "col-sm-3" }, [
@@ -81475,7 +81555,7 @@ var render = function() {
                 staticClass: "col-sm-3 col-form-label",
                 attrs: { for: "corr_password" }
               },
-              [_vm._v("Contraseña Correo:\n        ")]
+              [_vm._v("Contraseña Correo:\n                ")]
             ),
             _vm._v(" "),
             _c("div", { staticClass: "col-sm-3" }, [
@@ -81514,7 +81594,11 @@ var render = function() {
               "div",
               _vm._l(_vm.errors, function(error) {
                 return _c("div", { key: error }, [
-                  _vm._v("\n          " + _vm._s(error) + "\n        ")
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(error) +
+                      "\n                "
+                  )
                 ])
               }),
               0
@@ -81536,7 +81620,7 @@ var render = function() {
                   attrs: { type: "button" },
                   on: { click: _vm.guardar }
                 },
-                [_vm._v("\n        Guardar\n      ")]
+                [_vm._v("\n                Guardar\n            ")]
               )
             ]
           : _vm.tipoAccion == 2
@@ -81548,7 +81632,7 @@ var render = function() {
                   attrs: { type: "button" },
                   on: { click: _vm.editar }
                 },
-                [_vm._v("\n        Actualizar\n      ")]
+                [_vm._v("\n                Actualizar\n            ")]
               )
             ]
           : _vm._e()
@@ -81565,7 +81649,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "card-header" }, [
       _c("h3", { staticClass: "card-title mt-2" }, [
         _c("i", { staticClass: "fas fa-align-justify" }),
-        _vm._v("\n      Empresa\n    ")
+        _vm._v("\n            Empresa\n        ")
       ])
     ])
   }
@@ -126560,7 +126644,7 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/cvdev/Documentos/Proyectos/moreplant/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\cristian.chuquitarco\Documents\Projects\agricolamoreplant\resources\js\app.js */"./resources/js/app.js");
 
 
 /***/ }),
