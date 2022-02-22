@@ -2,6 +2,7 @@
 import NotFound from "./components/404.vue";
 import Home from "./components/Home.vue";
 import Dashboard from "./components/Dashboard.vue";
+import Profile from "./components/Profile.vue";
 
 // Componentes Administración
 // Empresa
@@ -652,5 +653,9 @@ export const routes = [
                 component: RepVenta
             }
         ]
+    },
+    {
+        path: "/perfil",
+        component: Profile
     }
 ];

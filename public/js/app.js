@@ -2123,6 +2123,38 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2205,27 +2237,64 @@ __webpack_require__.r(__webpack_exports__);
         return;
       }
 
-      axios.post("/api/empleado/guardar", {
-        rol_id: this.rol_id,
-        nombres: this.nombres,
-        apellidos: this.apellidos,
-        tip_identificacion: this.tip_identificacion,
-        num_identificacion: this.num_identificacion,
-        salario: this.salario,
-        direccion: this.direccion,
-        telefonos: this.telefonos,
-        email: this.email,
-        usuario: this.usuario,
-        password: this.password,
-        fec_ingreso: this.fec_ingreso,
-        fec_salida: this.fec_salida
-      }).then(function (resp) {
-        Swal.fire("Bien!", "El registro se guardó con éxito.", "success");
+      Swal.fire({
+        title: "Espere...",
+        allowOutsideClick: false,
+        didOpen: function didOpen() {
+          Swal.showLoading();
+          axios.post("/api/empleado/guardar", {
+            rol_id: _this.rol_id,
+            nombres: _this.nombres,
+            apellidos: _this.apellidos,
+            tip_identificacion: _this.tip_identificacion,
+            num_identificacion: _this.num_identificacion,
+            salario: _this.salario,
+            direccion: _this.direccion,
+            telefonos: _this.telefonos,
+            email: _this.email,
+            usuario: _this.usuario,
+            password: _this.password,
+            fec_ingreso: _this.fec_ingreso,
+            fec_salida: _this.fec_salida
+          }).then(function (resp) {
+            Swal.fire("Bien!", "El registro se guardó con éxito.", "success");
 
-        _this.$router.push("/empleados");
-      })["catch"](function (err) {
-        Swal.fire("Error!", "No se pudo realizar el registro. " + err, "error");
-      });
+            _this.$router.push("/empleados");
+          })["catch"](function (err) {
+            Swal.fire("Alto!", "Error: ".concat(err), "error");
+          });
+        }
+      }); // axios
+      //     .post("/api/empleado/guardar", {
+      //         rol_id: this.rol_id,
+      //         nombres: this.nombres,
+      //         apellidos: this.apellidos,
+      //         tip_identificacion: this.tip_identificacion,
+      //         num_identificacion: this.num_identificacion,
+      //         salario: this.salario,
+      //         direccion: this.direccion,
+      //         telefonos: this.telefonos,
+      //         email: this.email,
+      //         usuario: this.usuario,
+      //         password: this.password,
+      //         fec_ingreso: this.fec_ingreso,
+      //         fec_salida: this.fec_salida
+      //     })
+      //     .then(resp => {
+      //         Swal.fire(
+      //             "Bien!",
+      //             "El registro se guardó con éxito.",
+      //             "success"
+      //         );
+      //         this.$router.push("/empleados");
+      //     })
+      //     .catch(err => {
+      //         Swal.fire(
+      //             "Error!",
+      //             "No se pudo realizar el registro. " + err,
+      //             "error"
+      //         );
+      //     });
     },
     selectRoles: function selectRoles() {
       var _this2 = this;
@@ -2251,6 +2320,35 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2561,27 +2659,34 @@ __webpack_require__.r(__webpack_exports__);
         return;
       }
 
-      axios.put("/api/empleado/editar", {
-        id: this.user_id,
-        rol_id: this.rol_id,
-        nombres: this.nombres,
-        apellidos: this.apellidos,
-        tip_identificacion: this.tip_identificacion,
-        num_identificacion: this.num_identificacion,
-        salario: this.salario,
-        direccion: this.direccion,
-        telefonos: this.telefonos,
-        email: this.email,
-        usuario: this.usuario,
-        password: this.password,
-        fec_ingreso: this.fec_ingreso,
-        fec_salida: this.fec_salida
-      }).then(function (resp) {
-        Swal.fire("Bien!", "El registro se actualizó con éxito.", "success");
+      Swal.fire({
+        title: "Espere...",
+        allowOutsideClick: false,
+        didOpen: function didOpen() {
+          Swal.showLoading();
+          axios.put("/api/empleado/editar", {
+            id: _this2.user_id,
+            rol_id: _this2.rol_id,
+            nombres: _this2.nombres,
+            apellidos: _this2.apellidos,
+            tip_identificacion: _this2.tip_identificacion,
+            num_identificacion: _this2.num_identificacion,
+            salario: _this2.salario,
+            direccion: _this2.direccion,
+            telefonos: _this2.telefonos,
+            email: _this2.email,
+            usuario: _this2.usuario,
+            password: _this2.password,
+            fec_ingreso: _this2.fec_ingreso,
+            fec_salida: _this2.fec_salida
+          }).then(function (resp) {
+            Swal.fire("Bien!", "El registro se actualizó con éxito.", "success");
 
-        _this2.$router.push("/empleados");
-      })["catch"](function (err) {
-        Swal.fire("Error!", "No se pudo realizar el registro. " + err, "error");
+            _this2.$router.push("/empleados");
+          })["catch"](function (err) {
+            Swal.fire("Alto!", "Error: ".concat(err), "error");
+          });
+        }
       });
     },
     selectRoles: function selectRoles() {
@@ -14191,6 +14296,80 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     this.listar();
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Profile.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Profile.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      nombres: "",
+      apellidos: ""
+    };
+  },
+  methods: {
+    getData: function getData() {
+      axios.get("/api/perfil").then(function (resp) {
+        console.log(resp);
+      })["catch"](function (err) {
+        Swal.fire("Alto!", "Error: ".concat(err), "error");
+      });
+    }
+  },
+  mounted: function mounted() {
+    this.getData();
   }
 });
 
@@ -79217,7 +79396,7 @@ var render = function() {
             },
             [
               _c("i", { staticClass: "fas fa-arrow-left" }),
-              _vm._v(" Regresar\n      ")
+              _vm._v(" Regresar\n            ")
             ]
           )
         ],
@@ -79230,6 +79409,12 @@ var render = function() {
         _c("b", { staticClass: "text-primary" }, [_vm._v("Datos Generales")]),
         _vm._v(" "),
         _c("hr", { staticClass: "mt-0" }),
+        _vm._v(" "),
+        _c("p", { staticClass: "text-red mt-0" }, [
+          _vm._v(
+            "\n                *Ingresar los nombres y apellidos completos\n            "
+          )
+        ]),
         _vm._v(" "),
         _c("div", { staticClass: "form-group row" }, [
           _c(
@@ -79477,40 +79662,6 @@ var render = function() {
         _c("div", { staticClass: "form-group row" }, [
           _c(
             "label",
-            { staticClass: "col-sm-2 col-form-label", attrs: { for: "email" } },
-            [_vm._v("e-mail:")]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-sm-4" }, [
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.email,
-                  expression: "email"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: {
-                type: "email",
-                placeholder: "E-mail.",
-                maxlength: "100"
-              },
-              domProps: { value: _vm.email },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.email = $event.target.value
-                }
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c(
-            "label",
             {
               staticClass: "col-sm-2 col-form-label",
               attrs: { for: "telefonos" }
@@ -79552,7 +79703,47 @@ var render = function() {
         _vm._v(" "),
         _c("hr", { staticClass: "mt-0" }),
         _vm._v(" "),
+        _c("p", { staticClass: "text-red mt-0" }, [
+          _vm._v(
+            "\n                *La contraseña del empleado se genera automáticamente y es\n                la misma del nombre de usuario\n            "
+          )
+        ]),
+        _vm._v(" "),
         _c("div", { staticClass: "form-group row" }, [
+          _c(
+            "label",
+            { staticClass: "col-sm-2 col-form-label", attrs: { for: "email" } },
+            [_vm._v("e-mail:")]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-4" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.email,
+                  expression: "email"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: {
+                type: "email",
+                placeholder: "E-mail.",
+                maxlength: "100"
+              },
+              domProps: { value: _vm.email },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.email = $event.target.value
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
           _c(
             "label",
             {
@@ -79584,8 +79775,10 @@ var render = function() {
                 }
               }
             })
-          ]),
-          _vm._v(" "),
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group row" }, [
           _c(
             "label",
             {
@@ -79791,7 +79984,11 @@ var render = function() {
                 "div",
                 _vm._l(_vm.errors, function(error) {
                   return _c("div", { key: error }, [
-                    _vm._v("\n            " + _vm._s(error) + "\n          ")
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(error) +
+                        "\n                    "
+                    )
                   ])
                 }),
                 0
@@ -79808,7 +80005,7 @@ var render = function() {
         _c(
           "router-link",
           { staticClass: "btn btn-danger", attrs: { to: "/empleados" } },
-          [_vm._v("\n      Cancelar\n    ")]
+          [_vm._v("\n            Cancelar\n        ")]
         ),
         _vm._v(" "),
         _c(
@@ -79818,7 +80015,7 @@ var render = function() {
             attrs: { type: "button" },
             on: { click: _vm.guardar }
           },
-          [_vm._v("\n      Guardar\n    ")]
+          [_vm._v("\n            Guardar\n        ")]
         )
       ],
       1
@@ -79832,7 +80029,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("h3", { staticClass: "card-title mt-2" }, [
       _c("i", { staticClass: "fas fa-align-justify" }),
-      _vm._v("\n      Agregar Usuario - Empleado\n    ")
+      _vm._v("\n            Agregar Usuario - Empleado\n        ")
     ])
   }
 ]
@@ -79862,9 +80059,9 @@ var render = function() {
       _c("h3", { staticClass: "card-title mt-2" }, [
         _c("i", { staticClass: "fas fa-align-justify" }),
         _vm._v(
-          "\n      Editar Empleado: " +
+          "\n            Editar Empleado: " +
             _vm._s(_vm.apellidos + " " + _vm.nombres) +
-            "\n    "
+            "\n        "
         )
       ]),
       _vm._v(" "),
@@ -79880,7 +80077,7 @@ var render = function() {
             },
             [
               _c("i", { staticClass: "fas fa-arrow-left" }),
-              _vm._v(" Regresar\n      ")
+              _vm._v(" Regresar\n            ")
             ]
           )
         ],
@@ -80140,40 +80337,6 @@ var render = function() {
         _c("div", { staticClass: "form-group row" }, [
           _c(
             "label",
-            { staticClass: "col-sm-2 col-form-label", attrs: { for: "email" } },
-            [_vm._v("e-mail:")]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-sm-4" }, [
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.email,
-                  expression: "email"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: {
-                type: "email",
-                placeholder: "E-mail.",
-                maxlength: "100"
-              },
-              domProps: { value: _vm.email },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.email = $event.target.value
-                }
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c(
-            "label",
             {
               staticClass: "col-sm-2 col-form-label",
               attrs: { for: "telefonos" }
@@ -80215,7 +80378,47 @@ var render = function() {
         _vm._v(" "),
         _c("hr", { staticClass: "mt-0" }),
         _vm._v(" "),
+        _c("p", { staticClass: "text-red mt-0" }, [
+          _vm._v(
+            "\n                *La contraseña del empleado se genera automáticamente y es\n                la misma del nombre de usuario\n            "
+          )
+        ]),
+        _vm._v(" "),
         _c("div", { staticClass: "form-group row" }, [
+          _c(
+            "label",
+            { staticClass: "col-sm-2 col-form-label", attrs: { for: "email" } },
+            [_vm._v("e-mail:")]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-4" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.email,
+                  expression: "email"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: {
+                type: "email",
+                placeholder: "E-mail.",
+                maxlength: "100"
+              },
+              domProps: { value: _vm.email },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.email = $event.target.value
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
           _c(
             "label",
             {
@@ -80247,8 +80450,10 @@ var render = function() {
                 }
               }
             })
-          ]),
-          _vm._v(" "),
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group row" }, [
           _c(
             "label",
             {
@@ -80454,7 +80659,11 @@ var render = function() {
                 "div",
                 _vm._l(_vm.errors, function(error) {
                   return _c("div", { key: error }, [
-                    _vm._v("\n            " + _vm._s(error) + "\n          ")
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(error) +
+                        "\n                    "
+                    )
                   ])
                 }),
                 0
@@ -80471,7 +80680,7 @@ var render = function() {
         _c(
           "router-link",
           { staticClass: "btn btn-danger", attrs: { to: "/empleados" } },
-          [_vm._v("\n      Cancelar\n    ")]
+          [_vm._v("\n            Cancelar\n        ")]
         ),
         _vm._v(" "),
         _c(
@@ -80481,7 +80690,7 @@ var render = function() {
             attrs: { type: "button" },
             on: { click: _vm.editar }
           },
-          [_vm._v("\n      Actualizar\n    ")]
+          [_vm._v("\n            Actualizar\n        ")]
         )
       ],
       1
@@ -98694,6 +98903,128 @@ var render = function() {
   return _c("router-view")
 }
 var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Profile.vue?vue&type=template&id=3bd692e4&":
+/*!**********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Profile.vue?vue&type=template&id=3bd692e4& ***!
+  \**********************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "card card-primary card-outline" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", { staticClass: "card-body" }, [
+      _c("b", { staticClass: "text-primary" }, [_vm._v("Actualizar Datos")]),
+      _vm._v(" "),
+      _c("hr", { staticClass: "mt-0" }),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-grow row" }, [
+        _c("div", { staticClass: "col-sm-4" }, [
+          _c(
+            "label",
+            { staticClass: "col-form-label", attrs: { for: "nombres" } },
+            [_vm._v("Nombres:")]
+          ),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.nombres,
+                expression: "nombres"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: {
+              type: "text",
+              placeholder: "Nombres.",
+              maxlength: "100",
+              disabled: ""
+            },
+            domProps: { value: _vm.nombres },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.nombres = $event.target.value
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-sm-4" }, [
+          _c(
+            "label",
+            { staticClass: "col-form-label", attrs: { for: "apellidos" } },
+            [_vm._v("Apellidos:")]
+          ),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.apellidos,
+                expression: "apellidos"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: {
+              type: "text",
+              placeholder: "Apellidos.",
+              maxlength: "100",
+              disabled: ""
+            },
+            domProps: { value: _vm.apellidos },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.apellidos = $event.target.value
+              }
+            }
+          })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("b", { staticClass: "text-primary" }, [
+        _vm._v("Cambio de Contraseña")
+      ]),
+      _vm._v(" "),
+      _c("hr", { staticClass: "mt-0" })
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header" }, [
+      _c("h3", { staticClass: "card-title mt-2" }, [
+        _c("i", { staticClass: "fas fa-align-justify" }),
+        _vm._v("\n            Perfil de Usuario\n        ")
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -123923,6 +124254,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/Profile.vue":
+/*!*********************************************!*\
+  !*** ./resources/js/components/Profile.vue ***!
+  \*********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Profile_vue_vue_type_template_id_3bd692e4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Profile.vue?vue&type=template&id=3bd692e4& */ "./resources/js/components/Profile.vue?vue&type=template&id=3bd692e4&");
+/* harmony import */ var _Profile_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Profile.vue?vue&type=script&lang=js& */ "./resources/js/components/Profile.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Profile_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Profile_vue_vue_type_template_id_3bd692e4___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Profile_vue_vue_type_template_id_3bd692e4___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Profile.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Profile.vue?vue&type=script&lang=js&":
+/*!**********************************************************************!*\
+  !*** ./resources/js/components/Profile.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Profile_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./Profile.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Profile.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Profile_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Profile.vue?vue&type=template&id=3bd692e4&":
+/*!****************************************************************************!*\
+  !*** ./resources/js/components/Profile.vue?vue&type=template&id=3bd692e4& ***!
+  \****************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Profile_vue_vue_type_template_id_3bd692e4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./Profile.vue?vue&type=template&id=3bd692e4& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Profile.vue?vue&type=template&id=3bd692e4&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Profile_vue_vue_type_template_id_3bd692e4___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Profile_vue_vue_type_template_id_3bd692e4___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/Reportes/Main.vue":
 /*!***************************************************!*\
   !*** ./resources/js/components/Reportes/Main.vue ***!
@@ -126032,98 +126432,100 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_404_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/404.vue */ "./resources/js/components/404.vue");
 /* harmony import */ var _components_Home_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/Home.vue */ "./resources/js/components/Home.vue");
 /* harmony import */ var _components_Dashboard_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/Dashboard.vue */ "./resources/js/components/Dashboard.vue");
-/* harmony import */ var _components_Administracion_Empresa_Empresa_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/Administracion/Empresa/Empresa.vue */ "./resources/js/components/Administracion/Empresa/Empresa.vue");
-/* harmony import */ var _components_Administracion_Roles_ListRol_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/Administracion/Roles/ListRol.vue */ "./resources/js/components/Administracion/Roles/ListRol.vue");
-/* harmony import */ var _components_Administracion_Impuestos_Iva_Main_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Administracion/Impuestos/Iva/Main.vue */ "./resources/js/components/Administracion/Impuestos/Iva/Main.vue");
-/* harmony import */ var _components_Administracion_Impuestos_Iva_ListImpuestoIva_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Administracion/Impuestos/Iva/ListImpuestoIva.vue */ "./resources/js/components/Administracion/Impuestos/Iva/ListImpuestoIva.vue");
-/* harmony import */ var _components_Administracion_Impuestos_Iva_AddImpuestoIva_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/Administracion/Impuestos/Iva/AddImpuestoIva.vue */ "./resources/js/components/Administracion/Impuestos/Iva/AddImpuestoIva.vue");
-/* harmony import */ var _components_Administracion_Impuestos_Iva_EditImpuestoIva_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/Administracion/Impuestos/Iva/EditImpuestoIva.vue */ "./resources/js/components/Administracion/Impuestos/Iva/EditImpuestoIva.vue");
-/* harmony import */ var _components_Administracion_Impuestos_Retencion_Main_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/Administracion/Impuestos/Retencion/Main.vue */ "./resources/js/components/Administracion/Impuestos/Retencion/Main.vue");
-/* harmony import */ var _components_Administracion_Impuestos_Retencion_ListImpuestoRetencion_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/Administracion/Impuestos/Retencion/ListImpuestoRetencion.vue */ "./resources/js/components/Administracion/Impuestos/Retencion/ListImpuestoRetencion.vue");
-/* harmony import */ var _components_Administracion_Impuestos_Retencion_AddImpuestoRetencion_vue__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/Administracion/Impuestos/Retencion/AddImpuestoRetencion.vue */ "./resources/js/components/Administracion/Impuestos/Retencion/AddImpuestoRetencion.vue");
-/* harmony import */ var _components_Administracion_Impuestos_Retencion_EditImpuestoRetencion_vue__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/Administracion/Impuestos/Retencion/EditImpuestoRetencion.vue */ "./resources/js/components/Administracion/Impuestos/Retencion/EditImpuestoRetencion.vue");
-/* harmony import */ var _components_Administracion_Establecimientos_Main_vue__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/Administracion/Establecimientos/Main.vue */ "./resources/js/components/Administracion/Establecimientos/Main.vue");
-/* harmony import */ var _components_Administracion_Establecimientos_ListEstablecimiento_vue__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/Administracion/Establecimientos/ListEstablecimiento.vue */ "./resources/js/components/Administracion/Establecimientos/ListEstablecimiento.vue");
-/* harmony import */ var _components_Administracion_Establecimientos_AddEstablecimiento_vue__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/Administracion/Establecimientos/AddEstablecimiento.vue */ "./resources/js/components/Administracion/Establecimientos/AddEstablecimiento.vue");
-/* harmony import */ var _components_Administracion_Establecimientos_EditEstablecimiento_vue__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/Administracion/Establecimientos/EditEstablecimiento.vue */ "./resources/js/components/Administracion/Establecimientos/EditEstablecimiento.vue");
-/* harmony import */ var _components_Administracion_Empleados_Main_vue__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/Administracion/Empleados/Main.vue */ "./resources/js/components/Administracion/Empleados/Main.vue");
-/* harmony import */ var _components_Administracion_Empleados_ListEmpleado_vue__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./components/Administracion/Empleados/ListEmpleado.vue */ "./resources/js/components/Administracion/Empleados/ListEmpleado.vue");
-/* harmony import */ var _components_Administracion_Empleados_AddEmpleado_vue__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./components/Administracion/Empleados/AddEmpleado.vue */ "./resources/js/components/Administracion/Empleados/AddEmpleado.vue");
-/* harmony import */ var _components_Administracion_Empleados_EditEmpleado_vue__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./components/Administracion/Empleados/EditEmpleado.vue */ "./resources/js/components/Administracion/Empleados/EditEmpleado.vue");
-/* harmony import */ var _components_Administracion_PuntosEmision_Main_vue__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./components/Administracion/PuntosEmision/Main.vue */ "./resources/js/components/Administracion/PuntosEmision/Main.vue");
-/* harmony import */ var _components_Administracion_PuntosEmision_ListPuntoEmision_vue__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./components/Administracion/PuntosEmision/ListPuntoEmision.vue */ "./resources/js/components/Administracion/PuntosEmision/ListPuntoEmision.vue");
-/* harmony import */ var _components_Administracion_PuntosEmision_AddPuntoEmision_vue__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./components/Administracion/PuntosEmision/AddPuntoEmision.vue */ "./resources/js/components/Administracion/PuntosEmision/AddPuntoEmision.vue");
-/* harmony import */ var _components_Administracion_PuntosEmision_EditPuntoEmision_vue__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./components/Administracion/PuntosEmision/EditPuntoEmision.vue */ "./resources/js/components/Administracion/PuntosEmision/EditPuntoEmision.vue");
-/* harmony import */ var _components_Almacen_Categorias_Main_vue__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./components/Almacen/Categorias/Main.vue */ "./resources/js/components/Almacen/Categorias/Main.vue");
-/* harmony import */ var _components_Almacen_Categorias_ListCategoria_vue__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./components/Almacen/Categorias/ListCategoria.vue */ "./resources/js/components/Almacen/Categorias/ListCategoria.vue");
-/* harmony import */ var _components_Almacen_Categorias_AddCategoria_vue__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./components/Almacen/Categorias/AddCategoria.vue */ "./resources/js/components/Almacen/Categorias/AddCategoria.vue");
-/* harmony import */ var _components_Almacen_Categorias_EditCategoria_vue__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./components/Almacen/Categorias/EditCategoria.vue */ "./resources/js/components/Almacen/Categorias/EditCategoria.vue");
-/* harmony import */ var _components_Almacen_Productos_Main_vue__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./components/Almacen/Productos/Main.vue */ "./resources/js/components/Almacen/Productos/Main.vue");
-/* harmony import */ var _components_Almacen_Productos_ListProducto_vue__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./components/Almacen/Productos/ListProducto.vue */ "./resources/js/components/Almacen/Productos/ListProducto.vue");
-/* harmony import */ var _components_Almacen_Productos_AddProducto_vue__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./components/Almacen/Productos/AddProducto.vue */ "./resources/js/components/Almacen/Productos/AddProducto.vue");
-/* harmony import */ var _components_Almacen_Productos_EditProducto_vue__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./components/Almacen/Productos/EditProducto.vue */ "./resources/js/components/Almacen/Productos/EditProducto.vue");
-/* harmony import */ var _components_Almacen_Unidades_Main_vue__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./components/Almacen/Unidades/Main.vue */ "./resources/js/components/Almacen/Unidades/Main.vue");
-/* harmony import */ var _components_Almacen_Unidades_ListUnidad_vue__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./components/Almacen/Unidades/ListUnidad.vue */ "./resources/js/components/Almacen/Unidades/ListUnidad.vue");
-/* harmony import */ var _components_Almacen_Unidades_AddUnidad_vue__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./components/Almacen/Unidades/AddUnidad.vue */ "./resources/js/components/Almacen/Unidades/AddUnidad.vue");
-/* harmony import */ var _components_Almacen_Unidades_EditUnidad_vue__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ./components/Almacen/Unidades/EditUnidad.vue */ "./resources/js/components/Almacen/Unidades/EditUnidad.vue");
-/* harmony import */ var _components_Almacen_Inventarios_Main_vue__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ./components/Almacen/Inventarios/Main.vue */ "./resources/js/components/Almacen/Inventarios/Main.vue");
-/* harmony import */ var _components_Almacen_Inventarios_ListInventario_vue__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ./components/Almacen/Inventarios/ListInventario.vue */ "./resources/js/components/Almacen/Inventarios/ListInventario.vue");
-/* harmony import */ var _components_Almacen_Inventarios_KarInventario_vue__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ./components/Almacen/Inventarios/KarInventario.vue */ "./resources/js/components/Almacen/Inventarios/KarInventario.vue");
-/* harmony import */ var _components_Almacen_Inventarios_ManInventario_vue__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ./components/Almacen/Inventarios/ManInventario.vue */ "./resources/js/components/Almacen/Inventarios/ManInventario.vue");
-/* harmony import */ var _components_Administracion_RolesPago_Main_vue__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ./components/Administracion/RolesPago/Main.vue */ "./resources/js/components/Administracion/RolesPago/Main.vue");
-/* harmony import */ var _components_Administracion_RolesPago_ListRolPago_vue__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! ./components/Administracion/RolesPago/ListRolPago.vue */ "./resources/js/components/Administracion/RolesPago/ListRolPago.vue");
-/* harmony import */ var _components_Administracion_RolesPago_AddRolPago_vue__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! ./components/Administracion/RolesPago/AddRolPago.vue */ "./resources/js/components/Administracion/RolesPago/AddRolPago.vue");
-/* harmony import */ var _components_Administracion_RolesPago_EditRolPago_vue__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(/*! ./components/Administracion/RolesPago/EditRolPago.vue */ "./resources/js/components/Administracion/RolesPago/EditRolPago.vue");
-/* harmony import */ var _components_Administracion_RolesPago_DetRolPago_vue__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(/*! ./components/Administracion/RolesPago/DetRolPago.vue */ "./resources/js/components/Administracion/RolesPago/DetRolPago.vue");
-/* harmony import */ var _components_Compras_Proveedores_Main_vue__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(/*! ./components/Compras/Proveedores/Main.vue */ "./resources/js/components/Compras/Proveedores/Main.vue");
-/* harmony import */ var _components_Compras_Proveedores_ListProveedor_vue__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(/*! ./components/Compras/Proveedores/ListProveedor.vue */ "./resources/js/components/Compras/Proveedores/ListProveedor.vue");
-/* harmony import */ var _components_Compras_Proveedores_AddProveedor_vue__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(/*! ./components/Compras/Proveedores/AddProveedor.vue */ "./resources/js/components/Compras/Proveedores/AddProveedor.vue");
-/* harmony import */ var _components_Compras_Proveedores_EditProveedor_vue__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(/*! ./components/Compras/Proveedores/EditProveedor.vue */ "./resources/js/components/Compras/Proveedores/EditProveedor.vue");
-/* harmony import */ var _components_Compras_Compras_Main_vue__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(/*! ./components/Compras/Compras/Main.vue */ "./resources/js/components/Compras/Compras/Main.vue");
-/* harmony import */ var _components_Compras_Compras_ListCompra_vue__WEBPACK_IMPORTED_MODULE_51__ = __webpack_require__(/*! ./components/Compras/Compras/ListCompra.vue */ "./resources/js/components/Compras/Compras/ListCompra.vue");
-/* harmony import */ var _components_Compras_Compras_AddCompra_vue__WEBPACK_IMPORTED_MODULE_52__ = __webpack_require__(/*! ./components/Compras/Compras/AddCompra.vue */ "./resources/js/components/Compras/Compras/AddCompra.vue");
-/* harmony import */ var _components_Compras_Compras_DetCompra_vue__WEBPACK_IMPORTED_MODULE_53__ = __webpack_require__(/*! ./components/Compras/Compras/DetCompra.vue */ "./resources/js/components/Compras/Compras/DetCompra.vue");
-/* harmony import */ var _components_Compras_Deudas_Main_vue__WEBPACK_IMPORTED_MODULE_54__ = __webpack_require__(/*! ./components/Compras/Deudas/Main.vue */ "./resources/js/components/Compras/Deudas/Main.vue");
-/* harmony import */ var _components_Compras_Deudas_ListDeuda_vue__WEBPACK_IMPORTED_MODULE_55__ = __webpack_require__(/*! ./components/Compras/Deudas/ListDeuda.vue */ "./resources/js/components/Compras/Deudas/ListDeuda.vue");
-/* harmony import */ var _components_Compras_Deudas_DetDeuda_vue__WEBPACK_IMPORTED_MODULE_56__ = __webpack_require__(/*! ./components/Compras/Deudas/DetDeuda.vue */ "./resources/js/components/Compras/Deudas/DetDeuda.vue");
-/* harmony import */ var _components_Ventas_Clientes_Main_vue__WEBPACK_IMPORTED_MODULE_57__ = __webpack_require__(/*! ./components/Ventas/Clientes/Main.vue */ "./resources/js/components/Ventas/Clientes/Main.vue");
-/* harmony import */ var _components_Ventas_Clientes_ListCliente_vue__WEBPACK_IMPORTED_MODULE_58__ = __webpack_require__(/*! ./components/Ventas/Clientes/ListCliente.vue */ "./resources/js/components/Ventas/Clientes/ListCliente.vue");
-/* harmony import */ var _components_Ventas_Clientes_AddCliente_vue__WEBPACK_IMPORTED_MODULE_59__ = __webpack_require__(/*! ./components/Ventas/Clientes/AddCliente.vue */ "./resources/js/components/Ventas/Clientes/AddCliente.vue");
-/* harmony import */ var _components_Ventas_Clientes_EditCliente_vue__WEBPACK_IMPORTED_MODULE_60__ = __webpack_require__(/*! ./components/Ventas/Clientes/EditCliente.vue */ "./resources/js/components/Ventas/Clientes/EditCliente.vue");
-/* harmony import */ var _components_Ventas_Facturacion_Main_vue__WEBPACK_IMPORTED_MODULE_61__ = __webpack_require__(/*! ./components/Ventas/Facturacion/Main.vue */ "./resources/js/components/Ventas/Facturacion/Main.vue");
-/* harmony import */ var _components_Ventas_Facturacion_ListFactura_vue__WEBPACK_IMPORTED_MODULE_62__ = __webpack_require__(/*! ./components/Ventas/Facturacion/ListFactura.vue */ "./resources/js/components/Ventas/Facturacion/ListFactura.vue");
-/* harmony import */ var _components_Ventas_Facturacion_AddFactura_vue__WEBPACK_IMPORTED_MODULE_63__ = __webpack_require__(/*! ./components/Ventas/Facturacion/AddFactura.vue */ "./resources/js/components/Ventas/Facturacion/AddFactura.vue");
-/* harmony import */ var _components_Ventas_Facturacion_DetFactura_vue__WEBPACK_IMPORTED_MODULE_64__ = __webpack_require__(/*! ./components/Ventas/Facturacion/DetFactura.vue */ "./resources/js/components/Ventas/Facturacion/DetFactura.vue");
-/* harmony import */ var _components_Ventas_Creditos_Main_vue__WEBPACK_IMPORTED_MODULE_65__ = __webpack_require__(/*! ./components/Ventas/Creditos/Main.vue */ "./resources/js/components/Ventas/Creditos/Main.vue");
-/* harmony import */ var _components_Ventas_Creditos_ListCredito_vue__WEBPACK_IMPORTED_MODULE_66__ = __webpack_require__(/*! ./components/Ventas/Creditos/ListCredito.vue */ "./resources/js/components/Ventas/Creditos/ListCredito.vue");
-/* harmony import */ var _components_Ventas_Creditos_DetCredito_vue__WEBPACK_IMPORTED_MODULE_67__ = __webpack_require__(/*! ./components/Ventas/Creditos/DetCredito.vue */ "./resources/js/components/Ventas/Creditos/DetCredito.vue");
-/* harmony import */ var _components_Guias_Transportistas_Main_vue__WEBPACK_IMPORTED_MODULE_68__ = __webpack_require__(/*! ./components/Guias/Transportistas/Main.vue */ "./resources/js/components/Guias/Transportistas/Main.vue");
-/* harmony import */ var _components_Guias_Transportistas_ListTransportista_vue__WEBPACK_IMPORTED_MODULE_69__ = __webpack_require__(/*! ./components/Guias/Transportistas/ListTransportista.vue */ "./resources/js/components/Guias/Transportistas/ListTransportista.vue");
-/* harmony import */ var _components_Guias_Transportistas_AddTransportista_vue__WEBPACK_IMPORTED_MODULE_70__ = __webpack_require__(/*! ./components/Guias/Transportistas/AddTransportista.vue */ "./resources/js/components/Guias/Transportistas/AddTransportista.vue");
-/* harmony import */ var _components_Guias_Transportistas_EditTransportista_vue__WEBPACK_IMPORTED_MODULE_71__ = __webpack_require__(/*! ./components/Guias/Transportistas/EditTransportista.vue */ "./resources/js/components/Guias/Transportistas/EditTransportista.vue");
-/* harmony import */ var _components_Guias_GuiasRemision_Main_vue__WEBPACK_IMPORTED_MODULE_72__ = __webpack_require__(/*! ./components/Guias/GuiasRemision/Main.vue */ "./resources/js/components/Guias/GuiasRemision/Main.vue");
-/* harmony import */ var _components_Guias_GuiasRemision_ListGuia_vue__WEBPACK_IMPORTED_MODULE_73__ = __webpack_require__(/*! ./components/Guias/GuiasRemision/ListGuia.vue */ "./resources/js/components/Guias/GuiasRemision/ListGuia.vue");
-/* harmony import */ var _components_Guias_GuiasRemision_AddGuia_vue__WEBPACK_IMPORTED_MODULE_74__ = __webpack_require__(/*! ./components/Guias/GuiasRemision/AddGuia.vue */ "./resources/js/components/Guias/GuiasRemision/AddGuia.vue");
-/* harmony import */ var _components_Guias_GuiasRemision_DetGuia_vue__WEBPACK_IMPORTED_MODULE_75__ = __webpack_require__(/*! ./components/Guias/GuiasRemision/DetGuia.vue */ "./resources/js/components/Guias/GuiasRemision/DetGuia.vue");
-/* harmony import */ var _components_Guias_GuiasRemision_FacGuia_vue__WEBPACK_IMPORTED_MODULE_76__ = __webpack_require__(/*! ./components/Guias/GuiasRemision/FacGuia.vue */ "./resources/js/components/Guias/GuiasRemision/FacGuia.vue");
-/* harmony import */ var _components_Retenciones_Retencion_Main_vue__WEBPACK_IMPORTED_MODULE_77__ = __webpack_require__(/*! ./components/Retenciones/Retencion/Main.vue */ "./resources/js/components/Retenciones/Retencion/Main.vue");
-/* harmony import */ var _components_Retenciones_Retencion_ListRetencion_vue__WEBPACK_IMPORTED_MODULE_78__ = __webpack_require__(/*! ./components/Retenciones/Retencion/ListRetencion.vue */ "./resources/js/components/Retenciones/Retencion/ListRetencion.vue");
-/* harmony import */ var _components_Retenciones_Retencion_AddRetencion_vue__WEBPACK_IMPORTED_MODULE_79__ = __webpack_require__(/*! ./components/Retenciones/Retencion/AddRetencion.vue */ "./resources/js/components/Retenciones/Retencion/AddRetencion.vue");
-/* harmony import */ var _components_Retenciones_Retencion_DetRetencion_vue__WEBPACK_IMPORTED_MODULE_80__ = __webpack_require__(/*! ./components/Retenciones/Retencion/DetRetencion.vue */ "./resources/js/components/Retenciones/Retencion/DetRetencion.vue");
-/* harmony import */ var _components_Produccion_Plantas_Main_vue__WEBPACK_IMPORTED_MODULE_81__ = __webpack_require__(/*! ./components/Produccion/Plantas/Main.vue */ "./resources/js/components/Produccion/Plantas/Main.vue");
-/* harmony import */ var _components_Produccion_Plantas_ListProduccion_vue__WEBPACK_IMPORTED_MODULE_82__ = __webpack_require__(/*! ./components/Produccion/Plantas/ListProduccion.vue */ "./resources/js/components/Produccion/Plantas/ListProduccion.vue");
-/* harmony import */ var _components_Produccion_Plantas_AddProduccion_vue__WEBPACK_IMPORTED_MODULE_83__ = __webpack_require__(/*! ./components/Produccion/Plantas/AddProduccion.vue */ "./resources/js/components/Produccion/Plantas/AddProduccion.vue");
-/* harmony import */ var _components_Produccion_Plantas_EditProduccion_vue__WEBPACK_IMPORTED_MODULE_84__ = __webpack_require__(/*! ./components/Produccion/Plantas/EditProduccion.vue */ "./resources/js/components/Produccion/Plantas/EditProduccion.vue");
-/* harmony import */ var _components_Produccion_Plantas_FinProduccion_vue__WEBPACK_IMPORTED_MODULE_85__ = __webpack_require__(/*! ./components/Produccion/Plantas/FinProduccion.vue */ "./resources/js/components/Produccion/Plantas/FinProduccion.vue");
-/* harmony import */ var _components_Caja_OpeArqueo_vue__WEBPACK_IMPORTED_MODULE_86__ = __webpack_require__(/*! ./components/Caja/OpeArqueo.vue */ "./resources/js/components/Caja/OpeArqueo.vue");
-/* harmony import */ var _components_Caja_CloArqueo_vue__WEBPACK_IMPORTED_MODULE_87__ = __webpack_require__(/*! ./components/Caja/CloArqueo.vue */ "./resources/js/components/Caja/CloArqueo.vue");
-/* harmony import */ var _components_Caja_Arqueos_Main_vue__WEBPACK_IMPORTED_MODULE_88__ = __webpack_require__(/*! ./components/Caja/Arqueos/Main.vue */ "./resources/js/components/Caja/Arqueos/Main.vue");
-/* harmony import */ var _components_Caja_Arqueos_ListArqueo_vue__WEBPACK_IMPORTED_MODULE_89__ = __webpack_require__(/*! ./components/Caja/Arqueos/ListArqueo.vue */ "./resources/js/components/Caja/Arqueos/ListArqueo.vue");
-/* harmony import */ var _components_Caja_Arqueos_DetArqueo_vue__WEBPACK_IMPORTED_MODULE_90__ = __webpack_require__(/*! ./components/Caja/Arqueos/DetArqueo.vue */ "./resources/js/components/Caja/Arqueos/DetArqueo.vue");
-/* harmony import */ var _components_Reportes_Main_vue__WEBPACK_IMPORTED_MODULE_91__ = __webpack_require__(/*! ./components/Reportes/Main.vue */ "./resources/js/components/Reportes/Main.vue");
-/* harmony import */ var _components_Reportes_RepCompra_vue__WEBPACK_IMPORTED_MODULE_92__ = __webpack_require__(/*! ./components/Reportes/RepCompra.vue */ "./resources/js/components/Reportes/RepCompra.vue");
-/* harmony import */ var _components_Reportes_RepVenta_vue__WEBPACK_IMPORTED_MODULE_93__ = __webpack_require__(/*! ./components/Reportes/RepVenta.vue */ "./resources/js/components/Reportes/RepVenta.vue");
+/* harmony import */ var _components_Profile_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/Profile.vue */ "./resources/js/components/Profile.vue");
+/* harmony import */ var _components_Administracion_Empresa_Empresa_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/Administracion/Empresa/Empresa.vue */ "./resources/js/components/Administracion/Empresa/Empresa.vue");
+/* harmony import */ var _components_Administracion_Roles_ListRol_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Administracion/Roles/ListRol.vue */ "./resources/js/components/Administracion/Roles/ListRol.vue");
+/* harmony import */ var _components_Administracion_Impuestos_Iva_Main_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Administracion/Impuestos/Iva/Main.vue */ "./resources/js/components/Administracion/Impuestos/Iva/Main.vue");
+/* harmony import */ var _components_Administracion_Impuestos_Iva_ListImpuestoIva_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/Administracion/Impuestos/Iva/ListImpuestoIva.vue */ "./resources/js/components/Administracion/Impuestos/Iva/ListImpuestoIva.vue");
+/* harmony import */ var _components_Administracion_Impuestos_Iva_AddImpuestoIva_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/Administracion/Impuestos/Iva/AddImpuestoIva.vue */ "./resources/js/components/Administracion/Impuestos/Iva/AddImpuestoIva.vue");
+/* harmony import */ var _components_Administracion_Impuestos_Iva_EditImpuestoIva_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/Administracion/Impuestos/Iva/EditImpuestoIva.vue */ "./resources/js/components/Administracion/Impuestos/Iva/EditImpuestoIva.vue");
+/* harmony import */ var _components_Administracion_Impuestos_Retencion_Main_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/Administracion/Impuestos/Retencion/Main.vue */ "./resources/js/components/Administracion/Impuestos/Retencion/Main.vue");
+/* harmony import */ var _components_Administracion_Impuestos_Retencion_ListImpuestoRetencion_vue__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/Administracion/Impuestos/Retencion/ListImpuestoRetencion.vue */ "./resources/js/components/Administracion/Impuestos/Retencion/ListImpuestoRetencion.vue");
+/* harmony import */ var _components_Administracion_Impuestos_Retencion_AddImpuestoRetencion_vue__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/Administracion/Impuestos/Retencion/AddImpuestoRetencion.vue */ "./resources/js/components/Administracion/Impuestos/Retencion/AddImpuestoRetencion.vue");
+/* harmony import */ var _components_Administracion_Impuestos_Retencion_EditImpuestoRetencion_vue__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/Administracion/Impuestos/Retencion/EditImpuestoRetencion.vue */ "./resources/js/components/Administracion/Impuestos/Retencion/EditImpuestoRetencion.vue");
+/* harmony import */ var _components_Administracion_Establecimientos_Main_vue__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/Administracion/Establecimientos/Main.vue */ "./resources/js/components/Administracion/Establecimientos/Main.vue");
+/* harmony import */ var _components_Administracion_Establecimientos_ListEstablecimiento_vue__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/Administracion/Establecimientos/ListEstablecimiento.vue */ "./resources/js/components/Administracion/Establecimientos/ListEstablecimiento.vue");
+/* harmony import */ var _components_Administracion_Establecimientos_AddEstablecimiento_vue__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/Administracion/Establecimientos/AddEstablecimiento.vue */ "./resources/js/components/Administracion/Establecimientos/AddEstablecimiento.vue");
+/* harmony import */ var _components_Administracion_Establecimientos_EditEstablecimiento_vue__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/Administracion/Establecimientos/EditEstablecimiento.vue */ "./resources/js/components/Administracion/Establecimientos/EditEstablecimiento.vue");
+/* harmony import */ var _components_Administracion_Empleados_Main_vue__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./components/Administracion/Empleados/Main.vue */ "./resources/js/components/Administracion/Empleados/Main.vue");
+/* harmony import */ var _components_Administracion_Empleados_ListEmpleado_vue__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./components/Administracion/Empleados/ListEmpleado.vue */ "./resources/js/components/Administracion/Empleados/ListEmpleado.vue");
+/* harmony import */ var _components_Administracion_Empleados_AddEmpleado_vue__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./components/Administracion/Empleados/AddEmpleado.vue */ "./resources/js/components/Administracion/Empleados/AddEmpleado.vue");
+/* harmony import */ var _components_Administracion_Empleados_EditEmpleado_vue__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./components/Administracion/Empleados/EditEmpleado.vue */ "./resources/js/components/Administracion/Empleados/EditEmpleado.vue");
+/* harmony import */ var _components_Administracion_PuntosEmision_Main_vue__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./components/Administracion/PuntosEmision/Main.vue */ "./resources/js/components/Administracion/PuntosEmision/Main.vue");
+/* harmony import */ var _components_Administracion_PuntosEmision_ListPuntoEmision_vue__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./components/Administracion/PuntosEmision/ListPuntoEmision.vue */ "./resources/js/components/Administracion/PuntosEmision/ListPuntoEmision.vue");
+/* harmony import */ var _components_Administracion_PuntosEmision_AddPuntoEmision_vue__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./components/Administracion/PuntosEmision/AddPuntoEmision.vue */ "./resources/js/components/Administracion/PuntosEmision/AddPuntoEmision.vue");
+/* harmony import */ var _components_Administracion_PuntosEmision_EditPuntoEmision_vue__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./components/Administracion/PuntosEmision/EditPuntoEmision.vue */ "./resources/js/components/Administracion/PuntosEmision/EditPuntoEmision.vue");
+/* harmony import */ var _components_Almacen_Categorias_Main_vue__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./components/Almacen/Categorias/Main.vue */ "./resources/js/components/Almacen/Categorias/Main.vue");
+/* harmony import */ var _components_Almacen_Categorias_ListCategoria_vue__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./components/Almacen/Categorias/ListCategoria.vue */ "./resources/js/components/Almacen/Categorias/ListCategoria.vue");
+/* harmony import */ var _components_Almacen_Categorias_AddCategoria_vue__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./components/Almacen/Categorias/AddCategoria.vue */ "./resources/js/components/Almacen/Categorias/AddCategoria.vue");
+/* harmony import */ var _components_Almacen_Categorias_EditCategoria_vue__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./components/Almacen/Categorias/EditCategoria.vue */ "./resources/js/components/Almacen/Categorias/EditCategoria.vue");
+/* harmony import */ var _components_Almacen_Productos_Main_vue__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./components/Almacen/Productos/Main.vue */ "./resources/js/components/Almacen/Productos/Main.vue");
+/* harmony import */ var _components_Almacen_Productos_ListProducto_vue__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./components/Almacen/Productos/ListProducto.vue */ "./resources/js/components/Almacen/Productos/ListProducto.vue");
+/* harmony import */ var _components_Almacen_Productos_AddProducto_vue__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./components/Almacen/Productos/AddProducto.vue */ "./resources/js/components/Almacen/Productos/AddProducto.vue");
+/* harmony import */ var _components_Almacen_Productos_EditProducto_vue__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./components/Almacen/Productos/EditProducto.vue */ "./resources/js/components/Almacen/Productos/EditProducto.vue");
+/* harmony import */ var _components_Almacen_Unidades_Main_vue__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./components/Almacen/Unidades/Main.vue */ "./resources/js/components/Almacen/Unidades/Main.vue");
+/* harmony import */ var _components_Almacen_Unidades_ListUnidad_vue__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./components/Almacen/Unidades/ListUnidad.vue */ "./resources/js/components/Almacen/Unidades/ListUnidad.vue");
+/* harmony import */ var _components_Almacen_Unidades_AddUnidad_vue__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ./components/Almacen/Unidades/AddUnidad.vue */ "./resources/js/components/Almacen/Unidades/AddUnidad.vue");
+/* harmony import */ var _components_Almacen_Unidades_EditUnidad_vue__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ./components/Almacen/Unidades/EditUnidad.vue */ "./resources/js/components/Almacen/Unidades/EditUnidad.vue");
+/* harmony import */ var _components_Almacen_Inventarios_Main_vue__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ./components/Almacen/Inventarios/Main.vue */ "./resources/js/components/Almacen/Inventarios/Main.vue");
+/* harmony import */ var _components_Almacen_Inventarios_ListInventario_vue__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ./components/Almacen/Inventarios/ListInventario.vue */ "./resources/js/components/Almacen/Inventarios/ListInventario.vue");
+/* harmony import */ var _components_Almacen_Inventarios_KarInventario_vue__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ./components/Almacen/Inventarios/KarInventario.vue */ "./resources/js/components/Almacen/Inventarios/KarInventario.vue");
+/* harmony import */ var _components_Almacen_Inventarios_ManInventario_vue__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ./components/Almacen/Inventarios/ManInventario.vue */ "./resources/js/components/Almacen/Inventarios/ManInventario.vue");
+/* harmony import */ var _components_Administracion_RolesPago_Main_vue__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! ./components/Administracion/RolesPago/Main.vue */ "./resources/js/components/Administracion/RolesPago/Main.vue");
+/* harmony import */ var _components_Administracion_RolesPago_ListRolPago_vue__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! ./components/Administracion/RolesPago/ListRolPago.vue */ "./resources/js/components/Administracion/RolesPago/ListRolPago.vue");
+/* harmony import */ var _components_Administracion_RolesPago_AddRolPago_vue__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(/*! ./components/Administracion/RolesPago/AddRolPago.vue */ "./resources/js/components/Administracion/RolesPago/AddRolPago.vue");
+/* harmony import */ var _components_Administracion_RolesPago_EditRolPago_vue__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(/*! ./components/Administracion/RolesPago/EditRolPago.vue */ "./resources/js/components/Administracion/RolesPago/EditRolPago.vue");
+/* harmony import */ var _components_Administracion_RolesPago_DetRolPago_vue__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(/*! ./components/Administracion/RolesPago/DetRolPago.vue */ "./resources/js/components/Administracion/RolesPago/DetRolPago.vue");
+/* harmony import */ var _components_Compras_Proveedores_Main_vue__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(/*! ./components/Compras/Proveedores/Main.vue */ "./resources/js/components/Compras/Proveedores/Main.vue");
+/* harmony import */ var _components_Compras_Proveedores_ListProveedor_vue__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(/*! ./components/Compras/Proveedores/ListProveedor.vue */ "./resources/js/components/Compras/Proveedores/ListProveedor.vue");
+/* harmony import */ var _components_Compras_Proveedores_AddProveedor_vue__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(/*! ./components/Compras/Proveedores/AddProveedor.vue */ "./resources/js/components/Compras/Proveedores/AddProveedor.vue");
+/* harmony import */ var _components_Compras_Proveedores_EditProveedor_vue__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(/*! ./components/Compras/Proveedores/EditProveedor.vue */ "./resources/js/components/Compras/Proveedores/EditProveedor.vue");
+/* harmony import */ var _components_Compras_Compras_Main_vue__WEBPACK_IMPORTED_MODULE_51__ = __webpack_require__(/*! ./components/Compras/Compras/Main.vue */ "./resources/js/components/Compras/Compras/Main.vue");
+/* harmony import */ var _components_Compras_Compras_ListCompra_vue__WEBPACK_IMPORTED_MODULE_52__ = __webpack_require__(/*! ./components/Compras/Compras/ListCompra.vue */ "./resources/js/components/Compras/Compras/ListCompra.vue");
+/* harmony import */ var _components_Compras_Compras_AddCompra_vue__WEBPACK_IMPORTED_MODULE_53__ = __webpack_require__(/*! ./components/Compras/Compras/AddCompra.vue */ "./resources/js/components/Compras/Compras/AddCompra.vue");
+/* harmony import */ var _components_Compras_Compras_DetCompra_vue__WEBPACK_IMPORTED_MODULE_54__ = __webpack_require__(/*! ./components/Compras/Compras/DetCompra.vue */ "./resources/js/components/Compras/Compras/DetCompra.vue");
+/* harmony import */ var _components_Compras_Deudas_Main_vue__WEBPACK_IMPORTED_MODULE_55__ = __webpack_require__(/*! ./components/Compras/Deudas/Main.vue */ "./resources/js/components/Compras/Deudas/Main.vue");
+/* harmony import */ var _components_Compras_Deudas_ListDeuda_vue__WEBPACK_IMPORTED_MODULE_56__ = __webpack_require__(/*! ./components/Compras/Deudas/ListDeuda.vue */ "./resources/js/components/Compras/Deudas/ListDeuda.vue");
+/* harmony import */ var _components_Compras_Deudas_DetDeuda_vue__WEBPACK_IMPORTED_MODULE_57__ = __webpack_require__(/*! ./components/Compras/Deudas/DetDeuda.vue */ "./resources/js/components/Compras/Deudas/DetDeuda.vue");
+/* harmony import */ var _components_Ventas_Clientes_Main_vue__WEBPACK_IMPORTED_MODULE_58__ = __webpack_require__(/*! ./components/Ventas/Clientes/Main.vue */ "./resources/js/components/Ventas/Clientes/Main.vue");
+/* harmony import */ var _components_Ventas_Clientes_ListCliente_vue__WEBPACK_IMPORTED_MODULE_59__ = __webpack_require__(/*! ./components/Ventas/Clientes/ListCliente.vue */ "./resources/js/components/Ventas/Clientes/ListCliente.vue");
+/* harmony import */ var _components_Ventas_Clientes_AddCliente_vue__WEBPACK_IMPORTED_MODULE_60__ = __webpack_require__(/*! ./components/Ventas/Clientes/AddCliente.vue */ "./resources/js/components/Ventas/Clientes/AddCliente.vue");
+/* harmony import */ var _components_Ventas_Clientes_EditCliente_vue__WEBPACK_IMPORTED_MODULE_61__ = __webpack_require__(/*! ./components/Ventas/Clientes/EditCliente.vue */ "./resources/js/components/Ventas/Clientes/EditCliente.vue");
+/* harmony import */ var _components_Ventas_Facturacion_Main_vue__WEBPACK_IMPORTED_MODULE_62__ = __webpack_require__(/*! ./components/Ventas/Facturacion/Main.vue */ "./resources/js/components/Ventas/Facturacion/Main.vue");
+/* harmony import */ var _components_Ventas_Facturacion_ListFactura_vue__WEBPACK_IMPORTED_MODULE_63__ = __webpack_require__(/*! ./components/Ventas/Facturacion/ListFactura.vue */ "./resources/js/components/Ventas/Facturacion/ListFactura.vue");
+/* harmony import */ var _components_Ventas_Facturacion_AddFactura_vue__WEBPACK_IMPORTED_MODULE_64__ = __webpack_require__(/*! ./components/Ventas/Facturacion/AddFactura.vue */ "./resources/js/components/Ventas/Facturacion/AddFactura.vue");
+/* harmony import */ var _components_Ventas_Facturacion_DetFactura_vue__WEBPACK_IMPORTED_MODULE_65__ = __webpack_require__(/*! ./components/Ventas/Facturacion/DetFactura.vue */ "./resources/js/components/Ventas/Facturacion/DetFactura.vue");
+/* harmony import */ var _components_Ventas_Creditos_Main_vue__WEBPACK_IMPORTED_MODULE_66__ = __webpack_require__(/*! ./components/Ventas/Creditos/Main.vue */ "./resources/js/components/Ventas/Creditos/Main.vue");
+/* harmony import */ var _components_Ventas_Creditos_ListCredito_vue__WEBPACK_IMPORTED_MODULE_67__ = __webpack_require__(/*! ./components/Ventas/Creditos/ListCredito.vue */ "./resources/js/components/Ventas/Creditos/ListCredito.vue");
+/* harmony import */ var _components_Ventas_Creditos_DetCredito_vue__WEBPACK_IMPORTED_MODULE_68__ = __webpack_require__(/*! ./components/Ventas/Creditos/DetCredito.vue */ "./resources/js/components/Ventas/Creditos/DetCredito.vue");
+/* harmony import */ var _components_Guias_Transportistas_Main_vue__WEBPACK_IMPORTED_MODULE_69__ = __webpack_require__(/*! ./components/Guias/Transportistas/Main.vue */ "./resources/js/components/Guias/Transportistas/Main.vue");
+/* harmony import */ var _components_Guias_Transportistas_ListTransportista_vue__WEBPACK_IMPORTED_MODULE_70__ = __webpack_require__(/*! ./components/Guias/Transportistas/ListTransportista.vue */ "./resources/js/components/Guias/Transportistas/ListTransportista.vue");
+/* harmony import */ var _components_Guias_Transportistas_AddTransportista_vue__WEBPACK_IMPORTED_MODULE_71__ = __webpack_require__(/*! ./components/Guias/Transportistas/AddTransportista.vue */ "./resources/js/components/Guias/Transportistas/AddTransportista.vue");
+/* harmony import */ var _components_Guias_Transportistas_EditTransportista_vue__WEBPACK_IMPORTED_MODULE_72__ = __webpack_require__(/*! ./components/Guias/Transportistas/EditTransportista.vue */ "./resources/js/components/Guias/Transportistas/EditTransportista.vue");
+/* harmony import */ var _components_Guias_GuiasRemision_Main_vue__WEBPACK_IMPORTED_MODULE_73__ = __webpack_require__(/*! ./components/Guias/GuiasRemision/Main.vue */ "./resources/js/components/Guias/GuiasRemision/Main.vue");
+/* harmony import */ var _components_Guias_GuiasRemision_ListGuia_vue__WEBPACK_IMPORTED_MODULE_74__ = __webpack_require__(/*! ./components/Guias/GuiasRemision/ListGuia.vue */ "./resources/js/components/Guias/GuiasRemision/ListGuia.vue");
+/* harmony import */ var _components_Guias_GuiasRemision_AddGuia_vue__WEBPACK_IMPORTED_MODULE_75__ = __webpack_require__(/*! ./components/Guias/GuiasRemision/AddGuia.vue */ "./resources/js/components/Guias/GuiasRemision/AddGuia.vue");
+/* harmony import */ var _components_Guias_GuiasRemision_DetGuia_vue__WEBPACK_IMPORTED_MODULE_76__ = __webpack_require__(/*! ./components/Guias/GuiasRemision/DetGuia.vue */ "./resources/js/components/Guias/GuiasRemision/DetGuia.vue");
+/* harmony import */ var _components_Guias_GuiasRemision_FacGuia_vue__WEBPACK_IMPORTED_MODULE_77__ = __webpack_require__(/*! ./components/Guias/GuiasRemision/FacGuia.vue */ "./resources/js/components/Guias/GuiasRemision/FacGuia.vue");
+/* harmony import */ var _components_Retenciones_Retencion_Main_vue__WEBPACK_IMPORTED_MODULE_78__ = __webpack_require__(/*! ./components/Retenciones/Retencion/Main.vue */ "./resources/js/components/Retenciones/Retencion/Main.vue");
+/* harmony import */ var _components_Retenciones_Retencion_ListRetencion_vue__WEBPACK_IMPORTED_MODULE_79__ = __webpack_require__(/*! ./components/Retenciones/Retencion/ListRetencion.vue */ "./resources/js/components/Retenciones/Retencion/ListRetencion.vue");
+/* harmony import */ var _components_Retenciones_Retencion_AddRetencion_vue__WEBPACK_IMPORTED_MODULE_80__ = __webpack_require__(/*! ./components/Retenciones/Retencion/AddRetencion.vue */ "./resources/js/components/Retenciones/Retencion/AddRetencion.vue");
+/* harmony import */ var _components_Retenciones_Retencion_DetRetencion_vue__WEBPACK_IMPORTED_MODULE_81__ = __webpack_require__(/*! ./components/Retenciones/Retencion/DetRetencion.vue */ "./resources/js/components/Retenciones/Retencion/DetRetencion.vue");
+/* harmony import */ var _components_Produccion_Plantas_Main_vue__WEBPACK_IMPORTED_MODULE_82__ = __webpack_require__(/*! ./components/Produccion/Plantas/Main.vue */ "./resources/js/components/Produccion/Plantas/Main.vue");
+/* harmony import */ var _components_Produccion_Plantas_ListProduccion_vue__WEBPACK_IMPORTED_MODULE_83__ = __webpack_require__(/*! ./components/Produccion/Plantas/ListProduccion.vue */ "./resources/js/components/Produccion/Plantas/ListProduccion.vue");
+/* harmony import */ var _components_Produccion_Plantas_AddProduccion_vue__WEBPACK_IMPORTED_MODULE_84__ = __webpack_require__(/*! ./components/Produccion/Plantas/AddProduccion.vue */ "./resources/js/components/Produccion/Plantas/AddProduccion.vue");
+/* harmony import */ var _components_Produccion_Plantas_EditProduccion_vue__WEBPACK_IMPORTED_MODULE_85__ = __webpack_require__(/*! ./components/Produccion/Plantas/EditProduccion.vue */ "./resources/js/components/Produccion/Plantas/EditProduccion.vue");
+/* harmony import */ var _components_Produccion_Plantas_FinProduccion_vue__WEBPACK_IMPORTED_MODULE_86__ = __webpack_require__(/*! ./components/Produccion/Plantas/FinProduccion.vue */ "./resources/js/components/Produccion/Plantas/FinProduccion.vue");
+/* harmony import */ var _components_Caja_OpeArqueo_vue__WEBPACK_IMPORTED_MODULE_87__ = __webpack_require__(/*! ./components/Caja/OpeArqueo.vue */ "./resources/js/components/Caja/OpeArqueo.vue");
+/* harmony import */ var _components_Caja_CloArqueo_vue__WEBPACK_IMPORTED_MODULE_88__ = __webpack_require__(/*! ./components/Caja/CloArqueo.vue */ "./resources/js/components/Caja/CloArqueo.vue");
+/* harmony import */ var _components_Caja_Arqueos_Main_vue__WEBPACK_IMPORTED_MODULE_89__ = __webpack_require__(/*! ./components/Caja/Arqueos/Main.vue */ "./resources/js/components/Caja/Arqueos/Main.vue");
+/* harmony import */ var _components_Caja_Arqueos_ListArqueo_vue__WEBPACK_IMPORTED_MODULE_90__ = __webpack_require__(/*! ./components/Caja/Arqueos/ListArqueo.vue */ "./resources/js/components/Caja/Arqueos/ListArqueo.vue");
+/* harmony import */ var _components_Caja_Arqueos_DetArqueo_vue__WEBPACK_IMPORTED_MODULE_91__ = __webpack_require__(/*! ./components/Caja/Arqueos/DetArqueo.vue */ "./resources/js/components/Caja/Arqueos/DetArqueo.vue");
+/* harmony import */ var _components_Reportes_Main_vue__WEBPACK_IMPORTED_MODULE_92__ = __webpack_require__(/*! ./components/Reportes/Main.vue */ "./resources/js/components/Reportes/Main.vue");
+/* harmony import */ var _components_Reportes_RepCompra_vue__WEBPACK_IMPORTED_MODULE_93__ = __webpack_require__(/*! ./components/Reportes/RepCompra.vue */ "./resources/js/components/Reportes/RepCompra.vue");
+/* harmony import */ var _components_Reportes_RepVenta_vue__WEBPACK_IMPORTED_MODULE_94__ = __webpack_require__(/*! ./components/Reportes/RepVenta.vue */ "./resources/js/components/Reportes/RepVenta.vue");
 // Componentes Unitarios
+
 
 
  // Componentes Administración
@@ -126272,367 +126674,370 @@ var routes = [{
 }, {
   path: "/roles",
   name: "roles",
-  component: _components_Administracion_Roles_ListRol_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
+  component: _components_Administracion_Roles_ListRol_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
 }, {
   path: "/empresa",
   name: "empresa",
-  component: _components_Administracion_Empresa_Empresa_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
+  component: _components_Administracion_Empresa_Empresa_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
 }, {
   path: "/impuestos-iva",
-  component: _components_Administracion_Impuestos_Iva_Main_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
+  component: _components_Administracion_Impuestos_Iva_Main_vue__WEBPACK_IMPORTED_MODULE_6__["default"],
   children: [{
     path: "",
     name: "listImpuestoIva",
-    component: _components_Administracion_Impuestos_Iva_ListImpuestoIva_vue__WEBPACK_IMPORTED_MODULE_6__["default"]
+    component: _components_Administracion_Impuestos_Iva_ListImpuestoIva_vue__WEBPACK_IMPORTED_MODULE_7__["default"]
   }, {
     path: "agregar",
     name: "addImpuestoIva",
-    component: _components_Administracion_Impuestos_Iva_AddImpuestoIva_vue__WEBPACK_IMPORTED_MODULE_7__["default"]
+    component: _components_Administracion_Impuestos_Iva_AddImpuestoIva_vue__WEBPACK_IMPORTED_MODULE_8__["default"]
   }, {
     path: "editar/:id",
     name: "editImpuestoIva",
-    component: _components_Administracion_Impuestos_Iva_EditImpuestoIva_vue__WEBPACK_IMPORTED_MODULE_8__["default"]
+    component: _components_Administracion_Impuestos_Iva_EditImpuestoIva_vue__WEBPACK_IMPORTED_MODULE_9__["default"]
   }]
 }, {
   path: "/impuestos-retencion",
-  component: _components_Administracion_Impuestos_Retencion_Main_vue__WEBPACK_IMPORTED_MODULE_9__["default"],
+  component: _components_Administracion_Impuestos_Retencion_Main_vue__WEBPACK_IMPORTED_MODULE_10__["default"],
   children: [{
     path: "",
     name: "listImpuestoRetencion",
-    component: _components_Administracion_Impuestos_Retencion_ListImpuestoRetencion_vue__WEBPACK_IMPORTED_MODULE_10__["default"]
+    component: _components_Administracion_Impuestos_Retencion_ListImpuestoRetencion_vue__WEBPACK_IMPORTED_MODULE_11__["default"]
   }, {
     path: "agregar",
     name: "addImpuestoRetencion",
-    component: _components_Administracion_Impuestos_Retencion_AddImpuestoRetencion_vue__WEBPACK_IMPORTED_MODULE_11__["default"]
+    component: _components_Administracion_Impuestos_Retencion_AddImpuestoRetencion_vue__WEBPACK_IMPORTED_MODULE_12__["default"]
   }, {
     path: "editar/:id",
     name: "editImpuestoRetencion",
-    component: _components_Administracion_Impuestos_Retencion_EditImpuestoRetencion_vue__WEBPACK_IMPORTED_MODULE_12__["default"]
+    component: _components_Administracion_Impuestos_Retencion_EditImpuestoRetencion_vue__WEBPACK_IMPORTED_MODULE_13__["default"]
   }]
 }, {
   path: "/categorias",
-  component: _components_Almacen_Categorias_Main_vue__WEBPACK_IMPORTED_MODULE_25__["default"],
+  component: _components_Almacen_Categorias_Main_vue__WEBPACK_IMPORTED_MODULE_26__["default"],
   children: [{
     path: "",
     name: "listCategoria",
-    component: _components_Almacen_Categorias_ListCategoria_vue__WEBPACK_IMPORTED_MODULE_26__["default"]
+    component: _components_Almacen_Categorias_ListCategoria_vue__WEBPACK_IMPORTED_MODULE_27__["default"]
   }, {
     path: "agregar",
     name: "addCategoria",
-    component: _components_Almacen_Categorias_AddCategoria_vue__WEBPACK_IMPORTED_MODULE_27__["default"]
+    component: _components_Almacen_Categorias_AddCategoria_vue__WEBPACK_IMPORTED_MODULE_28__["default"]
   }, {
     path: "editar/:id",
     name: "editCategoria",
-    component: _components_Almacen_Categorias_EditCategoria_vue__WEBPACK_IMPORTED_MODULE_28__["default"]
+    component: _components_Almacen_Categorias_EditCategoria_vue__WEBPACK_IMPORTED_MODULE_29__["default"]
   }]
 }, {
   path: "/unidades",
-  component: _components_Almacen_Unidades_Main_vue__WEBPACK_IMPORTED_MODULE_33__["default"],
+  component: _components_Almacen_Unidades_Main_vue__WEBPACK_IMPORTED_MODULE_34__["default"],
   children: [{
     path: "",
     name: "listUnidad",
-    component: _components_Almacen_Unidades_ListUnidad_vue__WEBPACK_IMPORTED_MODULE_34__["default"]
+    component: _components_Almacen_Unidades_ListUnidad_vue__WEBPACK_IMPORTED_MODULE_35__["default"]
   }, {
     path: "agregar",
     name: "addUnidad",
-    component: _components_Almacen_Unidades_AddUnidad_vue__WEBPACK_IMPORTED_MODULE_35__["default"]
+    component: _components_Almacen_Unidades_AddUnidad_vue__WEBPACK_IMPORTED_MODULE_36__["default"]
   }, {
     path: "editar/:id",
     name: "editUnidad",
-    component: _components_Almacen_Unidades_EditUnidad_vue__WEBPACK_IMPORTED_MODULE_36__["default"]
+    component: _components_Almacen_Unidades_EditUnidad_vue__WEBPACK_IMPORTED_MODULE_37__["default"]
   }]
 }, {
   path: "/proveedores",
-  component: _components_Compras_Proveedores_Main_vue__WEBPACK_IMPORTED_MODULE_46__["default"],
+  component: _components_Compras_Proveedores_Main_vue__WEBPACK_IMPORTED_MODULE_47__["default"],
   children: [{
     path: "",
     name: "listProveedor",
-    component: _components_Compras_Proveedores_ListProveedor_vue__WEBPACK_IMPORTED_MODULE_47__["default"]
+    component: _components_Compras_Proveedores_ListProveedor_vue__WEBPACK_IMPORTED_MODULE_48__["default"]
   }, {
     path: "agregar",
     name: "addProveedor",
-    component: _components_Compras_Proveedores_AddProveedor_vue__WEBPACK_IMPORTED_MODULE_48__["default"]
+    component: _components_Compras_Proveedores_AddProveedor_vue__WEBPACK_IMPORTED_MODULE_49__["default"]
   }, {
     path: "editar/:id",
     name: "editProveedor",
-    component: _components_Compras_Proveedores_EditProveedor_vue__WEBPACK_IMPORTED_MODULE_49__["default"]
+    component: _components_Compras_Proveedores_EditProveedor_vue__WEBPACK_IMPORTED_MODULE_50__["default"]
   }]
 }, {
   path: "/clientes",
-  component: _components_Ventas_Clientes_Main_vue__WEBPACK_IMPORTED_MODULE_57__["default"],
+  component: _components_Ventas_Clientes_Main_vue__WEBPACK_IMPORTED_MODULE_58__["default"],
   children: [{
     path: "",
     name: "listCliente",
-    component: _components_Ventas_Clientes_ListCliente_vue__WEBPACK_IMPORTED_MODULE_58__["default"]
+    component: _components_Ventas_Clientes_ListCliente_vue__WEBPACK_IMPORTED_MODULE_59__["default"]
   }, {
     path: "agregar",
     name: "addCliente",
-    component: _components_Ventas_Clientes_AddCliente_vue__WEBPACK_IMPORTED_MODULE_59__["default"]
+    component: _components_Ventas_Clientes_AddCliente_vue__WEBPACK_IMPORTED_MODULE_60__["default"]
   }, {
     path: "editar/:id",
     name: "editCliente",
-    component: _components_Ventas_Clientes_EditCliente_vue__WEBPACK_IMPORTED_MODULE_60__["default"]
+    component: _components_Ventas_Clientes_EditCliente_vue__WEBPACK_IMPORTED_MODULE_61__["default"]
   }]
 }, {
   path: "/establecimientos",
-  component: _components_Administracion_Establecimientos_Main_vue__WEBPACK_IMPORTED_MODULE_13__["default"],
+  component: _components_Administracion_Establecimientos_Main_vue__WEBPACK_IMPORTED_MODULE_14__["default"],
   children: [{
     path: "",
     name: "listEstablecimiento",
-    component: _components_Administracion_Establecimientos_ListEstablecimiento_vue__WEBPACK_IMPORTED_MODULE_14__["default"]
+    component: _components_Administracion_Establecimientos_ListEstablecimiento_vue__WEBPACK_IMPORTED_MODULE_15__["default"]
   }, {
     path: "agregar",
     name: "addEstablecimiento",
-    component: _components_Administracion_Establecimientos_AddEstablecimiento_vue__WEBPACK_IMPORTED_MODULE_15__["default"]
+    component: _components_Administracion_Establecimientos_AddEstablecimiento_vue__WEBPACK_IMPORTED_MODULE_16__["default"]
   }, {
     path: "editar/:id",
     name: "editEstablecimiento",
-    component: _components_Administracion_Establecimientos_EditEstablecimiento_vue__WEBPACK_IMPORTED_MODULE_16__["default"]
+    component: _components_Administracion_Establecimientos_EditEstablecimiento_vue__WEBPACK_IMPORTED_MODULE_17__["default"]
   }]
 }, {
   path: "/empleados",
-  component: _components_Administracion_Empleados_Main_vue__WEBPACK_IMPORTED_MODULE_17__["default"],
+  component: _components_Administracion_Empleados_Main_vue__WEBPACK_IMPORTED_MODULE_18__["default"],
   children: [{
     path: "",
     name: "listEmpleado",
-    component: _components_Administracion_Empleados_ListEmpleado_vue__WEBPACK_IMPORTED_MODULE_18__["default"]
+    component: _components_Administracion_Empleados_ListEmpleado_vue__WEBPACK_IMPORTED_MODULE_19__["default"]
   }, {
     path: "agregar",
     name: "addEmpleado",
-    component: _components_Administracion_Empleados_AddEmpleado_vue__WEBPACK_IMPORTED_MODULE_19__["default"]
+    component: _components_Administracion_Empleados_AddEmpleado_vue__WEBPACK_IMPORTED_MODULE_20__["default"]
   }, {
     path: "editar/:id",
     name: "editEmpleado",
-    component: _components_Administracion_Empleados_EditEmpleado_vue__WEBPACK_IMPORTED_MODULE_20__["default"]
+    component: _components_Administracion_Empleados_EditEmpleado_vue__WEBPACK_IMPORTED_MODULE_21__["default"]
   }]
 }, {
   path: "/productos",
-  component: _components_Almacen_Productos_Main_vue__WEBPACK_IMPORTED_MODULE_29__["default"],
+  component: _components_Almacen_Productos_Main_vue__WEBPACK_IMPORTED_MODULE_30__["default"],
   children: [{
     path: "",
     name: "listProducto",
-    component: _components_Almacen_Productos_ListProducto_vue__WEBPACK_IMPORTED_MODULE_30__["default"]
+    component: _components_Almacen_Productos_ListProducto_vue__WEBPACK_IMPORTED_MODULE_31__["default"]
   }, {
     path: "agregar",
     name: "addProducto",
-    component: _components_Almacen_Productos_AddProducto_vue__WEBPACK_IMPORTED_MODULE_31__["default"]
+    component: _components_Almacen_Productos_AddProducto_vue__WEBPACK_IMPORTED_MODULE_32__["default"]
   }, {
     path: "editar/:id",
     name: "editProducto",
-    component: _components_Almacen_Productos_EditProducto_vue__WEBPACK_IMPORTED_MODULE_32__["default"]
+    component: _components_Almacen_Productos_EditProducto_vue__WEBPACK_IMPORTED_MODULE_33__["default"]
   }]
 }, {
   path: "/inventarios",
-  component: _components_Almacen_Inventarios_Main_vue__WEBPACK_IMPORTED_MODULE_37__["default"],
+  component: _components_Almacen_Inventarios_Main_vue__WEBPACK_IMPORTED_MODULE_38__["default"],
   children: [{
     path: "",
     name: "listInventario",
-    component: _components_Almacen_Inventarios_ListInventario_vue__WEBPACK_IMPORTED_MODULE_38__["default"]
+    component: _components_Almacen_Inventarios_ListInventario_vue__WEBPACK_IMPORTED_MODULE_39__["default"]
   }, {
     path: "gestionar",
     name: "manInventario",
-    component: _components_Almacen_Inventarios_ManInventario_vue__WEBPACK_IMPORTED_MODULE_40__["default"]
+    component: _components_Almacen_Inventarios_ManInventario_vue__WEBPACK_IMPORTED_MODULE_41__["default"]
   }, {
     path: "kardex/:id",
     name: "karInventario",
-    component: _components_Almacen_Inventarios_KarInventario_vue__WEBPACK_IMPORTED_MODULE_39__["default"]
+    component: _components_Almacen_Inventarios_KarInventario_vue__WEBPACK_IMPORTED_MODULE_40__["default"]
   }]
 }, {
   path: "/compras",
-  component: _components_Compras_Compras_Main_vue__WEBPACK_IMPORTED_MODULE_50__["default"],
+  component: _components_Compras_Compras_Main_vue__WEBPACK_IMPORTED_MODULE_51__["default"],
   children: [{
     path: "",
     name: "listCompra",
-    component: _components_Compras_Compras_ListCompra_vue__WEBPACK_IMPORTED_MODULE_51__["default"]
+    component: _components_Compras_Compras_ListCompra_vue__WEBPACK_IMPORTED_MODULE_52__["default"]
   }, {
     path: "agregar",
     name: "addCompra",
-    component: _components_Compras_Compras_AddCompra_vue__WEBPACK_IMPORTED_MODULE_52__["default"]
+    component: _components_Compras_Compras_AddCompra_vue__WEBPACK_IMPORTED_MODULE_53__["default"]
   }, {
     path: "detalle/:id",
     name: "detCompra",
-    component: _components_Compras_Compras_DetCompra_vue__WEBPACK_IMPORTED_MODULE_53__["default"]
+    component: _components_Compras_Compras_DetCompra_vue__WEBPACK_IMPORTED_MODULE_54__["default"]
   }]
 }, {
   path: "/deudas",
-  component: _components_Compras_Deudas_Main_vue__WEBPACK_IMPORTED_MODULE_54__["default"],
+  component: _components_Compras_Deudas_Main_vue__WEBPACK_IMPORTED_MODULE_55__["default"],
   children: [{
     path: "",
     name: "listDeuda",
-    component: _components_Compras_Deudas_ListDeuda_vue__WEBPACK_IMPORTED_MODULE_55__["default"]
+    component: _components_Compras_Deudas_ListDeuda_vue__WEBPACK_IMPORTED_MODULE_56__["default"]
   }, {
     path: "detalle/:id",
     name: "detDeuda",
-    component: _components_Compras_Deudas_DetDeuda_vue__WEBPACK_IMPORTED_MODULE_56__["default"]
+    component: _components_Compras_Deudas_DetDeuda_vue__WEBPACK_IMPORTED_MODULE_57__["default"]
   }]
 }, {
   path: "/puntos-emision",
-  component: _components_Administracion_PuntosEmision_Main_vue__WEBPACK_IMPORTED_MODULE_21__["default"],
+  component: _components_Administracion_PuntosEmision_Main_vue__WEBPACK_IMPORTED_MODULE_22__["default"],
   children: [{
     path: "",
     name: "listPuntoEmision",
-    component: _components_Administracion_PuntosEmision_ListPuntoEmision_vue__WEBPACK_IMPORTED_MODULE_22__["default"]
+    component: _components_Administracion_PuntosEmision_ListPuntoEmision_vue__WEBPACK_IMPORTED_MODULE_23__["default"]
   }, {
     path: "agregar",
     name: "addPuntoEmision",
-    component: _components_Administracion_PuntosEmision_AddPuntoEmision_vue__WEBPACK_IMPORTED_MODULE_23__["default"]
+    component: _components_Administracion_PuntosEmision_AddPuntoEmision_vue__WEBPACK_IMPORTED_MODULE_24__["default"]
   }, {
     path: "editar/:id",
     name: "editPuntoEmision",
-    component: _components_Administracion_PuntosEmision_EditPuntoEmision_vue__WEBPACK_IMPORTED_MODULE_24__["default"]
+    component: _components_Administracion_PuntosEmision_EditPuntoEmision_vue__WEBPACK_IMPORTED_MODULE_25__["default"]
   }]
 }, {
   path: "/producciones",
-  component: _components_Produccion_Plantas_Main_vue__WEBPACK_IMPORTED_MODULE_81__["default"],
+  component: _components_Produccion_Plantas_Main_vue__WEBPACK_IMPORTED_MODULE_82__["default"],
   children: [{
     path: "",
     name: "listProduccion",
-    component: _components_Produccion_Plantas_ListProduccion_vue__WEBPACK_IMPORTED_MODULE_82__["default"]
+    component: _components_Produccion_Plantas_ListProduccion_vue__WEBPACK_IMPORTED_MODULE_83__["default"]
   }, {
     path: "agregar",
     name: "addProduccion",
-    component: _components_Produccion_Plantas_AddProduccion_vue__WEBPACK_IMPORTED_MODULE_83__["default"]
+    component: _components_Produccion_Plantas_AddProduccion_vue__WEBPACK_IMPORTED_MODULE_84__["default"]
   }, {
     path: "editar/:id",
     name: "editProduccion",
-    component: _components_Produccion_Plantas_EditProduccion_vue__WEBPACK_IMPORTED_MODULE_84__["default"]
+    component: _components_Produccion_Plantas_EditProduccion_vue__WEBPACK_IMPORTED_MODULE_85__["default"]
   }, {
     path: "finalizar/:id",
     name: "finProduccion",
-    component: _components_Produccion_Plantas_FinProduccion_vue__WEBPACK_IMPORTED_MODULE_85__["default"]
+    component: _components_Produccion_Plantas_FinProduccion_vue__WEBPACK_IMPORTED_MODULE_86__["default"]
   }]
 }, {
   path: "/facturacion",
-  component: _components_Ventas_Facturacion_Main_vue__WEBPACK_IMPORTED_MODULE_61__["default"],
+  component: _components_Ventas_Facturacion_Main_vue__WEBPACK_IMPORTED_MODULE_62__["default"],
   children: [{
     path: "",
     name: "listFactura",
-    component: _components_Ventas_Facturacion_ListFactura_vue__WEBPACK_IMPORTED_MODULE_62__["default"]
+    component: _components_Ventas_Facturacion_ListFactura_vue__WEBPACK_IMPORTED_MODULE_63__["default"]
   }, {
     path: "agregar",
     name: "addFactura",
-    component: _components_Ventas_Facturacion_AddFactura_vue__WEBPACK_IMPORTED_MODULE_63__["default"]
+    component: _components_Ventas_Facturacion_AddFactura_vue__WEBPACK_IMPORTED_MODULE_64__["default"]
   }, {
     path: "detalle/:id",
     name: "detFactura",
-    component: _components_Ventas_Facturacion_DetFactura_vue__WEBPACK_IMPORTED_MODULE_64__["default"]
+    component: _components_Ventas_Facturacion_DetFactura_vue__WEBPACK_IMPORTED_MODULE_65__["default"]
   }]
 }, {
   path: "/creditos",
-  component: _components_Ventas_Creditos_Main_vue__WEBPACK_IMPORTED_MODULE_65__["default"],
+  component: _components_Ventas_Creditos_Main_vue__WEBPACK_IMPORTED_MODULE_66__["default"],
   children: [{
     path: "",
     name: "listCredito",
-    component: _components_Ventas_Creditos_ListCredito_vue__WEBPACK_IMPORTED_MODULE_66__["default"]
+    component: _components_Ventas_Creditos_ListCredito_vue__WEBPACK_IMPORTED_MODULE_67__["default"]
   }, {
     path: "detalle/:id",
     name: "detCredito",
-    component: _components_Ventas_Creditos_DetCredito_vue__WEBPACK_IMPORTED_MODULE_67__["default"]
+    component: _components_Ventas_Creditos_DetCredito_vue__WEBPACK_IMPORTED_MODULE_68__["default"]
   }]
 }, {
   path: "/arqueos",
-  component: _components_Caja_Arqueos_Main_vue__WEBPACK_IMPORTED_MODULE_88__["default"],
+  component: _components_Caja_Arqueos_Main_vue__WEBPACK_IMPORTED_MODULE_89__["default"],
   children: [{
     path: "",
     name: "listArqueo",
-    component: _components_Caja_Arqueos_ListArqueo_vue__WEBPACK_IMPORTED_MODULE_89__["default"]
+    component: _components_Caja_Arqueos_ListArqueo_vue__WEBPACK_IMPORTED_MODULE_90__["default"]
   }, {
     path: "abrir",
     name: "opeArqueo",
-    component: _components_Caja_OpeArqueo_vue__WEBPACK_IMPORTED_MODULE_86__["default"]
+    component: _components_Caja_OpeArqueo_vue__WEBPACK_IMPORTED_MODULE_87__["default"]
   }, {
     path: "cerrar",
     name: "cloArqueo",
-    component: _components_Caja_CloArqueo_vue__WEBPACK_IMPORTED_MODULE_87__["default"]
+    component: _components_Caja_CloArqueo_vue__WEBPACK_IMPORTED_MODULE_88__["default"]
   }, {
     path: "detalle/:id",
     name: "detArqueo",
-    component: _components_Caja_Arqueos_DetArqueo_vue__WEBPACK_IMPORTED_MODULE_90__["default"]
+    component: _components_Caja_Arqueos_DetArqueo_vue__WEBPACK_IMPORTED_MODULE_91__["default"]
   }]
 }, {
   path: "/roles-pago",
-  component: _components_Administracion_RolesPago_Main_vue__WEBPACK_IMPORTED_MODULE_41__["default"],
+  component: _components_Administracion_RolesPago_Main_vue__WEBPACK_IMPORTED_MODULE_42__["default"],
   children: [{
     path: "",
     name: "listRolPago",
-    component: _components_Administracion_RolesPago_ListRolPago_vue__WEBPACK_IMPORTED_MODULE_42__["default"]
+    component: _components_Administracion_RolesPago_ListRolPago_vue__WEBPACK_IMPORTED_MODULE_43__["default"]
   }, {
     path: "generar",
     name: "addRolPago",
-    component: _components_Administracion_RolesPago_AddRolPago_vue__WEBPACK_IMPORTED_MODULE_43__["default"]
+    component: _components_Administracion_RolesPago_AddRolPago_vue__WEBPACK_IMPORTED_MODULE_44__["default"]
   }, {
     path: "editar/:id",
     name: "editRolPago",
-    component: _components_Administracion_RolesPago_EditRolPago_vue__WEBPACK_IMPORTED_MODULE_44__["default"]
+    component: _components_Administracion_RolesPago_EditRolPago_vue__WEBPACK_IMPORTED_MODULE_45__["default"]
   }, {
     path: "detalle/:id",
     name: "detRolPago",
-    component: _components_Administracion_RolesPago_DetRolPago_vue__WEBPACK_IMPORTED_MODULE_45__["default"]
+    component: _components_Administracion_RolesPago_DetRolPago_vue__WEBPACK_IMPORTED_MODULE_46__["default"]
   }]
 }, {
   path: "/transportistas",
-  component: _components_Guias_Transportistas_Main_vue__WEBPACK_IMPORTED_MODULE_68__["default"],
+  component: _components_Guias_Transportistas_Main_vue__WEBPACK_IMPORTED_MODULE_69__["default"],
   children: [{
     path: "",
     name: "listTransportista",
-    component: _components_Guias_Transportistas_ListTransportista_vue__WEBPACK_IMPORTED_MODULE_69__["default"]
+    component: _components_Guias_Transportistas_ListTransportista_vue__WEBPACK_IMPORTED_MODULE_70__["default"]
   }, {
     path: "agregar",
     name: "addTransportista",
-    component: _components_Guias_Transportistas_AddTransportista_vue__WEBPACK_IMPORTED_MODULE_70__["default"]
+    component: _components_Guias_Transportistas_AddTransportista_vue__WEBPACK_IMPORTED_MODULE_71__["default"]
   }, {
     path: "editar/:id",
     name: "editTransportista",
-    component: _components_Guias_Transportistas_EditTransportista_vue__WEBPACK_IMPORTED_MODULE_71__["default"]
+    component: _components_Guias_Transportistas_EditTransportista_vue__WEBPACK_IMPORTED_MODULE_72__["default"]
   }]
 }, {
   path: "/guias",
-  component: _components_Guias_GuiasRemision_Main_vue__WEBPACK_IMPORTED_MODULE_72__["default"],
+  component: _components_Guias_GuiasRemision_Main_vue__WEBPACK_IMPORTED_MODULE_73__["default"],
   children: [{
     path: "",
     name: "listGuia",
-    component: _components_Guias_GuiasRemision_ListGuia_vue__WEBPACK_IMPORTED_MODULE_73__["default"]
+    component: _components_Guias_GuiasRemision_ListGuia_vue__WEBPACK_IMPORTED_MODULE_74__["default"]
   }, {
     path: "agregar",
     name: "addGuia",
-    component: _components_Guias_GuiasRemision_AddGuia_vue__WEBPACK_IMPORTED_MODULE_74__["default"]
+    component: _components_Guias_GuiasRemision_AddGuia_vue__WEBPACK_IMPORTED_MODULE_75__["default"]
   }, {
     path: "factura/:id",
     name: "facGuia",
-    component: _components_Guias_GuiasRemision_FacGuia_vue__WEBPACK_IMPORTED_MODULE_76__["default"]
+    component: _components_Guias_GuiasRemision_FacGuia_vue__WEBPACK_IMPORTED_MODULE_77__["default"]
   }, {
     path: "detalle/:id",
     name: "detGuia",
-    component: _components_Guias_GuiasRemision_DetGuia_vue__WEBPACK_IMPORTED_MODULE_75__["default"]
+    component: _components_Guias_GuiasRemision_DetGuia_vue__WEBPACK_IMPORTED_MODULE_76__["default"]
   }]
 }, {
   path: "/retenciones",
-  component: _components_Retenciones_Retencion_Main_vue__WEBPACK_IMPORTED_MODULE_77__["default"],
+  component: _components_Retenciones_Retencion_Main_vue__WEBPACK_IMPORTED_MODULE_78__["default"],
   children: [{
     path: "",
     name: "listRetencion",
-    component: _components_Retenciones_Retencion_ListRetencion_vue__WEBPACK_IMPORTED_MODULE_78__["default"]
+    component: _components_Retenciones_Retencion_ListRetencion_vue__WEBPACK_IMPORTED_MODULE_79__["default"]
   }, {
     path: "agregar/:fact?",
     name: "addRetencion",
-    component: _components_Retenciones_Retencion_AddRetencion_vue__WEBPACK_IMPORTED_MODULE_79__["default"]
+    component: _components_Retenciones_Retencion_AddRetencion_vue__WEBPACK_IMPORTED_MODULE_80__["default"]
   }, {
     path: "detalle/:id",
     name: "detRetencion",
-    component: _components_Retenciones_Retencion_DetRetencion_vue__WEBPACK_IMPORTED_MODULE_80__["default"]
+    component: _components_Retenciones_Retencion_DetRetencion_vue__WEBPACK_IMPORTED_MODULE_81__["default"]
   }]
 }, {
   path: "/reporte",
-  component: _components_Reportes_Main_vue__WEBPACK_IMPORTED_MODULE_91__["default"],
+  component: _components_Reportes_Main_vue__WEBPACK_IMPORTED_MODULE_92__["default"],
   children: [{
     path: "compras",
     name: "repCompra",
-    component: _components_Reportes_RepCompra_vue__WEBPACK_IMPORTED_MODULE_92__["default"]
+    component: _components_Reportes_RepCompra_vue__WEBPACK_IMPORTED_MODULE_93__["default"]
   }, {
     path: "ventas",
     name: "repVenta",
-    component: _components_Reportes_RepVenta_vue__WEBPACK_IMPORTED_MODULE_93__["default"]
+    component: _components_Reportes_RepVenta_vue__WEBPACK_IMPORTED_MODULE_94__["default"]
   }]
+}, {
+  path: "/perfil",
+  component: _components_Profile_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
 }];
 
 /***/ }),

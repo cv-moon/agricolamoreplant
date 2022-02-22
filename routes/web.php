@@ -38,16 +38,16 @@ Route::middleware('auth')->group(function () {
 
     // Impuesto
     Route::get('api/impuestos-iva', 'ImpuestoController@index');
-    
+
     // Tarifas IVA
     Route::get('api/tarifas-iva', 'TarifaController@index');
     Route::post('api/tarifa-iva/guardar', 'TarifaController@store');
     Route::put('api/tarifa-iva/editar', 'TarifaController@update');
     Route::get('api/tarifa-iva/detalle', 'TarifaController@detail');
-    
+
     // Impuesto Retención
     Route::get('api/impuestos-retencion', 'ImpuestoRetencionController@index');
-    
+
     // Tarifas Retención
     Route::get('api/tarifas-retencion', 'TarifaRetencionController@index');
     Route::post('api/tarifa-retencion/guardar', 'TarifaRetencionController@store');
@@ -74,6 +74,7 @@ Route::middleware('auth')->group(function () {
 
     // Usuarios
     Route::get('api/users', 'UserController@index');
+    Route::get('api/perfil', 'UserController@profile');
 
     // Roles de Pago
     Route::get('api/roles_pago', 'RolPagoController@index');
@@ -141,7 +142,7 @@ Route::middleware('auth')->group(function () {
     Route::get('api/proveedor/detalle', 'ProveedorController@detail');
     Route::put('api/proveedor/editar', 'ProveedorController@update');
     Route::get('api/proveedor/buscar', 'ProveedorController@find');
-    
+
     // Compras
     Route::get('api/compras', 'CompraController@index');
     Route::post('api/compra/guardar', 'CompraController@store');
@@ -169,7 +170,7 @@ Route::middleware('auth')->group(function () {
     Route::get('api/cliente/detalle', 'ClienteController@detail');
     Route::put('api/cliente/editar', 'ClienteController@update');
     Route::get('api/cliente/buscar', 'ClienteController@find');
-    
+
     // Factura
     Route::get('api/facturas', 'FacturaController@index');
     Route::post('api/factura/guardar', 'FacturaController@store');
@@ -178,12 +179,12 @@ Route::middleware('auth')->group(function () {
     Route::get('api/factura/pdf/{clave}', 'FacturaController@individualPdf');
     Route::get('api/factura/xml/{clave}', 'FacturaController@individualXml');
     Route::post('api/factura/reenvio', 'FacturaController@forwardingInvoice');
-    
+
     // Cuentas por Cobrar - Créditos
     Route::get('api/creditos', 'CreditoController@index');
     Route::get('api/credito/detalle', 'CreditoController@detail');
     Route::post('api/credito/abonar', 'CreditoController@payment');
-    
+
     // Facturación - Proceso
     Route::post('api/leerFacturaphp', 'FacturacionController@leerFactura');
     Route::post('api/firmaphp', 'FacturacionController@firmaphp');
@@ -191,14 +192,14 @@ Route::middleware('auth')->group(function () {
     Route::post('api/autorizacionComprobantephp', 'FacturacionController@autorizacionComprobantephp');
     Route::post('api/validarFechaCertificadophp', 'FacturacionController@validarFechaCertificadophp');
     Route::post('api/respfactura', 'FacturacionController@respfactura');
-    
+
     // Rutas de XML
     Route::post('api/xml_factura', 'XmlController@efactura');
     Route::post('api/xml_retencion', 'XmlController@eRetencion');
     Route::post('api/xml_guia', 'XmlController@eGuia');
     Route::post('api/xml_nota_credito', 'XmlController@enotacredito');
     Route::post('api/xml_nota_debito', 'XmlController@enotadebito');
-    
+
     // Rutas de Arqueos - "Cajas"
     Route::get('api/arqueos', 'ArqueoController@index');
     Route::post('api/arqueo/guardar', 'ArqueoController@store');
@@ -207,12 +208,12 @@ Route::middleware('auth')->group(function () {
     Route::get('api/arqueo/validar', 'ArqueoController@validateToday');
     Route::get('api/arqueo/datos', 'ArqueoController@getArqueo');
     Route::get('api/arqueo/reporte/{id}', 'ArqueoController@printArqueo');
-    
+
     // Rutas Egresos
     Route::get('api/egresos', 'EgresoController@index');
     Route::post('api/egreso/guardar', 'EgresoController@store');
     Route::get('api/egreso/eliminar/{id}', 'EgresoController@drop');
-    
+
     // Rutas de Guías
     // Transportistas
     Route::get('api/transportistas', 'TransportistaController@index');
@@ -220,7 +221,7 @@ Route::middleware('auth')->group(function () {
     Route::get('api/transportista/detalle', 'TransportistaController@detail');
     Route::put('api/transportista/editar', 'TransportistaController@update');
     Route::get('api/transportista/buscar', 'TransportistaController@find');
-    
+
     // Guías de Remisión
     Route::get('api/guias', 'GuiaController@index');
     Route::post('api/guia/guardar', 'GuiaController@store');
@@ -230,7 +231,7 @@ Route::middleware('auth')->group(function () {
     Route::get('api/guia/comprobante', 'GuiaController@getGuide');
     Route::get('api/guia/facturas', 'GuiaController@getInvoices');
     Route::get('api/guia/detalles', 'GuiaController@getDetails');
-    
+
     // Rutas de Retenciones
     // Retención
     Route::get('api/retenciones', 'RetencionController@index');
@@ -243,11 +244,11 @@ Route::middleware('auth')->group(function () {
     Route::get('api/retencion/detalles', 'RetencionController@getDetails');
     Route::get('api/retencion/pdf/{clave}', 'RetencionController@individualPdf');
     Route::get('api/retencion/xml/{clave}', 'RetencionController@individualXml');
-    
+
     // Ruta Dashboard
     Route::get('api/dashboard', 'DashboardController');
     Route::get('api/dashboard/datos', 'DashboardController@index');
-    
+
     // Rutas de Reportes
     Route::get('api/reporte/ventas', 'ReporteController@reportSales');
     Route::get('api/reporte/compras', 'ReporteController@reportPurchases');
