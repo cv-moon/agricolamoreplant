@@ -14352,11 +14352,105 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       nombres: "",
-      apellidos: ""
+      apellidos: "",
+      tip_identificacion: "0",
+      num_identificacion: "",
+      direccion: "",
+      telefonos: "",
+      email: "",
+      usuario: "",
+      password: ""
     };
   },
   methods: {
@@ -14366,10 +14460,26 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (err) {
         Swal.fire("Alto!", "Error: ".concat(err), "error");
       });
+    },
+    getUsername: function getUsername() {
+      var separado = [];
+      var nombre = "";
+      var apellido = "";
+      separado = this.nombres.split(" ");
+
+      for (var i = 0; i < separado.length; i++) {
+        var element = separado[i].charAt(0);
+        nombre = nombre + element;
+      }
+
+      apellido = this.apellidos.split(" ");
+      nombre = nombre + apellido[0];
+      return this.usuario = this.password = nombre.toLowerCase();
     }
   },
   mounted: function mounted() {
     this.getData();
+    this.getUsername();
   }
 });
 
@@ -98933,7 +99043,7 @@ var render = function() {
       _c("hr", { staticClass: "mt-0" }),
       _vm._v(" "),
       _c("div", { staticClass: "form-grow row" }, [
-        _c("div", { staticClass: "col-sm-4" }, [
+        _c("div", { staticClass: "col-sm-6" }, [
           _c(
             "label",
             { staticClass: "col-form-label", attrs: { for: "nombres" } },
@@ -98950,12 +99060,7 @@ var render = function() {
               }
             ],
             staticClass: "form-control",
-            attrs: {
-              type: "text",
-              placeholder: "Nombres.",
-              maxlength: "100",
-              disabled: ""
-            },
+            attrs: { type: "text", placeholder: "Nombres.", maxlength: "100" },
             domProps: { value: _vm.nombres },
             on: {
               input: function($event) {
@@ -98968,7 +99073,7 @@ var render = function() {
           })
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-sm-4" }, [
+        _c("div", { staticClass: "col-sm-6" }, [
           _c(
             "label",
             { staticClass: "col-form-label", attrs: { for: "apellidos" } },
@@ -98988,8 +99093,7 @@ var render = function() {
             attrs: {
               type: "text",
               placeholder: "Apellidos.",
-              maxlength: "100",
-              disabled: ""
+              maxlength: "100"
             },
             domProps: { value: _vm.apellidos },
             on: {
@@ -98998,6 +99102,299 @@ var render = function() {
                   return
                 }
                 _vm.apellidos = $event.target.value
+              }
+            }
+          })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group row" }, [
+        _c("div", { staticClass: "col-sm-4" }, [
+          _c(
+            "label",
+            {
+              staticClass: "col-form-label",
+              attrs: { for: "tip_identificacion" }
+            },
+            [_vm._v("Tipo Identificación:")]
+          ),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.tip_identificacion,
+                  expression: "tip_identificacion"
+                }
+              ],
+              staticClass: "form-control",
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.tip_identificacion = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
+                }
+              }
+            },
+            [
+              _c("option", { attrs: { value: "0", disabled: "" } }, [
+                _vm._v("Seleccione...")
+              ]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "CED" } }, [_vm._v("CÉDULA")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "RUC" } }, [_vm._v("RUC")])
+            ]
+          )
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "col-sm-4" },
+          [
+            _c(
+              "label",
+              {
+                staticClass: "col-form-label",
+                attrs: { for: "num_identificacion" }
+              },
+              [_vm._v("# Identificación:")]
+            ),
+            _vm._v(" "),
+            _vm.tip_identificacion === "CED"
+              ? [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.num_identificacion,
+                        expression: "num_identificacion"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "text",
+                      placeholder: "Cédula.",
+                      maxlength: "10"
+                    },
+                    domProps: { value: _vm.num_identificacion },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.num_identificacion = $event.target.value
+                      }
+                    }
+                  })
+                ]
+              : _vm.tip_identificacion === "RUC"
+              ? [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.num_identificacion,
+                        expression: "num_identificacion"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "text",
+                      placeholder: "RUC.",
+                      maxlength: "13"
+                    },
+                    domProps: { value: _vm.num_identificacion },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.num_identificacion = $event.target.value
+                      }
+                    }
+                  })
+                ]
+              : _vm._e()
+          ],
+          2
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-sm-4" }, [
+          _c(
+            "label",
+            { staticClass: "col-form-label", attrs: { for: "telefonos" } },
+            [_vm._v("Teléfonos:")]
+          ),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.telefonos,
+                expression: "telefonos"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: {
+              type: "text",
+              placeholder: "Teléfonos.",
+              minlength: "7",
+              maxlength: "50"
+            },
+            domProps: { value: _vm.telefonos },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.telefonos = $event.target.value
+              }
+            }
+          })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group row" }, [
+        _c("div", { staticClass: "col-sm-12" }, [
+          _c(
+            "label",
+            { staticClass: "col-form-label", attrs: { for: "direccion" } },
+            [_vm._v("Dirección:")]
+          ),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.direccion,
+                expression: "direccion"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: {
+              type: "text",
+              placeholder: "Dirección.",
+              minlength: "4",
+              maxlength: "200"
+            },
+            domProps: { value: _vm.direccion },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.direccion = $event.target.value
+              }
+            }
+          })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group row" }, [
+        _c("div", { staticClass: "col-sm-4" }, [
+          _c(
+            "label",
+            { staticClass: "col-form-label", attrs: { for: "email" } },
+            [_vm._v("E-mail:")]
+          ),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.email,
+                expression: "email"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "email", placeholder: "E-mail.", maxlength: "100" },
+            domProps: { value: _vm.email },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.email = $event.target.value
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-sm-4" }, [
+          _c(
+            "label",
+            { staticClass: "col-form-label", attrs: { for: "usuario" } },
+            [_vm._v("Usuario:")]
+          ),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.usuario,
+                expression: "usuario"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "text", placeholder: "Usuario.", minlength: "4" },
+            domProps: { value: _vm.usuario },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.usuario = $event.target.value
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-sm-4" }, [
+          _c(
+            "label",
+            { staticClass: "col-form-label", attrs: { for: "password" } },
+            [_vm._v("Contraseña:")]
+          ),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.password,
+                expression: "password"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: {
+              type: "password",
+              placeholder: "Contraseña.",
+              minlength: "4"
+            },
+            domProps: { value: _vm.password },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.password = $event.target.value
               }
             }
           })
@@ -99020,7 +99417,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "card-header" }, [
       _c("h3", { staticClass: "card-title mt-2" }, [
         _c("i", { staticClass: "fas fa-align-justify" }),
-        _vm._v("\n            Perfil de Usuario\n        ")
+        _vm._v("\n      Perfil de Usuario\n    ")
       ])
     ])
   }
@@ -127049,7 +127446,7 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\cristian.chuquitarco\Documents\Projects\agricolamoreplant\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/cvdev/Documentos/Proyectos/moreplant/resources/js/app.js */"./resources/js/app.js");
 
 
 /***/ }),

@@ -17,7 +17,19 @@ class UserController extends Controller
 
     public function profile()
     {
-        $user = User::where('id', Auth::user()->id)
+        $user = User::join('empleados', 'users.id', 'empleados.id')
+            ->select(
+                'users.id',
+                'users.email',
+                'users.usuario',
+                'empleados.nombres',
+                'empleados.apellidos',
+                'empleados.tip_identificacion',
+                'empleados.num_identificacion',
+                'empleados.direccion',
+                'empleados.telefonos'
+            )
+            ->where('users.id', Auth::user()->id)
             ->first();
         return $user;
     }
