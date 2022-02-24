@@ -76,6 +76,7 @@ Route::middleware('auth')->group(function () {
     Route::get('api/users', 'UserController@index');
     Route::get('api/users/perfil', 'UserController@profile');
     Route::put('api/users/cambio_pass', 'UserController@changePass');
+    Route::put('api/users/actualiza_perfil', 'UserController@updateProfile');
 
     // Roles de Pago
     Route::get('api/roles_pago', 'RolPagoController@index');

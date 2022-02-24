@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Empleado;
 use App\User;
+use GuzzleHttp\Psr7\Request as Psr7Request;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Symfony\Component\HttpFoundation\Request as HttpFoundationRequest;
 
 class UserController extends Controller
 {
@@ -46,5 +49,26 @@ class UserController extends Controller
         $user = User::findOrFail($request->id);
         $user->password = Hash::make(trim($request->password));
         $user->save();
+    }
+
+    public function updateProfile(Request $request)
+    {
+        try {
+            $user = User::findOrFail($request->id);
+            $user->usuario = trim($request->usuario);
+            $user->email = mb_strtolower(trim($request->email));
+            $user->save();
+
+            $empleado = Empleado::findOrFail($request->id);
+            $empleado->nombres = mb_strtoupper(trim($request->nombres));
+            $empleado->apellidos = mb_strtoupper(trim($request->apellidos));
+            $empleado->tip_identificacion = mb_strtoupper(trim($request->tip_identificacion));
+            $empleado->num_identificacion = trim($request->num_identificacion);
+            $empleado->direccion = mb_strtoupper(trim($request->direccion));
+            $empleado->telefonos = trim($request->telefonos);
+            $empleado->save();
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
     }
 }
