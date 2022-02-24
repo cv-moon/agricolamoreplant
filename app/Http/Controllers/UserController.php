@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -38,5 +39,12 @@ class UserController extends Controller
                 ->first();
         }
         return $user;
+    }
+
+    public function changePass(Request $request)
+    {
+        $user = User::findOrFail($request->id);
+        $user->password = Hash::make(trim($request->password));
+        $user->save();
     }
 }

@@ -14479,17 +14479,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -14514,8 +14503,7 @@ __webpack_require__.r(__webpack_exports__);
     getData: function getData() {
       var _this = this;
 
-      axios.get("/api/perfil").then(function (resp) {
-        console.log(resp);
+      axios.get("/api/users/perfil").then(function (resp) {
         _this.user_id = resp.data.id;
         _this.usuario = resp.data.usuario;
         _this.email = resp.data.email;
@@ -14523,19 +14511,31 @@ __webpack_require__.r(__webpack_exports__);
         Swal.fire("Alto!", "Error: ".concat(err), "error");
       });
     },
-    repeatPassword: function repeatPassword() {
+    validPassword: function validPassword() {
       this.errors.password = [];
-      this.errors.password2 = [];
 
       if (!this.password) {
         this.errors.password.push("El campo no puede estar vacío");
       }
 
+      if (this.password.length < 4) {
+        this.errors.password.push("La contraseña debe tener más de 4 caracteres");
+      }
+    },
+    repeatPassword: function repeatPassword() {
+      this.errors.password2 = [];
+
       if (!this.password2) {
-        this.errors.password2.push("El campo puede estar vacío");
+        this.errors.password2.push("El campo no puede estar vacío");
       }
 
-      console.log(this.errors.password);
+      if (this.password2.length < 4) {
+        this.errors.password2.push("La contraseña debe tener más de 4 caracteres");
+      }
+
+      if (this.password2 !== this.password) {
+        this.errors.password2.push("La contraseña no es igual a la ingresada");
+      }
     },
     getUsername: function getUsername() {
       var separado = [];
@@ -14551,6 +14551,25 @@ __webpack_require__.r(__webpack_exports__);
       apellido = this.apellidos.split(" ");
       nombre = nombre + apellido[0];
       return this.usuario = this.password = nombre.toLowerCase();
+    },
+    changePassword: function changePassword() {
+      var _this2 = this;
+
+      Swal.fire({
+        title: "Espere...",
+        allowOutsideClick: false,
+        didOpen: function didOpen() {
+          Swal.showLoading();
+          axios.put("/api/users/cambio_pass", {
+            id: _this2.user_id,
+            password: _this2.password
+          }).then(function (resp) {
+            Swal.fire("Bien!", "El registro se guardó con éxito.", "success");
+          })["catch"](function (err) {
+            Swal.fire("Alto!", "Error: ".concat(err), "error");
+          });
+        }
+      });
     }
   },
   mounted: function mounted() {
@@ -99479,94 +99498,99 @@ var render = function() {
       _c("hr", { staticClass: "mt-0" }),
       _vm._v(" "),
       _c("div", { staticClass: "form-group row" }, [
-        _c("div", { staticClass: "col-sm-4" }, [
-          _c(
-            "label",
-            { staticClass: "col-form-label", attrs: { for: "password" } },
-            [_vm._v("Contraseña:")]
-          ),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.password,
-                expression: "password"
-              }
-            ],
-            staticClass: "form-control",
-            class: _vm.errors.password.length > 0 ? "is-invalid" : "",
-            attrs: {
-              type: "password",
-              placeholder: "Contraseña.",
-              minlength: "4"
-            },
-            domProps: { value: _vm.password },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
+        _c(
+          "div",
+          { staticClass: "col-sm-4" },
+          [
+            _c(
+              "label",
+              { staticClass: "col-form-label", attrs: { for: "password" } },
+              [_vm._v("Contraseña:")]
+            ),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.password,
+                  expression: "password"
                 }
-                _vm.password = $event.target.value
+              ],
+              staticClass: "form-control",
+              class: _vm.errors.password.length > 0 ? "is-invalid" : "",
+              attrs: {
+                type: "password",
+                placeholder: "Contraseña.",
+                minlength: "4"
+              },
+              domProps: { value: _vm.password },
+              on: {
+                keyup: _vm.validPassword,
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.password = $event.target.value
+                }
               }
-            }
-          }),
-          _vm._v(" "),
-          _vm.errors.password.length > 0
-            ? _c(
-                "div",
-                _vm._l(_vm.errors.password, function(err) {
-                  return _c(
-                    "div",
-                    { key: err, staticClass: "invalid-feedback" },
-                    [
-                      _vm._v(
-                        "\n                        " +
-                          _vm._s(err) +
-                          "\n                    "
-                      )
-                    ]
-                  )
-                }),
-                0
-              )
-            : _vm._e()
-        ]),
+            }),
+            _vm._v(" "),
+            _vm._l(_vm.errors.password, function(err) {
+              return _c("div", { key: err, staticClass: "invalid-feedback" }, [
+                _vm._v("\n          " + _vm._s(err) + "\n        ")
+              ])
+            })
+          ],
+          2
+        ),
         _vm._v(" "),
-        _c("div", { staticClass: "col-sm-4" }, [
-          _c(
-            "label",
-            { staticClass: "col-form-label", attrs: { for: "password" } },
-            [_vm._v("Repetir Contraseña:")]
-          ),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.password2,
-                expression: "password2"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: {
-              type: "password",
-              placeholder: "Repita Contraseña.",
-              minlength: "4"
-            },
-            domProps: { value: _vm.password2 },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
+        _c(
+          "div",
+          { staticClass: "col-sm-4" },
+          [
+            _c(
+              "label",
+              { staticClass: "col-form-label", attrs: { for: "password" } },
+              [_vm._v("Repetir Contraseña:")]
+            ),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.password2,
+                  expression: "password2"
                 }
-                _vm.password2 = $event.target.value
+              ],
+              staticClass: "form-control",
+              class: _vm.errors.password2.length > 0 ? "is-invalid" : "",
+              attrs: {
+                type: "password",
+                placeholder: "Repita Contraseña.",
+                minlength: "4"
+              },
+              domProps: { value: _vm.password2 },
+              on: {
+                keyup: _vm.repeatPassword,
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.password2 = $event.target.value
+                }
               }
-            }
-          })
-        ]),
+            }),
+            _vm._v(" "),
+            _vm._l(_vm.errors.password2, function(err) {
+              return _c("div", { key: err, staticClass: "invalid-feedback" }, [
+                _vm._v("\n          " + _vm._s(err) + "\n        ")
+              ])
+            })
+          ],
+          2
+        ),
         _vm._v(" "),
         _c("div", { staticClass: "invalid-feedback" })
       ]),
@@ -99577,9 +99601,9 @@ var render = function() {
           {
             staticClass: "btn btn-primary",
             attrs: { type: "button" },
-            on: { click: _vm.repeatPassword }
+            on: { click: _vm.changePassword }
           },
-          [_vm._v("\n                Cambiar Contraseña\n            ")]
+          [_vm._v("\n        Cambiar Contraseña\n      ")]
         )
       ])
     ])
@@ -99593,7 +99617,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "card-header" }, [
       _c("h3", { staticClass: "card-title mt-2" }, [
         _c("i", { staticClass: "fas fa-align-justify" }),
-        _vm._v("\n            Perfil de Usuario\n        ")
+        _vm._v("\n      Perfil de Usuario\n    ")
       ])
     ])
   }
@@ -127622,7 +127646,7 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\cristian.chuquitarco\Documents\Projects\agricolamoreplant\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/cvdev/Documentos/Proyectos/moreplant/resources/js/app.js */"./resources/js/app.js");
 
 
 /***/ }),
