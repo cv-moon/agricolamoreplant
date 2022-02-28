@@ -4,11 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Empleado;
 use App\User;
-use GuzzleHttp\Psr7\Request as Psr7Request;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Symfony\Component\HttpFoundation\Request as HttpFoundationRequest;
 
 class UserController extends Controller
 {

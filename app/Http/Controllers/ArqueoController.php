@@ -10,6 +10,8 @@ use Carbon\Carbon;
 use generarPDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Prophecy\Doubler\Generator\Node\ReturnTypeNode;
+
 include 'class/generarPDF.php';
 
 class ArqueoController extends Controller
@@ -136,7 +138,7 @@ class ArqueoController extends Controller
 
     public function validateToday()
     {
-        $dia = date('d');
+        $dia = date('Y-m-d');
         $arqueo = Arqueo::join('puntos_emision', 'arqueos.punto_id', 'puntos_emision.id')
             ->join('users', 'puntos_emision.user_id', 'users.id')
             ->select(
@@ -149,7 +151,7 @@ class ArqueoController extends Controller
             ->where('puntos_emision.user_id', Auth::user()->id)
             ->where('users.estado', 1)
             ->where('puntos_emision.estado', 1)
-            ->whereDay('arqueos.created_at', $dia)
+            ->where('arqueos.created_at', $dia)
             ->first();
         if ($arqueo) {
             return response()->json('open');
