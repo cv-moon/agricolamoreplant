@@ -6834,6 +6834,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -6877,15 +6881,22 @@ __webpack_require__.r(__webpack_exports__);
         return;
       }
 
-      axios.post("/api/categoria/guardar", {
-        nombre: this.nombre,
-        descripcion: this.descripcion
-      }).then(function (resp) {
-        Swal.fire("Bien!", "El registro se guardó con éxito.", "success");
+      Swal.fire({
+        title: "Espere...",
+        allowOutsideClick: false,
+        didOpen: function didOpen() {
+          Swal.showLoading();
+          axios.post("/api/categoria/guardar", {
+            nombre: _this2.nombre,
+            descripcion: _this2.descripcion
+          }).then(function (resp) {
+            Swal.fire("Bien!", "El registro se guardó con éxito.", "success");
 
-        _this2.$router.push("/categorias");
-      })["catch"](function (err) {
-        Swal.fire("Error!", "No se pudo realizar el registro. " + err, "error");
+            _this2.$router.push("/categorias");
+          })["catch"](function (err) {
+            Swal.fire("Alto!", "Error: ".concat(err), "error");
+          });
+        }
       });
     }
   }
@@ -6902,6 +6913,12 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -7009,16 +7026,23 @@ __webpack_require__.r(__webpack_exports__);
         return;
       }
 
-      axios.put("/api/categoria/editar", {
-        id: this.cat_id,
-        nombre: this.nombre,
-        descripcion: this.descripcion
-      }).then(function (resp) {
-        Swal.fire("Bien!", "El registro se guardó con éxito.", "success");
+      Swal.fire({
+        title: "Espere...",
+        allowOutsideClick: false,
+        didOpen: function didOpen() {
+          Swal.showLoading();
+          axios.put("/api/categoria/editar", {
+            id: _this2.cat_id,
+            nombre: _this2.nombre,
+            descripcion: _this2.descripcion
+          }).then(function (resp) {
+            Swal.fire("Bien!", "El registro se guardó con éxito.", "success");
 
-        _this2.$router.push("/categorias");
-      })["catch"](function (err) {
-        Swal.fire("Error!", "No se pudo realizar el registro. " + err, "error");
+            _this2.$router.push("/categorias");
+          })["catch"](function (err) {
+            Swal.fire("Alto!", "Error: ".concat(err), "error");
+          });
+        }
       });
     }
   },
@@ -7853,7 +7877,7 @@ __webpack_require__.r(__webpack_exports__);
     selectImpuesto: function selectImpuesto() {
       var _this4 = this;
 
-      axios.get("/api/tarifas").then(function (resp) {
+      axios.get("/api/tarifas-iva").then(function (resp) {
         _this4.arrayImpuestos = resp.data;
       });
     },
@@ -87033,7 +87057,7 @@ var render = function() {
             },
             [
               _c("i", { staticClass: "fas fa-arrow-left" }),
-              _vm._v(" Regresar\n      ")
+              _vm._v(" Regresar\n            ")
             ]
           )
         ],
@@ -87122,7 +87146,11 @@ var render = function() {
                 "div",
                 _vm._l(_vm.errors, function(error) {
                   return _c("div", { key: error }, [
-                    _vm._v("\n            " + _vm._s(error) + "\n          ")
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(error) +
+                        "\n                    "
+                    )
                   ])
                 }),
                 0
@@ -87139,7 +87167,7 @@ var render = function() {
         _c(
           "router-link",
           { staticClass: "btn btn-danger", attrs: { to: "/categorias" } },
-          [_vm._v("\n      Cancelar\n    ")]
+          [_vm._v("\n            Cancelar\n        ")]
         ),
         _vm._v(" "),
         _c(
@@ -87149,7 +87177,7 @@ var render = function() {
             attrs: { type: "button" },
             on: { click: _vm.guardar }
           },
-          [_vm._v("\n      Guardar\n    ")]
+          [_vm._v("\n            Guardar\n        ")]
         )
       ],
       1
@@ -87163,7 +87191,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("h3", { staticClass: "card-title mt-2" }, [
       _c("i", { staticClass: "fas fa-align-justify" }),
-      _vm._v("\n      Agregar Categoria\n    ")
+      _vm._v("\n            Agregar Categoria\n        ")
     ])
   }
 ]
@@ -87192,7 +87220,9 @@ var render = function() {
     _c("div", { staticClass: "card-header" }, [
       _c("h3", { staticClass: "card-title mt-2" }, [
         _c("i", { staticClass: "fas fa-align-justify" }),
-        _vm._v("\n      Editar Categoria: " + _vm._s(_vm.nombre) + "\n    ")
+        _vm._v(
+          "\n            Editar Categoria: " + _vm._s(_vm.nombre) + "\n        "
+        )
       ]),
       _vm._v(" "),
       _c(
@@ -87207,7 +87237,7 @@ var render = function() {
             },
             [
               _c("i", { staticClass: "fas fa-arrow-left" }),
-              _vm._v(" Regresar\n      ")
+              _vm._v(" Regresar\n            ")
             ]
           )
         ],
@@ -87302,7 +87332,11 @@ var render = function() {
                 "div",
                 _vm._l(_vm.errors, function(error) {
                   return _c("div", { key: error }, [
-                    _vm._v("\n            " + _vm._s(error) + "\n          ")
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(error) +
+                        "\n                    "
+                    )
                   ])
                 }),
                 0
@@ -87319,7 +87353,7 @@ var render = function() {
         _c(
           "router-link",
           { staticClass: "btn btn-danger", attrs: { to: "/categorias" } },
-          [_vm._v("\n      Cancelar\n    ")]
+          [_vm._v("\n            Cancelar\n        ")]
         ),
         _vm._v(" "),
         _c(
@@ -87329,7 +87363,7 @@ var render = function() {
             attrs: { type: "button" },
             on: { click: _vm.editar }
           },
-          [_vm._v("\n      Actualizar\n    ")]
+          [_vm._v("\n            Actualizar\n        ")]
         )
       ],
       1
@@ -127989,7 +128023,7 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/cvdev/Documentos/Proyectos/moreplant/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\cristian.chuquitarco\Documents\Projects\agricolamoreplant\resources\js\app.js */"./resources/js/app.js");
 
 
 /***/ }),

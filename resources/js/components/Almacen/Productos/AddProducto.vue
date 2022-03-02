@@ -242,7 +242,7 @@ export default {
       });
     },
     selectImpuesto() {
-      axios.get("/api/tarifas").then((resp) => {
+      axios.get("/api/tarifas-iva").then((resp) => {
         this.arrayImpuestos = resp.data;
       });
     },
