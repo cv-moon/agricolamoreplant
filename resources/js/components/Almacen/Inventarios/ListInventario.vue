@@ -140,7 +140,6 @@ export default {
           this.arrayInventarios = resp.data;
           $("#tabla").DataTable().destroy();
           this.myTable();
-          this.establecimiento = 0;
         });
     },
     selectProveedores() {

@@ -66,6 +66,7 @@ import MainInventario from "./components/Almacen/Inventarios/Main.vue";
 import ListInventario from "./components/Almacen/Inventarios/ListInventario.vue";
 import KarInventario from "./components/Almacen/Inventarios/KarInventario.vue";
 import ManInventario from "./components/Almacen/Inventarios/ManInventario.vue";
+import AddTraslado from "./components/Almacen/Inventarios/AddTraslado.vue";
 
 // Roles de Pago - Remuneraciones
 import MainRolPago from "./components/Administracion/RolesPago/Main.vue";
@@ -389,6 +390,11 @@ export const routes = [
                 path: "gestionar",
                 name: "manInventario",
                 component: ManInventario
+            },
+            {
+                path: "traslados",
+                name: "addTraslado",
+                component: AddTraslado
             },
             {
                 path: "kardex/:id",

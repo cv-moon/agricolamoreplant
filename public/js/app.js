@@ -7137,6 +7137,215 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Almacen/Inventarios/AddTraslado.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Almacen/Inventarios/AddTraslado.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      estab_origen_id: 0,
+      estab_destino_id: 0,
+      arrayProductos: [],
+      arrayEstabOrigen: [],
+      arrayEstabDestino: []
+    };
+  },
+  methods: {
+    guardar: function guardar() {
+      var _this = this;
+
+      Swal.fire({
+        title: "Espere...",
+        allowOutsideClick: false,
+        didOpen: function didOpen() {
+          Swal.showLoading();
+          axios.post("/api/inventario/guardar", {
+            establecimiento_id: _this.establecimiento_id,
+            productos: _this.arrayProductos
+          }).then(function (resp) {
+            Swal.fire("Bien!", "El registro se guardó con éxito.", "success");
+
+            _this.$router.push("/inventarios");
+          })["catch"](function (err) {
+            Swal.fire("Alto!", "Error: ".concat(err), "error");
+          });
+        }
+      });
+    },
+    listar: function listar() {
+      var _this2 = this;
+
+      var id = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+      axios.get("/api/inventarios?establecimiento=" + id).then(function (resp) {
+        _this2.arrayProductos = resp.data;
+      });
+    },
+    selectEstablecimientos: function selectEstablecimientos() {
+      var _this3 = this;
+
+      axios.get("/api/establecimientos").then(function (resp) {
+        _this3.arrayEstabOrigen = resp.data;
+        _this3.arrayEstabDestino = resp.data;
+      });
+    }
+  },
+  mounted: function mounted() {
+    this.selectEstablecimientos();
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Almacen/Inventarios/KarInventario.vue?vue&type=script&lang=js&":
 /*!********************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Almacen/Inventarios/KarInventario.vue?vue&type=script&lang=js& ***!
@@ -7429,8 +7638,6 @@ __webpack_require__.r(__webpack_exports__);
         $("#tabla").DataTable().destroy();
 
         _this.myTable();
-
-        _this.establecimiento = 0;
       });
     },
     selectProveedores: function selectProveedores() {
@@ -7562,6 +7769,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -7575,15 +7790,22 @@ __webpack_require__.r(__webpack_exports__);
     guardar: function guardar() {
       var _this = this;
 
-      axios.post("/api/inventario/guardar", {
-        establecimiento_id: this.establecimiento_id,
-        productos: this.arrayProductos
-      }).then(function (resp) {
-        Swal.fire("Bien!", "El registro se guardó con éxito.", "success");
+      Swal.fire({
+        title: "Espere...",
+        allowOutsideClick: false,
+        didOpen: function didOpen() {
+          Swal.showLoading();
+          axios.post("/api/inventario/guardar", {
+            establecimiento_id: _this.establecimiento_id,
+            productos: _this.arrayProductos
+          }).then(function (resp) {
+            Swal.fire("Bien!", "El registro se guardó con éxito.", "success");
 
-        _this.$router.push("/inventarios");
-      })["catch"](function (err) {
-        Swal.fire("Error!", "No se pudo realizar el registro. " + err, "error");
+            _this.$router.push("/inventarios");
+          })["catch"](function (err) {
+            Swal.fire("Alto!", "Error: ".concat(err), "error");
+          });
+        }
       });
     },
     listar: function listar() {
@@ -87543,6 +87765,349 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Almacen/Inventarios/AddTraslado.vue?vue&type=template&id=2e151247&":
+/*!**********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Almacen/Inventarios/AddTraslado.vue?vue&type=template&id=2e151247& ***!
+  \**********************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "card card-primary card-outline" }, [
+    _c("div", { staticClass: "card-header" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "card-tools" },
+        [
+          _c(
+            "router-link",
+            { staticClass: "btn btn-secondary", attrs: { to: "/inventarios" } },
+            [
+              _c("i", { staticClass: "fas fa-arrow-left" }),
+              _vm._v(" Regresar\n            ")
+            ]
+          )
+        ],
+        1
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "card-body" }, [
+      _c("div", { staticClass: "form-group row" }, [
+        _c("div", { staticClass: "col-sm-6" }, [
+          _c(
+            "label",
+            {
+              staticClass: "col-form-label",
+              attrs: { for: "establecimiento" }
+            },
+            [_vm._v("Establecimiento Origen:")]
+          ),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.estab_origen_id,
+                  expression: "estab_origen_id"
+                }
+              ],
+              staticClass: "form-control",
+              on: {
+                change: [
+                  function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.estab_origen_id = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  },
+                  function($event) {
+                    return _vm.listar(_vm.estab_origen_id)
+                  }
+                ]
+              }
+            },
+            [
+              _c("option", { attrs: { value: "0" } }, [
+                _vm._v("Seleccione...")
+              ]),
+              _vm._v(" "),
+              _vm._l(_vm.arrayEstabOrigen, function(establecimiento) {
+                return _c("option", {
+                  key: establecimiento.id,
+                  domProps: {
+                    value: establecimiento.id,
+                    textContent: _vm._s(
+                      establecimiento.nom_comercial +
+                        " - " +
+                        establecimiento.nom_referencia
+                    )
+                  }
+                })
+              })
+            ],
+            2
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-sm-6" }, [
+          _c(
+            "label",
+            {
+              staticClass: "col-form-label",
+              attrs: { for: "establecimiento" }
+            },
+            [_vm._v("Establecimiento Destino:")]
+          ),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.estab_destino_id,
+                  expression: "estab_destino_id"
+                }
+              ],
+              staticClass: "form-control",
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.estab_destino_id = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
+                }
+              }
+            },
+            [
+              _c("option", { attrs: { value: "0" } }, [
+                _vm._v("Seleccione...")
+              ]),
+              _vm._v(" "),
+              _vm._l(_vm.arrayEstabDestino, function(establecimiento) {
+                return _c("option", {
+                  key: establecimiento.id,
+                  domProps: {
+                    value: establecimiento.id,
+                    textContent: _vm._s(
+                      establecimiento.nom_comercial +
+                        " - " +
+                        establecimiento.nom_referencia
+                    )
+                  }
+                })
+              })
+            ],
+            2
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group row" }, [
+        _c("div", { staticClass: "col-sm-6" }, [
+          _c("div", { staticClass: "table-responsive" }, [
+            _c("table", { staticClass: "table table-striped" }, [
+              _vm._m(1),
+              _vm._v(" "),
+              _c(
+                "tbody",
+                [
+                  _vm.arrayProductos.length
+                    ? _vm._l(_vm.arrayProductos, function(producto) {
+                        return _c("tr", { key: producto.id }, [
+                          _c("td", {
+                            domProps: { textContent: _vm._s(producto.nombre) }
+                          }),
+                          _vm._v(" "),
+                          _c("td", {
+                            domProps: {
+                              textContent: _vm._s(producto.dis_stock)
+                            }
+                          })
+                        ])
+                      })
+                    : [_vm._m(2)]
+                ],
+                2
+              )
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-sm-6" }, [
+          _c("div", { staticClass: "table-responsive" }, [
+            _c("table", { staticClass: "table table-striped" }, [
+              _vm._m(3),
+              _vm._v(" "),
+              _c(
+                "tbody",
+                [
+                  _vm.arrayProductos.length
+                    ? _vm._l(_vm.arrayProductos, function(producto) {
+                        return _c("tr", { key: producto.id }, [
+                          _c("td", {
+                            domProps: { textContent: _vm._s(producto.nombre) }
+                          }),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: producto.dis_stock,
+                                  expression: "producto.dis_stock"
+                                }
+                              ],
+                              attrs: {
+                                type: "number",
+                                placeholder: "0",
+                                min: "0"
+                              },
+                              domProps: { value: producto.dis_stock },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    producto,
+                                    "dis_stock",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            })
+                          ])
+                        ])
+                      })
+                    : [_vm._m(4)]
+                ],
+                2
+              )
+            ])
+          ])
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "card-footer" },
+      [
+        _c(
+          "router-link",
+          { staticClass: "btn btn-danger", attrs: { to: "/inventarios" } },
+          [_vm._v("\n            Cancelar\n        ")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-success",
+            attrs: { type: "button" },
+            on: { click: _vm.guardar }
+          },
+          [_vm._v("\n            Guardar\n        ")]
+        )
+      ],
+      1
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h3", { staticClass: "card-title mt-2" }, [
+      _c("i", { staticClass: "fas fa-align-justify" }),
+      _vm._v("\n            Traslado de productos entre almacenes\n        ")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("Producto")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Stock Inicial")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("td", { attrs: { align: "center", colspan: "3" } }, [
+        _vm._v(
+          "\n                                        No data available in table\n                                    "
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("Producto")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Stock Inicial")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("td", { attrs: { align: "center", colspan: "3" } }, [
+        _vm._v(
+          "\n                                        No data available in table\n                                    "
+        )
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Almacen/Inventarios/KarInventario.vue?vue&type=template&id=2c651f83&":
 /*!************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Almacen/Inventarios/KarInventario.vue?vue&type=template&id=2c651f83& ***!
@@ -88068,7 +88633,7 @@ var render = function() {
             { staticClass: "btn btn-secondary", attrs: { to: "/inventarios" } },
             [
               _c("i", { staticClass: "fas fa-arrow-left" }),
-              _vm._v(" Regresar\n      ")
+              _vm._v(" Regresar\n            ")
             ]
           )
         ],
@@ -88348,7 +88913,7 @@ var render = function() {
         _c(
           "router-link",
           { staticClass: "btn btn-danger", attrs: { to: "/inventarios" } },
-          [_vm._v("\n      Cancelar\n    ")]
+          [_vm._v("\n            Cancelar\n        ")]
         ),
         _vm._v(" "),
         _c(
@@ -88358,7 +88923,7 @@ var render = function() {
             attrs: { type: "button" },
             on: { click: _vm.guardar }
           },
-          [_vm._v("\n      Guardar\n    ")]
+          [_vm._v("\n            Guardar\n        ")]
         )
       ],
       1
@@ -88372,7 +88937,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("h3", { staticClass: "card-title mt-2" }, [
       _c("i", { staticClass: "fas fa-align-justify" }),
-      _vm._v("\n      Gestión de Productos por Establecimiento\n    ")
+      _vm._v("\n            Gestión de Productos por Establecimiento\n        ")
     ])
   },
   function() {
@@ -88381,7 +88946,9 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("tr", [
       _c("td", { attrs: { align: "center", colspan: "4" } }, [
-        _vm._v("No data available in table")
+        _vm._v(
+          "\n                                No data available in table\n                            "
+        )
       ])
     ])
   }
@@ -122476,6 +123043,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/Almacen/Inventarios/AddTraslado.vue":
+/*!*********************************************************************!*\
+  !*** ./resources/js/components/Almacen/Inventarios/AddTraslado.vue ***!
+  \*********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _AddTraslado_vue_vue_type_template_id_2e151247___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AddTraslado.vue?vue&type=template&id=2e151247& */ "./resources/js/components/Almacen/Inventarios/AddTraslado.vue?vue&type=template&id=2e151247&");
+/* harmony import */ var _AddTraslado_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AddTraslado.vue?vue&type=script&lang=js& */ "./resources/js/components/Almacen/Inventarios/AddTraslado.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _AddTraslado_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _AddTraslado_vue_vue_type_template_id_2e151247___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _AddTraslado_vue_vue_type_template_id_2e151247___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Almacen/Inventarios/AddTraslado.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Almacen/Inventarios/AddTraslado.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************!*\
+  !*** ./resources/js/components/Almacen/Inventarios/AddTraslado.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AddTraslado_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./AddTraslado.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Almacen/Inventarios/AddTraslado.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AddTraslado_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Almacen/Inventarios/AddTraslado.vue?vue&type=template&id=2e151247&":
+/*!****************************************************************************************************!*\
+  !*** ./resources/js/components/Almacen/Inventarios/AddTraslado.vue?vue&type=template&id=2e151247& ***!
+  \****************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddTraslado_vue_vue_type_template_id_2e151247___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./AddTraslado.vue?vue&type=template&id=2e151247& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Almacen/Inventarios/AddTraslado.vue?vue&type=template&id=2e151247&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddTraslado_vue_vue_type_template_id_2e151247___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AddTraslado_vue_vue_type_template_id_2e151247___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/Almacen/Inventarios/KarInventario.vue":
 /*!***********************************************************************!*\
   !*** ./resources/js/components/Almacen/Inventarios/KarInventario.vue ***!
@@ -127479,59 +128115,60 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Almacen_Inventarios_ListInventario_vue__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ./components/Almacen/Inventarios/ListInventario.vue */ "./resources/js/components/Almacen/Inventarios/ListInventario.vue");
 /* harmony import */ var _components_Almacen_Inventarios_KarInventario_vue__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ./components/Almacen/Inventarios/KarInventario.vue */ "./resources/js/components/Almacen/Inventarios/KarInventario.vue");
 /* harmony import */ var _components_Almacen_Inventarios_ManInventario_vue__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ./components/Almacen/Inventarios/ManInventario.vue */ "./resources/js/components/Almacen/Inventarios/ManInventario.vue");
-/* harmony import */ var _components_Administracion_RolesPago_Main_vue__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! ./components/Administracion/RolesPago/Main.vue */ "./resources/js/components/Administracion/RolesPago/Main.vue");
-/* harmony import */ var _components_Administracion_RolesPago_ListRolPago_vue__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! ./components/Administracion/RolesPago/ListRolPago.vue */ "./resources/js/components/Administracion/RolesPago/ListRolPago.vue");
-/* harmony import */ var _components_Administracion_RolesPago_AddRolPago_vue__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(/*! ./components/Administracion/RolesPago/AddRolPago.vue */ "./resources/js/components/Administracion/RolesPago/AddRolPago.vue");
-/* harmony import */ var _components_Administracion_RolesPago_EditRolPago_vue__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(/*! ./components/Administracion/RolesPago/EditRolPago.vue */ "./resources/js/components/Administracion/RolesPago/EditRolPago.vue");
-/* harmony import */ var _components_Administracion_RolesPago_DetRolPago_vue__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(/*! ./components/Administracion/RolesPago/DetRolPago.vue */ "./resources/js/components/Administracion/RolesPago/DetRolPago.vue");
-/* harmony import */ var _components_Compras_Proveedores_Main_vue__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(/*! ./components/Compras/Proveedores/Main.vue */ "./resources/js/components/Compras/Proveedores/Main.vue");
-/* harmony import */ var _components_Compras_Proveedores_ListProveedor_vue__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(/*! ./components/Compras/Proveedores/ListProveedor.vue */ "./resources/js/components/Compras/Proveedores/ListProveedor.vue");
-/* harmony import */ var _components_Compras_Proveedores_AddProveedor_vue__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(/*! ./components/Compras/Proveedores/AddProveedor.vue */ "./resources/js/components/Compras/Proveedores/AddProveedor.vue");
-/* harmony import */ var _components_Compras_Proveedores_EditProveedor_vue__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(/*! ./components/Compras/Proveedores/EditProveedor.vue */ "./resources/js/components/Compras/Proveedores/EditProveedor.vue");
-/* harmony import */ var _components_Compras_Compras_Main_vue__WEBPACK_IMPORTED_MODULE_51__ = __webpack_require__(/*! ./components/Compras/Compras/Main.vue */ "./resources/js/components/Compras/Compras/Main.vue");
-/* harmony import */ var _components_Compras_Compras_ListCompra_vue__WEBPACK_IMPORTED_MODULE_52__ = __webpack_require__(/*! ./components/Compras/Compras/ListCompra.vue */ "./resources/js/components/Compras/Compras/ListCompra.vue");
-/* harmony import */ var _components_Compras_Compras_AddCompra_vue__WEBPACK_IMPORTED_MODULE_53__ = __webpack_require__(/*! ./components/Compras/Compras/AddCompra.vue */ "./resources/js/components/Compras/Compras/AddCompra.vue");
-/* harmony import */ var _components_Compras_Compras_DetCompra_vue__WEBPACK_IMPORTED_MODULE_54__ = __webpack_require__(/*! ./components/Compras/Compras/DetCompra.vue */ "./resources/js/components/Compras/Compras/DetCompra.vue");
-/* harmony import */ var _components_Compras_Deudas_Main_vue__WEBPACK_IMPORTED_MODULE_55__ = __webpack_require__(/*! ./components/Compras/Deudas/Main.vue */ "./resources/js/components/Compras/Deudas/Main.vue");
-/* harmony import */ var _components_Compras_Deudas_ListDeuda_vue__WEBPACK_IMPORTED_MODULE_56__ = __webpack_require__(/*! ./components/Compras/Deudas/ListDeuda.vue */ "./resources/js/components/Compras/Deudas/ListDeuda.vue");
-/* harmony import */ var _components_Compras_Deudas_DetDeuda_vue__WEBPACK_IMPORTED_MODULE_57__ = __webpack_require__(/*! ./components/Compras/Deudas/DetDeuda.vue */ "./resources/js/components/Compras/Deudas/DetDeuda.vue");
-/* harmony import */ var _components_Ventas_Clientes_Main_vue__WEBPACK_IMPORTED_MODULE_58__ = __webpack_require__(/*! ./components/Ventas/Clientes/Main.vue */ "./resources/js/components/Ventas/Clientes/Main.vue");
-/* harmony import */ var _components_Ventas_Clientes_ListCliente_vue__WEBPACK_IMPORTED_MODULE_59__ = __webpack_require__(/*! ./components/Ventas/Clientes/ListCliente.vue */ "./resources/js/components/Ventas/Clientes/ListCliente.vue");
-/* harmony import */ var _components_Ventas_Clientes_AddCliente_vue__WEBPACK_IMPORTED_MODULE_60__ = __webpack_require__(/*! ./components/Ventas/Clientes/AddCliente.vue */ "./resources/js/components/Ventas/Clientes/AddCliente.vue");
-/* harmony import */ var _components_Ventas_Clientes_EditCliente_vue__WEBPACK_IMPORTED_MODULE_61__ = __webpack_require__(/*! ./components/Ventas/Clientes/EditCliente.vue */ "./resources/js/components/Ventas/Clientes/EditCliente.vue");
-/* harmony import */ var _components_Ventas_Facturacion_Main_vue__WEBPACK_IMPORTED_MODULE_62__ = __webpack_require__(/*! ./components/Ventas/Facturacion/Main.vue */ "./resources/js/components/Ventas/Facturacion/Main.vue");
-/* harmony import */ var _components_Ventas_Facturacion_ListFactura_vue__WEBPACK_IMPORTED_MODULE_63__ = __webpack_require__(/*! ./components/Ventas/Facturacion/ListFactura.vue */ "./resources/js/components/Ventas/Facturacion/ListFactura.vue");
-/* harmony import */ var _components_Ventas_Facturacion_AddFactura_vue__WEBPACK_IMPORTED_MODULE_64__ = __webpack_require__(/*! ./components/Ventas/Facturacion/AddFactura.vue */ "./resources/js/components/Ventas/Facturacion/AddFactura.vue");
-/* harmony import */ var _components_Ventas_Facturacion_DetFactura_vue__WEBPACK_IMPORTED_MODULE_65__ = __webpack_require__(/*! ./components/Ventas/Facturacion/DetFactura.vue */ "./resources/js/components/Ventas/Facturacion/DetFactura.vue");
-/* harmony import */ var _components_Ventas_Creditos_Main_vue__WEBPACK_IMPORTED_MODULE_66__ = __webpack_require__(/*! ./components/Ventas/Creditos/Main.vue */ "./resources/js/components/Ventas/Creditos/Main.vue");
-/* harmony import */ var _components_Ventas_Creditos_ListCredito_vue__WEBPACK_IMPORTED_MODULE_67__ = __webpack_require__(/*! ./components/Ventas/Creditos/ListCredito.vue */ "./resources/js/components/Ventas/Creditos/ListCredito.vue");
-/* harmony import */ var _components_Ventas_Creditos_DetCredito_vue__WEBPACK_IMPORTED_MODULE_68__ = __webpack_require__(/*! ./components/Ventas/Creditos/DetCredito.vue */ "./resources/js/components/Ventas/Creditos/DetCredito.vue");
-/* harmony import */ var _components_Guias_Transportistas_Main_vue__WEBPACK_IMPORTED_MODULE_69__ = __webpack_require__(/*! ./components/Guias/Transportistas/Main.vue */ "./resources/js/components/Guias/Transportistas/Main.vue");
-/* harmony import */ var _components_Guias_Transportistas_ListTransportista_vue__WEBPACK_IMPORTED_MODULE_70__ = __webpack_require__(/*! ./components/Guias/Transportistas/ListTransportista.vue */ "./resources/js/components/Guias/Transportistas/ListTransportista.vue");
-/* harmony import */ var _components_Guias_Transportistas_AddTransportista_vue__WEBPACK_IMPORTED_MODULE_71__ = __webpack_require__(/*! ./components/Guias/Transportistas/AddTransportista.vue */ "./resources/js/components/Guias/Transportistas/AddTransportista.vue");
-/* harmony import */ var _components_Guias_Transportistas_EditTransportista_vue__WEBPACK_IMPORTED_MODULE_72__ = __webpack_require__(/*! ./components/Guias/Transportistas/EditTransportista.vue */ "./resources/js/components/Guias/Transportistas/EditTransportista.vue");
-/* harmony import */ var _components_Guias_GuiasRemision_Main_vue__WEBPACK_IMPORTED_MODULE_73__ = __webpack_require__(/*! ./components/Guias/GuiasRemision/Main.vue */ "./resources/js/components/Guias/GuiasRemision/Main.vue");
-/* harmony import */ var _components_Guias_GuiasRemision_ListGuia_vue__WEBPACK_IMPORTED_MODULE_74__ = __webpack_require__(/*! ./components/Guias/GuiasRemision/ListGuia.vue */ "./resources/js/components/Guias/GuiasRemision/ListGuia.vue");
-/* harmony import */ var _components_Guias_GuiasRemision_AddGuia_vue__WEBPACK_IMPORTED_MODULE_75__ = __webpack_require__(/*! ./components/Guias/GuiasRemision/AddGuia.vue */ "./resources/js/components/Guias/GuiasRemision/AddGuia.vue");
-/* harmony import */ var _components_Guias_GuiasRemision_DetGuia_vue__WEBPACK_IMPORTED_MODULE_76__ = __webpack_require__(/*! ./components/Guias/GuiasRemision/DetGuia.vue */ "./resources/js/components/Guias/GuiasRemision/DetGuia.vue");
-/* harmony import */ var _components_Guias_GuiasRemision_FacGuia_vue__WEBPACK_IMPORTED_MODULE_77__ = __webpack_require__(/*! ./components/Guias/GuiasRemision/FacGuia.vue */ "./resources/js/components/Guias/GuiasRemision/FacGuia.vue");
-/* harmony import */ var _components_Retenciones_Retencion_Main_vue__WEBPACK_IMPORTED_MODULE_78__ = __webpack_require__(/*! ./components/Retenciones/Retencion/Main.vue */ "./resources/js/components/Retenciones/Retencion/Main.vue");
-/* harmony import */ var _components_Retenciones_Retencion_ListRetencion_vue__WEBPACK_IMPORTED_MODULE_79__ = __webpack_require__(/*! ./components/Retenciones/Retencion/ListRetencion.vue */ "./resources/js/components/Retenciones/Retencion/ListRetencion.vue");
-/* harmony import */ var _components_Retenciones_Retencion_AddRetencion_vue__WEBPACK_IMPORTED_MODULE_80__ = __webpack_require__(/*! ./components/Retenciones/Retencion/AddRetencion.vue */ "./resources/js/components/Retenciones/Retencion/AddRetencion.vue");
-/* harmony import */ var _components_Retenciones_Retencion_DetRetencion_vue__WEBPACK_IMPORTED_MODULE_81__ = __webpack_require__(/*! ./components/Retenciones/Retencion/DetRetencion.vue */ "./resources/js/components/Retenciones/Retencion/DetRetencion.vue");
-/* harmony import */ var _components_Produccion_Plantas_Main_vue__WEBPACK_IMPORTED_MODULE_82__ = __webpack_require__(/*! ./components/Produccion/Plantas/Main.vue */ "./resources/js/components/Produccion/Plantas/Main.vue");
-/* harmony import */ var _components_Produccion_Plantas_ListProduccion_vue__WEBPACK_IMPORTED_MODULE_83__ = __webpack_require__(/*! ./components/Produccion/Plantas/ListProduccion.vue */ "./resources/js/components/Produccion/Plantas/ListProduccion.vue");
-/* harmony import */ var _components_Produccion_Plantas_AddProduccion_vue__WEBPACK_IMPORTED_MODULE_84__ = __webpack_require__(/*! ./components/Produccion/Plantas/AddProduccion.vue */ "./resources/js/components/Produccion/Plantas/AddProduccion.vue");
-/* harmony import */ var _components_Produccion_Plantas_EditProduccion_vue__WEBPACK_IMPORTED_MODULE_85__ = __webpack_require__(/*! ./components/Produccion/Plantas/EditProduccion.vue */ "./resources/js/components/Produccion/Plantas/EditProduccion.vue");
-/* harmony import */ var _components_Produccion_Plantas_FinProduccion_vue__WEBPACK_IMPORTED_MODULE_86__ = __webpack_require__(/*! ./components/Produccion/Plantas/FinProduccion.vue */ "./resources/js/components/Produccion/Plantas/FinProduccion.vue");
-/* harmony import */ var _components_Caja_OpeArqueo_vue__WEBPACK_IMPORTED_MODULE_87__ = __webpack_require__(/*! ./components/Caja/OpeArqueo.vue */ "./resources/js/components/Caja/OpeArqueo.vue");
-/* harmony import */ var _components_Caja_CloArqueo_vue__WEBPACK_IMPORTED_MODULE_88__ = __webpack_require__(/*! ./components/Caja/CloArqueo.vue */ "./resources/js/components/Caja/CloArqueo.vue");
-/* harmony import */ var _components_Caja_Arqueos_Main_vue__WEBPACK_IMPORTED_MODULE_89__ = __webpack_require__(/*! ./components/Caja/Arqueos/Main.vue */ "./resources/js/components/Caja/Arqueos/Main.vue");
-/* harmony import */ var _components_Caja_Arqueos_ListArqueo_vue__WEBPACK_IMPORTED_MODULE_90__ = __webpack_require__(/*! ./components/Caja/Arqueos/ListArqueo.vue */ "./resources/js/components/Caja/Arqueos/ListArqueo.vue");
-/* harmony import */ var _components_Caja_Arqueos_DetArqueo_vue__WEBPACK_IMPORTED_MODULE_91__ = __webpack_require__(/*! ./components/Caja/Arqueos/DetArqueo.vue */ "./resources/js/components/Caja/Arqueos/DetArqueo.vue");
-/* harmony import */ var _components_Reportes_Main_vue__WEBPACK_IMPORTED_MODULE_92__ = __webpack_require__(/*! ./components/Reportes/Main.vue */ "./resources/js/components/Reportes/Main.vue");
-/* harmony import */ var _components_Reportes_RepCompra_vue__WEBPACK_IMPORTED_MODULE_93__ = __webpack_require__(/*! ./components/Reportes/RepCompra.vue */ "./resources/js/components/Reportes/RepCompra.vue");
-/* harmony import */ var _components_Reportes_RepVenta_vue__WEBPACK_IMPORTED_MODULE_94__ = __webpack_require__(/*! ./components/Reportes/RepVenta.vue */ "./resources/js/components/Reportes/RepVenta.vue");
+/* harmony import */ var _components_Almacen_Inventarios_AddTraslado_vue__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! ./components/Almacen/Inventarios/AddTraslado.vue */ "./resources/js/components/Almacen/Inventarios/AddTraslado.vue");
+/* harmony import */ var _components_Administracion_RolesPago_Main_vue__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! ./components/Administracion/RolesPago/Main.vue */ "./resources/js/components/Administracion/RolesPago/Main.vue");
+/* harmony import */ var _components_Administracion_RolesPago_ListRolPago_vue__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(/*! ./components/Administracion/RolesPago/ListRolPago.vue */ "./resources/js/components/Administracion/RolesPago/ListRolPago.vue");
+/* harmony import */ var _components_Administracion_RolesPago_AddRolPago_vue__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(/*! ./components/Administracion/RolesPago/AddRolPago.vue */ "./resources/js/components/Administracion/RolesPago/AddRolPago.vue");
+/* harmony import */ var _components_Administracion_RolesPago_EditRolPago_vue__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(/*! ./components/Administracion/RolesPago/EditRolPago.vue */ "./resources/js/components/Administracion/RolesPago/EditRolPago.vue");
+/* harmony import */ var _components_Administracion_RolesPago_DetRolPago_vue__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(/*! ./components/Administracion/RolesPago/DetRolPago.vue */ "./resources/js/components/Administracion/RolesPago/DetRolPago.vue");
+/* harmony import */ var _components_Compras_Proveedores_Main_vue__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(/*! ./components/Compras/Proveedores/Main.vue */ "./resources/js/components/Compras/Proveedores/Main.vue");
+/* harmony import */ var _components_Compras_Proveedores_ListProveedor_vue__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(/*! ./components/Compras/Proveedores/ListProveedor.vue */ "./resources/js/components/Compras/Proveedores/ListProveedor.vue");
+/* harmony import */ var _components_Compras_Proveedores_AddProveedor_vue__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(/*! ./components/Compras/Proveedores/AddProveedor.vue */ "./resources/js/components/Compras/Proveedores/AddProveedor.vue");
+/* harmony import */ var _components_Compras_Proveedores_EditProveedor_vue__WEBPACK_IMPORTED_MODULE_51__ = __webpack_require__(/*! ./components/Compras/Proveedores/EditProveedor.vue */ "./resources/js/components/Compras/Proveedores/EditProveedor.vue");
+/* harmony import */ var _components_Compras_Compras_Main_vue__WEBPACK_IMPORTED_MODULE_52__ = __webpack_require__(/*! ./components/Compras/Compras/Main.vue */ "./resources/js/components/Compras/Compras/Main.vue");
+/* harmony import */ var _components_Compras_Compras_ListCompra_vue__WEBPACK_IMPORTED_MODULE_53__ = __webpack_require__(/*! ./components/Compras/Compras/ListCompra.vue */ "./resources/js/components/Compras/Compras/ListCompra.vue");
+/* harmony import */ var _components_Compras_Compras_AddCompra_vue__WEBPACK_IMPORTED_MODULE_54__ = __webpack_require__(/*! ./components/Compras/Compras/AddCompra.vue */ "./resources/js/components/Compras/Compras/AddCompra.vue");
+/* harmony import */ var _components_Compras_Compras_DetCompra_vue__WEBPACK_IMPORTED_MODULE_55__ = __webpack_require__(/*! ./components/Compras/Compras/DetCompra.vue */ "./resources/js/components/Compras/Compras/DetCompra.vue");
+/* harmony import */ var _components_Compras_Deudas_Main_vue__WEBPACK_IMPORTED_MODULE_56__ = __webpack_require__(/*! ./components/Compras/Deudas/Main.vue */ "./resources/js/components/Compras/Deudas/Main.vue");
+/* harmony import */ var _components_Compras_Deudas_ListDeuda_vue__WEBPACK_IMPORTED_MODULE_57__ = __webpack_require__(/*! ./components/Compras/Deudas/ListDeuda.vue */ "./resources/js/components/Compras/Deudas/ListDeuda.vue");
+/* harmony import */ var _components_Compras_Deudas_DetDeuda_vue__WEBPACK_IMPORTED_MODULE_58__ = __webpack_require__(/*! ./components/Compras/Deudas/DetDeuda.vue */ "./resources/js/components/Compras/Deudas/DetDeuda.vue");
+/* harmony import */ var _components_Ventas_Clientes_Main_vue__WEBPACK_IMPORTED_MODULE_59__ = __webpack_require__(/*! ./components/Ventas/Clientes/Main.vue */ "./resources/js/components/Ventas/Clientes/Main.vue");
+/* harmony import */ var _components_Ventas_Clientes_ListCliente_vue__WEBPACK_IMPORTED_MODULE_60__ = __webpack_require__(/*! ./components/Ventas/Clientes/ListCliente.vue */ "./resources/js/components/Ventas/Clientes/ListCliente.vue");
+/* harmony import */ var _components_Ventas_Clientes_AddCliente_vue__WEBPACK_IMPORTED_MODULE_61__ = __webpack_require__(/*! ./components/Ventas/Clientes/AddCliente.vue */ "./resources/js/components/Ventas/Clientes/AddCliente.vue");
+/* harmony import */ var _components_Ventas_Clientes_EditCliente_vue__WEBPACK_IMPORTED_MODULE_62__ = __webpack_require__(/*! ./components/Ventas/Clientes/EditCliente.vue */ "./resources/js/components/Ventas/Clientes/EditCliente.vue");
+/* harmony import */ var _components_Ventas_Facturacion_Main_vue__WEBPACK_IMPORTED_MODULE_63__ = __webpack_require__(/*! ./components/Ventas/Facturacion/Main.vue */ "./resources/js/components/Ventas/Facturacion/Main.vue");
+/* harmony import */ var _components_Ventas_Facturacion_ListFactura_vue__WEBPACK_IMPORTED_MODULE_64__ = __webpack_require__(/*! ./components/Ventas/Facturacion/ListFactura.vue */ "./resources/js/components/Ventas/Facturacion/ListFactura.vue");
+/* harmony import */ var _components_Ventas_Facturacion_AddFactura_vue__WEBPACK_IMPORTED_MODULE_65__ = __webpack_require__(/*! ./components/Ventas/Facturacion/AddFactura.vue */ "./resources/js/components/Ventas/Facturacion/AddFactura.vue");
+/* harmony import */ var _components_Ventas_Facturacion_DetFactura_vue__WEBPACK_IMPORTED_MODULE_66__ = __webpack_require__(/*! ./components/Ventas/Facturacion/DetFactura.vue */ "./resources/js/components/Ventas/Facturacion/DetFactura.vue");
+/* harmony import */ var _components_Ventas_Creditos_Main_vue__WEBPACK_IMPORTED_MODULE_67__ = __webpack_require__(/*! ./components/Ventas/Creditos/Main.vue */ "./resources/js/components/Ventas/Creditos/Main.vue");
+/* harmony import */ var _components_Ventas_Creditos_ListCredito_vue__WEBPACK_IMPORTED_MODULE_68__ = __webpack_require__(/*! ./components/Ventas/Creditos/ListCredito.vue */ "./resources/js/components/Ventas/Creditos/ListCredito.vue");
+/* harmony import */ var _components_Ventas_Creditos_DetCredito_vue__WEBPACK_IMPORTED_MODULE_69__ = __webpack_require__(/*! ./components/Ventas/Creditos/DetCredito.vue */ "./resources/js/components/Ventas/Creditos/DetCredito.vue");
+/* harmony import */ var _components_Guias_Transportistas_Main_vue__WEBPACK_IMPORTED_MODULE_70__ = __webpack_require__(/*! ./components/Guias/Transportistas/Main.vue */ "./resources/js/components/Guias/Transportistas/Main.vue");
+/* harmony import */ var _components_Guias_Transportistas_ListTransportista_vue__WEBPACK_IMPORTED_MODULE_71__ = __webpack_require__(/*! ./components/Guias/Transportistas/ListTransportista.vue */ "./resources/js/components/Guias/Transportistas/ListTransportista.vue");
+/* harmony import */ var _components_Guias_Transportistas_AddTransportista_vue__WEBPACK_IMPORTED_MODULE_72__ = __webpack_require__(/*! ./components/Guias/Transportistas/AddTransportista.vue */ "./resources/js/components/Guias/Transportistas/AddTransportista.vue");
+/* harmony import */ var _components_Guias_Transportistas_EditTransportista_vue__WEBPACK_IMPORTED_MODULE_73__ = __webpack_require__(/*! ./components/Guias/Transportistas/EditTransportista.vue */ "./resources/js/components/Guias/Transportistas/EditTransportista.vue");
+/* harmony import */ var _components_Guias_GuiasRemision_Main_vue__WEBPACK_IMPORTED_MODULE_74__ = __webpack_require__(/*! ./components/Guias/GuiasRemision/Main.vue */ "./resources/js/components/Guias/GuiasRemision/Main.vue");
+/* harmony import */ var _components_Guias_GuiasRemision_ListGuia_vue__WEBPACK_IMPORTED_MODULE_75__ = __webpack_require__(/*! ./components/Guias/GuiasRemision/ListGuia.vue */ "./resources/js/components/Guias/GuiasRemision/ListGuia.vue");
+/* harmony import */ var _components_Guias_GuiasRemision_AddGuia_vue__WEBPACK_IMPORTED_MODULE_76__ = __webpack_require__(/*! ./components/Guias/GuiasRemision/AddGuia.vue */ "./resources/js/components/Guias/GuiasRemision/AddGuia.vue");
+/* harmony import */ var _components_Guias_GuiasRemision_DetGuia_vue__WEBPACK_IMPORTED_MODULE_77__ = __webpack_require__(/*! ./components/Guias/GuiasRemision/DetGuia.vue */ "./resources/js/components/Guias/GuiasRemision/DetGuia.vue");
+/* harmony import */ var _components_Guias_GuiasRemision_FacGuia_vue__WEBPACK_IMPORTED_MODULE_78__ = __webpack_require__(/*! ./components/Guias/GuiasRemision/FacGuia.vue */ "./resources/js/components/Guias/GuiasRemision/FacGuia.vue");
+/* harmony import */ var _components_Retenciones_Retencion_Main_vue__WEBPACK_IMPORTED_MODULE_79__ = __webpack_require__(/*! ./components/Retenciones/Retencion/Main.vue */ "./resources/js/components/Retenciones/Retencion/Main.vue");
+/* harmony import */ var _components_Retenciones_Retencion_ListRetencion_vue__WEBPACK_IMPORTED_MODULE_80__ = __webpack_require__(/*! ./components/Retenciones/Retencion/ListRetencion.vue */ "./resources/js/components/Retenciones/Retencion/ListRetencion.vue");
+/* harmony import */ var _components_Retenciones_Retencion_AddRetencion_vue__WEBPACK_IMPORTED_MODULE_81__ = __webpack_require__(/*! ./components/Retenciones/Retencion/AddRetencion.vue */ "./resources/js/components/Retenciones/Retencion/AddRetencion.vue");
+/* harmony import */ var _components_Retenciones_Retencion_DetRetencion_vue__WEBPACK_IMPORTED_MODULE_82__ = __webpack_require__(/*! ./components/Retenciones/Retencion/DetRetencion.vue */ "./resources/js/components/Retenciones/Retencion/DetRetencion.vue");
+/* harmony import */ var _components_Produccion_Plantas_Main_vue__WEBPACK_IMPORTED_MODULE_83__ = __webpack_require__(/*! ./components/Produccion/Plantas/Main.vue */ "./resources/js/components/Produccion/Plantas/Main.vue");
+/* harmony import */ var _components_Produccion_Plantas_ListProduccion_vue__WEBPACK_IMPORTED_MODULE_84__ = __webpack_require__(/*! ./components/Produccion/Plantas/ListProduccion.vue */ "./resources/js/components/Produccion/Plantas/ListProduccion.vue");
+/* harmony import */ var _components_Produccion_Plantas_AddProduccion_vue__WEBPACK_IMPORTED_MODULE_85__ = __webpack_require__(/*! ./components/Produccion/Plantas/AddProduccion.vue */ "./resources/js/components/Produccion/Plantas/AddProduccion.vue");
+/* harmony import */ var _components_Produccion_Plantas_EditProduccion_vue__WEBPACK_IMPORTED_MODULE_86__ = __webpack_require__(/*! ./components/Produccion/Plantas/EditProduccion.vue */ "./resources/js/components/Produccion/Plantas/EditProduccion.vue");
+/* harmony import */ var _components_Produccion_Plantas_FinProduccion_vue__WEBPACK_IMPORTED_MODULE_87__ = __webpack_require__(/*! ./components/Produccion/Plantas/FinProduccion.vue */ "./resources/js/components/Produccion/Plantas/FinProduccion.vue");
+/* harmony import */ var _components_Caja_OpeArqueo_vue__WEBPACK_IMPORTED_MODULE_88__ = __webpack_require__(/*! ./components/Caja/OpeArqueo.vue */ "./resources/js/components/Caja/OpeArqueo.vue");
+/* harmony import */ var _components_Caja_CloArqueo_vue__WEBPACK_IMPORTED_MODULE_89__ = __webpack_require__(/*! ./components/Caja/CloArqueo.vue */ "./resources/js/components/Caja/CloArqueo.vue");
+/* harmony import */ var _components_Caja_Arqueos_Main_vue__WEBPACK_IMPORTED_MODULE_90__ = __webpack_require__(/*! ./components/Caja/Arqueos/Main.vue */ "./resources/js/components/Caja/Arqueos/Main.vue");
+/* harmony import */ var _components_Caja_Arqueos_ListArqueo_vue__WEBPACK_IMPORTED_MODULE_91__ = __webpack_require__(/*! ./components/Caja/Arqueos/ListArqueo.vue */ "./resources/js/components/Caja/Arqueos/ListArqueo.vue");
+/* harmony import */ var _components_Caja_Arqueos_DetArqueo_vue__WEBPACK_IMPORTED_MODULE_92__ = __webpack_require__(/*! ./components/Caja/Arqueos/DetArqueo.vue */ "./resources/js/components/Caja/Arqueos/DetArqueo.vue");
+/* harmony import */ var _components_Reportes_Main_vue__WEBPACK_IMPORTED_MODULE_93__ = __webpack_require__(/*! ./components/Reportes/Main.vue */ "./resources/js/components/Reportes/Main.vue");
+/* harmony import */ var _components_Reportes_RepCompra_vue__WEBPACK_IMPORTED_MODULE_94__ = __webpack_require__(/*! ./components/Reportes/RepCompra.vue */ "./resources/js/components/Reportes/RepCompra.vue");
+/* harmony import */ var _components_Reportes_RepVenta_vue__WEBPACK_IMPORTED_MODULE_95__ = __webpack_require__(/*! ./components/Reportes/RepVenta.vue */ "./resources/js/components/Reportes/RepVenta.vue");
 // Componentes Unitarios
 
 
@@ -127584,6 +128221,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
  // Inventarios
+
 
 
 
@@ -127753,35 +128391,35 @@ var routes = [{
   }]
 }, {
   path: "/proveedores",
-  component: _components_Compras_Proveedores_Main_vue__WEBPACK_IMPORTED_MODULE_47__["default"],
+  component: _components_Compras_Proveedores_Main_vue__WEBPACK_IMPORTED_MODULE_48__["default"],
   children: [{
     path: "",
     name: "listProveedor",
-    component: _components_Compras_Proveedores_ListProveedor_vue__WEBPACK_IMPORTED_MODULE_48__["default"]
+    component: _components_Compras_Proveedores_ListProveedor_vue__WEBPACK_IMPORTED_MODULE_49__["default"]
   }, {
     path: "agregar",
     name: "addProveedor",
-    component: _components_Compras_Proveedores_AddProveedor_vue__WEBPACK_IMPORTED_MODULE_49__["default"]
+    component: _components_Compras_Proveedores_AddProveedor_vue__WEBPACK_IMPORTED_MODULE_50__["default"]
   }, {
     path: "editar/:id",
     name: "editProveedor",
-    component: _components_Compras_Proveedores_EditProveedor_vue__WEBPACK_IMPORTED_MODULE_50__["default"]
+    component: _components_Compras_Proveedores_EditProveedor_vue__WEBPACK_IMPORTED_MODULE_51__["default"]
   }]
 }, {
   path: "/clientes",
-  component: _components_Ventas_Clientes_Main_vue__WEBPACK_IMPORTED_MODULE_58__["default"],
+  component: _components_Ventas_Clientes_Main_vue__WEBPACK_IMPORTED_MODULE_59__["default"],
   children: [{
     path: "",
     name: "listCliente",
-    component: _components_Ventas_Clientes_ListCliente_vue__WEBPACK_IMPORTED_MODULE_59__["default"]
+    component: _components_Ventas_Clientes_ListCliente_vue__WEBPACK_IMPORTED_MODULE_60__["default"]
   }, {
     path: "agregar",
     name: "addCliente",
-    component: _components_Ventas_Clientes_AddCliente_vue__WEBPACK_IMPORTED_MODULE_60__["default"]
+    component: _components_Ventas_Clientes_AddCliente_vue__WEBPACK_IMPORTED_MODULE_61__["default"]
   }, {
     path: "editar/:id",
     name: "editCliente",
-    component: _components_Ventas_Clientes_EditCliente_vue__WEBPACK_IMPORTED_MODULE_61__["default"]
+    component: _components_Ventas_Clientes_EditCliente_vue__WEBPACK_IMPORTED_MODULE_62__["default"]
   }]
 }, {
   path: "/establecimientos",
@@ -127843,37 +128481,41 @@ var routes = [{
     name: "manInventario",
     component: _components_Almacen_Inventarios_ManInventario_vue__WEBPACK_IMPORTED_MODULE_41__["default"]
   }, {
+    path: "traslados",
+    name: "addTraslado",
+    component: _components_Almacen_Inventarios_AddTraslado_vue__WEBPACK_IMPORTED_MODULE_42__["default"]
+  }, {
     path: "kardex/:id",
     name: "karInventario",
     component: _components_Almacen_Inventarios_KarInventario_vue__WEBPACK_IMPORTED_MODULE_40__["default"]
   }]
 }, {
   path: "/compras",
-  component: _components_Compras_Compras_Main_vue__WEBPACK_IMPORTED_MODULE_51__["default"],
+  component: _components_Compras_Compras_Main_vue__WEBPACK_IMPORTED_MODULE_52__["default"],
   children: [{
     path: "",
     name: "listCompra",
-    component: _components_Compras_Compras_ListCompra_vue__WEBPACK_IMPORTED_MODULE_52__["default"]
+    component: _components_Compras_Compras_ListCompra_vue__WEBPACK_IMPORTED_MODULE_53__["default"]
   }, {
     path: "agregar",
     name: "addCompra",
-    component: _components_Compras_Compras_AddCompra_vue__WEBPACK_IMPORTED_MODULE_53__["default"]
+    component: _components_Compras_Compras_AddCompra_vue__WEBPACK_IMPORTED_MODULE_54__["default"]
   }, {
     path: "detalle/:id",
     name: "detCompra",
-    component: _components_Compras_Compras_DetCompra_vue__WEBPACK_IMPORTED_MODULE_54__["default"]
+    component: _components_Compras_Compras_DetCompra_vue__WEBPACK_IMPORTED_MODULE_55__["default"]
   }]
 }, {
   path: "/deudas",
-  component: _components_Compras_Deudas_Main_vue__WEBPACK_IMPORTED_MODULE_55__["default"],
+  component: _components_Compras_Deudas_Main_vue__WEBPACK_IMPORTED_MODULE_56__["default"],
   children: [{
     path: "",
     name: "listDeuda",
-    component: _components_Compras_Deudas_ListDeuda_vue__WEBPACK_IMPORTED_MODULE_56__["default"]
+    component: _components_Compras_Deudas_ListDeuda_vue__WEBPACK_IMPORTED_MODULE_57__["default"]
   }, {
     path: "detalle/:id",
     name: "detDeuda",
-    component: _components_Compras_Deudas_DetDeuda_vue__WEBPACK_IMPORTED_MODULE_57__["default"]
+    component: _components_Compras_Deudas_DetDeuda_vue__WEBPACK_IMPORTED_MODULE_58__["default"]
   }]
 }, {
   path: "/puntos-emision",
@@ -127893,155 +128535,155 @@ var routes = [{
   }]
 }, {
   path: "/producciones",
-  component: _components_Produccion_Plantas_Main_vue__WEBPACK_IMPORTED_MODULE_82__["default"],
+  component: _components_Produccion_Plantas_Main_vue__WEBPACK_IMPORTED_MODULE_83__["default"],
   children: [{
     path: "",
     name: "listProduccion",
-    component: _components_Produccion_Plantas_ListProduccion_vue__WEBPACK_IMPORTED_MODULE_83__["default"]
+    component: _components_Produccion_Plantas_ListProduccion_vue__WEBPACK_IMPORTED_MODULE_84__["default"]
   }, {
     path: "agregar",
     name: "addProduccion",
-    component: _components_Produccion_Plantas_AddProduccion_vue__WEBPACK_IMPORTED_MODULE_84__["default"]
+    component: _components_Produccion_Plantas_AddProduccion_vue__WEBPACK_IMPORTED_MODULE_85__["default"]
   }, {
     path: "editar/:id",
     name: "editProduccion",
-    component: _components_Produccion_Plantas_EditProduccion_vue__WEBPACK_IMPORTED_MODULE_85__["default"]
+    component: _components_Produccion_Plantas_EditProduccion_vue__WEBPACK_IMPORTED_MODULE_86__["default"]
   }, {
     path: "finalizar/:id",
     name: "finProduccion",
-    component: _components_Produccion_Plantas_FinProduccion_vue__WEBPACK_IMPORTED_MODULE_86__["default"]
+    component: _components_Produccion_Plantas_FinProduccion_vue__WEBPACK_IMPORTED_MODULE_87__["default"]
   }]
 }, {
   path: "/facturacion",
-  component: _components_Ventas_Facturacion_Main_vue__WEBPACK_IMPORTED_MODULE_62__["default"],
+  component: _components_Ventas_Facturacion_Main_vue__WEBPACK_IMPORTED_MODULE_63__["default"],
   children: [{
     path: "",
     name: "listFactura",
-    component: _components_Ventas_Facturacion_ListFactura_vue__WEBPACK_IMPORTED_MODULE_63__["default"]
+    component: _components_Ventas_Facturacion_ListFactura_vue__WEBPACK_IMPORTED_MODULE_64__["default"]
   }, {
     path: "agregar",
     name: "addFactura",
-    component: _components_Ventas_Facturacion_AddFactura_vue__WEBPACK_IMPORTED_MODULE_64__["default"]
+    component: _components_Ventas_Facturacion_AddFactura_vue__WEBPACK_IMPORTED_MODULE_65__["default"]
   }, {
     path: "detalle/:id",
     name: "detFactura",
-    component: _components_Ventas_Facturacion_DetFactura_vue__WEBPACK_IMPORTED_MODULE_65__["default"]
+    component: _components_Ventas_Facturacion_DetFactura_vue__WEBPACK_IMPORTED_MODULE_66__["default"]
   }]
 }, {
   path: "/creditos",
-  component: _components_Ventas_Creditos_Main_vue__WEBPACK_IMPORTED_MODULE_66__["default"],
+  component: _components_Ventas_Creditos_Main_vue__WEBPACK_IMPORTED_MODULE_67__["default"],
   children: [{
     path: "",
     name: "listCredito",
-    component: _components_Ventas_Creditos_ListCredito_vue__WEBPACK_IMPORTED_MODULE_67__["default"]
+    component: _components_Ventas_Creditos_ListCredito_vue__WEBPACK_IMPORTED_MODULE_68__["default"]
   }, {
     path: "detalle/:id",
     name: "detCredito",
-    component: _components_Ventas_Creditos_DetCredito_vue__WEBPACK_IMPORTED_MODULE_68__["default"]
+    component: _components_Ventas_Creditos_DetCredito_vue__WEBPACK_IMPORTED_MODULE_69__["default"]
   }]
 }, {
   path: "/arqueos",
-  component: _components_Caja_Arqueos_Main_vue__WEBPACK_IMPORTED_MODULE_89__["default"],
+  component: _components_Caja_Arqueos_Main_vue__WEBPACK_IMPORTED_MODULE_90__["default"],
   children: [{
     path: "",
     name: "listArqueo",
-    component: _components_Caja_Arqueos_ListArqueo_vue__WEBPACK_IMPORTED_MODULE_90__["default"]
+    component: _components_Caja_Arqueos_ListArqueo_vue__WEBPACK_IMPORTED_MODULE_91__["default"]
   }, {
     path: "abrir",
     name: "opeArqueo",
-    component: _components_Caja_OpeArqueo_vue__WEBPACK_IMPORTED_MODULE_87__["default"]
+    component: _components_Caja_OpeArqueo_vue__WEBPACK_IMPORTED_MODULE_88__["default"]
   }, {
     path: "cerrar",
     name: "cloArqueo",
-    component: _components_Caja_CloArqueo_vue__WEBPACK_IMPORTED_MODULE_88__["default"]
+    component: _components_Caja_CloArqueo_vue__WEBPACK_IMPORTED_MODULE_89__["default"]
   }, {
     path: "detalle/:id",
     name: "detArqueo",
-    component: _components_Caja_Arqueos_DetArqueo_vue__WEBPACK_IMPORTED_MODULE_91__["default"]
+    component: _components_Caja_Arqueos_DetArqueo_vue__WEBPACK_IMPORTED_MODULE_92__["default"]
   }]
 }, {
   path: "/roles-pago",
-  component: _components_Administracion_RolesPago_Main_vue__WEBPACK_IMPORTED_MODULE_42__["default"],
+  component: _components_Administracion_RolesPago_Main_vue__WEBPACK_IMPORTED_MODULE_43__["default"],
   children: [{
     path: "",
     name: "listRolPago",
-    component: _components_Administracion_RolesPago_ListRolPago_vue__WEBPACK_IMPORTED_MODULE_43__["default"]
+    component: _components_Administracion_RolesPago_ListRolPago_vue__WEBPACK_IMPORTED_MODULE_44__["default"]
   }, {
     path: "generar",
     name: "addRolPago",
-    component: _components_Administracion_RolesPago_AddRolPago_vue__WEBPACK_IMPORTED_MODULE_44__["default"]
+    component: _components_Administracion_RolesPago_AddRolPago_vue__WEBPACK_IMPORTED_MODULE_45__["default"]
   }, {
     path: "editar/:id",
     name: "editRolPago",
-    component: _components_Administracion_RolesPago_EditRolPago_vue__WEBPACK_IMPORTED_MODULE_45__["default"]
+    component: _components_Administracion_RolesPago_EditRolPago_vue__WEBPACK_IMPORTED_MODULE_46__["default"]
   }, {
     path: "detalle/:id",
     name: "detRolPago",
-    component: _components_Administracion_RolesPago_DetRolPago_vue__WEBPACK_IMPORTED_MODULE_46__["default"]
+    component: _components_Administracion_RolesPago_DetRolPago_vue__WEBPACK_IMPORTED_MODULE_47__["default"]
   }]
 }, {
   path: "/transportistas",
-  component: _components_Guias_Transportistas_Main_vue__WEBPACK_IMPORTED_MODULE_69__["default"],
+  component: _components_Guias_Transportistas_Main_vue__WEBPACK_IMPORTED_MODULE_70__["default"],
   children: [{
     path: "",
     name: "listTransportista",
-    component: _components_Guias_Transportistas_ListTransportista_vue__WEBPACK_IMPORTED_MODULE_70__["default"]
+    component: _components_Guias_Transportistas_ListTransportista_vue__WEBPACK_IMPORTED_MODULE_71__["default"]
   }, {
     path: "agregar",
     name: "addTransportista",
-    component: _components_Guias_Transportistas_AddTransportista_vue__WEBPACK_IMPORTED_MODULE_71__["default"]
+    component: _components_Guias_Transportistas_AddTransportista_vue__WEBPACK_IMPORTED_MODULE_72__["default"]
   }, {
     path: "editar/:id",
     name: "editTransportista",
-    component: _components_Guias_Transportistas_EditTransportista_vue__WEBPACK_IMPORTED_MODULE_72__["default"]
+    component: _components_Guias_Transportistas_EditTransportista_vue__WEBPACK_IMPORTED_MODULE_73__["default"]
   }]
 }, {
   path: "/guias",
-  component: _components_Guias_GuiasRemision_Main_vue__WEBPACK_IMPORTED_MODULE_73__["default"],
+  component: _components_Guias_GuiasRemision_Main_vue__WEBPACK_IMPORTED_MODULE_74__["default"],
   children: [{
     path: "",
     name: "listGuia",
-    component: _components_Guias_GuiasRemision_ListGuia_vue__WEBPACK_IMPORTED_MODULE_74__["default"]
+    component: _components_Guias_GuiasRemision_ListGuia_vue__WEBPACK_IMPORTED_MODULE_75__["default"]
   }, {
     path: "agregar",
     name: "addGuia",
-    component: _components_Guias_GuiasRemision_AddGuia_vue__WEBPACK_IMPORTED_MODULE_75__["default"]
+    component: _components_Guias_GuiasRemision_AddGuia_vue__WEBPACK_IMPORTED_MODULE_76__["default"]
   }, {
     path: "factura/:id",
     name: "facGuia",
-    component: _components_Guias_GuiasRemision_FacGuia_vue__WEBPACK_IMPORTED_MODULE_77__["default"]
+    component: _components_Guias_GuiasRemision_FacGuia_vue__WEBPACK_IMPORTED_MODULE_78__["default"]
   }, {
     path: "detalle/:id",
     name: "detGuia",
-    component: _components_Guias_GuiasRemision_DetGuia_vue__WEBPACK_IMPORTED_MODULE_76__["default"]
+    component: _components_Guias_GuiasRemision_DetGuia_vue__WEBPACK_IMPORTED_MODULE_77__["default"]
   }]
 }, {
   path: "/retenciones",
-  component: _components_Retenciones_Retencion_Main_vue__WEBPACK_IMPORTED_MODULE_78__["default"],
+  component: _components_Retenciones_Retencion_Main_vue__WEBPACK_IMPORTED_MODULE_79__["default"],
   children: [{
     path: "",
     name: "listRetencion",
-    component: _components_Retenciones_Retencion_ListRetencion_vue__WEBPACK_IMPORTED_MODULE_79__["default"]
+    component: _components_Retenciones_Retencion_ListRetencion_vue__WEBPACK_IMPORTED_MODULE_80__["default"]
   }, {
     path: "agregar/:fact?",
     name: "addRetencion",
-    component: _components_Retenciones_Retencion_AddRetencion_vue__WEBPACK_IMPORTED_MODULE_80__["default"]
+    component: _components_Retenciones_Retencion_AddRetencion_vue__WEBPACK_IMPORTED_MODULE_81__["default"]
   }, {
     path: "detalle/:id",
     name: "detRetencion",
-    component: _components_Retenciones_Retencion_DetRetencion_vue__WEBPACK_IMPORTED_MODULE_81__["default"]
+    component: _components_Retenciones_Retencion_DetRetencion_vue__WEBPACK_IMPORTED_MODULE_82__["default"]
   }]
 }, {
   path: "/reporte",
-  component: _components_Reportes_Main_vue__WEBPACK_IMPORTED_MODULE_92__["default"],
+  component: _components_Reportes_Main_vue__WEBPACK_IMPORTED_MODULE_93__["default"],
   children: [{
     path: "compras",
     name: "repCompra",
-    component: _components_Reportes_RepCompra_vue__WEBPACK_IMPORTED_MODULE_93__["default"]
+    component: _components_Reportes_RepCompra_vue__WEBPACK_IMPORTED_MODULE_94__["default"]
   }, {
     path: "ventas",
     name: "repVenta",
-    component: _components_Reportes_RepVenta_vue__WEBPACK_IMPORTED_MODULE_94__["default"]
+    component: _components_Reportes_RepVenta_vue__WEBPACK_IMPORTED_MODULE_95__["default"]
   }]
 }, {
   path: "/perfil",
