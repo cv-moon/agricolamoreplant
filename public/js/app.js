@@ -7290,17 +7290,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       estab_origen_id: 0,
       estab_destino_id: 0,
-      arrayProductos: [],
+      arrayProOrigen: [],
+      arrayProDestino: [],
       arrayEstabOrigen: [],
       arrayEstabDestino: []
     };
   },
   methods: {
+    trasladar: function trasladar(data) {
+      console.log(data);
+      this.arrayProDestino.push(data);
+      console.log(this.arrayProDestino);
+    },
     guardar: function guardar() {
       var _this = this;
 
@@ -7311,7 +7318,7 @@ __webpack_require__.r(__webpack_exports__);
           Swal.showLoading();
           axios.post("/api/inventario/guardar", {
             establecimiento_id: _this.establecimiento_id,
-            productos: _this.arrayProductos
+            productos: _this.arrayProOrigen
           }).then(function (resp) {
             Swal.fire("Bien!", "El registro se guardó con éxito.", "success");
 
@@ -7327,7 +7334,7 @@ __webpack_require__.r(__webpack_exports__);
 
       var id = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
       axios.get("/api/inventarios?establecimiento=" + id).then(function (resp) {
-        _this2.arrayProductos = resp.data;
+        _this2.arrayProOrigen = resp.data;
       });
     },
     selectEstablecimientos: function selectEstablecimientos() {
@@ -87793,7 +87800,7 @@ var render = function() {
             { staticClass: "btn btn-secondary", attrs: { to: "/inventarios" } },
             [
               _c("i", { staticClass: "fas fa-arrow-left" }),
-              _vm._v(" Regresar\n            ")
+              _vm._v(" Regresar\n      ")
             ]
           )
         ],
@@ -87940,18 +87947,42 @@ var render = function() {
               _c(
                 "tbody",
                 [
-                  _vm.arrayProductos.length
-                    ? _vm._l(_vm.arrayProductos, function(producto) {
+                  _vm.arrayProOrigen.length
+                    ? _vm._l(_vm.arrayProOrigen, function(producto) {
                         return _c("tr", { key: producto.id }, [
                           _c("td", {
                             domProps: { textContent: _vm._s(producto.nombre) }
                           }),
                           _vm._v(" "),
                           _c("td", {
+                            attrs: { align: "right" },
                             domProps: {
                               textContent: _vm._s(producto.dis_stock)
                             }
-                          })
+                          }),
+                          _vm._v(" "),
+                          _vm.estab_destino_id != _vm.estab_origen_id &&
+                          _vm.estab_destino_id != 0
+                            ? _c("td", [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-success btn-xs",
+                                    attrs: { title: "Trasladar" },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.trasladar(producto)
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c("i", {
+                                      staticClass: "fas fa-arrow-right"
+                                    })
+                                  ]
+                                )
+                              ])
+                            : _vm._e()
                         ])
                       })
                     : [_vm._m(2)]
@@ -87970,8 +88001,8 @@ var render = function() {
               _c(
                 "tbody",
                 [
-                  _vm.arrayProductos.length
-                    ? _vm._l(_vm.arrayProductos, function(producto) {
+                  _vm.arrayProDestino.length
+                    ? _vm._l(_vm.arrayProDestino, function(producto) {
                         return _c("tr", { key: producto.id }, [
                           _c("td", {
                             domProps: { textContent: _vm._s(producto.nombre) }
@@ -88026,7 +88057,7 @@ var render = function() {
         _c(
           "router-link",
           { staticClass: "btn btn-danger", attrs: { to: "/inventarios" } },
-          [_vm._v("\n            Cancelar\n        ")]
+          [_vm._v("\n      Cancelar\n    ")]
         ),
         _vm._v(" "),
         _c(
@@ -88036,7 +88067,7 @@ var render = function() {
             attrs: { type: "button" },
             on: { click: _vm.guardar }
           },
-          [_vm._v("\n            Guardar\n        ")]
+          [_vm._v("\n      Guardar\n    ")]
         )
       ],
       1
@@ -88050,7 +88081,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("h3", { staticClass: "card-title mt-2" }, [
       _c("i", { staticClass: "fas fa-align-justify" }),
-      _vm._v("\n            Traslado de productos entre almacenes\n        ")
+      _vm._v("\n      Traslado de productos entre almacenes\n    ")
     ])
   },
   function() {
@@ -88061,7 +88092,9 @@ var staticRenderFns = [
       _c("tr", [
         _c("th", [_vm._v("Producto")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Stock Inicial")])
+        _c("th", [_vm._v("Cant. Disponible")]),
+        _vm._v(" "),
+        _c("th")
       ])
     ])
   },
@@ -88072,7 +88105,7 @@ var staticRenderFns = [
     return _c("tr", [
       _c("td", { attrs: { align: "center", colspan: "3" } }, [
         _vm._v(
-          "\n                                        No data available in table\n                                    "
+          "\n                    No data available in table\n                  "
         )
       ])
     ])
@@ -88096,7 +88129,7 @@ var staticRenderFns = [
     return _c("tr", [
       _c("td", { attrs: { align: "center", colspan: "3" } }, [
         _vm._v(
-          "\n                                        No data available in table\n                                    "
+          "\n                    No data available in table\n                  "
         )
       ])
     ])
@@ -128699,7 +128732,7 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\cristian.chuquitarco\Documents\Projects\agricolamoreplant\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/cvdev/Documentos/Proyectos/moreplant/resources/js/app.js */"./resources/js/app.js");
 
 
 /***/ }),
