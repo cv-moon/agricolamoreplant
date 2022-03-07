@@ -66,7 +66,12 @@ import MainInventario from "./components/Almacen/Inventarios/Main.vue";
 import ListInventario from "./components/Almacen/Inventarios/ListInventario.vue";
 import KarInventario from "./components/Almacen/Inventarios/KarInventario.vue";
 import ManInventario from "./components/Almacen/Inventarios/ManInventario.vue";
-import AddTraslado from "./components/Almacen/Inventarios/AddTraslado.vue";
+
+// Traslados
+import MainTraslado from "./components/Almacen/Traslados/Main.vue";
+import ListTraslado from "./components/Almacen/Traslados/ListTraslado.vue";
+import AddTraslado from "./components/Almacen/Traslados/AddTraslado.vue";
+import WatTraslado from "./components/Almacen/Traslados/WatTraslado.vue";
 
 // Roles de Pago - Remuneraciones
 import MainRolPago from "./components/Administracion/RolesPago/Main.vue";
@@ -392,14 +397,30 @@ export const routes = [
                 component: ManInventario
             },
             {
-                path: "traslados",
+                path: "kardex/:id",
+                name: "karInventario",
+                component: KarInventario
+            }
+        ]
+    },
+    {
+        path: "/traslados",
+        component: MainTraslado,
+        children: [
+            {
+                path: "",
+                name: "listTraslado",
+                component: ListTraslado
+            },
+            {
+                path: "agregar",
                 name: "addTraslado",
                 component: AddTraslado
             },
             {
-                path: "kardex/:id",
-                name: "karInventario",
-                component: KarInventario
+                path: "ver/:id",
+                name: "watTraslado",
+                component: WatTraslado
             }
         ]
     },

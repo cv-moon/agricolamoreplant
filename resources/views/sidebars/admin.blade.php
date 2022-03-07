@@ -47,6 +47,12 @@
                             </router-link>
                         </li>
                         <li class="nav-item">
+                            <router-link to="/traslados" class="nav-link">
+                                <i class="fas fa-exchange-alt nav-icon"></i>
+                                <p>Traslados</p>
+                            </router-link>
+                        </li>
+                        <li class="nav-item">
                             <router-link to="/unidades" class="nav-link">
                                 <i class="fas fa-balance-scale-left nav-icon"></i>
                                 <p>Uni. de Medida</p>

@@ -21,10 +21,6 @@
             <router-link class="dropdown-item" to="/inventarios/gestionar"
               >Gestionar</router-link
             >
-            <div class="dropdown-divider"></div>
-            <router-link class="dropdown-item" to="/inventarios/traslados"
-              >Traslados</router-link
-            >
           </div>
         </div>
       </div>
