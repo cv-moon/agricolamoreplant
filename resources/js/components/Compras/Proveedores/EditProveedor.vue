@@ -1,224 +1,243 @@
 <template>
-  <div class="card card-primary card-outline">
-    <div class="card-header">
-      <h3 class="card-title mt-2">
-        <i class="fas fa-align-justify"></i>
-        Editar Proveedor: {{ nombre }}
-      </h3>
-      <div class="card-tools">
-        <router-link to="/proveedores" class="btn btn-secondary btn-sm">
-          <i class="fas fa-arrow-left"></i> Regresar
-        </router-link>
-      </div>
+    <div class="card card-primary card-outline">
+        <div class="card-header">
+            <h3 class="card-title mt-2">
+                <i class="fas fa-align-justify"></i>
+                Editar Proveedor: {{ nombre }}
+            </h3>
+            <div class="card-tools">
+                <router-link to="/proveedores" class="btn btn-secondary btn-sm">
+                    <i class="fas fa-arrow-left"></i> Regresar
+                </router-link>
+            </div>
+        </div>
+        <div class="card-body">
+            <form>
+                <b class="text-primary">Datos Generales</b>
+                <hr class="mt-0" />
+                <div class="form-group row">
+                    <label for="nombre" class="col-sm-2 col-form-label"
+                        >Nombre:</label
+                    >
+                    <div class="col-sm-6">
+                        <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Nombre."
+                            maxlength="100"
+                            v-model="nombre"
+                        />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label
+                        for="tip_identificacion"
+                        class="col-sm-2 col-form-label"
+                        >Tipo Identificación:</label
+                    >
+                    <div class="col-sm-4">
+                        <select
+                            v-model="tip_identificacion"
+                            class="form-control"
+                        >
+                            <option value="SELECCIONE" disabled
+                                >Seleccione...</option
+                            >
+                            <option value="CED">CÉDULA</option>
+                            <option value="RUC">RUC</option>
+                            <option value="S/N">S/N</option>
+                        </select>
+                    </div>
+                    <label
+                        for="num_identificacion"
+                        class="col-sm-2 col-form-label"
+                        ># Identificación:</label
+                    >
+                    <div class="col-sm-4">
+                        <template v-if="tip_identificacion === 'CED'">
+                            <input
+                                type="text"
+                                class="form-control"
+                                placeholder="Cédula."
+                                maxlength="10"
+                                v-model="num_identificacion"
+                            />
+                        </template>
+                        <template v-else-if="tip_identificacion === 'RUC'">
+                            <input
+                                type="text"
+                                class="form-control"
+                                placeholder="RUC."
+                                maxlength="13"
+                                v-model="num_identificacion"
+                            />
+                        </template>
+                        <template
+                            v-else-if="
+                                tip_identificacion === 'SELECCIONE' ||
+                                    tip_identificacion === 'S/N'
+                            "
+                        >
+                            <input
+                                type="text"
+                                class="form-control"
+                                placeholder="Sin numeración."
+                                maxlength="13"
+                                disabled
+                                v-model="num_identificacion"
+                            />
+                        </template>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="direccion" class="col-sm-2 col-form-label"
+                        >Dirección:</label
+                    >
+                    <div class="col-sm-10">
+                        <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Dirección."
+                            maxlength="200"
+                            v-model="direccion"
+                        />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="telefonos" class="col-sm-2 col-form-label"
+                        >Teléfonos:</label
+                    >
+                    <div class="col-sm-4">
+                        <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Teléfonos."
+                            maxlength="50"
+                            v-model="telefonos"
+                        />
+                    </div>
+                    <label for="email" class="col-sm-2 col-form-label"
+                        >Site/e-mail:</label
+                    >
+                    <div class="col-sm-4">
+                        <input
+                            type="email"
+                            class="form-control"
+                            placeholder="E-mail."
+                            maxlength="100"
+                            v-model="email"
+                        />
+                    </div>
+                </div>
+                <b class="text-primary">Información del Contacto</b>
+                <hr class="mt-0" />
+                <div class="form-group row">
+                    <label for="nom_contacto" class="col-sm-2 col-form-label"
+                        >Nombre:</label
+                    >
+                    <div class="col-sm-4">
+                        <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Nombre."
+                            maxlength="100"
+                            v-model="nom_contacto"
+                        />
+                    </div>
+                    <label for="tel_contacto" class="col-sm-2 col-form-label"
+                        >Teléfonos:</label
+                    >
+                    <div class="col-sm-4">
+                        <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Teléfonos."
+                            maxlength="50"
+                            v-model="tel_contacto"
+                        />
+                    </div>
+                </div>
+            </form>
+            <router-link to="/proveedores" class="btn btn-danger">
+                Cancelar
+            </router-link>
+            <button type="button" class="btn btn-primary" @click="editar">
+                Actualizar
+            </button>
+        </div>
     </div>
-    <div class="card-body">
-      <form>
-        <b class="text-primary">Datos Generales</b>
-        <hr class="mt-0" />
-        <div class="form-group row">
-          <label for="nombre" class="col-sm-2 col-form-label">Nombre:</label>
-          <div class="col-sm-6">
-            <input
-              type="text"
-              class="form-control"
-              placeholder="Nombre."
-              maxlength="100"
-              v-model="nombre"
-            />
-          </div>
-        </div>
-        <div class="form-group row">
-          <label for="tip_identificacion" class="col-sm-2 col-form-label"
-            >Tipo Identificación:</label
-          >
-          <div class="col-sm-4">
-            <select v-model="tip_identificacion" class="form-control">
-              <option value="SELECCIONE" disabled>Seleccione...</option>
-              <option value="CED">CÉDULA</option>
-              <option value="RUC">RUC</option>
-              <option value="S/N">S/N</option>
-            </select>
-          </div>
-          <label for="num_identificacion" class="col-sm-2 col-form-label"
-            ># Identificación:</label
-          >
-          <div class="col-sm-4">
-            <template v-if="tip_identificacion === 'CED'">
-              <input
-                type="text"
-                class="form-control"
-                placeholder="Cédula."
-                maxlength="10"
-                v-model="num_identificacion"
-              />
-            </template>
-            <template v-else-if="tip_identificacion === 'RUC'">
-              <input
-                type="text"
-                class="form-control"
-                placeholder="RUC."
-                maxlength="13"
-                v-model="num_identificacion"
-              />
-            </template>
-            <template
-              v-else-if="
-                tip_identificacion === 'SELECCIONE' ||
-                tip_identificacion === 'S/N'
-              "
-            >
-              <input
-                type="text"
-                class="form-control"
-                placeholder="Sin numeración."
-                maxlength="13"
-                disabled
-                v-model="num_identificacion"
-              />
-            </template>
-          </div>
-        </div>
-        <div class="form-group row">
-          <label for="direccion" class="col-sm-2 col-form-label"
-            >Dirección:</label
-          >
-          <div class="col-sm-10">
-            <input
-              type="text"
-              class="form-control"
-              placeholder="Dirección."
-              maxlength="200"
-              v-model="direccion"
-            />
-          </div>
-        </div>
-        <div class="form-group row">
-          <label for="telefonos" class="col-sm-2 col-form-label"
-            >Teléfonos:</label
-          >
-          <div class="col-sm-4">
-            <input
-              type="text"
-              class="form-control"
-              placeholder="Teléfonos."
-              maxlength="50"
-              v-model="telefonos"
-            />
-          </div>
-          <label for="email" class="col-sm-2 col-form-label"
-            >Site/e-mail:</label
-          >
-          <div class="col-sm-4">
-            <input
-              type="email"
-              class="form-control"
-              placeholder="E-mail."
-              maxlength="100"
-              v-model="email"
-            />
-          </div>
-        </div>
-        <b class="text-primary">Información del Contacto</b>
-        <hr class="mt-0" />
-        <div class="form-group row">
-          <label for="nom_contacto" class="col-sm-2 col-form-label"
-            >Nombre:</label
-          >
-          <div class="col-sm-4">
-            <input
-              type="text"
-              class="form-control"
-              placeholder="Nombre."
-              maxlength="100"
-              v-model="nom_contacto"
-            />
-          </div>
-          <label for="tel_contacto" class="col-sm-2 col-form-label"
-            >Teléfonos:</label
-          >
-          <div class="col-sm-4">
-            <input
-              type="text"
-              class="form-control"
-              placeholder="Teléfonos."
-              maxlength="50"
-              v-model="tel_contacto"
-            />
-          </div>
-        </div>
-      </form>
-      <router-link to="/proveedores" class="btn btn-danger">
-        Cancelar
-      </router-link>
-      <button type="button" class="btn btn-primary" @click="editar">
-        Actualizar
-      </button>
-    </div>
-  </div>
 </template>
 <script>
 export default {
-  data() {
-    return {
-      proveedor_id: 0,
-      nombre: "",
-      tip_identificacion: "SELECCIONE",
-      num_identificacion: "",
-      direccion: "",
-      telefonos: "",
-      email: "",
-      nom_contacto: "",
-      tel_contacto: "",
-    };
-  },
-  methods: {
-    detalle() {
-      axios
-        .get("/api/proveedor/detalle", {
-          params: {
-            id: this.$route.params.id,
-          },
-        })
-        .then((resp) => {
-          this.proveedor_id = resp.data["id"];
-          this.nombre = resp.data["nombre"];
-          this.tip_identificacion = resp.data["tip_identificacion"];
-          this.num_identificacion = resp.data["num_identificacion"];
-          this.direccion = resp.data["direccion"];
-          this.telefonos = resp.data["telefonos"];
-          this.email = resp.data["email"];
-          this.nom_contacto = resp.data["nom_contacto"];
-          this.tel_contacto = resp.data["tel_contacto"];
-        });
+    data() {
+        return {
+            proveedor_id: 0,
+            nombre: "",
+            tip_identificacion: "SELECCIONE",
+            num_identificacion: "",
+            direccion: "",
+            telefonos: "",
+            email: "",
+            nom_contacto: "",
+            tel_contacto: ""
+        };
     },
-    editar() {
-      axios
-        .put("/api/proveedor/editar", {
-          id: this.proveedor_id,
-          nombre: this.nombre,
-          tip_identificacion: this.tip_identificacion,
-          num_identificacion: this.num_identificacion,
-          direccion: this.direccion,
-          telefonos: this.telefonos,
-          email: this.email,
-          nom_contacto: this.nom_contacto,
-          tel_contacto: this.tel_contacto,
-        })
-        .then((resp) => {
-          Swal.fire("Bien!", "El registro se actualizó con éxito.", "success");
-          this.$router.push("/proveedores");
-        })
-        .catch((err) => {
-          Swal.fire(
-            "Error!",
-            "No se pudo editar el registro. " + error,
-            "error"
-          );
-        });
+    methods: {
+        detalle() {
+            axios
+                .get("/api/proveedor/detalle", {
+                    params: {
+                        id: this.$route.params.id
+                    }
+                })
+                .then(resp => {
+                    this.proveedor_id = resp.data["id"];
+                    this.nombre = resp.data["nombre"];
+                    this.tip_identificacion = resp.data["tip_identificacion"];
+                    this.num_identificacion = resp.data["num_identificacion"];
+                    this.direccion = resp.data["direccion"];
+                    this.telefonos = resp.data["telefonos"];
+                    this.email = resp.data["email"];
+                    this.nom_contacto = resp.data["nom_contacto"];
+                    this.tel_contacto = resp.data["tel_contacto"];
+                });
+        },
+        editar() {
+            Swal.fire({
+                title: "Espere...",
+                allowOutsideClick: false,
+                didOpen: () => {
+                    Swal.showLoading();
+
+                    axios
+                        .put("/api/proveedor/editar", {
+                            id: this.proveedor_id,
+                            nombre: this.nombre,
+                            tip_identificacion: this.tip_identificacion,
+                            num_identificacion: this.num_identificacion,
+                            direccion: this.direccion,
+                            telefonos: this.telefonos,
+                            email: this.email,
+                            nom_contacto: this.nom_contacto,
+                            tel_contacto: this.tel_contacto
+                        })
+                        .then(resp => {
+                            Swal.fire(
+                                "Bien!",
+                                "El registro se actualizó con éxito.",
+                                "success"
+                            );
+                            this.$router.push("/proveedores");
+                        })
+                        .catch(err => {
+                            Swal.fire("Alto!", `Error: ${err}`, "error");
+                        });
+                }
+            });
+        }
     },
-  },
-  mounted() {
-    this.detalle();
-  },
+    mounted() {
+        this.detalle();
+    }
 };
 </script>
