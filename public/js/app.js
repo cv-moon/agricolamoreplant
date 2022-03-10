@@ -11096,6 +11096,36 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -94329,7 +94359,7 @@ var render = function() {
     _c("div", { staticClass: "card-header" }, [
       _c("h3", { staticClass: "card-title mt-2" }, [
         _c("i", { staticClass: "fas fa-align-justify" }),
-        _vm._v("\n      Compra: " + _vm._s(_vm.proveedor) + "\n    ")
+        _vm._v("\n            Compra: " + _vm._s(_vm.proveedor) + "\n        ")
       ]),
       _vm._v(" "),
       _c(
@@ -94344,7 +94374,7 @@ var render = function() {
             },
             [
               _c("i", { staticClass: "fas fa-arrow-left" }),
-              _vm._v(" Regresar\n      ")
+              _vm._v(" Regresar\n            ")
             ]
           )
         ],
@@ -94458,16 +94488,14 @@ var render = function() {
                           _vm._v(" "),
                           _c("td", { attrs: { align: "right" } }, [
                             _vm._v(
-                              "\n                $\n                " +
+                              "\n                                $\n                                " +
                                 _vm._s(
                                   (
-                                    (detalle.precio -
-                                      (detalle.precio * detalle.descuento) /
-                                        100) *
-                                    detalle.cantidad
+                                    detalle.precio * detalle.cantidad -
+                                    detalle.descuento
                                   ).toFixed(2)
                                 ) +
-                                "\n              "
+                                "\n                            "
                             )
                           ])
                         ])
@@ -94517,9 +94545,9 @@ var render = function() {
                           _vm._v(" "),
                           _c("td", { attrs: { align: "right" } }, [
                             _vm._v(
-                              "\n                $\n                " +
+                              "\n                                $\n                                " +
                                 _vm._s(_vm.calcularImpuesto.toFixed(2)) +
-                                "\n              "
+                                "\n                            "
                             )
                           ])
                         ]
@@ -94553,7 +94581,7 @@ var render = function() {
         _c(
           "router-link",
           { staticClass: "btn btn-danger", attrs: { to: "/compras" } },
-          [_vm._v(" Cancelar ")]
+          [_vm._v("\n            Cancelar\n        ")]
         )
       ],
       1
@@ -94570,37 +94598,61 @@ var staticRenderFns = [
         _c(
           "th",
           { staticClass: "text-center", staticStyle: { width: "35%" } },
-          [_vm._v("Producto")]
+          [
+            _vm._v(
+              "\n                                Producto\n                            "
+            )
+          ]
         ),
         _vm._v(" "),
         _c(
           "th",
           { staticClass: "text-center", staticStyle: { width: "10%" } },
-          [_vm._v("Cantidad")]
+          [
+            _vm._v(
+              "\n                                Cantidad\n                            "
+            )
+          ]
         ),
         _vm._v(" "),
         _c(
           "th",
           { staticClass: "text-center", staticStyle: { width: "15%" } },
-          [_vm._v("Fec. Cad.")]
+          [
+            _vm._v(
+              "\n                                Fec. Cad.\n                            "
+            )
+          ]
         ),
         _vm._v(" "),
         _c(
           "th",
           { staticClass: "text-center", staticStyle: { width: "10%" } },
-          [_vm._v("Precio")]
+          [
+            _vm._v(
+              "\n                                Precio\n                            "
+            )
+          ]
         ),
         _vm._v(" "),
         _c(
           "th",
           { staticClass: "text-center", staticStyle: { width: "10%" } },
-          [_vm._v("Desc. %")]
+          [
+            _vm._v(
+              "\n                                Desc. %\n                            "
+            )
+          ]
         ),
         _vm._v(" "),
         _c(
           "th",
           { staticClass: "text-center", staticStyle: { width: "15%" } },
-          [_vm._v("Subtotal")]
+          [
+            _vm._v(
+              "\n                                Subtotal\n                            "
+            )
+          ]
         )
       ])
     ])
@@ -94651,7 +94703,9 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("tr", [
       _c("td", { staticClass: "text-center", attrs: { colspan: "7" } }, [
-        _vm._v("\n                NO hay artículos agregados\n              ")
+        _vm._v(
+          "\n                                NO hay artículos agregados\n                            "
+        )
       ])
     ])
   }

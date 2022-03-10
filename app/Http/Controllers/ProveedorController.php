@@ -73,7 +73,11 @@ class ProveedorController extends Controller
 
     public function find(Request $request)
     {
-        $proveedores = Proveedor::select('id', 'nombre', 'num_identificacion')
+        $proveedores = Proveedor::select(
+            'id',
+            'nombre',
+            'num_identificacion',
+        )
             ->where('nombre', 'like', '%' . $request->proveedor . '%')
             ->orWhere('num_identificacion', 'like', '%' . $request->proveedor . '%')
             ->orderBy('nombre', 'asc')
