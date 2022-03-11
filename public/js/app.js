@@ -11097,6 +11097,36 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -11971,6 +12001,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -12012,21 +12051,28 @@ __webpack_require__.r(__webpack_exports__);
         return;
       }
 
-      axios.post("/api/proveedor/guardar", {
-        nombre: this.nombre,
-        tip_identificacion: this.tip_identificacion,
-        num_identificacion: this.num_identificacion,
-        direccion: this.direccion,
-        telefonos: this.telefonos,
-        email: this.email,
-        nom_contacto: this.nom_contacto,
-        tel_contacto: this.tel_contacto
-      }).then(function (resp) {
-        Swal.fire("Bien!", "El registro se guardó con éxito.", "success");
+      Swal.fire({
+        title: "Espere...",
+        allowOutsideClick: false,
+        didOpen: function didOpen() {
+          Swal.showLoading();
+          axios.post("/api/proveedor/guardar", {
+            nombre: _this.nombre,
+            tip_identificacion: _this.tip_identificacion,
+            num_identificacion: _this.num_identificacion,
+            direccion: _this.direccion,
+            telefonos: _this.telefonos,
+            email: _this.email,
+            nom_contacto: _this.nom_contacto,
+            tel_contacto: _this.tel_contacto
+          }).then(function (resp) {
+            Swal.fire("Bien!", "El registro se guardó con éxito.", "success");
 
-        _this.$router.push("/proveedores");
-      })["catch"](function (err) {
-        Swal.fire("Error!", "No se pudo realizar el registro. " + err, "error");
+            _this.$router.push("/proveedores");
+          })["catch"](function (err) {
+            Swal.fire("Alto!", "Error: ".concat(err), "error");
+          });
+        }
       });
     }
   }
@@ -12043,6 +12089,17 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -12238,22 +12295,29 @@ __webpack_require__.r(__webpack_exports__);
     editar: function editar() {
       var _this2 = this;
 
-      axios.put("/api/proveedor/editar", {
-        id: this.proveedor_id,
-        nombre: this.nombre,
-        tip_identificacion: this.tip_identificacion,
-        num_identificacion: this.num_identificacion,
-        direccion: this.direccion,
-        telefonos: this.telefonos,
-        email: this.email,
-        nom_contacto: this.nom_contacto,
-        tel_contacto: this.tel_contacto
-      }).then(function (resp) {
-        Swal.fire("Bien!", "El registro se actualizó con éxito.", "success");
+      Swal.fire({
+        title: "Espere...",
+        allowOutsideClick: false,
+        didOpen: function didOpen() {
+          Swal.showLoading();
+          axios.put("/api/proveedor/editar", {
+            id: _this2.proveedor_id,
+            nombre: _this2.nombre,
+            tip_identificacion: _this2.tip_identificacion,
+            num_identificacion: _this2.num_identificacion,
+            direccion: _this2.direccion,
+            telefonos: _this2.telefonos,
+            email: _this2.email,
+            nom_contacto: _this2.nom_contacto,
+            tel_contacto: _this2.tel_contacto
+          }).then(function (resp) {
+            Swal.fire("Bien!", "El registro se actualizó con éxito.", "success");
 
-        _this2.$router.push("/proveedores");
-      })["catch"](function (err) {
-        Swal.fire("Error!", "No se pudo editar el registro. " + error, "error");
+            _this2.$router.push("/proveedores");
+          })["catch"](function (err) {
+            Swal.fire("Alto!", "Error: ".concat(err), "error");
+          });
+        }
       });
     }
   },
@@ -13748,6 +13812,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -13793,20 +13871,27 @@ __webpack_require__.r(__webpack_exports__);
         return;
       }
 
-      axios.post("/api/transportista/guardar", {
-        nombre: this.nombre,
-        identificacion_id: this.identificacion_id,
-        num_identificacion: this.num_identificacion,
-        direccion: this.direccion,
-        telefonos: this.telefonos,
-        email: this.email,
-        placa: this.placa
-      }).then(function (resp) {
-        Swal.fire("Bien!", "El registro se guardó con éxito.", "success");
+      Swal.fire({
+        title: "Espere...",
+        allowOutsideClick: false,
+        didOpen: function didOpen() {
+          Swal.showLoading();
+          axios.post("/api/transportista/guardar", {
+            nombre: _this.nombre,
+            identificacion_id: _this.identificacion_id,
+            num_identificacion: _this.num_identificacion,
+            direccion: _this.direccion,
+            telefonos: _this.telefonos,
+            email: _this.email,
+            placa: _this.placa
+          }).then(function (resp) {
+            Swal.fire("Bien!", "El registro se guardó con éxito.", "success");
 
-        _this.$router.push("/transportistas");
-      })["catch"](function (err) {
-        Swal.fire("Error!", "No se pudo realizar el registro. " + err, "error");
+            _this.$router.push("/transportistas");
+          })["catch"](function (err) {
+            Swal.fire("Alto!", "Error: ".concat(err), "error");
+          });
+        }
       });
     },
     selectIdentificaciones: function selectIdentificaciones() {
@@ -13833,6 +13918,20 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -14041,21 +14140,28 @@ __webpack_require__.r(__webpack_exports__);
         return;
       }
 
-      axios.put("/api/transportista/editar", {
-        id: this.transportista_id,
-        identificacion_id: this.identificacion_id,
-        nombre: this.nombre,
-        num_identificacion: this.num_identificacion,
-        direccion: this.direccion,
-        telefonos: this.telefonos,
-        email: this.email,
-        placa: this.placa
-      }).then(function (resp) {
-        Swal.fire("Bien!", "El registro se actualizó con éxito.", "success");
+      Swal.fire({
+        title: "Espere...",
+        allowOutsideClick: false,
+        didOpen: function didOpen() {
+          Swal.showLoading();
+          axios.put("/api/transportista/editar", {
+            id: _this2.transportista_id,
+            identificacion_id: _this2.identificacion_id,
+            nombre: _this2.nombre,
+            num_identificacion: _this2.num_identificacion,
+            direccion: _this2.direccion,
+            telefonos: _this2.telefonos,
+            email: _this2.email,
+            placa: _this2.placa
+          }).then(function (resp) {
+            Swal.fire("Bien!", "El registro se actualizó con éxito.", "success");
 
-        _this2.$router.push("/transportistas");
-      })["catch"](function (err) {
-        Swal.fire("Error!", "No se pudo editar el registro. " + error, "error");
+            _this2.$router.push("/transportistas");
+          })["catch"](function (err) {
+            Swal.fire("Alto!", "Error: ".concat(err), "error");
+          });
+        }
       });
     },
     selectIdentificaciones: function selectIdentificaciones() {
@@ -16133,6 +16239,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -16175,21 +16290,28 @@ __webpack_require__.r(__webpack_exports__);
         return;
       }
 
-      axios.post("/api/cliente/guardar", {
-        nombre: this.nombre,
-        identificacion_id: this.identificacion_id,
-        num_identificacion: this.num_identificacion,
-        direccion: this.direccion,
-        telefonos: this.telefonos,
-        email: this.email,
-        lim_credito: this.lim_credito,
-        descuento: this.descuento
-      }).then(function (resp) {
-        Swal.fire("Bien!", "El registro se guardó con éxito.", "success");
+      Swal.fire({
+        title: "Espere...",
+        allowOutsideClick: false,
+        didOpen: function didOpen() {
+          Swal.showLoading();
+          axios.post("/api/cliente/guardar", {
+            nombre: _this.nombre,
+            identificacion_id: _this.identificacion_id,
+            num_identificacion: _this.num_identificacion,
+            direccion: _this.direccion,
+            telefonos: _this.telefonos,
+            email: _this.email,
+            lim_credito: _this.lim_credito,
+            descuento: _this.descuento
+          }).then(function (resp) {
+            Swal.fire("Bien!", "El registro se guardó con éxito.", "success");
 
-        _this.$router.push("/clientes");
-      })["catch"](function (err) {
-        Swal.fire("Error!", "No se pudo realizar el registro. " + err, "error");
+            _this.$router.push("/clientes");
+          })["catch"](function (err) {
+            Swal.fire("Alto!", "Error: ".concat(err), "error");
+          });
+        }
       });
     },
     selectIdentificaciones: function selectIdentificaciones() {
@@ -16216,6 +16338,15 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -16441,22 +16572,29 @@ __webpack_require__.r(__webpack_exports__);
         return;
       }
 
-      axios.put("/api/cliente/editar", {
-        id: this.cliente_id,
-        identificacion_id: this.identificacion_id,
-        nombre: this.nombre,
-        num_identificacion: this.num_identificacion,
-        direccion: this.direccion,
-        telefonos: this.telefonos,
-        email: this.email,
-        lim_credito: this.lim_credito,
-        descuento: this.descuento
-      }).then(function (resp) {
-        Swal.fire("Bien!", "El registro se actualizó con éxito.", "success");
+      Swal.fire({
+        title: "Espere...",
+        allowOutsideClick: false,
+        didOpen: function didOpen() {
+          Swal.showLoading();
+          axios.put("/api/cliente/editar", {
+            id: _this2.cliente_id,
+            identificacion_id: _this2.identificacion_id,
+            nombre: _this2.nombre,
+            num_identificacion: _this2.num_identificacion,
+            direccion: _this2.direccion,
+            telefonos: _this2.telefonos,
+            email: _this2.email,
+            lim_credito: _this2.lim_credito,
+            descuento: _this2.descuento
+          }).then(function (resp) {
+            Swal.fire("Bien!", "El registro se actualizó con éxito.", "success");
 
-        _this2.$router.push("/clientes");
-      })["catch"](function (err) {
-        Swal.fire("Error!", "No se pudo editar el registro. " + error, "error");
+            _this2.$router.push("/clientes");
+          })["catch"](function (err) {
+            Swal.fire("Alto!", "Error: ".concat(err), "error");
+          });
+        }
       });
     },
     selectIdentificaciones: function selectIdentificaciones() {
@@ -90121,7 +90259,7 @@ var render = function() {
       [
         _c(
           "router-link",
-          { staticClass: "btn btn-danger", attrs: { to: "/inventarios" } },
+          { staticClass: "btn btn-danger", attrs: { to: "/traslados" } },
           [_vm._v("\n      Cancelar\n    ")]
         ),
         _vm._v(" "),
@@ -94199,7 +94337,7 @@ var render = function() {
     _c("div", { staticClass: "card-header" }, [
       _c("h3", { staticClass: "card-title mt-2" }, [
         _c("i", { staticClass: "fas fa-align-justify" }),
-        _vm._v("\n      Compra: " + _vm._s(_vm.proveedor) + "\n    ")
+        _vm._v("\n            Compra: " + _vm._s(_vm.proveedor) + "\n        ")
       ]),
       _vm._v(" "),
       _c(
@@ -94214,7 +94352,7 @@ var render = function() {
             },
             [
               _c("i", { staticClass: "fas fa-arrow-left" }),
-              _vm._v(" Regresar\n      ")
+              _vm._v(" Regresar\n            ")
             ]
           )
         ],
@@ -94328,16 +94466,14 @@ var render = function() {
                           _vm._v(" "),
                           _c("td", { attrs: { align: "right" } }, [
                             _vm._v(
-                              "\n                $\n                " +
+                              "\n                                $\n                                " +
                                 _vm._s(
                                   (
-                                    (detalle.precio -
-                                      (detalle.precio * detalle.descuento) /
-                                        100) *
-                                    detalle.cantidad
+                                    detalle.precio * detalle.cantidad -
+                                    detalle.descuento
                                   ).toFixed(2)
                                 ) +
-                                "\n              "
+                                "\n                            "
                             )
                           ])
                         ])
@@ -94387,9 +94523,9 @@ var render = function() {
                           _vm._v(" "),
                           _c("td", { attrs: { align: "right" } }, [
                             _vm._v(
-                              "\n                $\n                " +
+                              "\n                                $\n                                " +
                                 _vm._s(_vm.calcularImpuesto.toFixed(2)) +
-                                "\n              "
+                                "\n                            "
                             )
                           ])
                         ]
@@ -94423,7 +94559,7 @@ var render = function() {
         _c(
           "router-link",
           { staticClass: "btn btn-danger", attrs: { to: "/compras" } },
-          [_vm._v(" Cancelar ")]
+          [_vm._v("\n            Cancelar\n        ")]
         )
       ],
       1
@@ -94440,37 +94576,61 @@ var staticRenderFns = [
         _c(
           "th",
           { staticClass: "text-center", staticStyle: { width: "35%" } },
-          [_vm._v("Producto")]
+          [
+            _vm._v(
+              "\n                                Producto\n                            "
+            )
+          ]
         ),
         _vm._v(" "),
         _c(
           "th",
           { staticClass: "text-center", staticStyle: { width: "10%" } },
-          [_vm._v("Cantidad")]
+          [
+            _vm._v(
+              "\n                                Cantidad\n                            "
+            )
+          ]
         ),
         _vm._v(" "),
         _c(
           "th",
           { staticClass: "text-center", staticStyle: { width: "15%" } },
-          [_vm._v("Fec. Cad.")]
+          [
+            _vm._v(
+              "\n                                Fec. Cad.\n                            "
+            )
+          ]
         ),
         _vm._v(" "),
         _c(
           "th",
           { staticClass: "text-center", staticStyle: { width: "10%" } },
-          [_vm._v("Precio")]
+          [
+            _vm._v(
+              "\n                                Precio\n                            "
+            )
+          ]
         ),
         _vm._v(" "),
         _c(
           "th",
           { staticClass: "text-center", staticStyle: { width: "10%" } },
-          [_vm._v("Desc. %")]
+          [
+            _vm._v(
+              "\n                                Desc. %\n                            "
+            )
+          ]
         ),
         _vm._v(" "),
         _c(
           "th",
           { staticClass: "text-center", staticStyle: { width: "15%" } },
-          [_vm._v("Subtotal")]
+          [
+            _vm._v(
+              "\n                                Subtotal\n                            "
+            )
+          ]
         )
       ])
     ])
@@ -94521,7 +94681,9 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("tr", [
       _c("td", { staticClass: "text-center", attrs: { colspan: "7" } }, [
-        _vm._v("\n                NO hay artículos agregados\n              ")
+        _vm._v(
+          "\n                                NO hay artículos agregados\n                            "
+        )
       ])
     ])
   }
@@ -95590,7 +95752,7 @@ var render = function() {
             },
             [
               _c("i", { staticClass: "fas fa-arrow-left" }),
-              _vm._v(" Regresar\n      ")
+              _vm._v(" Regresar\n            ")
             ]
           )
         ],
@@ -96007,7 +96169,11 @@ var render = function() {
                   "div",
                   _vm._l(_vm.errors, function(error) {
                     return _c("div", { key: error }, [
-                      _vm._v("\n            " + _vm._s(error) + "\n          ")
+                      _vm._v(
+                        "\n                        " +
+                          _vm._s(error) +
+                          "\n                    "
+                      )
                     ])
                   }),
                   0
@@ -96019,7 +96185,7 @@ var render = function() {
         _c(
           "router-link",
           { staticClass: "btn btn-danger", attrs: { to: "/proveedores" } },
-          [_vm._v("\n      Cancelar\n    ")]
+          [_vm._v("\n            Cancelar\n        ")]
         ),
         _vm._v(" "),
         _c(
@@ -96029,7 +96195,7 @@ var render = function() {
             attrs: { type: "button" },
             on: { click: _vm.guardar }
           },
-          [_vm._v("\n      Guardar\n    ")]
+          [_vm._v("\n            Guardar\n        ")]
         )
       ],
       1
@@ -96043,7 +96209,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("h3", { staticClass: "card-title mt-2" }, [
       _c("i", { staticClass: "fas fa-align-justify" }),
-      _vm._v("\n      Agregar Proveedor\n    ")
+      _vm._v("\n            Agregar Proveedor\n        ")
     ])
   }
 ]
@@ -96072,7 +96238,9 @@ var render = function() {
     _c("div", { staticClass: "card-header" }, [
       _c("h3", { staticClass: "card-title mt-2" }, [
         _c("i", { staticClass: "fas fa-align-justify" }),
-        _vm._v("\n      Editar Proveedor: " + _vm._s(_vm.nombre) + "\n    ")
+        _vm._v(
+          "\n            Editar Proveedor: " + _vm._s(_vm.nombre) + "\n        "
+        )
       ]),
       _vm._v(" "),
       _c(
@@ -96087,7 +96255,7 @@ var render = function() {
             },
             [
               _c("i", { staticClass: "fas fa-arrow-left" }),
-              _vm._v(" Regresar\n      ")
+              _vm._v(" Regresar\n            ")
             ]
           )
         ],
@@ -96504,7 +96672,7 @@ var render = function() {
         _c(
           "router-link",
           { staticClass: "btn btn-danger", attrs: { to: "/proveedores" } },
-          [_vm._v("\n      Cancelar\n    ")]
+          [_vm._v("\n            Cancelar\n        ")]
         ),
         _vm._v(" "),
         _c(
@@ -96514,7 +96682,7 @@ var render = function() {
             attrs: { type: "button" },
             on: { click: _vm.editar }
           },
-          [_vm._v("\n      Actualizar\n    ")]
+          [_vm._v("\n            Actualizar\n        ")]
         )
       ],
       1
@@ -98321,7 +98489,7 @@ var render = function() {
             },
             [
               _c("i", { staticClass: "fas fa-arrow-left" }),
-              _vm._v(" Regresar\n      ")
+              _vm._v(" Regresar\n            ")
             ]
           )
         ],
@@ -98692,7 +98860,11 @@ var render = function() {
                   "div",
                   _vm._l(_vm.errors, function(error) {
                     return _c("div", { key: error }, [
-                      _vm._v("\n            " + _vm._s(error) + "\n          ")
+                      _vm._v(
+                        "\n                        " +
+                          _vm._s(error) +
+                          "\n                    "
+                      )
                     ])
                   }),
                   0
@@ -98704,7 +98876,7 @@ var render = function() {
         _c(
           "router-link",
           { staticClass: "btn btn-danger", attrs: { to: "/transportistas" } },
-          [_vm._v("\n      Cancelar\n    ")]
+          [_vm._v("\n            Cancelar\n        ")]
         ),
         _vm._v(" "),
         _c(
@@ -98714,7 +98886,7 @@ var render = function() {
             attrs: { type: "button" },
             on: { click: _vm.guardar }
           },
-          [_vm._v("\n      Guardar\n    ")]
+          [_vm._v("\n            Guardar\n        ")]
         )
       ],
       1
@@ -98728,7 +98900,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("h3", { staticClass: "card-title mt-2" }, [
       _c("i", { staticClass: "fas fa-align-justify" }),
-      _vm._v("\n      Agregar Transportista\n    ")
+      _vm._v("\n            Agregar Transportista\n        ")
     ])
   }
 ]
@@ -98757,7 +98929,11 @@ var render = function() {
     _c("div", { staticClass: "card-header" }, [
       _c("h3", { staticClass: "card-title mt-2" }, [
         _c("i", { staticClass: "fas fa-align-justify" }),
-        _vm._v("\n      Editar Transportista: " + _vm._s(_vm.nombre) + "\n    ")
+        _vm._v(
+          "\n            Editar Transportista: " +
+            _vm._s(_vm.nombre) +
+            "\n        "
+        )
       ]),
       _vm._v(" "),
       _c(
@@ -98772,7 +98948,7 @@ var render = function() {
             },
             [
               _c("i", { staticClass: "fas fa-arrow-left" }),
-              _vm._v(" Regresar\n      ")
+              _vm._v(" Regresar\n            ")
             ]
           )
         ],
@@ -99143,7 +99319,11 @@ var render = function() {
                   "div",
                   _vm._l(_vm.errors, function(error) {
                     return _c("div", { key: error }, [
-                      _vm._v("\n            " + _vm._s(error) + "\n          ")
+                      _vm._v(
+                        "\n                        " +
+                          _vm._s(error) +
+                          "\n                    "
+                      )
                     ])
                   }),
                   0
@@ -99155,7 +99335,7 @@ var render = function() {
         _c(
           "router-link",
           { staticClass: "btn btn-danger", attrs: { to: "/transportistas" } },
-          [_vm._v("\n      Cancelar\n    ")]
+          [_vm._v("\n            Cancelar\n        ")]
         ),
         _vm._v(" "),
         _c(
@@ -99165,7 +99345,7 @@ var render = function() {
             attrs: { type: "button" },
             on: { click: _vm.editar }
           },
-          [_vm._v("\n      Actualizar\n    ")]
+          [_vm._v("\n            Actualizar\n        ")]
         )
       ],
       1
@@ -102064,7 +102244,7 @@ var render = function() {
             },
             [
               _c("i", { staticClass: "fas fa-arrow-left" }),
-              _vm._v(" Regresar\n      ")
+              _vm._v(" Regresar\n            ")
             ]
           )
         ],
@@ -102476,7 +102656,11 @@ var render = function() {
                   "div",
                   _vm._l(_vm.errors, function(error) {
                     return _c("div", { key: error }, [
-                      _vm._v("\n            " + _vm._s(error) + "\n          ")
+                      _vm._v(
+                        "\n                        " +
+                          _vm._s(error) +
+                          "\n                    "
+                      )
                     ])
                   }),
                   0
@@ -102488,7 +102672,7 @@ var render = function() {
         _c(
           "router-link",
           { staticClass: "btn btn-danger", attrs: { to: "/clientes" } },
-          [_vm._v("\n      Cancelar\n    ")]
+          [_vm._v("\n            Cancelar\n        ")]
         ),
         _vm._v(" "),
         _c(
@@ -102498,7 +102682,7 @@ var render = function() {
             attrs: { type: "button" },
             on: { click: _vm.guardar }
           },
-          [_vm._v("\n      Guardar\n    ")]
+          [_vm._v("\n            Guardar\n        ")]
         )
       ],
       1
@@ -102512,7 +102696,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("h3", { staticClass: "card-title mt-2" }, [
       _c("i", { staticClass: "fas fa-align-justify" }),
-      _vm._v("\n      Agregar Cliente\n    ")
+      _vm._v("\n            Agregar Cliente\n        ")
     ])
   }
 ]
@@ -102541,7 +102725,9 @@ var render = function() {
     _c("div", { staticClass: "card-header" }, [
       _c("h3", { staticClass: "card-title mt-2" }, [
         _c("i", { staticClass: "fas fa-align-justify" }),
-        _vm._v("\n      Editar Cliente: " + _vm._s(_vm.nombre) + "\n    ")
+        _vm._v(
+          "\n            Editar Cliente: " + _vm._s(_vm.nombre) + "\n        "
+        )
       ]),
       _vm._v(" "),
       _c(
@@ -102556,7 +102742,7 @@ var render = function() {
             },
             [
               _c("i", { staticClass: "fas fa-arrow-left" }),
-              _vm._v(" Regresar\n      ")
+              _vm._v(" Regresar\n            ")
             ]
           )
         ],
@@ -102971,7 +103157,11 @@ var render = function() {
                   "div",
                   _vm._l(_vm.errors, function(error) {
                     return _c("div", { key: error }, [
-                      _vm._v("\n            " + _vm._s(error) + "\n          ")
+                      _vm._v(
+                        "\n                        " +
+                          _vm._s(error) +
+                          "\n                    "
+                      )
                     ])
                   }),
                   0
@@ -102983,7 +103173,7 @@ var render = function() {
         _c(
           "router-link",
           { staticClass: "btn btn-danger", attrs: { to: "/clientes" } },
-          [_vm._v("\n      Cancelar\n    ")]
+          [_vm._v("\n            Cancelar\n        ")]
         ),
         _vm._v(" "),
         _c(
@@ -102993,7 +103183,7 @@ var render = function() {
             attrs: { type: "button" },
             on: { click: _vm.editar }
           },
-          [_vm._v("\n      Actualizar\n    ")]
+          [_vm._v("\n            Actualizar\n        ")]
         )
       ],
       1

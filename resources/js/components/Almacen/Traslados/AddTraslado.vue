@@ -134,7 +134,7 @@
       </div>
     </div>
     <div class="card-footer">
-      <router-link to="/inventarios" class="btn btn-danger">
+      <router-link to="/traslados" class="btn btn-danger">
         Cancelar
       </router-link>
       <button type="button" class="btn btn-success" @click="guardar">
