@@ -10789,7 +10789,7 @@ __webpack_require__.r(__webpack_exports__);
         allowOutsideClick: false,
         didOpen: function didOpen() {
           Swal.showLoading();
-          axios.post("/api/empresa/guardar", form).post("/api/compra/guardar", {
+          axios.post("/api/compra/guardar", {
             establecimiento_id: _this.establecimiento_id,
             proveedor_id: _this.proveedor_id,
             tip_comprobante: _this.tip_comprobante,
@@ -13106,6 +13106,72 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -13239,32 +13305,39 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
 
       this.disabled = true;
-      axios.post("/api/guia/guardar", {
-        factura_id: this.guia.factura_id,
-        punto_id: this.guia.punto_id,
-        transportista_id: this.guia.transportista_id,
-        tip_ambiente: this.guia.tip_ambiente,
-        tip_emision: this.guia.tip_emision,
-        num_secuencial: this.guia.num_secuencial,
-        cla_acceso: this.guia.cla_acceso,
-        fec_inicio: this.guia.fec_inicio,
-        fec_fin: this.guia.fec_fin,
-        des_nombre: this.guia.des_nombre,
-        des_direccion: this.guia.des_direccion,
-        des_identificacion: this.guia.des_identificacion,
-        motivo: this.guia.motivo,
-        ruta: this.guia.ruta,
-        observaciones: this.guia.observaciones,
-        detalles: this.arrayDetalle
-      }).then(function (resp) {
-        axios.post("/api/xml_guia", {
-          guia: resp.data.guia,
-          detalles: resp.data.detalles
-        }).then(function (res) {
-          _this2.crearfacturacion("/" + res.data.firma, res.data.clave, res.data.archivo, res.data.tipo, res.data.id, res.data.carpeta);
-        });
-      })["catch"](function (err) {
-        Swal.fire("Error!", "No se pudo realizar el registro. " + err, "error");
+      Swal.fire({
+        title: "Espere...",
+        allowOutsideClick: false,
+        didOpen: function didOpen() {
+          Swal.showLoading();
+          axios.post("/api/guia/guardar", {
+            factura_id: _this2.guia.factura_id,
+            punto_id: _this2.guia.punto_id,
+            transportista_id: _this2.guia.transportista_id,
+            tip_ambiente: _this2.guia.tip_ambiente,
+            tip_emision: _this2.guia.tip_emision,
+            num_secuencial: _this2.guia.num_secuencial,
+            cla_acceso: _this2.guia.cla_acceso,
+            fec_inicio: _this2.guia.fec_inicio,
+            fec_fin: _this2.guia.fec_fin,
+            des_nombre: _this2.guia.des_nombre,
+            des_direccion: _this2.guia.des_direccion,
+            des_identificacion: _this2.guia.des_identificacion,
+            motivo: _this2.guia.motivo,
+            ruta: _this2.guia.ruta,
+            observaciones: _this2.guia.observaciones,
+            detalles: _this2.arrayDetalle
+          }).then(function (resp) {
+            axios.post("/api/xml_guia", {
+              guia: resp.data.guia,
+              detalles: resp.data.detalles
+            }).then(function (res) {
+              _this2.crearfacturacion("/" + res.data.firma, res.data.clave, res.data.archivo, res.data.tipo, res.data.id, res.data.carpeta);
+            });
+          })["catch"](function (err) {
+            Swal.fire("Alto!", "Error: ".concat(err), "error");
+          });
+        }
       });
     },
     selectTransportista: function selectTransportista(search, loading) {
@@ -13528,14 +13601,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -15618,6 +15683,44 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -15727,6 +15830,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           porcentaje: 0,
           val_retenido: 0
         });
+        console.log(this.arrayImpuesto);
       }
     },
     getTarifas: function getTarifas() {
@@ -15758,26 +15862,33 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       // if (condiciones.length) {
       //   return;
       // }
-      axios.post("/api/retencion/guardar", {
-        punto_id: this.retencion.punto_id,
-        proveedor_id: this.retencion.proveedor_id,
-        fec_emision: this.retencion.fec_emision,
-        num_secuencial: this.retencion.num_secuencial,
-        tip_ambiente: this.retencion.tip_ambiente,
-        tip_emision: this.retencion.tip_emision,
-        cla_acceso: this.retencion.cla_acceso,
-        eje_fiscal: this.retencion.eje_fiscal,
-        tot_retenido: this.retencion.tot_retenido,
-        detalles: this.arrayDetalle
-      }).then(function (resp) {
-        axios.post("/api/xml_retencion", {
-          retencion: resp.data.retencion,
-          detalles: resp.data.detalles
-        }).then(function (res) {
-          _this4.crearfacturacion("/" + res.data.firma, res.data.clave, res.data.archivo, res.data.tipo, res.data.id, res.data.carpeta);
-        });
-      })["catch"](function (err) {
-        Swal.fire("Error!", "No se pudo realizar el registro. " + err, "error");
+      Swal.fire({
+        title: "Espere...",
+        allowOutsideClick: false,
+        didOpen: function didOpen() {
+          Swal.showLoading();
+          axios.post("/api/retencion/guardar", {
+            punto_id: _this4.retencion.punto_id,
+            proveedor_id: _this4.retencion.proveedor_id,
+            fec_emision: _this4.retencion.fec_emision,
+            num_secuencial: _this4.retencion.num_secuencial,
+            tip_ambiente: _this4.retencion.tip_ambiente,
+            tip_emision: _this4.retencion.tip_emision,
+            cla_acceso: _this4.retencion.cla_acceso,
+            eje_fiscal: _this4.retencion.eje_fiscal,
+            tot_retenido: _this4.retencion.tot_retenido,
+            detalles: _this4.arrayDetalle
+          }).then(function (resp) {
+            axios.post("/api/xml_retencion", {
+              retencion: resp.data.retencion,
+              detalles: resp.data.detalles
+            }).then(function (res) {
+              _this4.crearfacturacion("/" + res.data.firma, res.data.clave, res.data.archivo, res.data.tipo, res.data.id, res.data.carpeta);
+            });
+          })["catch"](function (err) {
+            Swal.fire("Alto!", "Error: ".concat(err), "error");
+          });
+        }
       });
     },
     // Métodos para retencion electronica.
@@ -15935,14 +16046,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -17825,6 +17928,158 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -17896,6 +18151,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         descuento: 0,
         errors: []
       },
+      disabled: false,
       identificacion_id: 0,
       arrayCliente: [],
       arrayIdentificaciones: [],
@@ -17906,10 +18162,36 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   computed: {
     getId: function getId() {
+      var _this = this;
+
       if (!this.selected) {
         this.factura.cliente_id = 0;
       } else {
         this.factura.cliente_id = this.selected.id;
+        axios.get("/api/cliente/saldo", {
+          params: {
+            id: this.factura.cliente_id
+          }
+        }).then(function (resp) {
+          _this.info.sal_pendiente = parseFloat(resp.data.saldos).toFixed(2);
+          _this.info.dis_facturar = parseFloat(resp.data.limite["lim_credito"]).toFixed(2) - parseFloat(resp.data.saldos).toFixed(2);
+
+          if (_this.info.dis_facturar == 0) {
+            Swal.fire({
+              title: "Alto!",
+              text: "El cliente ha excedido su límite de crédito",
+              icon: "error",
+              showCancelButton: false,
+              confirmButtonColor: "#3085d6",
+              cancelButtonColor: "#d33",
+              confirmButtonText: "OK"
+            }).then(function (result) {
+              if (result.isConfirmed) {
+                _this.$router.push("/facturacion");
+              }
+            });
+          }
+        });
       }
     },
     totalDescuento: function totalDescuento() {
@@ -18018,6 +18300,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         res = parseFloat(0);
       }
 
+      if (res > this.info.dis_facturar && this.pago.tipo == "C") {
+        Swal.fire("Alto!", "El cliente no puede exceder el límite de crédito", "error");
+      }
+
       return res;
     }
   },
@@ -18028,24 +18314,24 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       });
     },
     getFactura: function getFactura() {
-      var _this = this;
+      var _this2 = this;
 
       axios.get("/api/factura/comprobante").then(function (resp) {
-        _this.factura.cla_acceso = resp.data.cla_acceso + _this.modulo11(resp.data.cla_acceso);
-        _this.factura.fec_emision = resp.data.fec_emision;
-        _this.factura.num_secuencial = resp.data.num_secuencial;
-        _this.factura.punto_id = resp.data.punto_id;
-        _this.factura.tip_ambiente = resp.data.tip_ambiente;
-        _this.datos.comprobante = resp.data.comprobante;
-        _this.datos.firma = resp.data.firma;
-        _this.datos.fir_clave = resp.data.fir_clave;
+        _this2.factura.cla_acceso = resp.data.cla_acceso + _this2.modulo11(resp.data.cla_acceso);
+        _this2.factura.fec_emision = resp.data.fec_emision;
+        _this2.factura.num_secuencial = resp.data.num_secuencial;
+        _this2.factura.punto_id = resp.data.punto_id;
+        _this2.factura.tip_ambiente = resp.data.tip_ambiente;
+        _this2.datos.comprobante = resp.data.comprobante;
+        _this2.datos.firma = resp.data.firma;
+        _this2.datos.fir_clave = resp.data.fir_clave;
       });
     },
     selectFormaPagos: function selectFormaPagos() {
-      var _this2 = this;
+      var _this3 = this;
 
       axios.get("/api/formas_pago").then(function (resp) {
-        _this2.arrayForma = resp.data;
+        _this3.arrayForma = resp.data;
       });
     },
     validaCampos: function validaCampos() {
@@ -18068,7 +18354,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return this.factura.errors;
     },
     guardar: function guardar() {
-      var _this3 = this;
+      var _this4 = this;
 
       var condiciones = this.validaCampos();
 
@@ -18076,46 +18362,53 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         return;
       }
 
-      axios.post("/api/factura/guardar", {
-        cliente_id: this.factura.cliente_id,
-        punto_id: this.factura.punto_id,
-        for_pago_id: this.pago.forma_id,
-        tip_ambiente: this.factura.tip_ambiente,
-        num_secuencial: this.factura.num_secuencial,
-        fec_emision: this.factura.fec_emision,
-        cla_acceso: this.factura.cla_acceso,
-        sub_sin_imp: this.factura.sub_sin_imp,
-        sub_iva: this.factura.sub_iva,
-        sub_0: this.factura.sub_0,
-        sub_no_iva: this.factura.sub_no_iva,
-        sub_exento: this.factura.sub_exento,
-        tot_descuento: this.factura.tot_descuento,
-        val_ice: this.factura.val_ice,
-        val_irbpnr: this.factura.val_irbpnr,
-        val_iva: this.factura.val_iva,
-        val_propina: this.factura.val_propina,
-        val_total: this.factura.val_total,
-        for_pago: this.pago.tipo,
-        dias_credito: this.pago.plazo,
-        detalles: this.arrayDetalle
-      }).then(function (resp) {
-        axios.post("/api/xml_factura", {
-          factura: resp.data.factura,
-          detalles: resp.data.detalles,
-          credito: resp.data.credito
-        }).then(function (res) {
-          _this3.crearfacturacion("/" + res.data.firma, res.data.clave, res.data.archivo, res.data.tipo, res.data.id, res.data.carpeta);
-        });
-      })["catch"](function (err) {
-        Swal.fire("Error!", "No se pudo realizar el registro. " + err, "error");
+      Swal.fire({
+        title: "Espere...",
+        allowOutsideClick: false,
+        didOpen: function didOpen() {
+          Swal.showLoading();
+          axios.post("/api/factura/guardar", {
+            cliente_id: _this4.factura.cliente_id,
+            punto_id: _this4.factura.punto_id,
+            for_pago_id: _this4.pago.forma_id,
+            tip_ambiente: _this4.factura.tip_ambiente,
+            num_secuencial: _this4.factura.num_secuencial,
+            fec_emision: _this4.factura.fec_emision,
+            cla_acceso: _this4.factura.cla_acceso,
+            sub_sin_imp: _this4.factura.sub_sin_imp,
+            sub_iva: _this4.factura.sub_iva,
+            sub_0: _this4.factura.sub_0,
+            sub_no_iva: _this4.factura.sub_no_iva,
+            sub_exento: _this4.factura.sub_exento,
+            tot_descuento: _this4.factura.tot_descuento,
+            val_ice: _this4.factura.val_ice,
+            val_irbpnr: _this4.factura.val_irbpnr,
+            val_iva: _this4.factura.val_iva,
+            val_propina: _this4.factura.val_propina,
+            val_total: _this4.factura.val_total,
+            for_pago: _this4.pago.tipo,
+            dias_credito: _this4.pago.plazo,
+            detalles: _this4.arrayDetalle
+          }).then(function (resp) {
+            axios.post("/api/xml_factura", {
+              factura: resp.data.factura,
+              detalles: resp.data.detalles,
+              credito: resp.data.credito
+            }).then(function (res) {
+              _this4.crearfacturacion("/" + res.data.firma, res.data.clave, res.data.archivo, res.data.tipo, res.data.id, res.data.carpeta);
+            });
+          })["catch"](function (err) {
+            Swal.fire("Alto!", "Error: ".concat(err), "error");
+          });
+        }
       });
     },
     selectCliente: function selectCliente(search, loading) {
-      var _this4 = this;
+      var _this5 = this;
 
       loading(true);
       axios.get("/api/cliente/buscar?cli=" + search).then(function (resp) {
-        _this4.arrayCliente = resp.data;
+        _this5.arrayCliente = resp.data;
         loading(false);
       })["catch"](function (err) {
         console.log(err);
@@ -18130,13 +18423,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       $("#modal").modal("hide");
     },
     getProductos: function getProductos() {
-      var _this5 = this;
+      var _this6 = this;
 
       axios.get("/api/productos/venta").then(function (resp) {
-        _this5.arrayProductos = resp.data;
+        _this6.arrayProductos = resp.data;
         $("#productos").DataTable().destroy();
 
-        _this5.myTable();
+        _this6.myTable();
       });
     },
     addDetalle: function addDetalle() {
@@ -18199,7 +18492,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return this.cliente.errors;
     },
     guardarCliente: function guardarCliente() {
-      var _this6 = this;
+      var _this7 = this;
 
       var condiciones = this.validaCamposCliente();
 
@@ -18219,7 +18512,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }).then(function (resp) {
         Swal.fire("Bien!", "El registro se guardó con éxito.", "success");
 
-        _this6.cerrarCliente();
+        _this7.cerrarCliente();
       })["catch"](function (err) {
         Swal.fire("Error!", "No se pudo realizar el registro. " + err, "error");
       });
@@ -18235,10 +18528,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.cliente.descuento = 0;
     },
     selectIdentificaciones: function selectIdentificaciones() {
-      var _this7 = this;
+      var _this8 = this;
 
       axios.get("/api/identificaciones").then(function (resp) {
-        _this7.arrayIdentificaciones = resp.data;
+        _this8.arrayIdentificaciones = resp.data;
       });
     },
     // Métodos para la facturación
@@ -18268,7 +18561,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return digito_calculado;
     },
     crearfacturacion: function crearfacturacion(firma, password, factura, tipo, id, carpeta) {
-      var _this8 = this;
+      var _this9 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
         var _yield$script_comprob, comprobante, _yield$script_comprob2, contenido, _yield$script_comprob3, certificado, _yield$script_comprob4, quefirma, _yield$script_comprob5, validado, _yield$script_comprob6, recibida, _yield$script_comprob7, registrado;
@@ -18358,11 +18651,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 if (registrado == "enviado") {
                   Swal.fire("Bien!", "La factura se envió exitosamente.", "success");
 
-                  _this8.$router.push("/facturacion");
+                  _this9.$router.push("/facturacion");
                 } else {
                   Swal.fire("Error!", "La factura no pudo ser enviada, intente mas tarde.", "error");
 
-                  _this8.$router.push("/facturacion");
+                  _this9.$router.push("/facturacion");
                 }
 
                 _context.next = 36;
@@ -18373,7 +18666,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _context.t0 = _context["catch"](0);
                 Swal.fire("Error!", "Error en el envio al SRI" + _context.t0, "error");
 
-                _this8.$router.push("/facturacion");
+                _this9.$router.push("/facturacion");
 
               case 36:
               case "end":
@@ -18401,6 +18694,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
 //
 //
 //
@@ -84374,7 +84670,7 @@ var render = function() {
                 }
               ],
               staticClass: "form-control",
-              attrs: { type: "number", placeholder: "0", min: "0", max: "255" },
+              attrs: { type: "text", placeholder: "0", min: "0", max: "255" },
               domProps: { value: _vm.codigo },
               on: {
                 input: function($event) {
@@ -97136,7 +97432,7 @@ var render = function() {
             },
             [
               _c("i", { staticClass: "fas fa-arrow-left" }),
-              _vm._v(" Regresar\n      ")
+              _vm._v(" Regresar\n            ")
             ]
           )
         ],
@@ -97202,7 +97498,11 @@ var render = function() {
           ),
           _vm._v(" "),
           _c("p", { staticClass: "col-form-label" }, [
-            _vm._v("\n          " + _vm._s(_vm.guia.cla_acceso) + "\n        ")
+            _vm._v(
+              "\n                    " +
+                _vm._s(_vm.guia.cla_acceso) +
+                "\n                "
+            )
           ])
         ])
       ]),
@@ -97698,7 +97998,11 @@ var render = function() {
               "div",
               _vm._l(_vm.guia.errors, function(error) {
                 return _c("div", { key: error }, [
-                  _vm._v("\n          " + _vm._s(error) + "\n        ")
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(error) +
+                      "\n                "
+                  )
                 ])
               }),
               0
@@ -97714,7 +98018,7 @@ var render = function() {
         _c(
           "router-link",
           { staticClass: "btn btn-danger", attrs: { to: "/guias" } },
-          [_vm._v(" Cancelar ")]
+          [_vm._v("\n            Cancelar\n        ")]
         ),
         _vm._v(" "),
         _c(
@@ -97724,7 +98028,7 @@ var render = function() {
             attrs: { type: "button", disabled: _vm.disabled },
             on: { click: _vm.guardar }
           },
-          [_vm._v("\n      Guardar\n    ")]
+          [_vm._v("\n            Guardar\n        ")]
         )
       ],
       1
@@ -97860,7 +98164,8 @@ var render = function() {
                           name: "model",
                           rawName: "v-model",
                           value: _vm.transportista.identificacion_id,
-                          expression: "transportista.identificacion_id"
+                          expression:
+                            "\n                                        transportista.identificacion_id\n                                    "
                         }
                       ],
                       staticClass: "form-control",
@@ -97926,7 +98231,8 @@ var render = function() {
                                 name: "model",
                                 rawName: "v-model",
                                 value: _vm.transportista.num_identificacion,
-                                expression: "transportista.num_identificacion"
+                                expression:
+                                  "\n                                            transportista.num_identificacion\n                                        "
                               }
                             ],
                             staticClass: "form-control",
@@ -97960,7 +98266,8 @@ var render = function() {
                                 name: "model",
                                 rawName: "v-model",
                                 value: _vm.transportista.num_identificacion,
-                                expression: "transportista.num_identificacion"
+                                expression:
+                                  "\n                                            transportista.num_identificacion\n                                        "
                               }
                             ],
                             staticClass: "form-control",
@@ -97994,7 +98301,8 @@ var render = function() {
                                 name: "model",
                                 rawName: "v-model",
                                 value: _vm.transportista.num_identificacion,
-                                expression: "transportista.num_identificacion"
+                                expression:
+                                  "\n                                            transportista.num_identificacion\n                                        "
                               }
                             ],
                             staticClass: "form-control",
@@ -98160,9 +98468,9 @@ var render = function() {
                       _vm._l(_vm.transportista.errors, function(error) {
                         return _c("div", { key: error }, [
                           _vm._v(
-                            "\n                  " +
+                            "\n                                    " +
                               _vm._s(error) +
-                              "\n                "
+                              "\n                                "
                           )
                         ])
                       }),
@@ -98181,7 +98489,7 @@ var render = function() {
                 attrs: { type: "button" },
                 on: { click: _vm.cerrarModal }
               },
-              [_vm._v("\n            Close\n          ")]
+              [_vm._v("\n                        Close\n                    ")]
             ),
             _vm._v(" "),
             _c(
@@ -98191,7 +98499,11 @@ var render = function() {
                 attrs: { type: "button" },
                 on: { click: _vm.guardarTransportista }
               },
-              [_vm._v("\n            Guardar\n          ")]
+              [
+                _vm._v(
+                  "\n                        Guardar\n                    "
+                )
+              ]
             )
           ])
         ])
@@ -98206,7 +98518,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("h3", { staticClass: "card-title mt-2" }, [
       _c("i", { staticClass: "fas fa-align-justify" }),
-      _vm._v("\n      Guía de Remisión\n    ")
+      _vm._v("\n            Guía de Remisión\n        ")
     ])
   },
   function() {
@@ -98216,19 +98528,29 @@ var staticRenderFns = [
     return _c("thead", [
       _c("tr", [
         _c("th", { staticClass: "text-center", staticStyle: { width: "5%" } }, [
-          _vm._v("Acción")
+          _vm._v(
+            "\n                                Acción\n                            "
+          )
         ]),
         _vm._v(" "),
         _c(
           "th",
           { staticClass: "text-center", staticStyle: { width: "35%" } },
-          [_vm._v("Producto")]
+          [
+            _vm._v(
+              "\n                                Producto\n                            "
+            )
+          ]
         ),
         _vm._v(" "),
         _c(
           "th",
           { staticClass: "text-center", staticStyle: { width: "10%" } },
-          [_vm._v("Cantidad")]
+          [
+            _vm._v(
+              "\n                                Cantidad\n                            "
+            )
+          ]
         )
       ])
     ])
@@ -98239,7 +98561,9 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("tr", [
       _c("td", { staticClass: "text-center", attrs: { colspan: "7" } }, [
-        _vm._v("\n                NO hay artículos agregados\n              ")
+        _vm._v(
+          "\n                                NO hay artículos agregados\n                            "
+        )
       ])
     ])
   }
@@ -98326,66 +98650,49 @@ var render = function() {
                 _vm._v(" "),
                 _c("td", { domProps: { textContent: _vm._s(guia.respuesta) } }),
                 _vm._v(" "),
-                _c(
-                  "td",
-                  [
-                    _c(
-                      "router-link",
-                      {
-                        staticClass: "btn btn-warning btn-xs",
-                        attrs: {
-                          type: "button",
-                          title: "Detalle",
-                          to: "/guias/detalle/" + guia.id
+                _c("td", [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-info btn-xs",
+                      attrs: { type: "button", title: "Reenviar" },
+                      on: {
+                        click: function($event) {
+                          return _vm.reenvio(guia.id)
                         }
-                      },
-                      [_c("i", { staticClass: "fas fa-pen" })]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-info btn-xs",
-                        attrs: { type: "button", title: "Reenviar" },
-                        on: {
-                          click: function($event) {
-                            return _vm.reenvio(guia.id)
-                          }
+                      }
+                    },
+                    [_c("i", { staticClass: "fas fa-paper-plane" })]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-danger btn-xs",
+                      attrs: { type: "button", title: "PDF" },
+                      on: {
+                        click: function($event) {
+                          return _vm.desPdf(guia.cla_acceso)
                         }
-                      },
-                      [_c("i", { staticClass: "fas fa-paper-plane" })]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-danger btn-xs",
-                        attrs: { type: "button", title: "PDF" },
-                        on: {
-                          click: function($event) {
-                            return _vm.desPdf(guia.cla_acceso)
-                          }
+                      }
+                    },
+                    [_c("i", { staticClass: "fas fa-file-pdf" })]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-secondary btn-xs",
+                      attrs: { type: "button", title: "XML" },
+                      on: {
+                        click: function($event) {
+                          return _vm.desXml(guia.cla_acceso)
                         }
-                      },
-                      [_c("i", { staticClass: "fas fa-file-pdf" })]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-secondary btn-xs",
-                        attrs: { type: "button", title: "XML" },
-                        on: {
-                          click: function($event) {
-                            return _vm.desXml(guia.cla_acceso)
-                          }
-                        }
-                      },
-                      [_c("i", { staticClass: "fas fa-file-code" })]
-                    )
-                  ],
-                  1
-                )
+                      }
+                    },
+                    [_c("i", { staticClass: "fas fa-file-code" })]
+                  )
+                ])
               ])
             }),
             0
@@ -101601,7 +101908,7 @@ var render = function() {
             },
             [
               _c("i", { staticClass: "fas fa-arrow-left" }),
-              _vm._v(" Regresar\n      ")
+              _vm._v(" Regresar\n            ")
             ]
           )
         ],
@@ -101668,7 +101975,9 @@ var render = function() {
           _vm._v(" "),
           _c("p", { staticClass: "col-form-label" }, [
             _vm._v(
-              "\n          " + _vm._s(_vm.retencion.cla_acceso) + "\n        "
+              "\n                    " +
+                _vm._s(_vm.retencion.cla_acceso) +
+                "\n                "
             )
           ])
         ])
@@ -101870,14 +102179,18 @@ var render = function() {
                           _vm._v(" "),
                           _c("td", { attrs: { align: "right" } }, [
                             _vm._v(
-                              "\n                " +
+                              "\n                                " +
                                 _vm._s(detalle.porcentaje) +
-                                "\n              "
+                                "\n                            "
                             )
                           ]),
                           _vm._v(" "),
                           _c("td", { attrs: { align: "right" } }, [
-                            _vm._v(_vm._s(detalle.val_retenido))
+                            _vm._v(
+                              "\n                                " +
+                                _vm._s(detalle.val_retenido) +
+                                "\n                            "
+                            )
                           ])
                         ])
                       }),
@@ -101890,12 +102203,12 @@ var render = function() {
                           _vm._v(" "),
                           _c("td", { attrs: { align: "right" } }, [
                             _vm._v(
-                              "\n                $ " +
+                              "\n                                $\n                                " +
                                 _vm._s(
                                   (_vm.retencion.tot_retenido =
                                     _vm.calculaTotalRetencion)
                                 ) +
-                                "\n              "
+                                "\n                            "
                             )
                           ])
                         ]
@@ -101917,7 +102230,7 @@ var render = function() {
         _c(
           "router-link",
           { staticClass: "btn btn-danger", attrs: { to: "/retenciones" } },
-          [_vm._v("\n      Cancelar\n    ")]
+          [_vm._v("\n            Cancelar\n        ")]
         ),
         _vm._v(" "),
         _c(
@@ -101927,7 +102240,7 @@ var render = function() {
             attrs: { type: "button", disabled: _vm.retencion.compra_id == 0 },
             on: { click: _vm.guardar }
           },
-          [_vm._v("\n      Guardar\n    ")]
+          [_vm._v("\n            Guardar\n        ")]
         )
       ],
       1
@@ -101941,7 +102254,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("h3", { staticClass: "card-title mt-2" }, [
       _c("i", { staticClass: "fas fa-align-justify" }),
-      _vm._v("\n      Retención\n    ")
+      _vm._v("\n            Retención\n        ")
     ])
   },
   function() {
@@ -101983,7 +102296,7 @@ var staticRenderFns = [
     return _c("tr", [
       _c("td", { staticClass: "text-center", attrs: { colspan: "8" } }, [
         _vm._v(
-          "\n                NO se ha seleccionado un comprobante de compra.\n              "
+          "\n                                NO se ha seleccionado un comprobante de\n                                compra.\n                            "
         )
       ])
     ])
@@ -102081,66 +102394,49 @@ var render = function() {
                   domProps: { textContent: _vm._s(retencion.respuesta) }
                 }),
                 _vm._v(" "),
-                _c(
-                  "td",
-                  [
-                    _c(
-                      "router-link",
-                      {
-                        staticClass: "btn btn-warning btn-xs",
-                        attrs: {
-                          type: "button",
-                          title: "Detalle",
-                          to: "/retenciones/detalle/" + retencion.id
+                _c("td", [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-info btn-xs",
+                      attrs: { type: "button", title: "Reenviar" },
+                      on: {
+                        click: function($event) {
+                          return _vm.reenvio(retencion.id)
                         }
-                      },
-                      [_c("i", { staticClass: "fas fa-pen" })]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-info btn-xs",
-                        attrs: { type: "button", title: "Reenviar" },
-                        on: {
-                          click: function($event) {
-                            return _vm.reenvio(retencion.id)
-                          }
+                      }
+                    },
+                    [_c("i", { staticClass: "fas fa-paper-plane" })]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-danger btn-xs",
+                      attrs: { type: "button", title: "PDF" },
+                      on: {
+                        click: function($event) {
+                          return _vm.desPdf(retencion.cla_acceso)
                         }
-                      },
-                      [_c("i", { staticClass: "fas fa-paper-plane" })]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-danger btn-xs",
-                        attrs: { type: "button", title: "PDF" },
-                        on: {
-                          click: function($event) {
-                            return _vm.desPdf(retencion.cla_acceso)
-                          }
+                      }
+                    },
+                    [_c("i", { staticClass: "fas fa-file-pdf" })]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-secondary btn-xs",
+                      attrs: { type: "button", title: "XML" },
+                      on: {
+                        click: function($event) {
+                          return _vm.desXml(retencion.cla_acceso)
                         }
-                      },
-                      [_c("i", { staticClass: "fas fa-file-pdf" })]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-secondary btn-xs",
-                        attrs: { type: "button", title: "XML" },
-                        on: {
-                          click: function($event) {
-                            return _vm.desXml(retencion.cla_acceso)
-                          }
-                        }
-                      },
-                      [_c("i", { staticClass: "fas fa-file-code" })]
-                    )
-                  ],
-                  1
-                )
+                      }
+                    },
+                    [_c("i", { staticClass: "fas fa-file-code" })]
+                  )
+                ])
               ])
             }),
             0
@@ -104220,7 +104516,7 @@ var render = function() {
             },
             [
               _c("i", { staticClass: "fas fa-arrow-left" }),
-              _vm._v(" Regresar\n      ")
+              _vm._v(" Regresar\n            ")
             ]
           )
         ],
@@ -104372,7 +104668,9 @@ var render = function() {
           _vm._v(" "),
           _c("p", { staticClass: "col-form-label" }, [
             _vm._v(
-              "\n          " + _vm._s(_vm.factura.cla_acceso) + "\n        "
+              "\n                    " +
+                _vm._s(_vm.factura.cla_acceso) +
+                "\n                "
             )
           ])
         ])
@@ -104504,7 +104802,7 @@ var render = function() {
                         _vm._v(" "),
                         _c("td", { attrs: { align: "right" } }, [
                           _vm._v(
-                            "\n                $" +
+                            "\n                                $" +
                               _vm._s(
                                 (detalle.des_individual = (
                                   ((detalle.pre_venta * detalle.por_descuento) /
@@ -104512,20 +104810,20 @@ var render = function() {
                                   detalle.cantidad
                                 ).toFixed(2))
                               ) +
-                              "\n              "
+                              "\n                            "
                           )
                         ]),
                         _vm._v(" "),
                         _c("td", { attrs: { align: "right" } }, [
                           _vm._v(
-                            "\n                $\n                " +
+                            "\n                                $\n                                " +
                               _vm._s(
                                 (detalle.sub_individual = (
                                   detalle.pre_venta * detalle.cantidad -
                                   detalle.des_individual
                                 ).toFixed(2))
                               ) +
-                              "\n              "
+                              "\n                            "
                           )
                         ])
                       ])
@@ -104772,13 +105070,13 @@ var render = function() {
                   _vm._v("Subtotal Iva 12%:")
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-sm-6 bg-info text-right" }, [
+                _c("div", { staticClass: "col-sm-6 bg-lightblue text-right" }, [
                   _vm._v(
-                    "\n                $ " +
+                    "\n                                $\n                                " +
                       _vm._s(
                         (_vm.factura.sub_iva = _vm.subtotalIva.toFixed(2))
                       ) +
-                      "\n              "
+                      "\n                            "
                   )
                 ])
               ]),
@@ -104788,71 +105086,77 @@ var render = function() {
                   _vm._v("Subtotal 0%:")
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-sm-6 bg-gray-dark text-right" }, [
+                _c("div", { staticClass: "col-sm-6 bg-lightblue text-right" }, [
                   _vm._v(
-                    "\n                $ " +
+                    "\n                                $\n                                " +
                       _vm._s(
                         (_vm.factura.sub_0 = _vm.subtotalCero.toFixed(2))
                       ) +
-                      "\n              "
+                      "\n                            "
                   )
                 ])
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "form-group row" }, [
                 _c("div", { staticClass: "col-sm-6" }, [
-                  _vm._v("Subtotal no objeto de iva:")
+                  _vm._v(
+                    "\n                                Subtotal no objeto de iva:\n                            "
+                  )
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-sm-6 bg-indigo text-right" }, [
+                _c("div", { staticClass: "col-sm-6 bg-lightblue text-right" }, [
                   _vm._v(
-                    "\n                $ " +
+                    "\n                                $\n                                " +
                       _vm._s(
                         (_vm.factura.sub_no_iva = _vm.subtotalNoObjeto.toFixed(
                           2
                         ))
                       ) +
-                      "\n              "
+                      "\n                            "
                   )
                 ])
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "form-group row" }, [
                 _c("div", { staticClass: "col-sm-6" }, [
-                  _vm._v("Subtotal exento de iva:")
+                  _vm._v(
+                    "\n                                Subtotal exento de iva:\n                            "
+                  )
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-sm-6 bg-lightblue text-right" }, [
                   _vm._v(
-                    "\n                $ " +
+                    "\n                                $\n                                " +
                       _vm._s(
                         (_vm.factura.sub_exento = _vm.subtotalExento.toFixed(2))
                       ) +
-                      "\n              "
+                      "\n                            "
                   )
                 ])
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "form-group row" }, [
                 _c("div", { staticClass: "col-sm-6" }, [
-                  _vm._v("Subtotal sin Impuestos:")
+                  _vm._v(
+                    "\n                                Subtotal sin Impuestos:\n                            "
+                  )
                 ]),
                 _vm._v(" "),
                 _c(
                   "div",
                   {
                     staticClass:
-                      "\n                  col-sm-6\n                  solor-palette-set\n                  bg-info\n                  disabled\n                  color-palette\n                  text-right\n                "
+                      "\n                col-sm-6\n                solor-palette-set\n                bg-lightblue\n                disabled\n                color-palette\n                text-right\n              "
                   },
                   [
                     _vm._v(
-                      "\n                $ " +
+                      "\n                                $\n                                " +
                         _vm._s(
                           (_vm.factura.sub_sin_imp = _vm.subtotalSinImpuesto.toFixed(
                             2
                           ))
                         ) +
-                        "\n              "
+                        "\n                            "
                     )
                   ]
                 )
@@ -104863,15 +105167,15 @@ var render = function() {
                   _vm._v("Total Descuento:")
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-sm-6 bg-success text-right" }, [
+                _c("div", { staticClass: "col-sm-6 bg-lightblue text-right" }, [
                   _vm._v(
-                    "\n                $ " +
+                    "\n                                $\n                                " +
                       _vm._s(
                         (_vm.factura.tot_descuento = _vm.totalDescuento.toFixed(
                           2
                         ))
                       ) +
-                      "\n              "
+                      "\n                            "
                   )
                 ])
               ]),
@@ -104879,11 +105183,11 @@ var render = function() {
               _c("div", { staticClass: "form-group row" }, [
                 _c("div", { staticClass: "col-sm-6" }, [_vm._v("Valor ICE:")]),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-sm-6 bg-secondary text-right" }, [
+                _c("div", { staticClass: "col-sm-6 bg-lightblue text-right" }, [
                   _vm._v(
-                    "\n                $ " +
+                    "\n                                $ " +
                       _vm._s(_vm.factura.val_ice) +
-                      "\n              "
+                      "\n                            "
                   )
                 ])
               ]),
@@ -104893,11 +105197,11 @@ var render = function() {
                   _vm._v("Valor Irbpnr:")
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-sm-6 bg-gray text-right" }, [
+                _c("div", { staticClass: "col-sm-6 bg-lightblue text-right" }, [
                   _vm._v(
-                    "\n                $ " +
+                    "\n                                $ " +
                       _vm._s(_vm.factura.val_irbpnr) +
-                      "\n              "
+                      "\n                            "
                   )
                 ])
               ]),
@@ -104905,13 +105209,13 @@ var render = function() {
               _c("div", { staticClass: "form-group row" }, [
                 _c("div", { staticClass: "col-sm-6" }, [_vm._v("Iva 12%:")]),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-sm-6 bg-gray text-right" }, [
+                _c("div", { staticClass: "col-sm-6 bg-lightblue text-right" }, [
                   _vm._v(
-                    "\n                $ " +
+                    "\n                                $\n                                " +
                       _vm._s(
                         (_vm.factura.val_iva = _vm.calcularIva.toFixed(2))
                       ) +
-                      "\n              "
+                      "\n                            "
                   )
                 ])
               ]),
@@ -104921,11 +105225,11 @@ var render = function() {
                   _vm._v("Propina 10%:")
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-sm-6 bg-gray text-right" }, [
+                _c("div", { staticClass: "col-sm-6 bg-lightblue text-right" }, [
                   _vm._v(
-                    "\n                $ " +
+                    "\n                                $ " +
                       _vm._s(_vm.factura.val_propina) +
-                      "\n              "
+                      "\n                            "
                   )
                 ])
               ]),
@@ -104939,15 +105243,15 @@ var render = function() {
                   "div",
                   {
                     staticClass:
-                      "col-sm-6 bg-gray disabled color-palette text-right"
+                      "col-sm-6 bg-lightblue disabled color-palette text-right"
                   },
                   [
                     _vm._v(
-                      "\n                $ " +
+                      "\n                                $\n                                " +
                         _vm._s(
                           (_vm.factura.val_total = _vm.calcularTotal.toFixed(2))
                         ) +
-                        "\n              "
+                        "\n                            "
                     )
                   ]
                 )
@@ -104963,7 +105267,11 @@ var render = function() {
               "div",
               _vm._l(_vm.factura.errors, function(error) {
                 return _c("div", { key: error }, [
-                  _vm._v("\n          " + _vm._s(error) + "\n        ")
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(error) +
+                      "\n                "
+                  )
                 ])
               }),
               0
@@ -104979,7 +105287,7 @@ var render = function() {
         _c(
           "router-link",
           { staticClass: "btn btn-danger", attrs: { to: "/facturacion" } },
-          [_vm._v("\n      Cancelar\n    ")]
+          [_vm._v("\n            Cancelar\n        ")]
         ),
         _vm._v(" "),
         _c(
@@ -104989,7 +105297,7 @@ var render = function() {
             attrs: { type: "button" },
             on: { click: _vm.guardar }
           },
-          [_vm._v("\n      Guardar\n    ")]
+          [_vm._v("\n            Guardar\n        ")]
         )
       ],
       1
@@ -105132,7 +105440,7 @@ var render = function() {
                 attrs: { type: "button" },
                 on: { click: _vm.cerrarModal }
               },
-              [_vm._v("\n            Close\n          ")]
+              [_vm._v("\n                        Close\n                    ")]
             )
           ])
         ])
@@ -105584,9 +105892,9 @@ var render = function() {
                       _vm._l(_vm.cliente.errors, function(error) {
                         return _c("div", { key: error }, [
                           _vm._v(
-                            "\n                  " +
+                            "\n                                    " +
                               _vm._s(error) +
-                              "\n                "
+                              "\n                                "
                           )
                         ])
                       }),
@@ -105605,7 +105913,7 @@ var render = function() {
                 attrs: { type: "button" },
                 on: { click: _vm.cerrarCliente }
               },
-              [_vm._v("\n            Close\n          ")]
+              [_vm._v("\n                        Close\n                    ")]
             ),
             _vm._v(" "),
             _c(
@@ -105615,7 +105923,11 @@ var render = function() {
                 attrs: { type: "button" },
                 on: { click: _vm.guardarCliente }
               },
-              [_vm._v("\n            Guardar\n          ")]
+              [
+                _vm._v(
+                  "\n                        Guardar\n                    "
+                )
+              ]
             )
           ])
         ])
@@ -105630,7 +105942,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("h3", { staticClass: "card-title mt-2" }, [
       _c("i", { staticClass: "fas fa-align-justify" }),
-      _vm._v("\n      Facturar\n    ")
+      _vm._v("\n            Facturar\n        ")
     ])
   },
   function() {
@@ -105640,43 +105952,69 @@ var staticRenderFns = [
     return _c("thead", [
       _c("tr", [
         _c("th", { staticClass: "text-center", staticStyle: { width: "5%" } }, [
-          _vm._v("Acción")
+          _vm._v(
+            "\n                                Acción\n                            "
+          )
         ]),
         _vm._v(" "),
         _c(
           "th",
           { staticClass: "text-center", staticStyle: { width: "35%" } },
-          [_vm._v("Producto")]
+          [
+            _vm._v(
+              "\n                                Producto\n                            "
+            )
+          ]
         ),
         _vm._v(" "),
         _c(
           "th",
           { staticClass: "text-center", staticStyle: { width: "10%" } },
-          [_vm._v("Cantidad")]
+          [
+            _vm._v(
+              "\n                                Cantidad\n                            "
+            )
+          ]
         ),
         _vm._v(" "),
         _c(
           "th",
           { staticClass: "text-center", staticStyle: { width: "15%" } },
-          [_vm._v("Camp. Adicional")]
+          [
+            _vm._v(
+              "\n                                Camp. Adicional\n                            "
+            )
+          ]
         ),
         _vm._v(" "),
         _c(
           "th",
           { staticClass: "text-center", staticStyle: { width: "10%" } },
-          [_vm._v("Precio")]
+          [
+            _vm._v(
+              "\n                                Precio\n                            "
+            )
+          ]
         ),
         _vm._v(" "),
         _c(
           "th",
           { staticClass: "text-center", staticStyle: { width: "10%" } },
-          [_vm._v("Desc. %")]
+          [
+            _vm._v(
+              "\n                                Desc. %\n                            "
+            )
+          ]
         ),
         _vm._v(" "),
         _c(
           "th",
           { staticClass: "text-center", staticStyle: { width: "15%" } },
-          [_vm._v("Subtotal")]
+          [
+            _vm._v(
+              "\n                                Subtotal\n                            "
+            )
+          ]
         )
       ])
     ])
@@ -105687,7 +106025,9 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("tr", [
       _c("td", { staticClass: "text-center", attrs: { colspan: "7" } }, [
-        _vm._v("\n                NO hay artículos agregados\n              ")
+        _vm._v(
+          "\n                                NO hay artículos agregados\n                            "
+        )
       ])
     ])
   },
@@ -105759,7 +106099,10 @@ var render = function() {
               staticClass: "btn btn-success",
               attrs: { to: "/facturacion/agregar" }
             },
-            [_c("i", { staticClass: "fas fa-plus" }), _vm._v(" Nuevo\n      ")]
+            [
+              _c("i", { staticClass: "fas fa-plus" }),
+              _vm._v(" Nuevo\n            ")
+            ]
           )
         ],
         1
@@ -105781,65 +106124,59 @@ var render = function() {
           _c(
             "tbody",
             _vm._l(_vm.arrayFacturas, function(factura) {
-              return _c("tr", { key: factura.id }, [
-                _c("td", {
-                  domProps: { textContent: _vm._s(factura.fec_emision) }
-                }),
-                _vm._v(" "),
-                _c("td", {
-                  domProps: {
-                    textContent: _vm._s(
-                      "\n              " +
-                        factura.establecimiento.toString().padStart(3, 0) +
-                        "-" +
-                        factura.punto.toString().padStart(3, 0) +
-                        "-" +
-                        factura.num_secuencial.toString().padStart(9, 0)
-                    )
-                  }
-                }),
-                _vm._v(" "),
-                _c("td", {
-                  domProps: { textContent: _vm._s(factura.cliente) }
-                }),
-                _vm._v(" "),
-                _c("td", {
-                  attrs: { align: "right" },
-                  domProps: { textContent: _vm._s(factura.val_total) }
-                }),
-                _vm._v(" "),
-                _c("td", {
-                  domProps: { textContent: _vm._s(factura.usuario) }
-                }),
-                _vm._v(" "),
-                _c("td", [
-                  factura.for_pago == "E"
-                    ? _c("div", [_vm._v("EFECTIVO")])
-                    : factura.for_pago == "C"
-                    ? _c("div", [_vm._v("CRÉDITO")])
-                    : _vm._e()
-                ]),
-                _vm._v(" "),
-                _c("td", {
-                  domProps: { textContent: _vm._s(factura.respuesta) }
-                }),
-                _vm._v(" "),
-                _c(
-                  "td",
-                  [
-                    _c(
-                      "router-link",
-                      {
-                        staticClass: "btn btn-warning btn-xs",
-                        attrs: {
-                          type: "button",
-                          title: "Detalle",
-                          to: "/factura/detalle/" + factura.id
-                        }
-                      },
-                      [_c("i", { staticClass: "fas fa-pen" })]
-                    ),
-                    _vm._v(" "),
+              return _c(
+                "tr",
+                {
+                  key: factura.id,
+                  class:
+                    factura.respuesta == "Enviado"
+                      ? "table-success"
+                      : "table-danger"
+                },
+                [
+                  _c("td", {
+                    domProps: { textContent: _vm._s(factura.fec_emision) }
+                  }),
+                  _vm._v(" "),
+                  _c("td", {
+                    domProps: {
+                      textContent: _vm._s(
+                        "\n            " +
+                          factura.establecimiento.toString().padStart(3, 0) +
+                          "-" +
+                          factura.punto.toString().padStart(3, 0) +
+                          "-" +
+                          factura.num_secuencial.toString().padStart(9, 0)
+                      )
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("td", {
+                    domProps: { textContent: _vm._s(factura.cliente) }
+                  }),
+                  _vm._v(" "),
+                  _c("td", {
+                    attrs: { align: "right" },
+                    domProps: { textContent: _vm._s(factura.val_total) }
+                  }),
+                  _vm._v(" "),
+                  _c("td", {
+                    domProps: { textContent: _vm._s(factura.usuario) }
+                  }),
+                  _vm._v(" "),
+                  _c("td", [
+                    factura.for_pago == "E"
+                      ? _c("div", [_vm._v("EFECTIVO")])
+                      : factura.for_pago == "C"
+                      ? _c("div", [
+                          _vm._v(
+                            "\n                            CRÉDITO\n                        "
+                          )
+                        ])
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [
                     _c(
                       "button",
                       {
@@ -105881,10 +106218,9 @@ var render = function() {
                       },
                       [_c("i", { staticClass: "fas fa-file-code" })]
                     )
-                  ],
-                  1
-                )
-              ])
+                  ])
+                ]
+              )
             }),
             0
           )
@@ -105900,7 +106236,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("h3", { staticClass: "card-title mt-2" }, [
       _c("i", { staticClass: "fas fa-align-justify" }),
-      _vm._v("\n      Facturación\n    ")
+      _vm._v("\n            Facturación\n        ")
     ])
   },
   function() {
@@ -105920,8 +106256,6 @@ var staticRenderFns = [
         _c("th", [_vm._v("Usuario")]),
         _vm._v(" "),
         _c("th", [_vm._v("F. Pago")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Estado")]),
         _vm._v(" "),
         _c("th", [_vm._v("Acción")])
       ])
@@ -129353,7 +129687,7 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/cvdev/Documentos/Proyectos/moreplant/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\cristian.chuquitarco\Documents\Projects\agricolamoreplant\resources\js\app.js */"./resources/js/app.js");
 
 
 /***/ }),

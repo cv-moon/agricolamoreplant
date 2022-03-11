@@ -21,7 +21,7 @@ class generarPDF
             $pdf->Image($imagen, 30, 10, 60, 50);
         }
         $pdf->RoundedRect(110, 10, 90, 71, 2, '1234', 'D');
-        $pdf->RoundedRect(10, 50, 97, 31, 2, '1234', 'D');
+        $pdf->RoundedRect(10, 50, 97, 41, 2, '1234', 'D');
         //cuadros detalle empresa que emite
         $pdf->Ln(30);
         $pdf->SetXY(10, 50);
@@ -40,8 +40,8 @@ class generarPDF
         $pdf->Cell(55, 5, utf8_decode('OBLIGADO A LLEVAR CONTABILIDAD:'), 0, 0, 'L', 0);
         $pdf->SetFont('Helvetica', '', 8);
         $pdf->Cell(45, 5, utf8_decode($contabilidad), 0, 1, 'L', 0);
-        $pdf->SetFont('Helvetica', 'B', 8);
-        $pdf->Cell(55, 5, utf8_decode('CONTRIBUYENTE RÉGIMEN MICROEMPRESAS'), 0, 0, 'L', 0);
+        // $pdf->SetFont('Helvetica', 'B', 8);
+        // $pdf->Cell(55, 5, utf8_decode('CONTRIBUYENTE RÉGIMEN MICROEMPRESAS'), 0, 0, 'L', 0);
         // $pdf->SetFont('Helvetica', '', 8);
         // $pdf->Cell(45, 5, utf8_decode($contabilidad), 0, 2, 'L', 0);
 
@@ -93,8 +93,8 @@ class generarPDF
         $cli_guias = '';
 
         //cuadro de datos del cliente
-        $pdf->RoundedRect(10, 84, 190, 17, 2, '1234', 'D');
-        $pdf->SetXY(10, 85);
+        $pdf->RoundedRect(10, 94, 190, 17, 2, '1234', 'D');
+        $pdf->SetXY(10, 95);
         $pdf->SetFont('Helvetica', 'B', 8);
         $pdf->Cell(50, 5, utf8_decode('Razón Social / Nombres y Apellidos:'), 0, 0, 'L', 0);
         $pdf->SetFont('Helvetica', '', 8);
@@ -118,7 +118,7 @@ class generarPDF
 
 
         //tabla de productos
-        $pdf->SetXY(10, 104);
+        $pdf->SetXY(10, 114);
         $pdf->SetFont('Helvetica', 'B', 8);
         //header de tabla
         $pdf->Cell(25, 6, utf8_decode('Cod. Principal'), 0, 0, 'C', 1);

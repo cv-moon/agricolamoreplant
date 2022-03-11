@@ -43,7 +43,7 @@
           <div class="col-sm-3">
             <label for="codigo" class="col-form-label">Código:</label>
             <input
-              type="number"
+              type="text"
               class="form-control"
               placeholder="0"
               min="0"

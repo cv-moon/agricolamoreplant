@@ -48,14 +48,6 @@
             <td v-text="retencion.usuario"></td>
             <td v-text="retencion.respuesta"></td>
             <td>
-              <router-link
-                type="button"
-                title="Detalle"
-                :to="'/retenciones/detalle/' + retencion.id"
-                class="btn btn-warning btn-xs"
-              >
-                <i class="fas fa-pen"></i>
-              </router-link>
               <button
                 type="button"
                 title="Reenviar"

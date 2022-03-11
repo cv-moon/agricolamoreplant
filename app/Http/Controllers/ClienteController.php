@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cliente;
+use App\Models\Deuda;
+use App\Models\Factura;
 use Illuminate\Http\Request;
 
 class ClienteController extends Controller
@@ -81,5 +83,22 @@ class ClienteController extends Controller
             ->orderBy('nombre', 'asc')
             ->get();
         return $clientes;
+    }
+
+    public function getBalance(Request $request)
+    {
+        $limite = Cliente::select('lim_credito')
+            ->where('id', $request->id)
+            ->first();
+        $deuda = Factura::join('creditos', 'creditos.id', 'facturas.id')
+            ->select(
+                'facturas.cliente_id',
+                'facturas.for_pago',
+                'creditos.saldo'
+            )
+            ->where('facturas.cliente_id', $request->id)
+            ->get()
+            ->sum('saldo');
+        return ['limite' => $limite, 'saldos' => $deuda];
     }
 }

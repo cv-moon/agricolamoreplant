@@ -239,6 +239,46 @@ class XmlController extends Controller
             $xml->text($det["det_cantidad"]);
             $xml->endElement();
 
+            $xml->startElement('precioUnitario');
+            $xml->text($det["pre_venta"]);
+            $xml->endElement();
+
+            $xml->startElement('descuento');
+            $xml->text($det["det_descuento"]);
+            $xml->endElement();
+
+            $xml->startElement('precioTotalSinImpuesto');
+            $xml->text($det["det_total"]);
+            $xml->endElement();
+
+
+            $xml->startElement('impuestos');
+
+            $xml->startElement('impuesto');
+
+            $xml->startElement('codigo');
+            $xml->text($det["codigo"]);
+            $xml->endElement();
+
+            $xml->startElement('codigoPorcentaje');
+            $xml->text($det["cod_porcentaje"]);
+            $xml->endElement();
+
+            $xml->startElement('tarifa');
+            $xml->text(number_format($det["valor"], 2));
+            $xml->endElement();
+
+            $xml->startElement('baseImponible');
+            $xml->text($det["det_total"]);
+            $xml->endElement();
+
+            $xml->startElement('valor');
+            $xml->text(number_format($det["det_total"] * $det["valor"], 2));
+            $xml->endElement();
+
+            $xml->endElement();
+
+            $xml->endElement();
 
             $xml->endElement();
         }

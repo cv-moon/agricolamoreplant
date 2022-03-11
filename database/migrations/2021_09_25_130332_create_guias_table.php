@@ -34,8 +34,8 @@ class CreateGuiasTable extends Migration
             $table->string('motivo', 300);
             $table->string('ruta', 300);
             $table->string('observaciones', 255);
-            $table->string('respuesta', 50);
-            $table->char('estado', 1);
+            $table->string('estado', 3);
+            $table->string('respuesta', 50)->nullable();
             $table->timestamps();
 
             $table->foreign('factura_id')->references('id')->on('facturas');

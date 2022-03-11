@@ -688,7 +688,6 @@ export default {
           Swal.showLoading();
 
           axios
-            .post("/api/empresa/guardar", form)
             .post("/api/compra/guardar", {
               establecimiento_id: this.establecimiento_id,
               proveedor_id: this.proveedor_id,

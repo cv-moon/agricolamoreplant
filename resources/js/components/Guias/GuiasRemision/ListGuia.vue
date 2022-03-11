@@ -46,14 +46,6 @@
             <td v-text="guia.usuario"></td>
             <td v-text="guia.respuesta"></td>
             <td>
-              <router-link
-                type="button"
-                title="Detalle"
-                :to="'/guias/detalle/' + guia.id"
-                class="btn btn-warning btn-xs"
-              >
-                <i class="fas fa-pen"></i>
-              </router-link>
               <button
                 type="button"
                 title="Reenviar"

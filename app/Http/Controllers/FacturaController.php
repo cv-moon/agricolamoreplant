@@ -208,6 +208,7 @@ class FacturaController extends Controller
                         ->first(),
                     'detalles' => DetalleFactura::join('productos', 'detalles_factura.producto_id', 'productos.id')
                         ->join('tarifas', 'productos.tarifa_id', 'tarifas.id')
+                        ->join('impuestos','tarifas.impuesto_id','impuestos.id')
                         ->select(
                             'detalles_factura.factura_id',
                             'productos.cod_principal',
@@ -216,8 +217,9 @@ class FacturaController extends Controller
                             'detalles_factura.det_cantidad',
                             'detalles_factura.det_descuento',
                             'detalles_factura.det_total',
-                            'tarifas.valor',
-                            'tarifas.codigo'
+                            'impuestos.codigo',
+                            'tarifas.codigo as cod_porcentaje',
+                            'tarifas.valor'
                         )
                         ->where('detalles_factura.factura_id', $id)
                         ->get(),

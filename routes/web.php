@@ -172,6 +172,7 @@ Route::middleware('auth')->group(function () {
     Route::get('api/cliente/detalle', 'ClienteController@detail');
     Route::put('api/cliente/editar', 'ClienteController@update');
     Route::get('api/cliente/buscar', 'ClienteController@find');
+    Route::get('api/cliente/saldo', 'ClienteController@getBalance');
 
     // Factura
     Route::get('api/facturas', 'FacturaController@index');
