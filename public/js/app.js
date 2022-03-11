@@ -10642,12 +10642,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -10695,7 +10689,7 @@ __webpack_require__.r(__webpack_exports__);
 
       for (var i = 0; i < this.arrayDetalle.length; i++) {
         if (this.arrayDetalle[i].impuesto === 12) {
-          resultado = resultado + (this.arrayDetalle[i].precio - this.arrayDetalle[i].precio * this.arrayDetalle[i].descuento / 100) * this.arrayDetalle[i].cantidad / 1.12;
+          resultado = resultado + (this.arrayDetalle[i].precio * this.arrayDetalle[i].cantidad - this.arrayDetalle[i].descuento) / 1.12;
         }
       }
 
@@ -10706,7 +10700,7 @@ __webpack_require__.r(__webpack_exports__);
 
       for (var i = 0; i < this.arrayDetalle.length; i++) {
         if (this.arrayDetalle[i].impuesto === 0) {
-          resultado = resultado + (this.arrayDetalle[i].precio - this.arrayDetalle[i].precio * this.arrayDetalle[i].descuento / 100) * this.arrayDetalle[i].cantidad;
+          resultado = resultado + this.arrayDetalle[i].precio * this.arrayDetalle[i].cantidad - this.arrayDetalle[i].descuento;
         }
       }
 
@@ -10716,7 +10710,7 @@ __webpack_require__.r(__webpack_exports__);
       var resultado = 0.0;
 
       for (var i = 0; i < this.arrayDetalle.length; i++) {
-        resultado = resultado + this.arrayDetalle[i].precio * this.arrayDetalle[i].descuento / 100 * this.arrayDetalle[i].cantidad;
+        resultado = resultado + parseFloat(this.arrayDetalle[i].descuento);
       }
 
       return resultado;
@@ -10790,28 +10784,35 @@ __webpack_require__.r(__webpack_exports__);
         return;
       }
 
-      axios.post("/api/compra/guardar", {
-        establecimiento_id: this.establecimiento_id,
-        proveedor_id: this.proveedor_id,
-        tip_comprobante: this.tip_comprobante,
-        num_comprobante: this.num_comprobante,
-        fec_emision: this.fec_emision,
-        sub_0: this.sub_0,
-        sub_12: this.sub_12,
-        tot_desc: this.tot_desc,
-        total: this.total,
-        for_pago: this.for_pago,
-        saldo: this.saldo,
-        dias_credito: this.dias_credito,
-        fec_limite: this.fec_limite,
-        observaciones: this.observaciones,
-        detalles: this.arrayDetalle
-      }).then(function (resp) {
-        Swal.fire("Bien!", "El registro se guardó con éxito.", "success");
+      Swal.fire({
+        title: "Espere...",
+        allowOutsideClick: false,
+        didOpen: function didOpen() {
+          Swal.showLoading();
+          axios.post("/api/empresa/guardar", form).post("/api/compra/guardar", {
+            establecimiento_id: _this.establecimiento_id,
+            proveedor_id: _this.proveedor_id,
+            tip_comprobante: _this.tip_comprobante,
+            num_comprobante: _this.num_comprobante,
+            fec_emision: _this.fec_emision,
+            sub_0: _this.sub_0,
+            sub_12: _this.sub_12,
+            tot_desc: _this.tot_desc,
+            total: _this.total,
+            for_pago: _this.for_pago,
+            saldo: _this.saldo,
+            dias_credito: _this.dias_credito,
+            fec_limite: _this.fec_limite,
+            observaciones: _this.observaciones,
+            detalles: _this.arrayDetalle
+          }).then(function (resp) {
+            Swal.fire("Bien!", "El registro se guardó con éxito.", "success");
 
-        _this.$router.push("/compras");
-      })["catch"](function (err) {
-        Swal.fire("Error!", "No se pudo realizar el registro. " + err, "error");
+            _this.$router.push("/compras");
+          })["catch"](function (err) {
+            Swal.fire("Alto!", "Error: ".concat(err), "error");
+          });
+        }
       });
     },
     selectProveedor: function selectProveedor(search, loading) {
@@ -10866,8 +10867,8 @@ __webpack_require__.r(__webpack_exports__);
           producto_id: data["id"],
           producto: data["nombre"],
           impuesto: data["impuesto"],
-          cantidad: 1,
-          precio: 1,
+          cantidad: 0,
+          precio: 0,
           descuento: 0
         });
       }
@@ -93131,10 +93132,8 @@ var render = function() {
                               "\n                $\n                " +
                                 _vm._s(
                                   (
-                                    (detalle.precio -
-                                      (detalle.precio * detalle.descuento) /
-                                        100) *
-                                    detalle.cantidad
+                                    detalle.precio * detalle.cantidad -
+                                    detalle.descuento
                                   ).toFixed(2)
                                 ) +
                                 "\n              "
@@ -93539,11 +93538,6 @@ var render = function() {
                       _vm._v(" "),
                       _c("td", {
                         attrs: { align: "right" },
-                        domProps: { textContent: _vm._s(producto.dis_stock) }
-                      }),
-                      _vm._v(" "),
-                      _c("td", {
-                        attrs: { align: "right" },
                         domProps: { textContent: _vm._s(producto.min_stock) }
                       }),
                       _vm._v(" "),
@@ -93552,25 +93546,11 @@ var render = function() {
                         domProps: { textContent: _vm._s(producto.pre_venta) }
                       }),
                       _vm._v(" "),
-                      _c("td", [
-                        producto.estado == 1
-                          ? _c("div", [
-                              _c(
-                                "span",
-                                { staticClass: "badge badge-success" },
-                                [_vm._v("Activo")]
-                              )
-                            ])
-                          : producto.estado == 0
-                          ? _c("div", [
-                              _c(
-                                "span",
-                                { staticClass: "badge badge-danger" },
-                                [_vm._v("Inactivo")]
-                              )
-                            ])
-                          : _vm._e()
-                      ])
+                      _c("td", {
+                        staticClass: "table-info",
+                        attrs: { align: "right" },
+                        domProps: { textContent: _vm._s(producto.dis_stock) }
+                      })
                     ])
                   }),
                   0
@@ -94185,13 +94165,11 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Nombre")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Disponible")]),
-        _vm._v(" "),
         _c("th", [_vm._v("Stock Min.")]),
         _vm._v(" "),
         _c("th", [_vm._v("P.V.P.")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Estado")])
+        _c("th", [_vm._v("Disponible")])
       ])
     ])
   }
@@ -129185,7 +129163,7 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\cristian.chuquitarco\Documents\Projects\agricolamoreplant\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/cvdev/Documentos/Proyectos/moreplant/resources/js/app.js */"./resources/js/app.js");
 
 
 /***/ }),

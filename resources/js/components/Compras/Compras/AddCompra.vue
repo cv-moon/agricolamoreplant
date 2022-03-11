@@ -172,9 +172,8 @@
                   $
                   {{
                     (
-                      (detalle.precio -
-                        (detalle.precio * detalle.descuento) / 100) *
-                      detalle.cantidad
+                      detalle.precio * detalle.cantidad -
+                      detalle.descuento
                     ).toFixed(2)
                   }}
                 </td>
@@ -321,10 +320,9 @@
                   <th>Acción</th>
                   <th>Cod. Principal</th>
                   <th>Nombre</th>
-                  <th>Disponible</th>
                   <th>Stock Min.</th>
                   <th>P.V.P.</th>
-                  <th>Estado</th>
+                  <th>Disponible</th>
                 </tr>
               </thead>
               <tbody>
@@ -341,17 +339,13 @@
                   </td>
                   <td v-text="producto.cod_principal"></td>
                   <td v-text="producto.nombre"></td>
-                  <td align="right" v-text="producto.dis_stock"></td>
                   <td align="right" v-text="producto.min_stock"></td>
                   <td align="right" v-text="producto.pre_venta"></td>
-                  <td>
-                    <div v-if="producto.estado == 1">
-                      <span class="badge badge-success">Activo</span>
-                    </div>
-                    <div v-else-if="producto.estado == 0">
-                      <span class="badge badge-danger">Inactivo</span>
-                    </div>
-                  </td>
+                  <td
+                    align="right"
+                    v-text="producto.dis_stock"
+                    class="table-info"
+                  ></td>
                 </tr>
               </tbody>
             </table>
@@ -602,10 +596,8 @@ export default {
         if (this.arrayDetalle[i].impuesto === 12) {
           resultado =
             resultado +
-            ((this.arrayDetalle[i].precio -
-              (this.arrayDetalle[i].precio * this.arrayDetalle[i].descuento) /
-                100) *
-              this.arrayDetalle[i].cantidad) /
+            (this.arrayDetalle[i].precio * this.arrayDetalle[i].cantidad -
+              this.arrayDetalle[i].descuento) /
               1.12;
         }
       }
@@ -617,10 +609,8 @@ export default {
         if (this.arrayDetalle[i].impuesto === 0) {
           resultado =
             resultado +
-            (this.arrayDetalle[i].precio -
-              (this.arrayDetalle[i].precio * this.arrayDetalle[i].descuento) /
-                100) *
-              this.arrayDetalle[i].cantidad;
+            this.arrayDetalle[i].precio * this.arrayDetalle[i].cantidad -
+            this.arrayDetalle[i].descuento;
         }
       }
       return resultado;
@@ -628,11 +618,7 @@ export default {
     calcularDescuento() {
       let resultado = 0.0;
       for (let i = 0; i < this.arrayDetalle.length; i++) {
-        resultado =
-          resultado +
-          ((this.arrayDetalle[i].precio * this.arrayDetalle[i].descuento) /
-            100) *
-            this.arrayDetalle[i].cantidad;
+        resultado = resultado + parseFloat(this.arrayDetalle[i].descuento);
       }
       return resultado;
     },
@@ -695,35 +681,40 @@ export default {
       if (condiciones.length) {
         return;
       }
-      axios
-        .post("/api/compra/guardar", {
-          establecimiento_id: this.establecimiento_id,
-          proveedor_id: this.proveedor_id,
-          tip_comprobante: this.tip_comprobante,
-          num_comprobante: this.num_comprobante,
-          fec_emision: this.fec_emision,
-          sub_0: this.sub_0,
-          sub_12: this.sub_12,
-          tot_desc: this.tot_desc,
-          total: this.total,
-          for_pago: this.for_pago,
-          saldo: this.saldo,
-          dias_credito: this.dias_credito,
-          fec_limite: this.fec_limite,
-          observaciones: this.observaciones,
-          detalles: this.arrayDetalle,
-        })
-        .then((resp) => {
-          Swal.fire("Bien!", "El registro se guardó con éxito.", "success");
-          this.$router.push("/compras");
-        })
-        .catch((err) => {
-          Swal.fire(
-            "Error!",
-            "No se pudo realizar el registro. " + err,
-            "error"
-          );
-        });
+      Swal.fire({
+        title: "Espere...",
+        allowOutsideClick: false,
+        didOpen: () => {
+          Swal.showLoading();
+
+          axios
+            .post("/api/empresa/guardar", form)
+            .post("/api/compra/guardar", {
+              establecimiento_id: this.establecimiento_id,
+              proveedor_id: this.proveedor_id,
+              tip_comprobante: this.tip_comprobante,
+              num_comprobante: this.num_comprobante,
+              fec_emision: this.fec_emision,
+              sub_0: this.sub_0,
+              sub_12: this.sub_12,
+              tot_desc: this.tot_desc,
+              total: this.total,
+              for_pago: this.for_pago,
+              saldo: this.saldo,
+              dias_credito: this.dias_credito,
+              fec_limite: this.fec_limite,
+              observaciones: this.observaciones,
+              detalles: this.arrayDetalle,
+            })
+            .then((resp) => {
+              Swal.fire("Bien!", "El registro se guardó con éxito.", "success");
+              this.$router.push("/compras");
+            })
+            .catch((err) => {
+              Swal.fire("Alto!", `Error: ${err}`, "error");
+            });
+        },
+      });
     },
     selectProveedor(search, loading) {
       loading(true);
@@ -776,8 +767,8 @@ export default {
           producto_id: data["id"],
           producto: data["nombre"],
           impuesto: data["impuesto"],
-          cantidad: 1,
-          precio: 1,
+          cantidad: 0,
+          precio: 0,
           descuento: 0,
         });
       }
