@@ -76,7 +76,7 @@ class ProveedorController extends Controller
         $proveedores = Proveedor::select(
             'id',
             'nombre',
-            'num_identificacion',
+            'num_identificacion'
         )
             ->where('nombre', 'like', '%' . $request->proveedor . '%')
             ->orWhere('num_identificacion', 'like', '%' . $request->proveedor . '%')
