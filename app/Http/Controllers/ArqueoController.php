@@ -151,7 +151,7 @@ class ArqueoController extends Controller
             ->where('puntos_emision.user_id', Auth::user()->id)
             ->where('users.estado', 1)
             ->where('puntos_emision.estado', 1)
-            ->where('arqueos.created_at', $dia)
+            ->whereDate('arqueos.created_at', $dia)
             ->first();
         if ($arqueo) {
             return response()->json('open');
