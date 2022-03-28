@@ -62,7 +62,7 @@ class TransportistaController extends Controller
                 'transportistas.placa',
                 'transportistas.direccion',
                 'transportistas.telefonos',
-                'transportistas.email',
+                'transportistas.email'
             )
             ->where('transportistas.id', $request->id)
             ->first();

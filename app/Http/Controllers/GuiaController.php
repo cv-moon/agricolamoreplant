@@ -157,7 +157,7 @@ class GuiaController extends Controller
                         ->select(
                             'productos.cod_principal',
                             'productos.nombre',
-                            'detalles_guia.det_cantidad',
+                            'detalles_guia.det_cantidad'
                         )
                         ->where('detalles_guia.guia_id', $id)
                         ->get()
