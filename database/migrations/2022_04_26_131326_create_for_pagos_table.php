@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateIdentificacionesTable extends Migration
+class CreateForPagosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateIdentificacionesTable extends Migration
      */
     public function up()
     {
-        Schema::create('identificaciones', function (Blueprint $table) {
+        Schema::create('for_pagos', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre',30);
-            $table->char('codigo',2);
+            $table->string('nombre', 50);
+            $table->char('codigo', 2)->unique();
         });
     }
 
@@ -27,6 +27,6 @@ class CreateIdentificacionesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('identificaciones');
+        Schema::dropIfExists('for_pagos');
     }
 }

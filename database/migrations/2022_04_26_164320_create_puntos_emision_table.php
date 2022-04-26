@@ -17,15 +17,13 @@ class CreatePuntosEmisionTable extends Migration
             $table->id();
             $table->unsignedBigInteger('establecimiento_id');
             $table->unsignedBigInteger('user_id');
-            $table->tinyInteger('codigo');
+            $table->tinyInteger('pun_codigo');
             $table->string('nombre', 100);
             $table->integer('sec_factura')->nullable();
-            $table->integer('sec_liq_compras')->nullable();
-            $table->integer('sec_not_credito')->nullable();
-            $table->integer('sec_not_debito')->nullable();
-            $table->integer('sec_gui_remision')->nullable();
             $table->integer('sec_retencion')->nullable();
-            $table->integer('sec_recibo')->nullable();
+            $table->integer('sec_gui_remision')->nullable();
+            $table->integer('sec_orden_trabajo')->nullable();
+            $table->integer('sec_recibo_cobro')->nullable();
             $table->boolean('estado')->default(1);
             $table->timestamps();
 

@@ -15,18 +15,21 @@ class CreateEmpleadosTable extends Migration
     {
         Schema::create('empleados', function (Blueprint $table) {
             $table->unsignedBigInteger('id');
-            $table->string('nombres', 100);
-            $table->string('apellidos', 100);
-            $table->string('tip_identificacion', 3);
+            $table->unsignedBigInteger('tip_identificacion_id');
+            $table->string('nom_primero', 40);
+            $table->string('nom_segundo', 40);
+            $table->string('ape_paterno', 40);
+            $table->string('ape_materno', 40);
             $table->string('num_identificacion', 13)->unique();
             $table->string('direccion', 300)->nullable();
-            $table->string('telefonos')->nullable();
+            $table->string('telefonos', 100)->nullable();
             $table->decimal('salario', 12, 2);
             $table->date('fec_ingreso')->nullable();
             $table->date('fec_salida')->nullable();
             $table->timestamps();
 
             $table->foreign('id')->references('id')->on('users');
+            $table->foreign('tip_identificacion_id')->references('id')->on('tip_identificaciones');
         });
     }
 

@@ -16,7 +16,8 @@ class CreateEstablecimientosTable extends Migration
         Schema::create('establecimientos', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('empresa_id');
-            $table->integer('numero')->unique();
+            $table->unsignedBigInteger('user_id');
+            $table->integer('est_codigo')->unique();
             $table->string('nom_comercial', 300);
             $table->string('nom_referencia', 300);
             $table->string('direccion', 300);
@@ -25,6 +26,7 @@ class CreateEstablecimientosTable extends Migration
             $table->timestamps();
 
             $table->foreign('empresa_id')->references('id')->on('empresas');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

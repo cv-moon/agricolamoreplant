@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateImpuestosRetencionTable extends Migration
+class CreateTipEstadosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateImpuestosRetencionTable extends Migration
      */
     public function up()
     {
-        Schema::create('impuestos_retencion', function (Blueprint $table) {
+        Schema::create('tip_estados', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre', 6);
-            $table->tinyInteger('codigo');
+            $table->string('nombre', 50);
+            $table->char('codigo', 3)->unique();
         });
     }
 
@@ -27,6 +27,6 @@ class CreateImpuestosRetencionTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('impuestos_retencion');
+        Schema::dropIfExists('tip_estados');
     }
 }

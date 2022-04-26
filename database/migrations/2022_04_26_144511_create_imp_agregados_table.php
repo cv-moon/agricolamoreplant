@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateImpuestosTable extends Migration
+class CreateImpAgregadosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateImpuestosTable extends Migration
      */
     public function up()
     {
-        Schema::create('impuestos', function (Blueprint $table) {
+        Schema::create('imp_agregados', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre', 6);
-            $table->tinyInteger('codigo');
+            $table->string('nombre', 50);
+            $table->char('codigo', 1)->unique();
         });
     }
 
@@ -27,6 +27,6 @@ class CreateImpuestosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('impuestos');
+        Schema::dropIfExists('imp_agregados');
     }
 }

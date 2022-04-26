@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateComprobantesTable extends Migration
+class CreateTipComprobantesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateComprobantesTable extends Migration
      */
     public function up()
     {
-        Schema::create('comprobantes', function (Blueprint $table) {
+        Schema::create('tip_comprobantes', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre', 60);
-            $table->char('codigo', 2);
+            $table->string('nombre', 50);
+            $table->char('codigo', 2)->unique();
         });
     }
 
@@ -27,6 +27,6 @@ class CreateComprobantesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('comprobantes');
+        Schema::dropIfExists('tip_comprobantes');
     }
 }

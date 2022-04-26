@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMesesTable extends Migration
+class CreateImpRetencionesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class CreateMesesTable extends Migration
      */
     public function up()
     {
-        Schema::create('meses', function (Blueprint $table) {
+        Schema::create('imp_retenciones', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre',10);
+            $table->string('nombre', 50);
+            $table->char('codigo', 1)->unique();
         });
     }
 
@@ -26,6 +27,6 @@ class CreateMesesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('meses');
+        Schema::dropIfExists('imp_retenciones');
     }
 }
