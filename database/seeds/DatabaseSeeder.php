@@ -14,15 +14,11 @@ class DatabaseSeeder extends Seeder
         $this->call([
             RolSeeder::class,
             UserSeeder::class,
-            ImpuestoSeeder::class,
-            TarifaSeeder::class,
-            IdentificacionSeeder::class,
-            ComprobanteSeeder::class,
-            ClienteSeeder::class,
-            FormaPagoSeeder::class,
+            AnioSeeder::class,
             MesSeeder::class,
-            ImpuestoRetencionSeeder::class,
-            TarifaRetencionSeeder::class
+            TipoComprobanteSeeder::class,
+            TipoEstadoSeeder::class,
+            TipoIdentificacionSeeder::class
         ]);
     }
 }

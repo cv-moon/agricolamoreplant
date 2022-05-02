@@ -13,67 +13,67 @@ class AnioSeeder extends Seeder
     public function run()
     {
         DB::table('anios')->insert([
-            'nombre' => 2020,
+            'anio' => 2020,
         ]);
         DB::table('anios')->insert([
-            'nombre' => 2021,
+            'anio' => 2021,
         ]);
         DB::table('anios')->insert([
-            'nombre' => 2022,
+            'anio' => 2022,
         ]);
         DB::table('anios')->insert([
-            'nombre' => 2023,
+            'anio' => 2023,
         ]);
         DB::table('anios')->insert([
-            'nombre' => 2024,
+            'anio' => 2024,
         ]);
         DB::table('anios')->insert([
-            'nombre' => 2025,
+            'anio' => 2025,
         ]);
         DB::table('anios')->insert([
-            'nombre' => 2026,
+            'anio' => 2026,
         ]);
         DB::table('anios')->insert([
-            'nombre' => 2027,
+            'anio' => 2027,
         ]);
         DB::table('anios')->insert([
-            'nombre' => 2028,
+            'anio' => 2028,
         ]);
         DB::table('anios')->insert([
-            'nombre' => 2029,
+            'anio' => 2029,
         ]);
         DB::table('anios')->insert([
-            'nombre' => 2030,
+            'anio' => 2030,
         ]);
         DB::table('anios')->insert([
-            'nombre' => 2031,
+            'anio' => 2031,
         ]);
         DB::table('anios')->insert([
-            'nombre' => 2032,
+            'anio' => 2032,
         ]);
         DB::table('anios')->insert([
-            'nombre' => 2033,
+            'anio' => 2033,
         ]);
         DB::table('anios')->insert([
-            'nombre' => 2034,
+            'anio' => 2034,
         ]);
         DB::table('anios')->insert([
-            'nombre' => 2035,
+            'anio' => 2035,
         ]);
         DB::table('anios')->insert([
-            'nombre' => 2036,
+            'anio' => 2036,
         ]);
         DB::table('anios')->insert([
-            'nombre' => 2037,
+            'anio' => 2037,
         ]);
         DB::table('anios')->insert([
-            'nombre' => 2038,
+            'anio' => 2038,
         ]);
         DB::table('anios')->insert([
-            'nombre' => 2039,
+            'anio' => 2039,
         ]);
         DB::table('anios')->insert([
-            'nombre' => 2040,
+            'anio' => 2040,
         ]);
     }
 }

@@ -15,7 +15,7 @@ class CreateAniosTable extends Migration
     {
         Schema::create('anios', function (Blueprint $table) {
             $table->id();
-            $table->tinyInteger('anio')->unique();
+            $table->integer('anio')->unique();
         });
     }
 
