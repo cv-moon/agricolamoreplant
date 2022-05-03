@@ -16,17 +16,19 @@ class EmpleadoController extends Controller
             ->join('roles', 'users.rol_id', 'roles.id')
             ->select(
                 'users.id',
-                'empleados.nombres',
-                'empleados.apellidos',
-                'empleados.tip_identificacion',
+                'empleados.nom_primero',
+                'empleados.nom_segundo',
+                'empleados.ape_paterno',
+                'empleados.ape_materno',
                 'empleados.num_identificacion',
+                'empleados.telefonos',
                 'empleados.salario',
                 'empleados.fec_ingreso',
                 'empleados.fec_salida',
                 'users.estado',
                 'roles.nombre as rol'
             )
-            ->orderBy('empleados.apellidos', 'asc')
+            ->orderBy('empleados.ape_paterno', 'asc')
             ->get();
         return $empleados;
     }
@@ -44,9 +46,11 @@ class EmpleadoController extends Controller
 
             $empleado = new Empleado();
             $empleado->id = $user->id;
-            $empleado->nombres = mb_strtoupper(trim($request->nombres));
-            $empleado->apellidos = mb_strtoupper(trim($request->apellidos));
-            $empleado->tip_identificacion = mb_strtoupper(trim($request->tip_identificacion));
+            $empleado->tip_identificacion_id = trim($request->tip_identificacion_id);
+            $empleado->nom_primero = mb_strtoupper(trim($request->nom_primero));
+            $empleado->nom_segundo = mb_strtoupper(trim($request->nom_segundo));
+            $empleado->ape_paterno = mb_strtoupper(trim($request->ape_paterno));
+            $empleado->ape_materno = mb_strtoupper(trim($request->ape_materno));
             $empleado->num_identificacion = trim($request->num_identificacion);
             $empleado->direccion = mb_strtoupper(trim($request->direccion));
             $empleado->telefonos = mb_strtoupper(trim($request->telefonos));
@@ -61,6 +65,7 @@ class EmpleadoController extends Controller
             DB::commit();
         } catch (\Throwable $th) {
             DB::rollBack();
+            return $th;
         }
     }
 
@@ -77,9 +82,11 @@ class EmpleadoController extends Controller
 
             $empleado = Empleado::findOrFail($user->id);
             $empleado->id = $user->id;
-            $empleado->nombres = mb_strtoupper(trim($request->nombres));
-            $empleado->apellidos = mb_strtoupper(trim($request->apellidos));
-            $empleado->tip_identificacion = mb_strtoupper(trim($request->tip_identificacion));
+            $empleado->tip_identificacion_id = trim($request->tip_identificacion_id);
+            $empleado->nom_primero = mb_strtoupper(trim($request->nom_primero));
+            $empleado->nom_segundo = mb_strtoupper(trim($request->nom_segundo));
+            $empleado->ape_paterno = mb_strtoupper(trim($request->ape_paterno));
+            $empleado->ape_materno = mb_strtoupper(trim($request->ape_materno));
             $empleado->num_identificacion = trim($request->num_identificacion);
             $empleado->direccion = mb_strtoupper(trim($request->direccion));
             $empleado->telefonos = mb_strtoupper(trim($request->telefonos));
@@ -106,9 +113,11 @@ class EmpleadoController extends Controller
                 'users.usuario',
                 'users.estado',
                 'users.rol_id',
-                'empleados.nombres',
-                'empleados.apellidos',
-                'empleados.tip_identificacion',
+                'empleados.tip_identificacion_id',
+                'empleados.nom_primero',
+                'empleados.nom_segundo',
+                'empleados.ape_paterno',
+                'empleados.ape_materno',
                 'empleados.num_identificacion',
                 'empleados.direccion',
                 'empleados.telefonos',
@@ -116,7 +125,7 @@ class EmpleadoController extends Controller
                 'empleados.fec_ingreso',
                 'empleados.fec_salida'
             )
-            ->where('users.id', '=', $request->id)
+            ->where('users.id', $request->id)
             ->first();
         return $user;
     }

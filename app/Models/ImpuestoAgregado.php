@@ -4,9 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class FormaPago extends Model
+class ImpuestoAgregado extends Model
 {
-    protected $table = 'for_pagos';
+    protected $table = 'imp_agregados';
     protected $fillable = [
         'nombre',
         'codigo'

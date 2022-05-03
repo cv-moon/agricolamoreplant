@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Inventario;
+use App\Models\Presentacion;
 use App\Models\Producto;
 use App\Models\PuntoEmision;
 use Illuminate\Http\Request;
@@ -14,8 +15,7 @@ class ProductoController extends Controller
     public function index()
     {
         $productos = Producto::join('categorias', 'productos.categoria_id', 'categorias.id')
-            ->join('unidades', 'productos.unidad_id', 'unidades.id')
-            ->join('tarifas', 'productos.tarifa_id', 'tarifas.id')
+            ->join('tar_agregados', 'productos.tar_agregado_id', 'tar_agregados.id')
             ->select(
                 'productos.id',
                 'productos.nombre',
@@ -25,7 +25,7 @@ class ProductoController extends Controller
                 'productos.por_descuento',
                 'categorias.nombre as categoria',
                 'unidades.sigla as unidad',
-                'tarifas.valor as impuesto'
+                'tar_agregados.valor as impuesto'
             )
             ->orderBy('categorias.nombre', 'asc')
             ->get();
@@ -38,19 +38,29 @@ class ProductoController extends Controller
             DB::beginTransaction();
             $producto = new Producto();
             $producto->categoria_id = trim($request->categoria_id);
-            $producto->unidad_id = trim($request->unidad_id);
-            $producto->tarifa_id = trim($request->tarifa_id);
-            $producto->cod_principal = mb_strtoupper(trim($request->cod_principal));
-            $producto->cod_auxiliar = mb_strtoupper(trim($request->cod_auxiliar));
+            $producto->tar_agregado_id = trim($request->tar_agregado_id);
             $producto->nombre = mb_strtoupper(trim($request->nombre));
             $producto->composicion = mb_strtoupper(trim($request->composicion));
             $producto->pre_venta = trim($request->pre_venta);
             $producto->por_descuento = trim($request->por_descuento);
+            $producto->mar_utilidad = trim($request->mar_utilidad);
             $producto->save();
+
+            foreach ($request->presentaciones as $ep => $det) {
+                $presentacion = new Presentacion();
+                $presentacion->producto_id = $producto->id;
+                $presentacion->unidad_id = trim($det['unidad_id']);
+                $presentacion->cod_principal = mb_strtoupper(trim($det['cod_principal']));
+                $presentacion->cod_auxiliar = mb_strtoupper(trim($det['cod_auxiliar']));
+                $presentacion->presentacion = trim($det['presentacion']);
+                $presentacion->pre_venta = trim($det['pre_venta']);
+                $presentacion->save();
+            }
 
             DB::commit();
         } catch (\Throwable $th) {
             DB::rollBack();
+            return $th;
         }
     }
 
@@ -60,18 +70,17 @@ class ProductoController extends Controller
             DB::beginTransaction();
             $producto = Producto::findOrFail($request->id);
             $producto->categoria_id = trim($request->categoria_id);
-            $producto->unidad_id = trim($request->unidad_id);
-            $producto->tarifa_id = trim($request->tarifa_id);
-            $producto->cod_principal = mb_strtoupper(trim($request->cod_principal));
-            $producto->cod_auxiliar = mb_strtoupper(trim($request->cod_auxiliar));
+            $producto->tar_agregado_id = trim($request->tar_agregado_id);
             $producto->nombre = mb_strtoupper(trim($request->nombre));
             $producto->composicion = mb_strtoupper(trim($request->composicion));
             $producto->pre_venta = trim($request->pre_venta);
             $producto->por_descuento = trim($request->por_descuento);
+            $producto->mar_utilidad = trim($request->mar_utilidad);
             $producto->save();
             DB::commit();
         } catch (\Throwable $th) {
             DB::rollBack();
+            return $th;
         }
     }
 
@@ -120,7 +129,7 @@ class ProductoController extends Controller
     {
         $productos = Inventario::join('productos', 'inventarios.producto_id', 'productos.id')
             ->join('establecimientos', 'inventarios.establecimiento_id', 'establecimientos.id')
-            ->join('tarifas', 'productos.tarifa_id', 'tarifas.id')
+            ->join('tar_agregados', 'productos.tarifa_id', 'tar_agregados.id')
             ->select(
                 'productos.id',
                 'productos.nombre',
@@ -130,7 +139,7 @@ class ProductoController extends Controller
                 'inventarios.dis_stock',
                 'inventarios.min_stock',
                 'inventarios.estado',
-                'tarifas.valor as impuesto'
+                'tar_agregados.valor as impuesto'
             )
             ->where('inventarios.establecimiento_id', $request->establecimiento)
             ->orderBy('productos.cod_principal', 'asc')
@@ -155,7 +164,7 @@ class ProductoController extends Controller
         $punto = PuntoEmision::select('establecimiento_id', 'user_id')
             ->where('user_id', Auth::user()->id)
             ->first();
-        $productos = Producto::join('tarifas', 'productos.tarifa_id', 'tarifas.id')
+        $productos = Producto::join('tar_agregados', 'productos.tarifa_id', 'tar_agregados.id')
             ->join('inventarios', 'productos.id', 'inventarios.producto_id')
             ->select(
                 'productos.id',
@@ -163,9 +172,9 @@ class ProductoController extends Controller
                 'productos.pre_venta',
                 'productos.por_descuento',
                 'productos.composicion',
-                'tarifas.nombre as impuesto',
-                'tarifas.valor',
-                'tarifas.codigo',
+                'tar_agregados.nombre as impuesto',
+                'tar_agregados.valor',
+                'tar_agregados.codigo',
                 'inventarios.establecimiento_id',
                 'inventarios.min_stock',
                 'inventarios.dis_stock'

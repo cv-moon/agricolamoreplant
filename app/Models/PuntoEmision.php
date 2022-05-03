@@ -10,15 +10,13 @@ class PuntoEmision extends Model
     protected $fillable = [
         'establecimiento_id',
         'user_id',
-        'codigo',
+        'pun_codigo',
         'nombre',
         'sec_factura',
-        'sec_liq_compras',
-        'sec_not_credito',
-        'sec_not_debito',
-        'sec_gui_remision',
         'sec_retencion',
-        'sec_recibo',
+        'sec_gui_remision',
+        'sec_orden_trabajo',
+        'sec_recibo_cobro',
         'estado'
     ];
 }

@@ -9,16 +9,18 @@ class EstablecimientoController extends Controller
 {
     public function index()
     {
-        $establecimientos = Establecimiento::select(
-            'id',
-            'numero',
-            'nom_comercial',
-            'nom_referencia',
-            'direccion',
-            'telefonos',
-            'estado'
-        )
-            ->orderBy('numero', 'asc')
+        $establecimientos = Establecimiento::join('users', 'establecimientos.user_id', 'users.id')
+            ->select(
+                'users.usuario',
+                'establecimientos.id',
+                'establecimientos.est_codigo',
+                'establecimientos.nom_comercial',
+                'establecimientos.nom_referencia',
+                'establecimientos.direccion',
+                'establecimientos.telefonos',
+                'establecimientos.estado'
+            )
+            ->orderBy('establecimientos.est_codigo', 'asc')
             ->get();
         return $establecimientos;
     }
@@ -27,7 +29,8 @@ class EstablecimientoController extends Controller
     {
         $establecimiento = new Establecimiento();
         $establecimiento->empresa_id = 1;
-        $establecimiento->numero = mb_strtoupper(trim($request->numero));
+        $establecimiento->user_id = trim($request->user_id);
+        $establecimiento->est_codigo = mb_strtoupper(trim($request->est_codigo));
         $establecimiento->nom_comercial = mb_strtoupper(trim($request->nom_comercial));
         $establecimiento->nom_referencia = mb_strtoupper(trim($request->nom_referencia));
         $establecimiento->direccion = mb_strtoupper(trim($request->direccion));
@@ -38,6 +41,7 @@ class EstablecimientoController extends Controller
     public function update(Request $request)
     {
         $establecimiento = Establecimiento::findOrFail($request->id);
+        $establecimiento->user_id = trim($request->user_id);
         $establecimiento->nom_comercial = mb_strtoupper(trim($request->nom_comercial));
         $establecimiento->nom_referencia = mb_strtoupper(trim($request->nom_referencia));
         $establecimiento->direccion = mb_strtoupper(trim($request->direccion));
@@ -47,16 +51,18 @@ class EstablecimientoController extends Controller
 
     public function detail(Request $request)
     {
-        $establecimiento = Establecimiento::select(
-            'id',
-            'numero',
-            'nom_comercial',
-            'nom_referencia',
-            'direccion',
-            'telefonos',
-            'estado'
-        )
-            ->where('id', $request->id)
+        $establecimiento = Establecimiento::join('users', 'establecimientos.user_id', 'users.id')
+            ->select(
+                'users.usuario',
+                'establecimientos.id',
+                'establecimientos.est_codigo',
+                'establecimientos.nom_comercial',
+                'establecimientos.nom_referencia',
+                'establecimientos.direccion',
+                'establecimientos.telefonos',
+                'establecimientos.estado'
+            )
+            ->where('establecimientos.id', $request->id)
             ->first();
         return $establecimiento;
     }

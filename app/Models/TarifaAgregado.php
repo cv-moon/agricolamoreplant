@@ -4,12 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class FormaPago extends Model
+class TarifaAgregado extends Model
 {
-    protected $table = 'for_pagos';
+    protected $table = 'tar_agregados';
     protected $fillable = [
+        'imp_agregado_id',
         'nombre',
-        'codigo'
+        'codigo',
+        'valor'
     ];
     public $timestamps = false;
 }

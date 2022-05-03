@@ -22,7 +22,7 @@ class CreateEmpresasTable extends Migration
             $table->string('logo', 100)->nullable();
             $table->string('cont_resolucion', 5)->nullable();
             $table->boolean('obli_contabilidad')->default(0);
-            $table->tinyInteger('regimen')->default(0);
+            $table->tinyInteger('tip_regimen')->default(0);
             $table->boolean('age_retencion')->default(0);
             $table->boolean('tip_emision')->default(1);
             $table->string('firma', 100)->nullable();

@@ -8,26 +8,18 @@ class Empresa extends Model
 {
     protected $table = 'empresas';
     protected $fillable = [
+        'tip_ambiente_id',
         'raz_social',
         'ruc',
         'direccion',
-        'telefonos',
-        'url',
         'logo',
         'cont_resolucion',
         'obli_contabilidad',
-        'reg_microempresa',
+        'tip_regimen',
         'age_retencion',
+        'tip_emision',
         'firma',
         'fir_clave',
-        'fir_vencimiento',
-        'tip_ambiente',
-        'tip_emision',
-        'corr_servidor',
-        'corr_puerto',
-        'corr_seguridad',
-        'corr_autenticacion',
-        'corr_usuario',
-        'corr_password'
+        'fir_vencimiento'
     ];
 }

@@ -4,9 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class FormaPago extends Model
+class TipoComprobante extends Model
 {
-    protected $table = 'for_pagos';
+    protected $table = 'tip_comprobantes';
     protected $fillable = [
         'nombre',
         'codigo'

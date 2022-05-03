@@ -9,7 +9,8 @@ class Establecimiento extends Model
     protected $table = 'establecimientos';
     protected $fillable = [
         'empresa_id',
-        'numero',
+        'user_id',
+        'est_codigo',
         'nom_comercial',
         'nom_referencia',
         'direccion',

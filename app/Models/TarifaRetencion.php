@@ -8,7 +8,7 @@ class TarifaRetencion extends Model
 {
     protected $table = 'tarifas_retencion';
     protected $fillable = [
-        'impuesto_id',
+        'imp_retencion_id',
         'nombre',
         'codigo',
         'valor'

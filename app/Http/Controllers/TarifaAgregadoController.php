@@ -2,29 +2,29 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Tarifa;
+use App\Models\TarifaAgregado;
 use Illuminate\Http\Request;
 
-class TarifaController extends Controller
+class TarifaAgregadoController extends Controller
 {
     public function index()
     {
-        $tarifas = Tarifa::join('impuestos', 'tarifas.impuesto_id', 'impuestos.id')
+        $tar_agregados = TarifaAgregado::join('imp_agregados', 'tar_agregados.imp_agregado_id', 'imp_agregados.id')
             ->select(
-                'tarifas.id',
-                'tarifas.nombre as tarifa',
-                'tarifas.codigo',
-                'tarifas.valor',
-                'impuestos.nombre as impuesto'
+                'tar_agregados.id',
+                'tar_agregados.nombre as tarifa',
+                'tar_agregados.codigo',
+                'tar_agregados.valor',
+                'imp_agregados.nombre as impuesto'
             )
-            ->orderBy('impuestos.nombre')
+            ->orderBy('imp_agregados.nombre')
             ->get();
-        return $tarifas;
+        return $tar_agregados;
     }
 
     public function store(Request $request)
     {
-        $tarifa = new Tarifa();
+        $tarifa = new TarifaAgregado();
         $tarifa->impuesto_id = $request->impuesto_id;
         $tarifa->nombre = mb_strtoupper(trim($request->nombre));
         $tarifa->codigo = trim($request->codigo);
@@ -34,7 +34,7 @@ class TarifaController extends Controller
 
     public function update(Request $request)
     {
-        $tarifa = Tarifa::findOrFail($request->id);
+        $tarifa = TarifaAgregado::findOrFail($request->id);
         $tarifa->impuesto_id = $request->impuesto_id;
         $tarifa->nombre = mb_strtoupper(trim($request->nombre));
         $tarifa->codigo = trim($request->codigo);
@@ -44,9 +44,9 @@ class TarifaController extends Controller
 
     public function detail(Request $request)
     {
-        $tarifa = Tarifa::select(
+        $tarifa = TarifaAgregado::select(
             'id',
-            'impuesto_id',
+            'imp_agregado_id',
             'nombre',
             'codigo',
             'valor'

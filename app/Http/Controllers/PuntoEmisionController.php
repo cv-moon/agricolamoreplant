@@ -15,12 +15,13 @@ class PuntoEmisionController extends Controller
             ->join('users', 'puntos_emision.user_id', 'users.id')
             ->select(
                 'puntos_emision.id',
-                'puntos_emision.codigo',
+                'puntos_emision.pun_codigo',
                 'puntos_emision.nombre',
                 'puntos_emision.sec_factura',
-                'puntos_emision.sec_gui_remision',
                 'puntos_emision.sec_retencion',
-                'puntos_emision.sec_recibo',
+                'puntos_emision.sec_gui_remision',
+                'puntos_emision.sec_orden_trabajo',
+                'puntos_emision.sec_recibo_cobro',
                 'puntos_emision.estado',
                 'establecimientos.nom_referencia',
                 'users.usuario'
@@ -36,15 +37,13 @@ class PuntoEmisionController extends Controller
         $punto = new PuntoEmision();
         $punto->establecimiento_id = trim($request->establecimiento_id);
         $punto->user_id = trim($request->user_id);
-        $punto->codigo = trim($request->codigo);
+        $punto->pun_codigo = trim($request->pun_codigo);
         $punto->nombre = mb_strtoupper(trim($request->nombre));
         $punto->sec_factura = trim($request->sec_factura);
-        $punto->sec_liq_compras = trim($request->sec_liq_compras);
-        $punto->sec_not_credito = trim($request->sec_not_credito);
-        $punto->sec_not_debito = trim($request->sec_not_debito);
-        $punto->sec_gui_remision = trim($request->sec_gui_remision);
         $punto->sec_retencion = trim($request->sec_retencion);
-        $punto->sec_recibo = trim($request->sec_recibo);
+        $punto->sec_gui_remision = trim($request->sec_gui_remision);
+        $punto->sec_orden_trabajo = trim($request->sec_orden_trabajo);
+        $punto->sec_recibo_cobro = trim($request->sec_recibo_cobro);
         $punto->save();
     }
 
@@ -53,15 +52,13 @@ class PuntoEmisionController extends Controller
         $punto = PuntoEmision::findOrFail($request->id);
         $punto->establecimiento_id = trim($request->establecimiento_id);
         $punto->user_id = trim($request->user_id);
-        $punto->codigo = trim($request->codigo);
+        $punto->pun_codigo = trim($request->pun_codigo);
         $punto->nombre = mb_strtoupper(trim($request->nombre));
         $punto->sec_factura = trim($request->sec_factura);
-        $punto->sec_liq_compras = trim($request->sec_liq_compras);
-        $punto->sec_not_credito = trim($request->sec_not_credito);
-        $punto->sec_not_debito = trim($request->sec_not_debito);
-        $punto->sec_gui_remision = trim($request->sec_gui_remision);
         $punto->sec_retencion = trim($request->sec_retencion);
-        $punto->sec_recibo = trim($request->sec_recibo);
+        $punto->sec_gui_remision = trim($request->sec_gui_remision);
+        $punto->sec_orden_trabajo = trim($request->sec_orden_trabajo);
+        $punto->sec_recibo_cobro = trim($request->sec_recibo_cobro);
         $punto->save();
     }
 
@@ -72,15 +69,13 @@ class PuntoEmisionController extends Controller
                 'puntos_emision.id',
                 'puntos_emision.establecimiento_id',
                 'puntos_emision.user_id',
-                'puntos_emision.codigo',
+                'puntos_emision.pun_codigo',
                 'puntos_emision.nombre',
                 'puntos_emision.sec_factura',
-                'puntos_emision.sec_liq_compras',
-                'puntos_emision.sec_not_credito',
-                'puntos_emision.sec_not_debito',
-                'puntos_emision.sec_gui_remision',
                 'puntos_emision.sec_retencion',
-                'puntos_emision.sec_recibo',
+                'puntos_emision.sec_gui_remision',
+                'puntos_emision.sec_orden_trabajo',
+                'puntos_emision.sec_recibo_cobro',
                 'establecimientos.numero'
             )
             ->where('puntos_emision.id', $request->id)
@@ -105,19 +100,19 @@ class PuntoEmisionController extends Controller
 
     public function validateName(Request $request)
     {
-        $nombre = PuntoEmision::select('codigo', 'establecimiento_id', 'nombre')
+        $nombre = PuntoEmision::select('pun_codigo', 'establecimiento_id', 'nombre')
             ->where('nombre', mb_strtoupper(trim($request->nombre)))
             ->where('establecimiento_id', $request->est_id)
-            ->where('codigo', $request->codigo)
+            ->where('pun_codigo', $request->pun_codigo)
             ->first();
         return $nombre;
     }
 
     public function validateCode(Request $request)
     {
-        $codigo = PuntoEmision::select('establecimiento_id', 'codigo')
+        $codigo = PuntoEmision::select('establecimiento_id', 'pun_codigo')
             ->where('establecimiento_id', $request->est_id)
-            ->where('codigo', $request->codigo)
+            ->where('pun_codigo', $request->pun_codigo)
             ->first();
         return $codigo;
     }
@@ -132,7 +127,7 @@ class PuntoEmisionController extends Controller
     {
         $establecimientos = Establecimiento::select(
             'id',
-            'numero',
+            'est_codigo',
             'nom_comercial',
             'nom_referencia',
             'estado'

@@ -9,17 +9,17 @@ class TarifaRetencionController extends Controller
 {
     public function index()
     {
-        $tarifas = TarifaRetencion::join('impuestos_retencion', 'tarifas_retencion.impuesto_id', 'impuestos_retencion.id')
+        $tar_retenciones = TarifaRetencion::join('imp_retenciones', 'tar_retenciones.imp_retencion_id', 'imp_retenciones.id')
             ->select(
-                'tarifas_retencion.id',
-                'tarifas_retencion.nombre as tarifa',
-                'tarifas_retencion.codigo',
-                'tarifas_retencion.valor',
-                'impuestos_retencion.nombre as impuesto'
+                'tar_retenciones.id',
+                'tar_retenciones.nombre as tarifa',
+                'tar_retenciones.codigo',
+                'tar_retenciones.valor',
+                'imp_retenciones.nombre as impuesto'
             )
-            ->orderBy('impuestos_retencion.nombre')
+            ->orderBy('imp_retenciones.nombre')
             ->get();
-        return $tarifas;
+        return $tar_retenciones;
     }
 
     public function store(Request $request)

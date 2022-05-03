@@ -17,7 +17,7 @@ class CreateProductosTable extends Migration
             $table->id();
             $table->unsignedBigInteger('categoria_id');
             $table->unsignedBigInteger('tar_agregado_id');
-            $table->string('nombre', 300)->unique();
+            $table->string('nombre', 300);
             $table->string('composicion', 300)->nullable();
             $table->decimal('pre_compra', 15, 3)->default(0);
             $table->decimal('por_descuento', 5, 2)->default(0);

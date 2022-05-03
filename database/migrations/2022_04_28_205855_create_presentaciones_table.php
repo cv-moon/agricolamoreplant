@@ -16,7 +16,7 @@ class CreatePresentacionesTable extends Migration
         Schema::create('presentaciones', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('producto_id');
-            $table->unsignedBigInteger('unidades_id');
+            $table->unsignedBigInteger('unidad_id');
             $table->string('cod_principal', 15)->unique();
             $table->string('cod_auxiliar', 15)->unique()->nullable();
             $table->tinyInteger('presentacion')->unique();
@@ -25,7 +25,7 @@ class CreatePresentacionesTable extends Migration
             $table->timestamps();
 
             $table->foreign('producto_id')->references('id')->on('productos');
-            $table->foreign('unidades_id')->references('id')->on('unidades');
+            $table->foreign('unidad_id')->references('id')->on('unidades');
         });
     }
 

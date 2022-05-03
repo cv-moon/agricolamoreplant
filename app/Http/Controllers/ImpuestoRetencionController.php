@@ -9,7 +9,7 @@ class ImpuestoRetencionController extends Controller
 {
     public function index()
     {
-        $impuestos = ImpuestoRetencion::get();
-        return $impuestos;
+        $imp_retenciones = ImpuestoRetencion::get();
+        return $imp_retenciones;
     }
 }

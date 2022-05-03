@@ -9,8 +9,8 @@ class FormaPagoController extends Controller
 {
     public function index()
     {
-        $formas = FormaPago::select('id', 'nombre', 'codigo')
+        $for_pagos = FormaPago::select('id', 'nombre', 'codigo')
             ->get();
-        return $formas;
+        return $for_pagos;
     }
 }

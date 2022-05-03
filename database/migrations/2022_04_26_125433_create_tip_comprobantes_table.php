@@ -15,7 +15,7 @@ class CreateTipComprobantesTable extends Migration
     {
         Schema::create('tip_comprobantes', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre', 50);
+            $table->string('nombre', 100);
             $table->char('codigo', 2)->unique();
         });
     }

@@ -4,14 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Tarifa extends Model
+class TipoIdentificacion extends Model
 {
-    protected $table = 'tarifas';
+    protected $table = 'tip_identificaciones';
     protected $fillable = [
-        'impuesto_id',
         'nombre',
-        'codigo',
-        'valor'
+        'codigo'
     ];
     public $timestamps = false;
 }
