@@ -27,9 +27,23 @@ Route::middleware('auth')->group(function () {
     // Formas de Pago
     Route::get('api/formas_pago', 'FormaPagoController@index');
 
+    // Tipos Comprobantes
+    Route::get('api/compobantes', 'TipoComprobanteController@index');
+
+    // Tipo Estados
+    Route::get('api/estados', 'TipoEstadoController@index');
+
+    // Tipo Ambientes
+    Route::get('api/ambientes', 'TipoAmbienteController@index');
+
+    // Meses
+    Route::get('api/meses', 'MesController@index');
+
     // Rutas de Administración
     // Roles
     Route::get('api/roles', 'RolController@index');
+
+
 
     // Empresa
     Route::get('api/empresa/detalle', 'EmpresaController@detail');
@@ -86,9 +100,6 @@ Route::middleware('auth')->group(function () {
     Route::put('api/roles_pago/editar', 'RolPagoController@update');
     Route::post('api/roles_pago/pagar', 'RolPagoController@payRol');
     Route::get('api/roles_pago/imprimir/{id}', 'RolPagoController@printRol');
-
-    // Meses
-    Route::get('api/meses', 'MesController@index');
 
 
     // Puntos de Emisión

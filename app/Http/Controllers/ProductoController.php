@@ -15,6 +15,7 @@ class ProductoController extends Controller
     public function index()
     {
         $productos = Producto::join('categorias', 'productos.categoria_id', 'categorias.id')
+            ->join('presentaciones', 'productos.presentacion_id', 'presentaciones.id')
             ->join('tar_agregados', 'productos.tar_agregado_id', 'tar_agregados.id')
             ->select(
                 'productos.id',
@@ -77,6 +78,17 @@ class ProductoController extends Controller
             $producto->por_descuento = trim($request->por_descuento);
             $producto->mar_utilidad = trim($request->mar_utilidad);
             $producto->save();
+
+            foreach ($request->presentaciones as $ep => $det) {
+                $presentacion = new Presentacion();
+                $presentacion->producto_id = $producto->id;
+                $presentacion->unidad_id = trim($det['unidad_id']);
+                $presentacion->cod_principal = mb_strtoupper(trim($det['cod_principal']));
+                $presentacion->cod_auxiliar = mb_strtoupper(trim($det['cod_auxiliar']));
+                $presentacion->presentacion = trim($det['presentacion']);
+                $presentacion->pre_venta = trim($det['pre_venta']);
+                $presentacion->save();
+            }
             DB::commit();
         } catch (\Throwable $th) {
             DB::rollBack();
