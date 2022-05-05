@@ -18,7 +18,7 @@ class CreateTarAgregadosTable extends Migration
             $table->unsignedBigInteger('imp_agregado_id');
             $table->string('nombre', 300);
             $table->char('codigo', 5);
-            $table->decimal('valor', 3, 2);
+            $table->decimal('valor', 5, 2);
 
             $table->foreign('imp_agregado_id')->references('id')->on('imp_agregados');
         });

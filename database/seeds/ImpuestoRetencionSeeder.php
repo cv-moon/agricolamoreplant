@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class ImpuestoRetenidoSeeder extends Seeder
+class ImpuestoRetencionSeeder extends Seeder
 {
     /**
      * Run the database seeds.

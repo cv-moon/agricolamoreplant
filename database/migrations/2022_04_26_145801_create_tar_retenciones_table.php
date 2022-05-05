@@ -15,12 +15,12 @@ class CreateTarRetencionesTable extends Migration
     {
         Schema::create('tar_retenciones', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('imp_retencione_id');
+            $table->unsignedBigInteger('imp_retencion_id');
             $table->string('nombre', 300);
             $table->char('codigo', 5);
-            $table->decimal('valor', 3, 2);
+            $table->decimal('valor', 5, 2);
 
-            $table->foreign('imp_retencione_id')->references('id')->on('imp_retenciones');
+            $table->foreign('imp_retencion_id')->references('id')->on('imp_retenciones');
         });
     }
 

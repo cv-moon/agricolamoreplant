@@ -51,13 +51,13 @@ Route::middleware('auth')->group(function () {
     Route::put('api/empresa/editar', 'EmpresaController@update');
 
     // Impuesto
-    Route::get('api/impuestos-iva', 'ImpuestoController@index');
+    Route::get('api/impuestos-iva', 'ImpuestoAgregadoController@index');
 
     // Tarifas IVA
-    Route::get('api/tarifas-iva', 'TarifaController@index');
-    Route::post('api/tarifa-iva/guardar', 'TarifaController@store');
-    Route::put('api/tarifa-iva/editar', 'TarifaController@update');
-    Route::get('api/tarifa-iva/detalle', 'TarifaController@detail');
+    Route::get('api/tarifas-iva', 'TarifaAgregadoController@index');
+    Route::post('api/tarifa-iva/guardar', 'TarifaAgregadoController@store');
+    Route::put('api/tarifa-iva/editar', 'TarifaAgregadoController@update');
+    Route::get('api/tarifa-iva/detalle', 'TarifaAgregadoController@detail');
 
     // Impuesto Retención
     Route::get('api/impuestos-retencion', 'ImpuestoRetencionController@index');

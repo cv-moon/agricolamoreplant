@@ -18,7 +18,13 @@ class DatabaseSeeder extends Seeder
             MesSeeder::class,
             TipoComprobanteSeeder::class,
             TipoEstadoSeeder::class,
-            TipoIdentificacionSeeder::class
+            TipoIdentificacionSeeder::class,
+            ImpuestoAgregadoSeeder::class,
+            ImpuestoRetencionSeeder::class,
+            TarifaAgregadoSeeder::class,
+            TarifaRetencionSeeder::class,
+            TipoAmbienteSeeder::class,
+            FormaPagoSeeder::class
         ]);
     }
 }
