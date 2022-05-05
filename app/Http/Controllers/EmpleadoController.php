@@ -14,6 +14,7 @@ class EmpleadoController extends Controller
     {
         $empleados = Empleado::join('users', 'empleados.id', 'users.id')
             ->join('roles', 'users.rol_id', 'roles.id')
+            ->join('tip_identificaciones', 'empleados.tip_identificacion_id', 'tip_identificaciones.id')
             ->select(
                 'users.id',
                 'empleados.nom_primero',
@@ -25,6 +26,7 @@ class EmpleadoController extends Controller
                 'empleados.salario',
                 'empleados.fec_ingreso',
                 'empleados.fec_salida',
+                'tip_identificaciones.nombre as tip_identificacion',
                 'users.estado',
                 'roles.nombre as rol'
             )

@@ -76,7 +76,7 @@ class PuntoEmisionController extends Controller
                 'puntos_emision.sec_gui_remision',
                 'puntos_emision.sec_orden_trabajo',
                 'puntos_emision.sec_recibo_cobro',
-                'establecimientos.numero'
+                'establecimientos.est_codigo'
             )
             ->where('puntos_emision.id', $request->id)
             ->first();

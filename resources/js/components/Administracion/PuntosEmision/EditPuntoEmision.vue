@@ -31,7 +31,7 @@
                                 :key="establecimiento.id"
                                 :value="establecimiento.id"
                                 v-text="
-                                    establecimiento.numero +
+                                    establecimiento.est_codigo +
                                         '-' +
                                         establecimiento.nom_comercial +
                                         '-' +
@@ -44,7 +44,7 @@
                 <b class="text-primary">Datos Generales</b>
                 <hr class="mt-0" />
                 <div class="form-group row">
-                    <label for="codigo" class="col-sm-1 col-form-label"
+                    <label for="pun_codigo" class="col-sm-1 col-form-label"
                         >No.:</label
                     >
                     <div class="col-sm-2">
@@ -55,7 +55,7 @@
                             min="0"
                             max="999"
                             disabled
-                            v-model="codigo"
+                            v-model="pun_codigo"
                         />
                     </div>
                     <label for="nombre" class="col-sm-1 col-form-label"
@@ -102,39 +102,14 @@
                                     <td>{{ numEstablecimiento }}</td>
                                     <td>{{ numPunto }}</td>
                                     <td>
-                                        {{ sec_factura }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Liquidación de Compras</td>
-                                    <td>{{ numEstablecimiento }}</td>
-                                    <td>{{ numPunto }}</td>
-                                    <td>
-                                        {{ sec_liq_compras }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Nota de Crédito</td>
-                                    <td>{{ numEstablecimiento }}</td>
-                                    <td>{{ numPunto }}</td>
-                                    <td>
-                                        {{ sec_not_credito }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Nota de Débito</td>
-                                    <td>{{ numEstablecimiento }}</td>
-                                    <td>{{ numPunto }}</td>
-                                    <td>
-                                        {{ sec_not_debito }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Guía de Remisión</td>
-                                    <td>{{ numEstablecimiento }}</td>
-                                    <td>{{ numPunto }}</td>
-                                    <td>
-                                        {{ sec_gui_remision }}
+                                        <input
+                                            type="number"
+                                            class="form-control"
+                                            placeholder="0"
+                                            min="0"
+                                            max="999999999"
+                                            v-model="sec_factura"
+                                        />
                                     </td>
                                 </tr>
                                 <tr>
@@ -142,7 +117,44 @@
                                     <td>{{ numEstablecimiento }}</td>
                                     <td>{{ numPunto }}</td>
                                     <td>
-                                        {{ sec_retencion }}
+                                        <input
+                                            type="number"
+                                            class="form-control"
+                                            placeholder="0"
+                                            min="0"
+                                            max="999999999"
+                                            v-model="sec_retencion"
+                                        />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Guía de Remisión</td>
+                                    <td>{{ numEstablecimiento }}</td>
+                                    <td>{{ numPunto }}</td>
+                                    <td>
+                                        <input
+                                            type="number"
+                                            class="form-control"
+                                            placeholder="0"
+                                            min="0"
+                                            max="999999999"
+                                            v-model="sec_gui_remision"
+                                        />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Orden de Trabajo</td>
+                                    <td>{{ numEstablecimiento }}</td>
+                                    <td>{{ numPunto }}</td>
+                                    <td>
+                                        <input
+                                            type="number"
+                                            class="form-control"
+                                            placeholder="0"
+                                            min="0"
+                                            max="999999999"
+                                            v-model="sec_orden_trabajo"
+                                        />
                                     </td>
                                 </tr>
                                 <tr>
@@ -150,7 +162,14 @@
                                     <td>{{ numEstablecimiento }}</td>
                                     <td>{{ numPunto }}</td>
                                     <td>
-                                        {{ sec_recibo }}
+                                        <input
+                                            type="number"
+                                            class="form-control"
+                                            placeholder="0"
+                                            min="0"
+                                            max="999999999"
+                                            v-model="sec_recibo_cobro"
+                                        />
                                     </td>
                                 </tr>
                             </tbody>
@@ -183,28 +202,26 @@ export default {
             punto_id: 0,
             establecimiento_id: 0,
             user_id: 0,
-            codigo: 0,
+            pun_codigo: 0,
             nombre: "",
             sec_factura: 0,
-            sec_liq_compras: 0,
-            sec_not_credito: 0,
-            sec_not_debito: 0,
-            sec_gui_remision: 0,
             sec_retencion: 0,
-            sec_recibo: 0,
-            numero: 0,
+            sec_gui_remision: 0,
+            sec_orden_trabajo: 0,
+            sec_recibo_cobro: 0,
             arrayEstablecimientos: [],
             arrayUsers: [],
-            errors: []
+            errors: [],
+            est_codigo: 0
         };
     },
     computed: {
         numEstablecimiento() {
-            let est = this.numero.toString();
+            let est = this.est_codigo.toString();
             return est.padStart(3, "0");
         },
         numPunto() {
-            let num = this.codigo.toString();
+            let num = this.pun_codigo.toString();
             return num.padStart(3, "0");
         }
     },
@@ -221,14 +238,13 @@ export default {
                     this.establecimiento_id = resp.data["establecimiento_id"];
                     this.user_id = resp.data["user_id"];
                     this.nombre = resp.data["nombre"];
-                    this.codigo = resp.data["codigo"];
+                    this.pun_codigo = resp.data["pun_codigo"];
                     this.sec_factura = resp.data["sec_factura"];
-                    this.sec_liq_compras = resp.data["sec_liq_compras"];
-                    this.sec_not_credito = resp.data["sec_not_credito"];
-                    this.sec_not_debito = resp.data["sec_not_debito"];
-                    this.sec_gui_remision = resp.data["sec_gui_remision"];
                     this.sec_retencion = resp.data["sec_retencion"];
-                    this.numero = resp.data["numero"];
+                    this.sec_gui_remision = resp.data["sec_gui_remision"];
+                    this.sec_orden_trabajo = resp.data["sec_orden_trabajo"];
+                    this.sec_recibo_cobro = resp.data["sec_recibo_cobro"];
+                    this.est_codigo = resp.data["est_codigo"];
                 });
         },
         validaCampos() {
@@ -239,10 +255,10 @@ export default {
             if (this.user_id == "0") {
                 this.errors.push("Seleccione Responsable.");
             }
-            if (!this.codigo) {
+            if (!this.pun_codigo) {
                 this.errors.push("Ingrese Número");
             } else {
-                if (this.codigo > 999) {
+                if (this.pun_codigo > 999) {
                     this.errors.push("El número no puede ser mayor a 999");
                 }
             }
@@ -267,15 +283,13 @@ export default {
                             id: this.punto_id,
                             establecimiento_id: this.establecimiento_id,
                             user_id: this.user_id,
-                            codigo: this.codigo,
+                            pun_codigo: this.pun_codigo,
                             nombre: this.nombre,
                             sec_factura: this.sec_factura,
-                            sec_liq_compras: this.sec_liq_compras,
-                            sec_not_credito: this.sec_not_credito,
-                            sec_not_debito: this.sec_not_debito,
-                            sec_gui_remision: this.sec_gui_remision,
                             sec_retencion: this.sec_retencion,
-                            sec_recibo: this.sec_recibo
+                            sec_gui_remision: this.sec_gui_remision,
+                            sec_orden_trabajo: this.sec_orden_trabajo,
+                            sec_recibo_cobro: this.sec_recibo_cobro
                         })
                         .then(resp => {
                             Swal.fire(

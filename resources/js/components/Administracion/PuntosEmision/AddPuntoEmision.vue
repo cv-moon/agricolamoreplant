@@ -30,7 +30,7 @@
                                 :key="establecimiento.id"
                                 :value="establecimiento.id"
                                 v-text="
-                                    establecimiento.numero +
+                                    establecimiento.est_codigo +
                                         '-' +
                                         establecimiento.nom_comercial +
                                         '-' +
@@ -43,7 +43,7 @@
                 <b class="text-primary">Datos Generales</b>
                 <hr class="mt-0" />
                 <div class="form-group row">
-                    <label for="codigo" class="col-sm-1 col-form-label"
+                    <label for="pun_codigo" class="col-sm-1 col-form-label"
                         >No.:</label
                     >
                     <div class="col-sm-2">
@@ -53,7 +53,7 @@
                             placeholder="0"
                             min="0"
                             max="999"
-                            v-model="codigo"
+                            v-model="pun_codigo"
                         />
                     </div>
                     <label for="nombre" class="col-sm-1 col-form-label"
@@ -108,7 +108,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>Liquidación de Compras</td>
+                                <td>Retención</td>
                                 <td>{{ numPunto }}</td>
                                 <td>
                                     <input
@@ -117,35 +117,7 @@
                                         placeholder="0"
                                         min="0"
                                         max="999999999"
-                                        v-model="sec_liq_compras"
-                                    />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Nota de Crédito</td>
-                                <td>{{ numPunto }}</td>
-                                <td>
-                                    <input
-                                        type="number"
-                                        class="form-control"
-                                        placeholder="0"
-                                        min="0"
-                                        max="999999999"
-                                        v-model="sec_not_credito"
-                                    />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Nota de Débito</td>
-                                <td>{{ numPunto }}</td>
-                                <td>
-                                    <input
-                                        type="number"
-                                        class="form-control"
-                                        placeholder="0"
-                                        min="0"
-                                        max="999999999"
-                                        v-model="sec_not_debito"
+                                        v-model="sec_retencion"
                                     />
                                 </td>
                             </tr>
@@ -164,7 +136,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>Retención</td>
+                                <td>Orden de Trabajo</td>
                                 <td>{{ numPunto }}</td>
                                 <td>
                                     <input
@@ -173,7 +145,7 @@
                                         placeholder="0"
                                         min="0"
                                         max="999999999"
-                                        v-model="sec_retencion"
+                                        v-model="sec_orden_trabajo"
                                     />
                                 </td>
                             </tr>
@@ -187,7 +159,7 @@
                                         placeholder="0"
                                         min="0"
                                         max="999999999"
-                                        v-model="sec_recibo"
+                                        v-model="sec_recibo_cobro"
                                     />
                                 </td>
                             </tr>
@@ -219,15 +191,13 @@ export default {
         return {
             establecimiento_id: 0,
             user_id: 0,
-            codigo: 0,
+            pun_codigo: 0,
             nombre: "",
             sec_factura: 0,
-            sec_liq_compras: 0,
-            sec_not_credito: 0,
-            sec_not_debito: 0,
-            sec_gui_remision: 0,
             sec_retencion: 0,
-            sec_recibo: 0,
+            sec_gui_remision: 0,
+            sec_orden_trabajo: 0,
+            sec_recibo_cobro: 0,
             arrayEstablecimientos: [],
             arrayUsers: [],
             errors: []
@@ -235,7 +205,7 @@ export default {
     },
     computed: {
         numPunto() {
-            let num = this.codigo.toString();
+            let num = this.pun_codigo.toString();
             return num.padStart(3, "0");
         }
     },
@@ -248,10 +218,10 @@ export default {
             if (this.user_id == "0") {
                 this.errors.push("Seleccione Responsable.");
             }
-            if (!this.codigo) {
+            if (!this.pun_codigo) {
                 this.errors.push("Ingrese Número");
             } else {
-                if (this.codigo > 999) {
+                if (this.pun_codigo > 999) {
                     this.errors.push("El número no puede ser mayor a 999");
                 }
             }
@@ -275,15 +245,13 @@ export default {
                         .post("/api/punto/guardar", {
                             establecimiento_id: this.establecimiento_id,
                             user_id: this.user_id,
-                            codigo: this.codigo,
+                            pun_codigo: this.pun_codigo,
                             nombre: this.nombre,
                             sec_factura: this.sec_factura,
-                            sec_liq_compras: this.sec_liq_compras,
-                            sec_not_credito: this.sec_not_credito,
-                            sec_not_debito: this.sec_not_debito,
-                            sec_gui_remision: this.sec_gui_remision,
                             sec_retencion: this.sec_retencion,
-                            sec_recibo: this.sec_recibo
+                            sec_gui_remision: this.sec_gui_remision,
+                            sec_orden_trabajo: this.sec_orden_trabajo,
+                            sec_recibo_cobro: this.sec_recibo_cobro
                         })
                         .then(resp => {
                             Swal.fire(
@@ -315,7 +283,7 @@ export default {
                     params: {
                         nombre: this.nombre,
                         est_id: this.establecimiento_id,
-                        codigo: this.codigo
+                        pun_codigo: this.pun_codigo
                     }
                 })
                 .then(resp => {
@@ -328,10 +296,10 @@ export default {
         },
         validaNumero() {
             axios
-                .get("/api/punto/valida/codigo", {
+                .get("/api/punto/valida/pun_codigo", {
                     params: {
                         est_id: this.establecimiento_id,
-                        codigo: this.codigo
+                        pun_codigo: this.pun_codigo
                     }
                 })
                 .then(resp => {

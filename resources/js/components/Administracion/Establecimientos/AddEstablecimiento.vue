@@ -19,7 +19,7 @@
                 <b class="text-primary">Datos Generales</b>
                 <hr class="mt-0" />
                 <div class="form-group row">
-                    <label for="numero" class="col-sm-2 col-form-label"
+                    <label for="est_codigo" class="col-sm-2 col-form-label"
                         >No.:</label
                     >
                     <div class="col-sm-2">
@@ -29,7 +29,7 @@
                             placeholder="0"
                             min="0"
                             max="999"
-                            v-model="numero"
+                            v-model="est_codigo"
                         />
                     </div>
                 </div>
@@ -91,6 +91,22 @@
                         />
                     </div>
                 </div>
+                <div class="form-group row">
+                    <label for="user_id" class="col-sm-2 col-form-label"
+                        >Responsable:</label
+                    >
+                    <div class="col-sm-4">
+                        <select v-model="user_id" class="form-control">
+                            <option value="0" disabled>Seleccione...</option>
+                            <option
+                                v-for="user in arrayResponsables"
+                                :key="user.id"
+                                :value="user.id"
+                                v-text="user.usuario"
+                            ></option>
+                        </select>
+                    </div>
+                </div>
                 <div v-if="errors.length" class="alert alert-danger">
                     <div>
                         <div v-for="error in errors" :key="error">
@@ -114,19 +130,21 @@
 export default {
     data() {
         return {
-            numero: 0,
+            est_codigo: 0,
+            user_id: 0,
             nom_comercial: "",
             nom_referencia: "",
             direccion: "",
             telefonos: "",
             arrayRoles: [],
+            arrayResponsables: [],
             errors: []
         };
     },
     methods: {
         validaCampos() {
             this.errors = [];
-            if (!this.numero || this.numero == 0) {
+            if (!this.est_codigo || this.est_codigo == 0) {
                 this.errors.push("Ingrese Número de Establecimiento.");
             }
             if (!this.nom_comercial) {
@@ -140,6 +158,9 @@ export default {
             }
             if (!this.telefonos) {
                 this.errors.push("Ingrese telefonos.");
+            }
+            if (this.user_id == 0) {
+                this.errors.push("Seleccione responsable.");
             }
             return this.errors;
         },
@@ -156,7 +177,8 @@ export default {
                     Swal.showLoading();
                     axios
                         .post("/api/establecimiento/guardar", {
-                            numero: this.numero,
+                            user_id: this.user_id,
+                            est_codigo: this.est_codigo,
                             nom_comercial: this.nom_comercial,
                             nom_referencia: this.nom_referencia,
                             direccion: this.direccion,
@@ -175,7 +197,15 @@ export default {
                         });
                 }
             });
+        },
+        selectResponsable() {
+            axios.get("/api/establecimiento/responsables").then(resp => {
+                this.arrayResponsables = resp.data;
+            });
         }
+    },
+    mounted() {
+        this.selectResponsable();
     }
 };
 </script>

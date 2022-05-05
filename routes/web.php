@@ -21,28 +21,29 @@ Route::get('/', function () {
 Auth::routes();
 Route::middleware('auth')->group(function () {
     // Rutas Solitarias
-    // Identificaciones
-    Route::get('api/identificaciones', 'IdentificacionController@index');
-
+    
     // Formas de Pago
     Route::get('api/formas_pago', 'FormaPagoController@index');
-
+    
     // Tipos Comprobantes
     Route::get('api/compobantes', 'TipoComprobanteController@index');
-
+    
     // Tipo Estados
     Route::get('api/estados', 'TipoEstadoController@index');
-
+    
     // Tipo Ambientes
     Route::get('api/ambientes', 'TipoAmbienteController@index');
-
+    
     // Meses
     Route::get('api/meses', 'MesController@index');
-
+    
     // Rutas de Administración
     // Roles
     Route::get('api/roles', 'RolController@index');
-
+    
+    // Identificaciones
+    Route::get('api/identificaciones', 'TipoIdentificacionController@index');
+    Route::get('api/identificacion-empleado', 'TipoIdentificacionController@identityEmployees');
 
 
     // Empresa
@@ -77,6 +78,7 @@ Route::middleware('auth')->group(function () {
     Route::put('api/establecimiento/activar', 'EstablecimientoController@activate');
     Route::put('api/establecimiento/desactivar', 'EstablecimientoController@deactivate');
     Route::GET('api/establecimiento/activos', 'EstablecimientoController@onlyActive');
+    Route::get('api/establecimiento/responsables', 'EstablecimientoController@responsibles');
 
     // Empleados
     Route::get('api/empleados', 'EmpleadoController@index');

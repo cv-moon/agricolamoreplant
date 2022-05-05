@@ -22,4 +22,5 @@ class Empresa extends Model
         'fir_clave',
         'fir_vencimiento'
     ];
+    public $timestamps = false;
 }

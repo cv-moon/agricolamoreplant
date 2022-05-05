@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Establecimiento;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class EstablecimientoController extends Controller
 {
@@ -42,6 +43,7 @@ class EstablecimientoController extends Controller
     {
         $establecimiento = Establecimiento::findOrFail($request->id);
         $establecimiento->user_id = trim($request->user_id);
+        $establecimiento->est_codigo = mb_strtoupper(trim($request->est_codigo));
         $establecimiento->nom_comercial = mb_strtoupper(trim($request->nom_comercial));
         $establecimiento->nom_referencia = mb_strtoupper(trim($request->nom_referencia));
         $establecimiento->direccion = mb_strtoupper(trim($request->direccion));
@@ -53,14 +55,14 @@ class EstablecimientoController extends Controller
     {
         $establecimiento = Establecimiento::join('users', 'establecimientos.user_id', 'users.id')
             ->select(
-                'users.usuario',
                 'establecimientos.id',
                 'establecimientos.est_codigo',
                 'establecimientos.nom_comercial',
                 'establecimientos.nom_referencia',
                 'establecimientos.direccion',
                 'establecimientos.telefonos',
-                'establecimientos.estado'
+                'establecimientos.estado',
+                'users.id as user_id'
             )
             ->where('establecimientos.id', $request->id)
             ->first();
@@ -92,5 +94,11 @@ class EstablecimientoController extends Controller
             ->where('estado', 1)
             ->get();
         return $establecimientos;
+    }
+
+    public function responsibles()
+    {
+        $responsables = DB::select("SELECT u.id, u.usuario FROM users u WHERE NOT EXISTS(SELECT e.user_id FROM establecimientos e WHERE u.id = e.user_id)");
+        return $responsables;
     }
 }

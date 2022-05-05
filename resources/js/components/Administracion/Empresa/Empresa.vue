@@ -41,34 +41,6 @@
                                     maxlength="13"
                                 />
                             </div>
-                            <label
-                                for="telefonos"
-                                class="col-sm-2 col-form-label"
-                                >Teléfonos:
-                            </label>
-                            <div class="col-sm-4">
-                                <input
-                                    type="text"
-                                    v-model="telefonos"
-                                    class="form-control"
-                                    maxlength="50"
-                                    placeholder="Teléfonos."
-                                />
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="url" class="col-sm-12 col-form-label"
-                                >Email:</label
-                            >
-                            <div class="col-sm-12">
-                                <input
-                                    type="url"
-                                    v-model="url"
-                                    class="form-control"
-                                    maxlength="100"
-                                    placeholder="Email."
-                                />
-                            </div>
                         </div>
                         <div class="form-group row">
                             <label
@@ -144,14 +116,15 @@
                     </div>
                     <div class="col-sm-4">
                         <label
-                            for="reg_microempresa"
+                            for="tip_regimen"
                             class="col-sm-12 col-form-label"
-                            >Reg. Microempresa:</label
+                            >Tip. Régimen:</label
                         >
-                        <select v-model="reg_microempresa" class="form-control">
+                        <select v-model="tip_regimen" class="form-control">
                             <option value="x" disabled>Seleccione...</option>
-                            <option value="0">NO</option>
-                            <option value="1">SI</option>
+                            <option value="0">Genreal</option>
+                            <option value="1">Microempresa</option>
+                            <option value="2">RIMPE</option>
                         </select>
                     </div>
                 </div>
@@ -174,10 +147,14 @@
                             class="col-sm-12 col-form-label"
                             >Tipo Ambiente:</label
                         >
-                        <select v-model="tip_ambiente" class="form-control">
-                            <option value="x" disabled>Seleccione...</option>
-                            <option value="0">PRUEBA</option>
-                            <option value="1">PRODUCCIÓN</option>
+                        <select v-model="tip_ambiente_id" class="form-control">
+                            <option value="0" disabled>Seleccione...</option>
+                            <option
+                                v-for="ambiente in arrayAmbiente"
+                                :key="ambiente.id"
+                                :value="ambiente.id"
+                                v-text="ambiente.nombre"
+                            ></option>
                         </select>
                     </div>
                     <div class="col-sm-4">
@@ -228,78 +205,6 @@
                         />
                     </div>
                 </div>
-                <hr />
-                <div class="form-group row">
-                    <label for="corr_servidor" class="col-sm-4 col-form-label"
-                        >Servidor de Correo SMTP:
-                    </label>
-                    <div class="col-sm-4">
-                        <input
-                            type="text"
-                            v-model="corr_servidor"
-                            class="form-control"
-                            placeholder="Servidor SMTP"
-                        />
-                    </div>
-                    <label for="corr_puerto" class="col-sm-2 col-form-label"
-                        >Puerto:
-                    </label>
-                    <div class="col-sm-2">
-                        <input
-                            type="number"
-                            v-model="corr_puerto"
-                            class="form-control"
-                            placeholder="Puerto"
-                        />
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="corr_seguridad" class="col-sm-4 col-form-label"
-                        >Seguridad (ssl/tls o en blanco):
-                    </label>
-                    <div class="col-sm-4">
-                        <input
-                            type="text"
-                            class="form-control"
-                            placeholder="Seguridad"
-                            v-model="corr_seguridad"
-                        />
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label
-                        for="corr_autenticacion"
-                        class="col-sm-4 col-form-label"
-                        >Requiere Autenticación:
-                    </label>
-                    <div class="col-sm-4">
-                        <input type="checkbox" v-model="corr_autenticacion" />
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="corr_usuario" class="col-sm-3 col-form-label"
-                        >Correo Destinatario:
-                    </label>
-                    <div class="col-sm-3">
-                        <input
-                            type="email"
-                            class="form-control"
-                            placeholder="Correo"
-                            v-model="corr_usuario"
-                        />
-                    </div>
-                    <label for="corr_password" class="col-sm-3 col-form-label"
-                        >Contraseña Correo:
-                    </label>
-                    <div class="col-sm-3">
-                        <input
-                            type="password"
-                            v-model="corr_password"
-                            class="form-control"
-                            placeholder="Contraseña del Correo."
-                        />
-                    </div>
-                </div>
             </form>
             <div v-if="errors.length" class="alert alert-danger">
                 <div>
@@ -328,28 +233,21 @@ export default {
     data() {
         return {
             empresa_id: 0,
+            tip_ambiente_id: 0,
             raz_social: "",
             ruc: "",
             direccion: "",
-            telefonos: "",
-            url: "",
             logo: "",
             cont_resolucion: "",
             obli_contabilidad: "x",
-            reg_microempresa: "x",
+            tip_regimen: "x",
             age_retencion: "x",
             firma: "",
             fir_clave: "",
             fir_vencimiento: "",
-            tip_ambiente: 0,
             tip_emision: 1,
-            corr_servidor: "",
-            corr_puerto: 0,
-            corr_seguridad: "",
-            corr_autenticacion: 1,
-            corr_usuario: "",
-            corr_password: "",
             tipoAccion: 0,
+            arrayAmbiente: [],
             errors: [],
             imgDemo: ""
         };
@@ -380,7 +278,7 @@ export default {
                     "Seleccione si esta obligado a llevar contabilidad."
                 );
             }
-            if (this.reg_microempresa === "x") {
+            if (this.tip_regimen === "x") {
                 this.errors.push(
                     "Seleccione si pertenece a régimen microempresa."
                 );
@@ -388,32 +286,17 @@ export default {
             if (this.age_retencion === "x") {
                 this.errors.push("Seleccione si es agente de retención.");
             }
-            if (this.tip_ambiente === "x") {
-                this.errors.push("Seleccione tipo de ambiente.");
-            }
             if (this.tip_emision === "x") {
                 this.errors.push("Seleccione tipo de emision.");
+            }
+            if (this.tip_ambiente_id === 0) {
+                this.errors.push("Seleccione tipo de ambiente.");
             }
             if (!this.firma) {
                 this.errors.push("Seleccione Firma Electrónica.");
             }
             if (!this.fir_clave) {
                 this.errors.push("Ingrese Contraeña de Firma Electronica.");
-            }
-            if (!this.corr_servidor) {
-                this.errors.push("Ingrese servidor de correo.");
-            }
-            if (!this.corr_puerto) {
-                this.errors.push("Ingrese puerto.");
-            }
-            if (!this.corr_seguridad) {
-                this.errors.push("Ingrese tipo de seguridad.");
-            }
-            if (!this.corr_usuario) {
-                this.errors.push("Ingrese correo destinatario.");
-            }
-            if (!this.corr_password) {
-                this.errors.push("Ingrese contraseña de correo destinatario.");
             }
 
             return this.errors;
@@ -425,27 +308,19 @@ export default {
             }
 
             let form = new FormData();
+            form.append("tip_ambiente_id", this.tip_ambiente_id);
             form.append("raz_social", this.raz_social);
             form.append("ruc", this.ruc);
             form.append("direccion", this.direccion);
-            form.append("telefonos", this.telefonos);
-            form.append("url", this.url);
             form.append("logo", this.logo);
             form.append("cont_resolucion", this.cont_resolucion);
             form.append("obli_contabilidad", this.obli_contabilidad);
-            form.append("reg_microempresa", this.reg_microempresa);
+            form.append("tip_regimen", this.tip_regimen);
             form.append("age_retencion", this.age_retencion);
+            form.append("tip_emision", this.tip_emision);
             form.append("firma", this.firma);
             form.append("fir_clave", this.fir_clave);
             form.append("fir_vencimiento", this.fir_vencimiento);
-            form.append("tip_ambiente", this.tip_ambiente);
-            form.append("tip_emision", this.tip_emision);
-            form.append("corr_servidor", this.corr_servidor);
-            form.append("corr_puerto", this.corr_puerto);
-            form.append("corr_seguridad", this.corr_seguridad);
-            form.append("corr_autenticacion", this.corr_autenticacion);
-            form.append("corr_usuario", this.corr_usuario);
-            form.append("corr_password", this.corr_password);
 
             Swal.fire({
                 title: "Espere...",
@@ -486,25 +361,17 @@ export default {
             axios
                 .put("/api/empresa/editar", {
                     id: this.empresa_id,
+                    tip_ambiente_id: this.tip_ambiente_id,
                     raz_social: this.raz_social,
                     ruc: this.ruc,
                     direccion: this.direccion,
-                    telefonos: this.telefonos,
-                    url: this.url,
                     cont_resolucion: this.cont_resolucion,
                     obli_contabilidad: this.obli_contabilidad,
-                    reg_microempresa: this.reg_microempresa,
+                    tip_regimen: this.tip_regimen,
                     age_retencion: this.age_retencion,
-                    fir_clave: this.fir_clave,
-                    fir_vencimiento: this.fir_vencimiento,
-                    tip_ambiente: this.tip_ambiente,
                     tip_emision: this.tip_emision,
-                    corr_servidor: this.corr_servidor,
-                    corr_puerto: this.corr_puerto,
-                    corr_seguridad: this.corr_seguridad,
-                    corr_autenticacion: this.corr_autenticacion,
-                    corr_usuario: this.corr_usuario,
-                    corr_password: this.corr_password
+                    fir_clave: this.fir_clave,
+                    fir_vencimiento: this.fir_vencimiento
                 })
                 .then(resp => {
                     Swal.fire(
@@ -525,27 +392,19 @@ export default {
         rellenar(data = []) {
             this.tipoAccion = 2;
             this.empresa_id = data["id"];
+            this.tip_ambiente_id = data["tip_ambiente_id"];
             this.raz_social = data["raz_social"];
             this.ruc = data["ruc"];
             this.direccion = data["direccion"];
-            this.telefonos = data["telefonos"];
-            this.url = data["url"];
             this.imgDemo = data["logo"];
             this.cont_resolucion = data["cont_resolucion"];
             this.obli_contabilidad = data["obli_contabilidad"];
-            this.reg_microempresa = data["reg_microempresa"];
+            this.tip_regimen = data["tip_regimen"];
             this.age_retencion = data["age_retencion"];
+            this.tip_emision = data["tip_emision"];
             this.firma = data["firma"];
             this.fir_clave = data["fir_clave"];
             this.fir_vencimiento = data["fir_vencimiento"];
-            this.tip_ambiente = data["tip_ambiente"];
-            this.tip_emision = data["tip_emision"];
-            this.corr_servidor = data["corr_servidor"];
-            this.corr_puerto = data["corr_puerto"];
-            this.corr_seguridad = data["corr_seguridad"];
-            this.corr_autenticacion = data["corr_autenticacion"];
-            this.corr_usuario = data["corr_usuario"];
-            this.corr_password = data["corr_password"];
         },
         getImage(e) {
             let file = e.target.files[0];
@@ -562,6 +421,11 @@ export default {
                 this.imgDemo = e.target.result;
             };
             reader.readAsDataURL(file);
+        },
+        selectAmbientes() {
+            axios.get("/api/ambientes").then(resp => {
+                this.arrayAmbiente = resp.data;
+            });
         }
     },
 
@@ -572,6 +436,7 @@ export default {
     },
     mounted() {
         this.detalle();
+        this.selectAmbientes();
     }
 };
 </script>

@@ -15,9 +15,6 @@
             <form>
                 <b class="text-primary">Datos Generales</b>
                 <hr class="mt-0" />
-                <p class="text-red mt-0">
-                    *Ingresar los nombres y apellidos completos
-                </p>
                 <div class="form-group row">
                     <label for="nombres" class="col-sm-2 col-form-label"
                         >Nombres:</label
@@ -26,11 +23,22 @@
                         <input
                             type="text"
                             class="form-control"
-                            placeholder="Nombres."
+                            placeholder="Primer Nombre."
                             maxlength="100"
-                            v-model="nombres"
+                            v-model="nom_primero"
                         />
                     </div>
+                    <div class="col-sm-4">
+                        <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Segundo Nombre."
+                            maxlength="100"
+                            v-model="nom_segundo"
+                        />
+                    </div>
+                </div>
+                <div class="form-group row">
                     <label for="apellidos" class="col-sm-2 col-form-label"
                         >Apellidos:</label
                     >
@@ -38,10 +46,19 @@
                         <input
                             type="text"
                             class="form-control"
-                            placeholder="Apellidos."
+                            placeholder="Primer Apellido."
                             maxlength="100"
-                            @change="getUsername"
-                            v-model="apellidos"
+                            v-model="ape_paterno"
+                            @change="getUsuario"
+                        />
+                    </div>
+                    <div class="col-sm-4">
+                        <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Segundo Apellido."
+                            maxlength="100"
+                            v-model="ape_materno"
                         />
                     </div>
                 </div>
@@ -53,12 +70,16 @@
                     >
                     <div class="col-sm-4">
                         <select
-                            v-model="tip_identificacion"
+                            v-model="tip_identificacion_id"
                             class="form-control"
                         >
                             <option value="0" disabled>Seleccione...</option>
-                            <option value="CED">CÉDULA</option>
-                            <option value="RUC">RUC</option>
+                            <option
+                                v-for="identificacion in arrayIdentificaciones"
+                                :key="identificacion.id"
+                                :value="identificacion.id"
+                                v-text="identificacion.nombre"
+                            ></option>
                         </select>
                     </div>
                     <label
@@ -67,24 +88,15 @@
                         ># Identificación:</label
                     >
                     <div class="col-sm-4">
-                        <template v-if="tip_identificacion === 'CED'">
-                            <input
-                                type="text"
-                                class="form-control"
-                                placeholder="Cédula."
-                                maxlength="10"
-                                v-model="num_identificacion"
-                            />
-                        </template>
-                        <template v-else-if="tip_identificacion === 'RUC'">
-                            <input
-                                type="text"
-                                class="form-control"
-                                placeholder="RUC."
-                                maxlength="13"
-                                v-model="num_identificacion"
-                            />
-                        </template>
+                        <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Cédula."
+                            :maxlength="
+                                tip_identificacion_id == 2 ? '10' : '13'
+                            "
+                            v-model="num_identificacion"
+                        />
                     </div>
                 </div>
                 <div class="form-group row">
@@ -238,9 +250,11 @@ export default {
     data() {
         return {
             rol_id: 0,
-            nombres: "",
-            apellidos: "",
-            tip_identificacion: "0",
+            tip_identificacion_id: 0,
+            nom_primero: "",
+            nom_segundo: "",
+            ape_paterno: "",
+            ape_materno: "",
             num_identificacion: "",
             salario: 0,
             direccion: "",
@@ -251,32 +265,36 @@ export default {
             fec_ingreso: "",
             fec_salida: "",
             arrayRoles: [],
+            arrayIdentificaciones: [],
             errors: []
         };
     },
     methods: {
-        getUsername() {
-            let separado = [];
-            let nombre = "";
-            let apellido = "";
-            separado = this.nombres.split(" ");
-            for (let i = 0; i < separado.length; i++) {
-                const element = separado[i].charAt(0);
-                nombre = nombre + element;
-            }
-            apellido = this.apellidos.split(" ");
-            nombre = nombre + apellido[0];
-            return (this.usuario = this.password = nombre.toLowerCase());
+        getUsuario() {
+            let username = "";
+            if (
+                this.nom_primero != "" ||
+                this.nom_segundo != "" ||
+                this.ape_paterno != ""
+            )
+                username =
+                    this.nom_primero.charAt(0) +
+                    this.nom_segundo.charAt(0) +
+                    this.ape_paterno;
+            return (this.usuario = this.password = username.toLowerCase());
         },
         validaCampos() {
             this.errors = [];
-            if (!this.nombres) {
-                this.errors.push("Ingrese nombres.");
+            if (!this.nom_primero) {
+                this.errors.push("Ingrese Primer Nombre.");
             }
-            if (!this.apellidos) {
-                this.errors.push("Ingrese apellidos.");
+            if (!this.nom_segundo) {
+                this.errors.push("Ingrese Segundo Nombre.");
             }
-            if (this.tip_identificacion == "0") {
+            if (!this.ape_paterno) {
+                this.errors.push("Ingrese Primer apellido.");
+            }
+            if (this.tip_identificacion_id == "0") {
                 this.errors.push("Seleccione tipo de identificación.");
             }
             if (!this.num_identificacion) {
@@ -310,9 +328,11 @@ export default {
                     axios
                         .post("/api/empleado/guardar", {
                             rol_id: this.rol_id,
-                            nombres: this.nombres,
-                            apellidos: this.apellidos,
-                            tip_identificacion: this.tip_identificacion,
+                            tip_identificacion_id: this.tip_identificacion_id,
+                            nom_primero: this.nom_primero,
+                            nom_segundo: this.nom_segundo,
+                            ape_paterno: this.ape_paterno,
+                            ape_materno: this.ape_materno,
                             num_identificacion: this.num_identificacion,
                             salario: this.salario,
                             direccion: this.direccion,
@@ -336,46 +356,21 @@ export default {
                         });
                 }
             });
-            // axios
-            //     .post("/api/empleado/guardar", {
-            //         rol_id: this.rol_id,
-            //         nombres: this.nombres,
-            //         apellidos: this.apellidos,
-            //         tip_identificacion: this.tip_identificacion,
-            //         num_identificacion: this.num_identificacion,
-            //         salario: this.salario,
-            //         direccion: this.direccion,
-            //         telefonos: this.telefonos,
-            //         email: this.email,
-            //         usuario: this.usuario,
-            //         password: this.password,
-            //         fec_ingreso: this.fec_ingreso,
-            //         fec_salida: this.fec_salida
-            //     })
-            //     .then(resp => {
-            //         Swal.fire(
-            //             "Bien!",
-            //             "El registro se guardó con éxito.",
-            //             "success"
-            //         );
-            //         this.$router.push("/empleados");
-            //     })
-            //     .catch(err => {
-            //         Swal.fire(
-            //             "Error!",
-            //             "No se pudo realizar el registro. " + err,
-            //             "error"
-            //         );
-            //     });
         },
         selectRoles() {
             axios.get("/api/roles").then(resp => {
                 this.arrayRoles = resp.data;
             });
+        },
+        selectIdenticaciones() {
+            axios.get("/api/identificacion-empleado").then(resp => {
+                this.arrayIdentificaciones = resp.data;
+            });
         }
     },
     mounted() {
         this.selectRoles();
+        this.selectIdenticaciones();
     }
 };
 </script>

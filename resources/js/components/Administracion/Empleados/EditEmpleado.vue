@@ -3,7 +3,16 @@
         <div class="card-header">
             <h3 class="card-title mt-2">
                 <i class="fas fa-align-justify"></i>
-                Editar Empleado: {{ apellidos + " " + nombres }}
+                Editar Empleado:
+                {{
+                    ape_paterno +
+                        " " +
+                        ape_materno +
+                        " " +
+                        nom_primero +
+                        " " +
+                        nom_segundo
+                }}
             </h3>
             <div class="card-tools">
                 <router-link to="/empleados" class="btn btn-secondary btn-sm">
@@ -23,11 +32,22 @@
                         <input
                             type="text"
                             class="form-control"
-                            placeholder="Nombres."
+                            placeholder="Primer Nombre."
                             maxlength="100"
-                            v-model="nombres"
+                            v-model="nom_primero"
                         />
                     </div>
+                    <div class="col-sm-4">
+                        <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Segundo Nombre."
+                            maxlength="100"
+                            v-model="nom_segundo"
+                        />
+                    </div>
+                </div>
+                <div class="form-group row">
                     <label for="apellidos" class="col-sm-2 col-form-label"
                         >Apellidos:</label
                     >
@@ -35,10 +55,19 @@
                         <input
                             type="text"
                             class="form-control"
-                            placeholder="Apellidos."
+                            placeholder="Primer Apellido."
                             maxlength="100"
-                            @change="getUsername"
-                            v-model="apellidos"
+                            v-model="ape_paterno"
+                            @change="getUsuario"
+                        />
+                    </div>
+                    <div class="col-sm-4">
+                        <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Segundo Apellido."
+                            maxlength="100"
+                            v-model="ape_materno"
                         />
                     </div>
                 </div>
@@ -50,12 +79,16 @@
                     >
                     <div class="col-sm-4">
                         <select
-                            v-model="tip_identificacion"
+                            v-model="tip_identificacion_id"
                             class="form-control"
                         >
                             <option value="0" disabled>Seleccione...</option>
-                            <option value="CED">CÉDULA</option>
-                            <option value="RUC">RUC</option>
+                            <option
+                                v-for="identificacion in arrayIdentificaciones"
+                                :key="identificacion.id"
+                                :value="identificacion.id"
+                                v-text="identificacion.nombre"
+                            ></option>
                         </select>
                     </div>
                     <label
@@ -64,24 +97,15 @@
                         ># Identificación:</label
                     >
                     <div class="col-sm-4">
-                        <template v-if="tip_identificacion === 'CED'">
-                            <input
-                                type="text"
-                                class="form-control"
-                                placeholder="Cédula."
-                                maxlength="10"
-                                v-model="num_identificacion"
-                            />
-                        </template>
-                        <template v-else-if="tip_identificacion === 'RUC'">
-                            <input
-                                type="text"
-                                class="form-control"
-                                placeholder="RUC."
-                                maxlength="13"
-                                v-model="num_identificacion"
-                            />
-                        </template>
+                        <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Cédula."
+                            :maxlength="
+                                tip_identificacion_id == 2 ? '10' : '13'
+                            "
+                            v-model="num_identificacion"
+                        />
                     </div>
                 </div>
                 <div class="form-group row">
@@ -236,9 +260,11 @@ export default {
         return {
             user_id: 0,
             rol_id: 0,
-            nombres: "",
-            apellidos: "",
-            tip_identificacion: "0",
+            tip_identificacion_id: 0,
+            nom_primero: "",
+            nom_segundo: "",
+            ape_paterno: "",
+            ape_materno: "",
             num_identificacion: "",
             salario: 0,
             direccion: "",
@@ -249,6 +275,7 @@ export default {
             fec_ingreso: "",
             fec_salida: "",
             arrayRoles: [],
+            arrayIdentificaciones: [],
             errors: []
         };
     },
@@ -263,9 +290,12 @@ export default {
                 .then(resp => {
                     this.user_id = resp.data["id"];
                     this.rol_id = resp.data["rol_id"];
-                    this.nombres = resp.data["nombres"];
-                    this.apellidos = resp.data["apellidos"];
-                    this.tip_identificacion = resp.data["tip_identificacion"];
+                    this.tip_identificacion_id =
+                        resp.data["tip_identificacion_id"];
+                    this.nom_primero = resp.data["nom_primero"];
+                    this.nom_segundo = resp.data["nom_segundo"];
+                    this.ape_paterno = resp.data["ape_paterno"];
+                    this.ape_materno = resp.data["ape_materno"];
                     this.num_identificacion = resp.data["num_identificacion"];
                     this.salario = resp.data["salario"];
                     this.direccion = resp.data["direccion"];
@@ -277,28 +307,31 @@ export default {
                     this.fec_salida = resp.data["fec_salida"];
                 });
         },
-        getUsername() {
-            let separado = [];
-            let nombre = "";
-            let apellido = "";
-            separado = this.nombres.split(" ");
-            for (let i = 0; i < separado.length; i++) {
-                const element = separado[i].charAt(0);
-                nombre = nombre + element;
-            }
-            apellido = this.apellidos.split(" ");
-            nombre = nombre + apellido[0];
-            return (this.usuario = this.password = nombre.toLowerCase());
+        getUsuario() {
+            let username = "";
+            if (
+                this.nom_primero != "" ||
+                this.nom_segundo != "" ||
+                this.ape_paterno != ""
+            )
+                username =
+                    this.nom_primero.charAt(0) +
+                    this.nom_segundo.charAt(0) +
+                    this.ape_paterno;
+            return (this.usuario = this.password = username.toLowerCase());
         },
         validaCampos() {
             this.errors = [];
-            if (!this.nombres) {
-                this.errors.push("Ingrese nombres.");
+            if (!this.nom_primero) {
+                this.errors.push("Ingrese Primer Nombre.");
             }
-            if (!this.apellidos) {
-                this.errors.push("Ingrese apellidos.");
+            if (!this.nom_segundo) {
+                this.errors.push("Ingrese Segundo Nombre.");
             }
-            if (this.tip_identificacion == "0") {
+            if (!this.ape_paterno) {
+                this.errors.push("Ingrese Primer apellido.");
+            }
+            if (this.tip_identificacion_id == "0") {
                 this.errors.push("Seleccione tipo de identificación.");
             }
             if (!this.num_identificacion) {
@@ -334,9 +367,11 @@ export default {
                         .put("/api/empleado/editar", {
                             id: this.user_id,
                             rol_id: this.rol_id,
-                            nombres: this.nombres,
-                            apellidos: this.apellidos,
-                            tip_identificacion: this.tip_identificacion,
+                            tip_identificacion_id: this.tip_identificacion_id,
+                            nom_primero: this.nom_primero,
+                            nom_segundo: this.nom_segundo,
+                            ape_paterno: this.ape_paterno,
+                            ape_materno: this.ape_materno,
                             num_identificacion: this.num_identificacion,
                             salario: this.salario,
                             direccion: this.direccion,
@@ -365,11 +400,17 @@ export default {
             axios.get("/api/roles").then(resp => {
                 this.arrayRoles = resp.data;
             });
+        },
+        selectIdenticaciones() {
+            axios.get("/api/identificacion-empleado").then(resp => {
+                this.arrayIdentificaciones = resp.data;
+            });
         }
     },
     mounted() {
         this.detalle();
         this.selectRoles();
+        this.selectIdenticaciones();
     }
 };
 </script>
