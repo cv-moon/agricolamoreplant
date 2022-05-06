@@ -20,12 +20,8 @@ class ProductoController extends Controller
             ->select(
                 'productos.id',
                 'productos.nombre',
-                'productos.cod_principal',
-                'productos.composicion',
-                'productos.pre_venta',
                 'productos.por_descuento',
                 'categorias.nombre as categoria',
-                'unidades.sigla as unidad',
                 'tar_agregados.valor as impuesto'
             )
             ->orderBy('categorias.nombre', 'asc')
@@ -42,7 +38,7 @@ class ProductoController extends Controller
             $producto->tar_agregado_id = trim($request->tar_agregado_id);
             $producto->nombre = mb_strtoupper(trim($request->nombre));
             $producto->composicion = mb_strtoupper(trim($request->composicion));
-            $producto->pre_venta = trim($request->pre_venta);
+            $producto->pre_compra = trim($request->pre_compra);
             $producto->por_descuento = trim($request->por_descuento);
             $producto->mar_utilidad = trim($request->mar_utilidad);
             $producto->save();

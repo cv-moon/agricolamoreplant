@@ -49,67 +49,30 @@
                     <label for="composicion" class="col-form-label"
                         >Composición:</label
                     >
-                    <input
-                        type="text"
+                    <textarea
                         class="form-control"
-                        placeholder="Composición."
+                        placeholder="Composición"
                         maxlength="300"
+                        cols="12"
+                        rows="2"
                         v-model="composicion"
-                    />
+                    ></textarea>
                 </div>
             </div>
             <div class="form-group row">
-                <div class="col-sm-4">
-                    <label for="cod_principal" class="col-form-label"
-                        >Cod. Principal:</label
+                <div class="col-md-3">
+                    <label for="pre_venta" class="col-form-label"
+                        >Precio Compra:</label
                     >
-                    <input
-                        type="text"
-                        class="form-control"
-                        placeholder="Código Principal."
-                        maxlength="100"
-                        v-model="cod_principal"
-                    />
-                </div>
-                <div class="col-sm-4">
-                    <label for="cod_auxiliar" class="col-form-label"
-                        >Cod. Auxiliar:</label
-                    >
-                    <input
-                        type="text"
-                        class="form-control"
-                        placeholder="Código Auxiliar."
-                        maxlength="100"
-                        v-model="cod_auxiliar"
-                    />
-                </div>
-                <div class="col-sm-4">
-                    <label for="categoria_id" class="col-form-label"
-                        >U. Presentación:</label
-                    >
-                    <select v-model="unidad_id" class="form-control">
-                        <option value="0" disabled>Seleccione...</option>
-                        <option
-                            v-for="unidad in arrayUnidades"
-                            :key="unidad.id"
-                            :value="unidad.id"
-                            v-text="unidad.nombre"
-                        ></option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-md-4">
-                    <label for="pre_venta" class="col-form-label">P.V.P:</label>
                     <input
                         type="number"
                         class="form-control"
                         placeholder="0.000"
                         min="0"
-                        v-model="pre_venta"
+                        v-model="pre_compra"
                     />
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <label for="por_descuento" class="col-form-label"
                         >Descuento (%):</label
                     >
@@ -121,11 +84,23 @@
                         v-model="por_descuento"
                     />
                 </div>
-                <div class="col-md-4">
-                    <label for="tarifa_id" class="col-form-label"
+                <div class="col-md-3">
+                    <label for="por_descuento" class="col-form-label"
+                        >Margen Utilidad:</label
+                    >
+                    <input
+                        type="number"
+                        class="form-control"
+                        placeholder="0.00"
+                        min="0"
+                        v-model="mar_utilidad"
+                    />
+                </div>
+                <div class="col-md-3">
+                    <label for="tar_agregado_id" class="col-form-label"
                         >Impuesto:</label
                     >
-                    <select v-model="tarifa_id" class="form-control">
+                    <select v-model="tar_agregado_id" class="form-control">
                         <option value="0" disabled>Seleccione...</option>
                         <option
                             v-for="impuesto in arrayImpuestos"
@@ -135,6 +110,100 @@
                         ></option>
                     </select>
                 </div>
+            </div>
+            <b class="text-primary">Presentaciones del producto</b>
+            <hr class="mt-0" />
+            <div class="form-group row table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Acción</th>
+                            <th>Cod. Principal</th>
+                            <th>Cod. Auxiliar</th>
+                            <th>Presentación</th>
+                            <th>P.V.P.</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr
+                            v-for="presentacion in arrayPresentaciones"
+                            :key="presentacion.id"
+                        >
+                            <td align="center">
+                                <button
+                                    @click="
+                                        eliminarPresentacion(presentacion.id)
+                                    "
+                                    title="Eliminar Presentación"
+                                    type="button"
+                                    class="btn btn-danger btn-xs"
+                                >
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </td>
+                            <td>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    placeholder="Cod. Principal"
+                                    maxlength="15"
+                                    v-model="presentacion.cod_principal"
+                                />
+                            </td>
+                            <td>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    placeholder="Cod. Principal"
+                                    maxlength="15"
+                                    v-model="presentacion.cod_auxiliar"
+                                />
+                            </td>
+                            <td>
+                                <div class="input-group">
+                                    <input
+                                        type="number"
+                                        class="form-control"
+                                        min="1"
+                                        v-model="presentacion.presentacion"
+                                    />
+                                    <div class="input-group-append">
+                                        <select
+                                            v-model="presentacion.unidad_id"
+                                            class="form-control"
+                                        >
+                                            <option value="0" disabled
+                                                >Sel.</option
+                                            >
+                                            <option
+                                                v-for="unidad in arrayUnidades"
+                                                :key="unidad.id"
+                                                :value="unidad.id"
+                                                v-text="unidad.sigla"
+                                            ></option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <input
+                                    type="number"
+                                    class="form-control"
+                                    placeholder="0.00"
+                                    min="0"
+                                    v-model="presentacion.pre_venta"
+                                />
+                            </td>
+                        </tr>
+                        <tr align="center">
+                            <td colspan="5">
+                                <button class="btn btn-success btn-xs">
+                                    <i class="fas fa-plus"></i> Agregar
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
             <div v-if="errors.length" class="alert alert-danger">
                 <div>
@@ -159,14 +228,13 @@ export default {
     data() {
         return {
             categoria_id: 0,
-            unidad_id: 0,
-            tarifa_id: 0,
+            tar_agregado_id: 0,
             nombre: "",
-            cod_principal: "",
-            cod_auxiliar: "",
             composicion: "",
-            pre_venta: 0,
+            pre_compra: 0,
             por_descuento: 0,
+            mar_utilidad: 0,
+            arrayPresentaciones: [],
             arrayCategorias: [],
             arrayUnidades: [],
             arrayImpuestos: [],
@@ -193,20 +261,11 @@ export default {
                         }
                     });
             }
-            if (this.unidad_id == 0) {
-                this.errors.push("Seleccione Unidad de Presentación");
-            }
             if (this.categoria_id == 0) {
                 this.errors.push("Seleccione Categoria.");
             }
-            if (!this.cod_principal) {
-                this.errors.push("Ingrese Código Principal.");
-            }
-            if (this.tarifa_id == 0) {
+            if (this.tar_agregado_id == 0) {
                 this.errors.push("Seleccione Impuesto.");
-            }
-            if (!this.pre_venta) {
-                this.errors.push("Ingrese P.V.P.");
             }
             if (!this.por_descuento) {
                 this.errors.push("Ingrese (%) Descuento.");
@@ -227,14 +286,13 @@ export default {
                     axios
                         .post("/api/producto/guardar", {
                             categoria_id: this.categoria_id,
-                            unidad_id: this.unidad_id,
-                            tarifa_id: this.tarifa_id,
+                            tar_agregado_id: this.tar_agregado_id,
                             nombre: this.nombre,
                             composicion: this.composicion,
-                            cod_principal: this.cod_principal,
-                            cod_auxiliar: this.cod_auxiliar,
-                            pre_venta: this.pre_venta,
-                            por_descuento: this.por_descuento
+                            pre_compra: this.pre_compra,
+                            mar_utilidad: this.mar_utilidad,
+                            por_descuento: this.por_descuento,
+                            presentaciones: this.arrayPresentaciones
                         })
                         .then(resp => {
                             Swal.fire(
