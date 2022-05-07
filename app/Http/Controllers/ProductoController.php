@@ -14,13 +14,17 @@ class ProductoController extends Controller
 {
     public function index()
     {
-        $productos = Producto::join('categorias', 'productos.categoria_id', 'categorias.id')
-            ->join('presentaciones', 'productos.presentacion_id', 'presentaciones.id')
+        $productos = Presentacion::join('productos', 'presentaciones.producto_id', 'productos.id')
+            ->join('categorias', 'productos.categoria_id', 'categorias.id')
             ->join('tar_agregados', 'productos.tar_agregado_id', 'tar_agregados.id')
+            ->join('unidades', 'presentaciones.unidad_id', 'unidades.id')
             ->select(
-                'productos.id',
+                'presentaciones.id',
+                'presentaciones.cod_principal',
+                'presentaciones.presentacion',
+                'presentaciones.pre_venta',
                 'productos.nombre',
-                'productos.por_descuento',
+                'unidades.sigla',
                 'categorias.nombre as categoria',
                 'tar_agregados.valor as impuesto'
             )
