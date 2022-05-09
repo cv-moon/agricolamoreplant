@@ -23,7 +23,6 @@
             <th>Categoría</th>
             <th>Nombre</th>
             <th>Cod. Prin.</th>
-            <th>Composición</th>
             <th>Presentación</th>
             <th>P.V.P.</th>
             <th>Desc.</th>
@@ -45,8 +44,7 @@
             <td v-text="producto.categoria"></td>
             <td v-text="producto.nombre"></td>
             <td v-text="producto.cod_principal"></td>
-            <td v-text="producto.composicion"></td>
-            <td v-text="producto.unidad"></td>
+            <td v-text="producto.presentacion + ' ' + producto.sigla"></td>
             <td v-text="producto.pre_venta"></td>
             <td v-text="producto.por_descuento"></td>
             <td v-text="producto.impuesto"></td>

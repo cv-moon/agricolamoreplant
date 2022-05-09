@@ -24,6 +24,7 @@ class ProductoController extends Controller
                 'presentaciones.presentacion',
                 'presentaciones.pre_venta',
                 'productos.nombre',
+                'productos.por_descuento',
                 'unidades.sigla',
                 'categorias.nombre as categoria',
                 'tar_agregados.valor as impuesto'
