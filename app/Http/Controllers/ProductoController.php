@@ -99,19 +99,23 @@ class ProductoController extends Controller
 
     public function detail(Request $request)
     {
-        $producto = Producto::select(
-            'id',
-            'categoria_id',
-            'unidad_id',
-            'tarifa_id',
-            'cod_principal',
-            'cod_auxiliar',
-            'nombre',
-            'composicion',
-            'pre_venta',
-            'por_descuento'
+        $producto = Presentacion::join('productos', 'presentaciones.producto_id', 'productos.id')
+        ->select(
+            'presentaciones.id',
+            'presentaciones.unidad_id',
+            'presentaciones.cod_principal',
+            'presentaciones.cod_auxiliar',
+            'presentaciones.presentacion',
+            'presentaciones.pre_venta',
+            'productos.categoria_id',
+            'productos.tar_agregado_id',
+            'productos.nombre',
+            'productos.composicion',
+            'productos.pre_compra',
+            'productos.por_descuento',
+            'productos.mar_utilidad',
         )
-            ->where('id', $request->id)
+            ->where('presentaciones.id', $request->id)
             ->first();
         return $producto;
     }

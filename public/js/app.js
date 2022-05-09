@@ -7800,6 +7800,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -7932,6 +7945,9 @@ __webpack_require__.r(__webpack_exports__);
         unidad_id: 0,
         pre_venta: 0
       });
+    },
+    deletePresentacion: function deletePresentacion(index) {
+      this.arrayPresentaciones.splice(index, 1);
     }
   },
   mounted: function mounted() {
@@ -8161,24 +8177,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      producto_id: 0,
+      presentacion_id: 0,
       categoria_id: 0,
       tar_agregado_id: 0,
+      unidad_id: 0,
       nombre: "",
       composicion: "",
       pre_compra: 0,
       por_descuento: 0,
       mar_utilidad: 0,
-      arrayPresentaciones: [],
+      cod_principal: "",
+      cod_auxiliar: "",
+      presentacion: "",
+      pre_venta: 0,
       arrayCategorias: [],
       arrayUnidades: [],
       arrayImpuestos: [],
@@ -8194,16 +8208,19 @@ __webpack_require__.r(__webpack_exports__);
           id: this.$route.params.id
         }
       }).then(function (resp) {
-        _this.producto_id = resp.data["id"];
+        _this.presentacion_id = resp.data["id"];
         _this.categoria_id = resp.data["categoria_id"];
         _this.unidad_id = resp.data["unidad_id"];
-        _this.tarifa_id = resp.data["tarifa_id"];
+        _this.tar_agregado_id = resp.data["tar_agregado_id"];
         _this.nombre = resp.data["nombre"];
         _this.cod_principal = resp.data["cod_principal"];
         _this.cod_auxiliar = resp.data["cod_auxiliar"];
         _this.composicion = resp.data["composicion"];
         _this.pre_venta = resp.data["pre_venta"];
+        _this.pre_compra = resp.data["pre_compra"];
+        _this.mar_utilidad = resp.data["mar_utilidad"];
         _this.por_descuento = resp.data["por_descuento"];
+        _this.presentacion = resp.data["presentacion"];
       });
     },
     validaCampos: function validaCampos() {
@@ -8249,8 +8266,7 @@ __webpack_require__.r(__webpack_exports__);
             composicion: _this2.composicion,
             pre_compra: _this2.pre_compra,
             mar_utilidad: _this2.mar_utilidad,
-            por_descuento: _this2.por_descuento,
-            presentaciones: _this2.arrayPresentaciones
+            por_descuento: _this2.por_descuento
           }).then(function (resp) {
             Swal.fire("Bien!", "El registro se guardó con éxito.", "success");
 
@@ -8271,7 +8287,7 @@ __webpack_require__.r(__webpack_exports__);
     selectImpuesto: function selectImpuesto() {
       var _this4 = this;
 
-      axios.get("/api/tarifas").then(function (resp) {
+      axios.get("/api/tarifas-iva").then(function (resp) {
         _this4.arrayImpuestos = resp.data;
       });
     },
@@ -8321,6 +8337,12 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -89008,7 +89030,7 @@ var render = function() {
             },
             [
               _c("i", { staticClass: "fas fa-arrow-left" }),
-              _vm._v(" Regresar\n      ")
+              _vm._v(" Regresar\n            ")
             ]
           )
         ],
@@ -89325,7 +89347,7 @@ var render = function() {
                           },
                           on: {
                             click: function($event) {
-                              return _vm.eliminarPresentacion(presentacion.id)
+                              return _vm.deletePresentacion(presentacion.id)
                             }
                           }
                         },
@@ -89530,7 +89552,7 @@ var render = function() {
                       },
                       [
                         _c("i", { staticClass: "fas fa-plus" }),
-                        _vm._v(" Agregar\n              ")
+                        _vm._v(" Agregar\n                            ")
                       ]
                     )
                   ])
@@ -89548,7 +89570,11 @@ var render = function() {
               "div",
               _vm._l(_vm.errors, function(error) {
                 return _c("div", { key: error }, [
-                  _vm._v("\n          " + _vm._s(error) + "\n        ")
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(error) +
+                      "\n                "
+                  )
                 ])
               }),
               0
@@ -89564,7 +89590,7 @@ var render = function() {
         _c(
           "router-link",
           { staticClass: "btn btn-danger", attrs: { to: "/productos" } },
-          [_vm._v("\n      Cancelar\n    ")]
+          [_vm._v("\n            Cancelar\n        ")]
         ),
         _vm._v(" "),
         _c(
@@ -89574,7 +89600,7 @@ var render = function() {
             attrs: { type: "button" },
             on: { click: _vm.guardar }
           },
-          [_vm._v("\n      Guardar\n    ")]
+          [_vm._v("\n            Guardar\n        ")]
         )
       ],
       1
@@ -89588,7 +89614,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("h3", { staticClass: "card-title mt-2" }, [
       _c("i", { staticClass: "fas fa-align-justify" }),
-      _vm._v("\n      Agregar Producto\n    ")
+      _vm._v("\n            Agregar Producto\n        ")
     ])
   },
   function() {
@@ -89635,7 +89661,9 @@ var render = function() {
     _c("div", { staticClass: "card-header" }, [
       _c("h3", { staticClass: "card-title mt-2" }, [
         _c("i", { staticClass: "fas fa-align-justify" }),
-        _vm._v("\n      Editar Producto: " + _vm._s(_vm.nombre) + "\n    ")
+        _vm._v(
+          "\n            Editar Producto: " + _vm._s(_vm.nombre) + "\n        "
+        )
       ]),
       _vm._v(" "),
       _c(
@@ -89650,7 +89678,7 @@ var render = function() {
             },
             [
               _c("i", { staticClass: "fas fa-arrow-left" }),
-              _vm._v(" Regresar\n      ")
+              _vm._v(" Regresar\n            ")
             ]
           )
         ],
@@ -89683,23 +89711,21 @@ var render = function() {
                 }
               ],
               staticClass: "form-control",
+              attrs: { disabled: "" },
               on: {
-                change: [
-                  function($event) {
-                    var $$selectedVal = Array.prototype.filter
-                      .call($event.target.options, function(o) {
-                        return o.selected
-                      })
-                      .map(function(o) {
-                        var val = "_value" in o ? o._value : o.value
-                        return val
-                      })
-                    _vm.categoria_id = $event.target.multiple
-                      ? $$selectedVal
-                      : $$selectedVal[0]
-                  },
-                  _vm.getCodigo
-                ]
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.categoria_id = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
+                }
               }
             },
             [
@@ -89738,7 +89764,12 @@ var render = function() {
               }
             ],
             staticClass: "form-control col-sm-9",
-            attrs: { type: "text", placeholder: "Nombre.", maxlength: "300" },
+            attrs: {
+              type: "text",
+              placeholder: "Nombre.",
+              maxlength: "300",
+              readonly: ""
+            },
             domProps: { value: _vm.nombre },
             on: {
               input: function($event) {
@@ -89774,7 +89805,8 @@ var render = function() {
               placeholder: "Composición",
               maxlength: "300",
               cols: "12",
-              rows: "2"
+              rows: "2",
+              readonly: ""
             },
             domProps: { value: _vm.composicion },
             on: {
@@ -89807,7 +89839,12 @@ var render = function() {
               }
             ],
             staticClass: "form-control",
-            attrs: { type: "number", placeholder: "0.000", min: "0" },
+            attrs: {
+              type: "number",
+              placeholder: "0.000",
+              min: "0",
+              readonly: ""
+            },
             domProps: { value: _vm.pre_compra },
             on: {
               input: function($event) {
@@ -89837,7 +89874,12 @@ var render = function() {
               }
             ],
             staticClass: "form-control",
-            attrs: { type: "number", placeholder: "0.00", min: "0" },
+            attrs: {
+              type: "number",
+              placeholder: "0.00",
+              min: "0",
+              readonly: ""
+            },
             domProps: { value: _vm.por_descuento },
             on: {
               input: function($event) {
@@ -89867,7 +89909,12 @@ var render = function() {
               }
             ],
             staticClass: "form-control",
-            attrs: { type: "number", placeholder: "0.00", min: "0" },
+            attrs: {
+              type: "number",
+              placeholder: "0.00",
+              min: "0",
+              readonly: ""
+            },
             domProps: { value: _vm.mar_utilidad },
             on: {
               input: function($event) {
@@ -89902,6 +89949,7 @@ var render = function() {
                 }
               ],
               staticClass: "form-control",
+              attrs: { disabled: "" },
               on: {
                 change: function($event) {
                   var $$selectedVal = Array.prototype.filter
@@ -89944,244 +89992,187 @@ var render = function() {
       _vm._v(" "),
       _c("hr", { staticClass: "mt-0" }),
       _vm._v(" "),
-      _c("div", { staticClass: "form-group row table-responsive" }, [
-        _c(
-          "table",
-          { staticClass: "table table-bordered table-striped table-sm" },
-          [
-            _vm._m(0),
-            _vm._v(" "),
-            _c(
-              "tbody",
-              [
-                _vm._l(_vm.arrayPresentaciones, function(presentacion) {
-                  return _c("tr", { key: presentacion.id }, [
-                    _c("td", { attrs: { align: "center" } }, [
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-danger btn-xs",
-                          attrs: {
-                            title: "Eliminar Presentación",
-                            type: "button"
-                          },
-                          on: {
-                            click: function($event) {
-                              return _vm.eliminarPresentacion(presentacion.id)
-                            }
-                          }
-                        },
-                        [_c("i", { staticClass: "fas fa-trash-alt" })]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("td", [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: presentacion.cod_principal,
-                            expression: "presentacion.cod_principal"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: {
-                          type: "text",
-                          placeholder: "Cod. Principal",
-                          maxlength: "15"
-                        },
-                        domProps: { value: presentacion.cod_principal },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(
-                              presentacion,
-                              "cod_principal",
-                              $event.target.value
-                            )
-                          }
-                        }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c("td", [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: presentacion.cod_auxiliar,
-                            expression: "presentacion.cod_auxiliar"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: {
-                          type: "text",
-                          placeholder: "Cod. Principal",
-                          maxlength: "15"
-                        },
-                        domProps: { value: presentacion.cod_auxiliar },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(
-                              presentacion,
-                              "cod_auxiliar",
-                              $event.target.value
-                            )
-                          }
-                        }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c("td", [
-                      _c("div", { staticClass: "input-group" }, [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: presentacion.presentacion,
-                              expression: "presentacion.presentacion"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: { type: "number", min: "1" },
-                          domProps: { value: presentacion.presentacion },
-                          on: {
-                            change: _vm.getCodigo,
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                presentacion,
-                                "presentacion",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "input-group-append" }, [
-                          _c(
-                            "select",
-                            {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: presentacion.unidad_id,
-                                  expression: "presentacion.unidad_id"
-                                }
-                              ],
-                              staticClass: "form-control",
-                              on: {
-                                change: [
-                                  function($event) {
-                                    var $$selectedVal = Array.prototype.filter
-                                      .call($event.target.options, function(o) {
-                                        return o.selected
-                                      })
-                                      .map(function(o) {
-                                        var val =
-                                          "_value" in o ? o._value : o.value
-                                        return val
-                                      })
-                                    _vm.$set(
-                                      presentacion,
-                                      "unidad_id",
-                                      $event.target.multiple
-                                        ? $$selectedVal
-                                        : $$selectedVal[0]
-                                    )
-                                  },
-                                  _vm.getCodigo
-                                ]
-                              }
-                            },
-                            [
-                              _c(
-                                "option",
-                                { attrs: { value: "0", disabled: "" } },
-                                [_vm._v("Sel.")]
-                              ),
-                              _vm._v(" "),
-                              _vm._l(_vm.arrayUnidades, function(unidad) {
-                                return _c("option", {
-                                  key: unidad.id,
-                                  domProps: {
-                                    value: unidad.id,
-                                    textContent: _vm._s(unidad.sigla)
-                                  }
-                                })
-                              })
-                            ],
-                            2
-                          )
-                        ])
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("td", [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: presentacion.pre_venta,
-                            expression: "presentacion.pre_venta"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: {
-                          type: "number",
-                          placeholder: "0.00",
-                          min: "0"
-                        },
-                        domProps: { value: presentacion.pre_venta },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(
-                              presentacion,
-                              "pre_venta",
-                              $event.target.value
-                            )
-                          }
-                        }
-                      })
-                    ])
-                  ])
-                }),
-                _vm._v(" "),
-                _c("tr", { attrs: { align: "center" } }, [
-                  _c("td", { attrs: { colspan: "5" } }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-success btn-xs",
-                        on: { click: _vm.addPresentacion }
-                      },
-                      [
-                        _c("i", { staticClass: "fas fa-plus" }),
-                        _vm._v(" Agregar\n              ")
-                      ]
-                    )
-                  ])
-                ])
+      _c("div", { staticClass: "form-group row" }, [
+        _c("div", { staticClass: "col-sm-3" }, [
+          _c(
+            "label",
+            { staticClass: "col-form-label", attrs: { for: "cod_principal" } },
+            [_vm._v("Cod. Principal:")]
+          ),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.cod_principal,
+                expression: "cod_principal"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: {
+              type: "text",
+              placeholder: "Código Principal.",
+              maxlength: "15"
+            },
+            domProps: { value: _vm.cod_principal },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.cod_principal = $event.target.value
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-sm-3" }, [
+          _c(
+            "label",
+            { staticClass: "col-form-label", attrs: { for: "cod_auxiliar" } },
+            [_vm._v("Cod. Auxiliar:")]
+          ),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.cod_auxiliar,
+                expression: "cod_auxiliar"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: {
+              type: "text",
+              placeholder: "Código Auxiliar.",
+              maxlength: "15"
+            },
+            domProps: { value: _vm.cod_auxiliar },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.cod_auxiliar = $event.target.value
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-sm-3" }, [
+          _c(
+            "label",
+            { staticClass: "col-form-label", attrs: { for: "cod_auxiliar" } },
+            [_vm._v("Presentación:")]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "input-group" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.presentacion,
+                  expression: "presentacion"
+                }
               ],
-              2
-            )
-          ]
-        )
+              staticClass: "form-control",
+              attrs: { type: "number", min: "1", disabled: "" },
+              domProps: { value: _vm.presentacion },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.presentacion = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "input-group-append" }, [
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.unidad_id,
+                      expression: "unidad_id"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  on: {
+                    change: [
+                      function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.unidad_id = $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      },
+                      _vm.getCodigo
+                    ]
+                  }
+                },
+                [
+                  _c("option", { attrs: { value: "0", disabled: "" } }, [
+                    _vm._v("Sel.")
+                  ]),
+                  _vm._v(" "),
+                  _vm._l(_vm.arrayUnidades, function(unidad) {
+                    return _c("option", {
+                      key: unidad.id,
+                      domProps: {
+                        value: unidad.id,
+                        textContent: _vm._s(unidad.sigla)
+                      }
+                    })
+                  })
+                ],
+                2
+              )
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-sm-3" }, [
+          _c(
+            "label",
+            { staticClass: "col-form-label", attrs: { for: "pre_venta" } },
+            [_vm._v("P.V.P.:")]
+          ),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.pre_venta,
+                expression: "pre_venta"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "number", placeholder: "0", min: "0" },
+            domProps: { value: _vm.pre_venta },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.pre_venta = $event.target.value
+              }
+            }
+          })
+        ])
       ]),
       _vm._v(" "),
       _vm.errors.length
@@ -90190,7 +90181,11 @@ var render = function() {
               "div",
               _vm._l(_vm.errors, function(error) {
                 return _c("div", { key: error }, [
-                  _vm._v("\n          " + _vm._s(error) + "\n        ")
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(error) +
+                      "\n                "
+                  )
                 ])
               }),
               0
@@ -90206,7 +90201,7 @@ var render = function() {
         _c(
           "router-link",
           { staticClass: "btn btn-danger", attrs: { to: "/productos" } },
-          [_vm._v("\n      Cancelar\n    ")]
+          [_vm._v("\n            Cancelar\n        ")]
         ),
         _vm._v(" "),
         _c(
@@ -90216,33 +90211,14 @@ var render = function() {
             attrs: { type: "button" },
             on: { click: _vm.editar }
           },
-          [_vm._v("\n      Actualizar\n    ")]
+          [_vm._v("\n            Actualizar\n        ")]
         )
       ],
       1
     )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", { staticClass: "text-center" }, [_vm._v("Acción")]),
-        _vm._v(" "),
-        _c("th", { staticClass: "text-center" }, [_vm._v("Cod. Principal")]),
-        _vm._v(" "),
-        _c("th", { staticClass: "text-center" }, [_vm._v("Cod. Auxiliar")]),
-        _vm._v(" "),
-        _c("th", { staticClass: "text-center" }, [_vm._v("Presentación")]),
-        _vm._v(" "),
-        _c("th", { staticClass: "text-center" }, [_vm._v("P.V.P.")])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -90278,7 +90254,10 @@ var render = function() {
               staticClass: "btn btn-success",
               attrs: { to: "/productos/agregar" }
             },
-            [_c("i", { staticClass: "fas fa-plus" }), _vm._v(" Nuevo\n      ")]
+            [
+              _c("i", { staticClass: "fas fa-plus" }),
+              _vm._v(" Nuevo\n            ")
+            ]
           )
         ],
         1
@@ -90325,19 +90304,19 @@ var render = function() {
                 }),
                 _vm._v(" "),
                 _c("td", {
-                  domProps: { textContent: _vm._s(producto.nombre) }
+                  domProps: {
+                    textContent: _vm._s(
+                      producto.nombre +
+                        " " +
+                        producto.presentacion +
+                        " " +
+                        producto.sigla
+                    )
+                  }
                 }),
                 _vm._v(" "),
                 _c("td", {
                   domProps: { textContent: _vm._s(producto.cod_principal) }
-                }),
-                _vm._v(" "),
-                _c("td", {
-                  domProps: {
-                    textContent: _vm._s(
-                      producto.presentacion + " " + producto.sigla
-                    )
-                  }
                 }),
                 _vm._v(" "),
                 _c("td", {
@@ -90367,7 +90346,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("h3", { staticClass: "card-title mt-2" }, [
       _c("i", { staticClass: "fas fa-align-justify" }),
-      _vm._v("\n      Productos\n    ")
+      _vm._v("\n            Productos\n        ")
     ])
   },
   function() {
@@ -90383,8 +90362,6 @@ var staticRenderFns = [
         _c("th", [_vm._v("Nombre")]),
         _vm._v(" "),
         _c("th", [_vm._v("Cod. Prin.")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Presentación")]),
         _vm._v(" "),
         _c("th", [_vm._v("P.V.P.")]),
         _vm._v(" "),
@@ -129782,7 +129759,7 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/cvdev/Documentos/Proyectos/moreplant/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\cristian.chuquitarco\Documents\Projects\agricolamoreplant\resources\js\app.js */"./resources/js/app.js");
 
 
 /***/ }),
