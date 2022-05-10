@@ -17,15 +17,15 @@
                 <hr class="mt-0" />
                 <div class="form-group row">
                     <label for="nombre" class="col-sm-2 col-form-label"
-                        >Nombre:</label
+                        >Nombre/Razón Social:</label
                     >
-                    <div class="col-sm-6">
+                    <div class="col-sm-10">
                         <input
                             type="text"
                             class="form-control"
-                            placeholder="Nombre."
+                            placeholder="Nombre/Razón Social."
                             maxlength="100"
-                            v-model="nombre"
+                            v-model="raz_social"
                         />
                     </div>
                 </div>
@@ -35,15 +35,18 @@
                         class="col-sm-2 col-form-label"
                         >Tipo Identificación:</label
                     >
-                    <div class="col-sm-4">
+                    <div class="col-sm-2">
                         <select
-                            v-model="tip_identificacion"
+                            v-model="tip_identificacion_id"
                             class="form-control"
                         >
                             <option value="0" disabled>Seleccione...</option>
-                            <option value="CED">CÉDULA</option>
-                            <option value="RUC">RUC</option>
-                            <option value="S/N">S/N</option>
+                            <option
+                                v-for="identificacion in arrayIdentificaciones"
+                                :key="identificacion.id"
+                                :value="identificacion.id"
+                                v-text="identificacion.nombre"
+                            ></option>
                         </select>
                     </div>
                     <label
@@ -51,40 +54,28 @@
                         class="col-sm-2 col-form-label"
                         ># Identificación:</label
                     >
-                    <div class="col-sm-4">
-                        <template v-if="tip_identificacion === 'CED'">
-                            <input
-                                type="text"
-                                class="form-control"
-                                placeholder="Cédula."
-                                maxlength="10"
-                                v-model="num_identificacion"
-                            />
-                        </template>
-                        <template v-else-if="tip_identificacion === 'RUC'">
-                            <input
-                                type="text"
-                                class="form-control"
-                                placeholder="RUC."
-                                maxlength="13"
-                                v-model="num_identificacion"
-                            />
-                        </template>
-                        <template
-                            v-else-if="
-                                tip_identificacion === 'SELECCIONE' ||
-                                    tip_identificacion === 'S/N'
+                    <div class="col-sm-2">
+                        <input
+                            type="text"
+                            class="form-control"
+                            placeholder="No. Identificación."
+                            :maxlength="
+                                tip_identificacion_id == 2 ? '10' : '13'
                             "
-                        >
-                            <input
-                                type="text"
-                                class="form-control"
-                                placeholder="Sin numeración."
-                                maxlength="13"
-                                disabled
-                                v-model="num_identificacion"
-                            />
-                        </template>
+                            v-model="num_identificacion"
+                        />
+                    </div>
+                    <label for="localidad" class="col-sm-2 col-form-label"
+                        >Localidad/Ciudad:</label
+                    >
+                    <div class="col-sm-2">
+                        <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Localidad."
+                            maxlength="100"
+                            v-model="localidad"
+                        />
                     </div>
                 </div>
                 <div class="form-group row">
@@ -96,28 +87,16 @@
                             type="text"
                             class="form-control"
                             placeholder="Dirección."
-                            maxlength="200"
+                            maxlength="300"
                             v-model="direccion"
                         />
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="telefonos" class="col-sm-2 col-form-label"
-                        >Teléfonos:</label
-                    >
-                    <div class="col-sm-4">
-                        <input
-                            type="text"
-                            class="form-control"
-                            placeholder="Teléfonos."
-                            maxlength="50"
-                            v-model="telefonos"
-                        />
-                    </div>
                     <label for="email" class="col-sm-2 col-form-label"
-                        >Site/e-mail:</label
+                        >Correo para retención:</label
                     >
-                    <div class="col-sm-4">
+                    <div class="col-sm-10">
                         <input
                             type="email"
                             class="form-control"
@@ -127,31 +106,29 @@
                         />
                     </div>
                 </div>
-                <b class="text-primary">Información del Contacto</b>
-                <hr class="mt-0" />
                 <div class="form-group row">
-                    <label for="nom_contacto" class="col-sm-2 col-form-label"
-                        >Nombre:</label
+                    <label for="telefonos" class="col-sm-2 col-form-label"
+                        >Telefono 1:</label
                     >
                     <div class="col-sm-4">
                         <input
                             type="text"
                             class="form-control"
-                            placeholder="Nombre."
-                            maxlength="100"
-                            v-model="nom_contacto"
+                            placeholder="Tel. 1."
+                            maxlength="10"
+                            v-model="tel_uno"
                         />
                     </div>
-                    <label for="tel_contacto" class="col-sm-2 col-form-label"
-                        >Teléfonos:</label
+                    <label for="telefonos" class="col-sm-2 col-form-label"
+                        >Teléfono 2:</label
                     >
                     <div class="col-sm-4">
                         <input
                             type="text"
                             class="form-control"
-                            placeholder="Teléfonos."
-                            maxlength="50"
-                            v-model="tel_contacto"
+                            placeholder="Tel. 2."
+                            maxlength="10"
+                            v-model="tel_dos"
                         />
                     </div>
                 </div>
@@ -176,28 +153,32 @@
 export default {
     data() {
         return {
-            nombre: "",
-            tip_identificacion: "0",
+            tip_identificacion_id: 0,
+            raz_social: "",
             num_identificacion: "",
+            localidad: "",
             direccion: "",
-            telefonos: "",
             email: "",
-            nom_contacto: "",
-            tel_contacto: "",
+            tel_uno: "",
+            tel_dos: "",
+            arrayIdentificaciones: [],
             errors: []
         };
     },
     methods: {
         validaCampos() {
             this.errors = [];
-            if (!this.nombre) {
-                this.errors.push("Ingrese nombre.");
+            if (!this.raz_social) {
+                this.errors.push("Ingrese razón social.");
             }
-            if (this.tip_identificacion == "0") {
+            if (this.tip_identificacion_id == 0) {
                 this.errors.push("Seleccione tipo de identificación.");
             }
             if (!this.num_identificacion) {
                 this.errors.push("Ingrese número de identificación.");
+            }
+            if (!this.tel_uno) {
+                this.errors.push("Ingrese al menos un teléfono.");
             }
             return this.errors;
         },
@@ -215,14 +196,14 @@ export default {
 
                     axios
                         .post("/api/proveedor/guardar", {
-                            nombre: this.nombre,
-                            tip_identificacion: this.tip_identificacion,
+                            tip_identificacion_id: this.tip_identificacion_id,
+                            raz_social: this.raz_social,
                             num_identificacion: this.num_identificacion,
+                            localidad: this.localidad,
                             direccion: this.direccion,
-                            telefonos: this.telefonos,
                             email: this.email,
-                            nom_contacto: this.nom_contacto,
-                            tel_contacto: this.tel_contacto
+                            tel_uno: this.tel_uno,
+                            tel_dos: this.tel_dos
                         })
                         .then(resp => {
                             Swal.fire(
@@ -237,7 +218,15 @@ export default {
                         });
                 }
             });
+        },
+        selectIdenticaciones() {
+            axios.get("/api/identificaciones").then(resp => {
+                this.arrayIdentificaciones = resp.data;
+            });
         }
+    },
+    mounted() {
+        this.selectIdenticaciones();
     }
 };
 </script>

@@ -42,7 +42,7 @@ Route::middleware('auth')->group(function () {
     Route::get('api/roles', 'RolController@index');
     
     // Identificaciones
-    Route::get('api/identificaciones', 'TipoIdentificacionController@index');
+    Route::get('api/identificaciones', 'TipoIdentificacionController@identityProvider');
     Route::get('api/identificacion-empleado', 'TipoIdentificacionController@identityEmployees');
 
 

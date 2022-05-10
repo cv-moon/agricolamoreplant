@@ -283,14 +283,11 @@ export default {
                     Swal.showLoading();
                     axios
                         .put("/api/producto/editar", {
-                            id: this.producto_id,
-                            categoria_id: this.categoria_id,
-                            tar_agregado_id: this.tar_agregado_id,
-                            nombre: this.nombre,
-                            composicion: this.composicion,
-                            pre_compra: this.pre_compra,
-                            mar_utilidad: this.mar_utilidad,
-                            por_descuento: this.por_descuento
+                            id: this.presentacion_id,
+                            unidad_id: this.unidad_id,
+                            cod_principal: this.cod_principal,
+                            cod_auxiliar: this.cod_auxiliar,
+                            pre_venta: this.pre_venta
                         })
                         .then(resp => {
                             Swal.fire(

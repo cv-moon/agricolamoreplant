@@ -9,18 +9,16 @@ class ProveedorController extends Controller
 {
     public function index()
     {
-        $proveedores = Proveedor::select(
-            'id',
-            'nombre',
-            'tip_identificacion',
-            'num_identificacion',
-            'direccion',
-            'telefonos',
-            'email',
-            'nom_contacto',
-            'tel_contacto'
-        )
-            ->orderBy('nombre', 'asc')
+        $proveedores = Proveedor::join('tip_identificaciones', 'proveedores.tip_identificacion_id', 'tip_identificaciones.id')
+            ->select(
+                'proveedores.id',
+                'proveedores.raz_social',
+                'proveedores.num_identificacion',
+                'proveedores.tel_uno',
+                'proveedores.tel_dos',
+                'tip_identificaciones.nombre'
+            )
+            ->orderBy('proveedores.raz_social', 'asc')
             ->get();
         return $proveedores;
     }
@@ -28,28 +26,28 @@ class ProveedorController extends Controller
     public function store(Request $request)
     {
         $proveedor = new Proveedor();
-        $proveedor->nombre = mb_strtoupper(trim($request->nombre));
-        $proveedor->tip_identificacion = mb_strtoupper(trim($request->tip_identificacion));
+        $proveedor->tip_identificacion_id = trim($request->tip_identificacion_id);
+        $proveedor->raz_social = mb_strtoupper(trim($request->raz_social));
         $proveedor->num_identificacion = trim($request->num_identificacion);
+        $proveedor->localidad = mb_strtoupper(trim($request->localidad));
         $proveedor->direccion = mb_strtoupper(trim($request->direccion));
-        $proveedor->telefonos = trim($request->telefonos);
         $proveedor->email = mb_strtolower(trim($request->email));
-        $proveedor->nom_contacto = mb_strtoupper(trim($request->nom_contacto));
-        $proveedor->tel_contacto = trim($request->tel_contacto);
+        $proveedor->tel_uno = trim($request->tel_uno);
+        $proveedor->tel_dos = trim($request->tel_dos);
         $proveedor->save();
     }
 
     public function update(Request $request)
     {
         $proveedor = Proveedor::findOrFail($request->id);
-        $proveedor->nombre = mb_strtoupper(trim($request->nombre));
-        $proveedor->tip_identificacion = mb_strtoupper(trim($request->tip_identificacion));
+        $proveedor->tip_identificacion_id = trim($request->tip_identificacion_id);
+        $proveedor->raz_social = mb_strtoupper(trim($request->raz_social));
         $proveedor->num_identificacion = trim($request->num_identificacion);
+        $proveedor->localidad = mb_strtoupper(trim($request->localidad));
         $proveedor->direccion = mb_strtoupper(trim($request->direccion));
-        $proveedor->telefonos = trim($request->telefonos);
         $proveedor->email = mb_strtolower(trim($request->email));
-        $proveedor->nom_contacto = mb_strtoupper(trim($request->nom_contacto));
-        $proveedor->tel_contacto = trim($request->tel_contacto);
+        $proveedor->tel_uno = trim($request->tel_uno);
+        $proveedor->tel_dos = trim($request->tel_dos);
         $proveedor->save();
     }
 
@@ -57,14 +55,14 @@ class ProveedorController extends Controller
     {
         $proveedor = Proveedor::select(
             'id',
-            'nombre',
-            'tip_identificacion',
+            'tip_identificacion_id',
+            'raz_social',
             'num_identificacion',
+            'localidad',
             'direccion',
-            'telefonos',
             'email',
-            'nom_contacto',
-            'tel_contacto'
+            'tel_uno',
+            'tel_dos'
         )
             ->where('id',  $request->id)
             ->first();
@@ -75,12 +73,12 @@ class ProveedorController extends Controller
     {
         $proveedores = Proveedor::select(
             'id',
-            'nombre',
+            'raz_social',
             'num_identificacion'
         )
-            ->where('nombre', 'like', '%' . $request->proveedor . '%')
+            ->where('raz_social', 'like', '%' . $request->proveedor . '%')
             ->orWhere('num_identificacion', 'like', '%' . $request->proveedor . '%')
-            ->orderBy('nombre', 'asc')
+            ->orderBy('raz_social', 'asc')
             ->get();
         return $proveedores;
     }

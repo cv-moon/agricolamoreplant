@@ -70,26 +70,13 @@ class ProductoController extends Controller
     {
         try {
             DB::beginTransaction();
-            $producto = Producto::findOrFail($request->id);
-            $producto->categoria_id = trim($request->categoria_id);
-            $producto->tar_agregado_id = trim($request->tar_agregado_id);
-            $producto->nombre = mb_strtoupper(trim($request->nombre));
-            $producto->composicion = mb_strtoupper(trim($request->composicion));
-            $producto->pre_venta = trim($request->pre_venta);
-            $producto->por_descuento = trim($request->por_descuento);
-            $producto->mar_utilidad = trim($request->mar_utilidad);
-            $producto->save();
+            $presentacion = Presentacion::findOrFail($request->id);
+            $presentacion->unidad_id = trim($request->unidad_id);
+            $presentacion->cod_principal = mb_strtoupper(trim($request->cod_principal));
+            $presentacion->cod_auxiliar = mb_strtoupper(trim($request->cod_auxiliar));
+            $presentacion->pre_venta = trim($request->pre_venta);
+            $presentacion->save();
 
-            foreach ($request->presentaciones as $ep => $det) {
-                $presentacion = new Presentacion();
-                $presentacion->producto_id = $producto->id;
-                $presentacion->unidad_id = trim($det['unidad_id']);
-                $presentacion->cod_principal = mb_strtoupper(trim($det['cod_principal']));
-                $presentacion->cod_auxiliar = mb_strtoupper(trim($det['cod_auxiliar']));
-                $presentacion->presentacion = trim($det['presentacion']);
-                $presentacion->pre_venta = trim($det['pre_venta']);
-                $presentacion->save();
-            }
             DB::commit();
         } catch (\Throwable $th) {
             DB::rollBack();
@@ -100,21 +87,21 @@ class ProductoController extends Controller
     public function detail(Request $request)
     {
         $producto = Presentacion::join('productos', 'presentaciones.producto_id', 'productos.id')
-        ->select(
-            'presentaciones.id',
-            'presentaciones.unidad_id',
-            'presentaciones.cod_principal',
-            'presentaciones.cod_auxiliar',
-            'presentaciones.presentacion',
-            'presentaciones.pre_venta',
-            'productos.categoria_id',
-            'productos.tar_agregado_id',
-            'productos.nombre',
-            'productos.composicion',
-            'productos.pre_compra',
-            'productos.por_descuento',
-            'productos.mar_utilidad',
-        )
+            ->select(
+                'presentaciones.id',
+                'presentaciones.unidad_id',
+                'presentaciones.cod_principal',
+                'presentaciones.cod_auxiliar',
+                'presentaciones.presentacion',
+                'presentaciones.pre_venta',
+                'productos.categoria_id',
+                'productos.tar_agregado_id',
+                'productos.nombre',
+                'productos.composicion',
+                'productos.pre_compra',
+                'productos.por_descuento',
+                'productos.mar_utilidad',
+            )
             ->where('presentaciones.id', $request->id)
             ->first();
         return $producto;
