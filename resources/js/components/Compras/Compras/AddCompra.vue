@@ -24,7 +24,7 @@
               <v-select
                 :options="arrayProveedor"
                 :getOptionLabel="
-                  (option) => option.nombre + ' - ' + option.num_identificacion
+                  (option) => option.raz_social + ' - ' + option.num_identificacion
                 "
                 @search="selectProveedor"
                 placeholder="Buscar Proveedor..."

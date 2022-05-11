@@ -56,7 +56,9 @@
                             "
                         ></td>
                         <td
-                            v-text="proveedor.tel_uno + ' / ' + proveedor.tel_dos"
+                            v-text="
+                                proveedor.tel_uno + ' / ' + proveedor.tel_dos
+                            "
                         ></td>
                     </tr>
                 </tbody>
