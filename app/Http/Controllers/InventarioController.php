@@ -11,22 +11,24 @@ class InventarioController extends Controller
 {
     public function index(Request $request)
     {
-        $inventarios = Inventario::join('productos', 'inventarios.producto_id', 'productos.id')
+        $inventarios = Inventario::join('presentaciones', 'inventarios.presentacion_id', 'presentaciones.id')
+            ->join('productos', 'presentaciones.producto_id', 'productos.id')
             ->join('establecimientos', 'inventarios.establecimiento_id', 'establecimientos.id')
-            ->join('unidades', 'productos.unidad_id', 'unidades.id')
+            ->join('unidades', 'presentaciones.unidad_id', 'unidades.id')
             ->select(
                 'inventarios.id',
                 'inventarios.establecimiento_id',
                 'inventarios.dis_stock',
                 'inventarios.min_stock',
                 'inventarios.estado',
-                'productos.cod_principal',
+                'presentaciones.cod_principal',
+                'presentaciones.presentacion',
                 'productos.nombre',
                 'unidades.sigla as unidad',
                 'establecimientos.nom_referencia'
             )
             ->where('inventarios.establecimiento_id', $request->establecimiento)
-            ->orderBy('productos.cod_principal', 'asc')
+            ->orderBy('presentaciones.cod_principal', 'asc')
             ->get();
         return $inventarios;
     }
@@ -39,7 +41,7 @@ class InventarioController extends Controller
             foreach ($products as $producto => $pro) {
                 if (key_exists('check', $pro)) {
                     $inventario = new Inventario();
-                    $inventario->producto_id = trim($pro['id']);
+                    $inventario->presentacion_id = trim($pro['id']);
                     $inventario->establecimiento_id = trim($request->establecimiento_id);
                     $inventario->min_stock = trim($pro['min_stock']);
                     $inventario->dis_stock = trim($pro['dis_stock']);

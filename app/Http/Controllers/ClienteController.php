@@ -11,7 +11,7 @@ class ClienteController extends Controller
 {
     public function index()
     {
-        $clientes = Cliente::join('identificaciones', 'clientes.identificacion_id', 'identificaciones.id')
+        $clientes = Cliente::join('tip_identificaciones', 'clientes.tip_identificacion_id', 'tip_identificaciones.id')
             ->select(
                 'clientes.id',
                 'clientes.nombre',
@@ -21,7 +21,7 @@ class ClienteController extends Controller
                 'clientes.email',
                 'clientes.lim_credito',
                 'clientes.descuento',
-                'identificaciones.nombre as tip_identificacion'
+                'tip_identificaciones.nombre as tip_identificacion'
             )
             ->orderBy('nombre', 'asc')
             ->get();
@@ -31,7 +31,7 @@ class ClienteController extends Controller
     public function store(Request $request)
     {
         $cliente = new Cliente();
-        $cliente->identificacion_id = trim($request->identificacion_id);
+        $cliente->tip_identificacion_id = trim($request->tip_identificacion_id);
         $cliente->nombre = mb_strtoupper(trim($request->nombre));
         $cliente->num_identificacion = trim($request->num_identificacion);
         $cliente->direccion = mb_strtoupper(trim($request->direccion));
@@ -45,7 +45,7 @@ class ClienteController extends Controller
     public function update(Request $request)
     {
         $cliente = Cliente::findOrFail($request->id);
-        $cliente->identificacion_id = trim($request->identificacion_id);
+        $cliente->tip_identificacion_id = trim($request->tip_identificacion_id);
         $cliente->nombre = mb_strtoupper(trim($request->nombre));
         $cliente->num_identificacion = trim($request->num_identificacion);
         $cliente->direccion = mb_strtoupper(trim($request->direccion));

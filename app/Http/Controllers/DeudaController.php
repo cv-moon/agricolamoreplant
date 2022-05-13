@@ -21,7 +21,7 @@ class DeudaController extends Controller
                     'deudas.fec_limite',
                     'deudas.observaciones',
                     'deudas.estado',
-                    'proveedores.nombre as proveedor'
+                    'proveedores.raz_social as proveedor'
                 )
                 ->orderBy('deudas.fec_limite', 'desc')
                 ->get();
@@ -38,7 +38,7 @@ class DeudaController extends Controller
                     'deudas.observaciones',
                     'deudas.estado',
                     'proveedores.id',
-                    'proveedores.nombre as proveedor'
+                    'proveedores.raz_social as proveedor'
                 )
                 ->where('proveedores.id', '=', $request->proveedor)
                 ->orderBy('deudas.fec_limite', 'desc')
@@ -56,7 +56,7 @@ class DeudaController extends Controller
                     'deudas.observaciones',
                     'deudas.estado',
                     'proveedores.id',
-                    'proveedores.nombre as proveedor'
+                    'proveedores.raz_social as proveedor'
                 )
                 ->where('deudas.estado', '=', $request->estado)
                 ->orderBy('deudas.fec_limite', 'desc')
@@ -74,7 +74,7 @@ class DeudaController extends Controller
                     'deudas.observaciones',
                     'deudas.estado',
                     'proveedores.id',
-                    'proveedores.nombre as proveedor'
+                    'proveedores.raz_social as proveedor'
                 )
                 ->where('proveedores.id', '=', $request->proveedor)
                 ->where('deudas.estado', '=', $request->estado)
@@ -95,7 +95,7 @@ class DeudaController extends Controller
                 'deudas.dias_credito',
                 'deudas.fec_limite',
                 'deudas.estado',
-                'proveedores.nombre as proveedor',
+                'proveedores.raz_social as proveedor',
                 'compras.tip_comprobante',
                 'compras.num_comprobante',
                 'compras.fec_emision'

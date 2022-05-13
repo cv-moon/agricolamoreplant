@@ -97,7 +97,7 @@
             <td v-text="inventario.nom_referencia"></td>
             <td v-text="inventario.cod_principal"></td>
             <td v-text="inventario.nombre"></td>
-            <td v-text="inventario.unidad"></td>
+            <td v-text="inventario.presentacion+' '+inventario.unidad"></td>
             <td align="right" v-text="inventario.dis_stock"></td>
             <td align="right" v-text="inventario.min_stock"></td>
             <td>

@@ -8,7 +8,7 @@ class Inventario extends Model
 {
     protected $table = 'inventarios';
     protected $fillable = [
-        'producto_id',
+        'presentacion_id',
         'establecimiento_id',
         'dis_stock',
         'min_stock',

@@ -39,8 +39,8 @@ class FacturaController extends Controller
                     'facturas.respuesta',
                     'clientes.nombre as cliente',
                     'clientes.num_identificacion',
-                    'establecimientos.numero as establecimiento',
-                    'puntos_emision.codigo as punto',
+                    'establecimientos.est_codigo as establecimiento',
+                    'puntos_emision.pun_codigo as punto',
                     'users.usuario'
                 )
                 ->whereMonth('facturas.fec_emision', $mes)
@@ -63,8 +63,8 @@ class FacturaController extends Controller
                     'facturas.estado',
                     'clientes.nombre as cliente',
                     'clientes.num_identificacion',
-                    'establecimientos.numero as establecimiento',
-                    'puntos_emision.codigo as punto',
+                    'establecimientos.est_codigo as establecimiento',
+                    'puntos_emision.pun_codigo as punto',
                     'users.usuario'
                 )
                 ->where('facturas.usuario_id', Auth::user()->id)

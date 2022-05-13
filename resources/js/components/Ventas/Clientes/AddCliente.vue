@@ -31,13 +31,13 @@
                 </div>
                 <div class="form-group row">
                     <label
-                        for="identificacion_id"
+                        for="tip_identificacion_id"
                         class="col-sm-2 col-form-label"
                         >Tipo Identificación:</label
                     >
                     <div class="col-sm-4">
                         <select
-                            v-model="identificacion_id"
+                            v-model="tip_identificacion_id"
                             class="form-control"
                         >
                             <option value="0" disabled>Seleccione...</option>
@@ -55,33 +55,15 @@
                         ># Identificación:</label
                     >
                     <div class="col-sm-4">
-                        <template v-if="identificacion_id === 2">
-                            <input
-                                type="text"
-                                class="form-control"
-                                placeholder="Cédula."
-                                maxlength="10"
-                                v-model="num_identificacion"
-                            />
-                        </template>
-                        <template v-else-if="identificacion_id === 1">
-                            <input
-                                type="text"
-                                class="form-control"
-                                placeholder="RUC."
-                                maxlength="13"
-                                v-model="num_identificacion"
-                            />
-                        </template>
-                        <template v-else-if="identificacion_id === 3">
-                            <input
-                                type="text"
-                                class="form-control"
-                                placeholder="Pasaporte."
-                                maxlength="13"
-                                v-model="num_identificacion"
-                            />
-                        </template>
+                        <input
+                            type="text"
+                            class="form-control"
+                            placeholder="No. Identificación."
+                            :maxlength="
+                                tip_identificacion_id == 2 ? '10' : '13'
+                            "
+                            v-model="num_identificacion"
+                        />
                     </div>
                 </div>
                 <div class="form-group row">
@@ -173,7 +155,7 @@
 export default {
     data() {
         return {
-            identificacion_id: "0",
+            tip_identificacion_id: "0",
             nombre: "",
             num_identificacion: "",
             direccion: "",
@@ -191,7 +173,7 @@ export default {
             if (!this.nombre) {
                 this.errors.push("Ingrese nombre.");
             }
-            if (this.identificacion_id == "0") {
+            if (this.tip_identificacion_id == "0") {
                 this.errors.push("Seleccione tipo de identificación.");
             }
             if (!this.num_identificacion) {
@@ -213,7 +195,7 @@ export default {
                     axios
                         .post("/api/cliente/guardar", {
                             nombre: this.nombre,
-                            identificacion_id: this.identificacion_id,
+                            tip_identificacion_id: this.tip_identificacion_id,
                             num_identificacion: this.num_identificacion,
                             direccion: this.direccion,
                             telefonos: this.telefonos,

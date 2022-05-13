@@ -20,7 +20,8 @@ class KardexController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
-        $datos = Inventario::join('productos', 'inventarios.producto_id', 'productos.id')
+        $datos = Inventario::join('presentaciones', 'inventarios.presentacion_id', 'presentaciones.id')
+            ->join('productos', 'presentaciones.producto_id', 'productos.id')
             ->join('establecimientos', 'inventarios.establecimiento_id', 'establecimientos.id')
             ->select(
                 'inventarios.id',
@@ -28,8 +29,8 @@ class KardexController extends Controller
                 'inventarios.dis_stock',
                 'inventarios.estado',
                 'productos.nombre',
-                'productos.cod_principal',
-                'productos.pre_venta',
+                'presentaciones.cod_principal',
+                'presentaciones.pre_venta',
                 'establecimientos.nom_comercial',
                 'establecimientos.nom_referencia'
             )

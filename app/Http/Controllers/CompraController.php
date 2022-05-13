@@ -27,7 +27,7 @@ class CompraController extends Controller
                 'compras.for_pago',
                 'compras.estado',
                 'compras.created_at',
-                'proveedores.nombre as proveedor',
+                'proveedores.raz_social as proveedor',
                 'establecimientos.nom_referencia as establecimiento'
             )
             ->orderBy('compras.created_at', 'desc')
@@ -57,7 +57,7 @@ class CompraController extends Controller
             foreach ($detalles as $ep => $det) {
                 $detalle = new DetalleCompra();
                 $detalle->compra_id = $compra->id;
-                $detalle->producto_id = $det['producto_id'];
+                $detalle->presentacion_id = $det['presentacion_id'];
                 $detalle->cantidad = trim($det['cantidad']);
                 if (!empty($det['fec_vencimiento'])) {
                     $detalle->fec_vencimiento = $det['fec_vencimiento'];
@@ -66,8 +66,8 @@ class CompraController extends Controller
                 $detalle->descuento = $det['descuento'];
                 $detalle->save();
 
-                $datos = Inventario::select('id', 'producto_id', 'establecimiento_id', 'dis_stock')
-                    ->where('producto_id', $det['producto_id'])
+                $datos = Inventario::select('id', 'presentacion_id', 'establecimiento_id', 'dis_stock')
+                    ->where('presentacion_id', $det['presentacion_id'])
                     ->where('establecimiento_id', $compra->establecimiento_id)
                     ->first();
 
@@ -76,13 +76,13 @@ class CompraController extends Controller
                     $inventario->dis_stock = $datos["dis_stock"] + trim($det['cantidad']);
                     $inventario->save();
 
-                    $proveedor = Proveedor::select('id', 'nombre')
+                    $proveedor = Proveedor::select('id', 'raz_social')
                         ->where('id', $request->proveedor_id)
                         ->first();
 
                     $kardex = new Kardex();
                     $kardex->inventario_id = $inventario->id;
-                    $kardex->concepto = mb_strtoupper("COMPRA: " . $compra->tip_comprobante . " " . $compra->num_comprobante . " " . $proveedor['nombre']);
+                    $kardex->concepto = mb_strtoupper("COMPRA: " . $compra->tip_comprobante . " " . $compra->num_comprobante . " " . $proveedor['raz_social']);
                     $kardex->cantidad = trim($det['cantidad']);
                     $kardex->save();
                 }
@@ -106,7 +106,7 @@ class CompraController extends Controller
 
     public function detail(Request $request)
     {
-        $compra = Compra::join('proveedores', 'compras.proveedor_id', '=', 'proveedores.id')
+        $compra = Compra::join('proveedores', 'compras.proveedor_id', 'proveedores.id')
             ->select(
                 'compras.id',
                 'compras.tip_comprobante',
@@ -117,11 +117,12 @@ class CompraController extends Controller
                 'compras.tot_desc',
                 'compras.total',
                 'compras.for_pago',
-                'proveedores.nombre as proveedor'
+                'proveedores.raz_social as proveedor'
             )
-            ->where('compras.id', '=', $request->id)
+            ->where('compras.id', $request->id)
             ->first();
-        $detalles = DetalleCompra::join('productos', 'detalles_compra.producto_id', '=', 'productos.id')
+        $detalles = DetalleCompra::join('presentaciones', 'detalles_compra.presentacion_id', 'presentaciones.id')
+            ->join('productos', 'presentaciones.producto_id', 'productos.id')
             ->select(
                 'detalles_compra.compra_id',
                 'detalles_compra.cantidad',
@@ -130,7 +131,7 @@ class CompraController extends Controller
                 'detalles_compra.descuento',
                 'productos.nombre as producto'
             )
-            ->where('detalles_compra.compra_id', '=', $request->id)
+            ->where('detalles_compra.compra_id', $request->id)
             ->get();
         return ['comprobante' => $compra, 'detalles' => $detalles];
     }

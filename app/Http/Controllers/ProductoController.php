@@ -124,29 +124,47 @@ class ProductoController extends Controller
     public function notRegistered(Request $request)
     {
         if ($request->establecimiento != 0) {
-            $productos = DB::select("SELECT p.id, p.nombre FROM productos p WHERE NOT EXISTS(SELECT i.producto_id FROM inventarios i WHERE p.id = i.producto_id and i.establecimiento_id=" . $request->establecimiento . ")");
+            $productos = DB::select("SELECT p.id, p.presentacion, pr.nombre, u.sigla FROM presentaciones p INNER JOIN productos pr on p.producto_id = pr.id INNER JOIN unidades u ON u.id=p.unidad_id WHERE NOT EXISTS(SELECT i.presentacion_id FROM inventarios i WHERE p.id = i.presentacion_id and i.establecimiento_id=" . $request->establecimiento . ")");
             return $productos;
         }
     }
 
-    public function productForEstablishment(Request $request)
+    public function productForBuy(Request $request)
     {
-        $productos = Inventario::join('productos', 'inventarios.producto_id', 'productos.id')
-            ->join('establecimientos', 'inventarios.establecimiento_id', 'establecimientos.id')
-            ->join('tar_agregados', 'productos.tarifa_id', 'tar_agregados.id')
+        $productos = Inventario::join('establecimientos', 'inventarios.establecimiento_id', 'establecimientos.id')
+            ->join('presentaciones', 'inventarios.presentacion_id', 'presentaciones.id')
+            ->join('productos', 'presentaciones.producto_id', 'productos.id')
+            ->join('tar_agregados', 'productos.tar_agregado_id', 'tar_agregados.id')
             ->select(
                 'productos.id',
                 'productos.nombre',
-                'productos.cod_principal',
-                'productos.pre_venta',
-                'inventarios.establecimiento_id',
-                'inventarios.dis_stock',
-                'inventarios.min_stock',
-                'inventarios.estado',
-                'tar_agregados.valor as impuesto'
+                'inventarios.establecimiento_id'
             )
-            ->where('inventarios.establecimiento_id', $request->establecimiento)
-            ->orderBy('productos.cod_principal', 'asc')
+            ->where('inventarios.establecimiento_id', $request->q)
+            ->orderBy('productos.nombre', 'asc')
+            ->get();
+        return $productos;
+    }
+
+    public function presentationsBuy(Request $request)
+    {
+        $productos = Inventario::join('establecimientos', 'inventarios.establecimiento_id', 'establecimientos.id')
+            ->join('presentaciones', 'inventarios.presentacion_id', 'presentaciones.id')
+            ->join('productos', 'presentaciones.producto_id', 'productos.id')
+            ->join('tar_agregados', 'productos.tar_agregado_id', 'tar_agregados.id')
+            ->join('unidades', 'presentaciones.unidad_id', 'unidades.id')
+            ->select(
+                'presentaciones.id',
+                'presentaciones.cod_principal',
+                'presentaciones.presentacion',
+                'productos.nombre',
+                'inventarios.establecimiento_id',
+                'inventarios.estado',
+                'tar_agregados.valor as impuesto',
+                'unidades.sigla'
+            )
+            ->where('inventarios.establecimiento_id', $request->q)
+            ->orderBy('productos.nombre', 'asc')
             ->get();
         return $productos;
     }

@@ -137,10 +137,11 @@ Route::middleware('auth')->group(function () {
     Route::get('api/producto/detalle', 'ProductoController@detail');
     Route::put('api/producto/editar', 'ProductoController@update');
     Route::get('api/productos/sin_registro', 'ProductoController@notRegistered');
-    Route::get('api/productos/establecimiento', 'ProductoController@productForEstablishment');
     Route::get('api/productos/plantas', 'ProductoController@plants');
     Route::get('api/productos/venta', 'ProductoController@forSale');
     Route::get('api/productos/conteo', 'ProductoController@counter');
+    Route::get('api/productos/listar/comprar', 'ProductoController@productForBuy');
+    Route::get('api/productos/listar/presentaciones', 'ProductoController@presentationsBuy');
     Route::get('api/producto/valida/nombre', 'ProductoController@validateName');
 
     //Inventarios

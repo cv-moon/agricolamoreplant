@@ -16,9 +16,11 @@ class CreateAbonosCreditoTable extends Migration
         Schema::create('abonos_credito', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('credito_id');
+            $table->integer('num_secuencial');
             $table->decimal('val_abono', 12, 2);
             $table->date('fec_abono');
             $table->string('observaciones', 150);
+            $table->boolean('estado')->default(1);
 
             $table->foreign('credito_id')->references('id')->on('creditos');
         });

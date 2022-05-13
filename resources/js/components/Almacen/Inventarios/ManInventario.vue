@@ -70,7 +70,7 @@
                                         v-model="producto.check"
                                     />
                                 </td>
-                                <td v-text="producto.nombre"></td>
+                                <td v-text="producto.nombre+' '+producto.presentacion+' '+producto.sigla"></td>
                                 <td>
                                     <input
                                         type="number"
