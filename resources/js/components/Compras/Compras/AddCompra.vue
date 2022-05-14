@@ -618,11 +618,7 @@ export default {
         },
         findProductos() {
             axios
-                .get("/api/productos/listar/comprar", {
-                    params: {
-                        q: this.establecimiento_id
-                    }
-                })
+                .get("/api/productos/listar/comprar")
                 .then(resp => {
                     this.arrayProductos = resp.data;
                 });

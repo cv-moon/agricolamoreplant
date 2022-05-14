@@ -139,6 +139,7 @@ Route::middleware('auth')->group(function () {
     Route::get('api/productos/sin_registro', 'ProductoController@notRegistered');
     Route::get('api/productos/plantas', 'ProductoController@plants');
     Route::get('api/productos/venta', 'ProductoController@forSale');
+    Route::get('api/productos/presentaciones', 'ProductoController@presentationsSale');
     Route::get('api/productos/conteo', 'ProductoController@counter');
     Route::get('api/productos/listar/comprar', 'ProductoController@productForBuy');
     Route::get('api/productos/listar/presentaciones', 'ProductoController@presentationsBuy');
@@ -187,6 +188,7 @@ Route::middleware('auth')->group(function () {
     Route::put('api/cliente/editar', 'ClienteController@update');
     Route::get('api/cliente/buscar', 'ClienteController@find');
     Route::get('api/cliente/saldo', 'ClienteController@getBalance');
+    Route::get('api/cliente/listar', 'ClienteController@listClients');
 
     // Factura
     Route::get('api/facturas', 'FacturaController@index');

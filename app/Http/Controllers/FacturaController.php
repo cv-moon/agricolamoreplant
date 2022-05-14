@@ -115,15 +115,15 @@ class FacturaController extends Controller
             foreach ($detalles as $key => $det) {
                 $detalle = new DetalleFactura();
                 $detalle->factura_id = $factura->id;
-                $detalle->producto_id = $det['producto_id'];
+                $detalle->presentacion_id = $det['presentacion_id'];
                 $detalle->det_cantidad = $det['cantidad'];
                 $detalle->det_precio = $det['pre_venta'];
                 $detalle->det_descuento = $det['des_individual'];
                 $detalle->det_total = $det['sub_individual'];
                 $detalle->save();
 
-                $get = Inventario::select('id', 'producto_id', 'establecimiento_id')
-                    ->where('producto_id', $det['producto_id'])
+                $get = Inventario::select('id', 'presentacion_id', 'establecimiento_id')
+                    ->where('presentacion_id', $det['presentacion_id'])
                     ->where('establecimiento_id', $punto->establecimiento_id)
                     ->first();
 
@@ -163,8 +163,8 @@ class FacturaController extends Controller
                         ->join('establecimientos', 'puntos_emision.establecimiento_id', 'establecimientos.id')
                         ->join('empresas', 'establecimientos.empresa_id', 'empresas.id')
                         ->join('clientes', 'facturas.cliente_id', 'clientes.id')
-                        ->join('identificaciones', 'clientes.identificacion_id', 'identificaciones.id')
-                        ->join('formas_pago', 'facturas.for_pago_id', 'formas_pago.id')
+                        ->join('tip_identificaciones', 'clientes.tip_identificacion_id', 'tip_identificaciones.id')
+                        ->join('for_pagos', 'facturas.for_pago_id', 'for_pagos.id')
                         ->select(
                             'facturas.id',
                             'facturas.fec_emision',
@@ -184,15 +184,15 @@ class FacturaController extends Controller
                             'facturas.val_propina',
                             'facturas.val_total',
                             'facturas.for_pago',
-                            'puntos_emision.codigo',
-                            'establecimientos.numero',
+                            'puntos_emision.pun_codigo',
+                            'establecimientos.est_codigo',
                             'establecimientos.nom_comercial',
                             'establecimientos.direccion as dir_establecimiento',
                             'empresas.raz_social',
                             'empresas.ruc',
                             'empresas.direccion as dir_matriz',
                             'empresas.obli_contabilidad',
-                            'empresas.reg_microempresa',
+                            'empresas.tip_regimen',
                             'empresas.age_retencion',
                             'empresas.firma',
                             'empresas.fir_clave',
@@ -201,34 +201,36 @@ class FacturaController extends Controller
                             'clientes.direccion as dir_cliente',
                             'clientes.telefonos',
                             'clientes.email',
-                            'identificaciones.codigo as tip_cliente',
-                            'formas_pago.codigo as forma'
+                            'tip_identificaciones.codigo as tip_cliente',
+                            'for_pagos.codigo as forma'
                         )
                         ->where('facturas.id', $id)
                         ->first(),
-                    'detalles' => DetalleFactura::join('productos', 'detalles_factura.producto_id', 'productos.id')
-                        ->join('tarifas', 'productos.tarifa_id', 'tarifas.id')
-                        ->join('impuestos','tarifas.impuesto_id','impuestos.id')
+                    'detalles' => DetalleFactura::join('presentaciones', 'detalles_factura.presentacion_id', 'presentaciones.id')
+                        ->join('productos', 'presentaciones.producto_id', 'productos.id')
+                        ->join('tar_agregados', 'productos.tar_agregado_id', 'tar_agregados.id')
+                        ->join('imp_agregados', 'tar_agregados.imp_agregado_id', 'imp_agregados.id')
                         ->select(
                             'detalles_factura.factura_id',
-                            'productos.cod_principal',
+                            'presentaciones.cod_principal',
                             'productos.nombre',
-                            'productos.pre_venta',
+                            'presentaciones.pre_venta',
                             'detalles_factura.det_cantidad',
                             'detalles_factura.det_descuento',
                             'detalles_factura.det_total',
-                            'impuestos.codigo',
-                            'tarifas.codigo as cod_porcentaje',
-                            'tarifas.valor'
+                            'imp_agregados.codigo',
+                            'tar_agregados.codigo as cod_porcentaje',
+                            'tar_agregados.valor'
                         )
                         ->where('detalles_factura.factura_id', $id)
                         ->get(),
                     'credito' => Credito::select('id', 'saldo', 'dias_credito')
                         ->where('id', $id)
-                        ->first() 
+                        ->first()
                 ];
         } catch (\Throwable $th) {
             DB::rollBack();
+            return $th;
         }
     }
 
@@ -236,14 +238,15 @@ class FacturaController extends Controller
     {
         $sec_inicial = PuntoEmision::join('establecimientos', 'puntos_emision.establecimiento_id', 'establecimientos.id')
             ->join('empresas', 'establecimientos.empresa_id', 'empresas.id')
+            ->join('tip_ambientes', 'empresas.tip_ambiente_id', 'tip_ambientes.id')
             ->select(
                 'puntos_emision.id',
-                'puntos_emision.codigo as punto',
+                'puntos_emision.pun_codigo as punto',
                 'puntos_emision.sec_factura',
                 'puntos_emision.user_id',
-                'establecimientos.numero as establecimiento',
+                'establecimientos.est_codigo as establecimiento',
                 'empresas.ruc',
-                'empresas.tip_ambiente',
+                'tip_ambientes.codigo as tip_ambiente',
                 'empresas.tip_emision',
                 'empresas.firma',
                 'empresas.fir_clave'

@@ -52,6 +52,12 @@
                             </router-link>
                         </li>
                         <li class="nav-item">
+                            <router-link to="/odts" class="nav-link">
+                                <i class="fas fa-file-signature nav-icon"></i>
+                                <p>Orden de Trabajo</p>
+                            </router-link>
+                        </li>
+                        <li class="nav-item">
                             <router-link to="/clientes" class="nav-link">
                                 <i class="far fa-address-book nav-icon"></i>
                                 <p>Clientes</p>
@@ -74,7 +80,7 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-                    <li class="nav-item">
+                        <li class="nav-item">
                             <router-link to="/arqueos/abrir" class="nav-link">
                                 <i class="fas fa-lock-open nav-icon"></i>
                                 <p>Apertura</p>

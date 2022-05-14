@@ -92,7 +92,7 @@
             <td v-text="credito.nom_referencia"></td>
             <td
               v-text="
-                `${credito.numero.toString().padStart(3, 0)}-${credito.codigo
+                `${credito.est_codigo.toString().padStart(3, 0)}-${credito.pun_codigo
                   .toString()
                   .padStart(3, 0)}-${credito.num_secuencial
                   .toString()
@@ -262,7 +262,7 @@ export default {
         });
     },
     selectClientes() {
-      axios.get("/api/clientes/listar").then((resp) => {
+      axios.get("/api/cliente/listar").then((resp) => {
         this.arrayClientes = resp.data;
       });
     },

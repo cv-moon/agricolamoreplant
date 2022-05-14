@@ -101,4 +101,11 @@ class ClienteController extends Controller
             ->sum('saldo');
         return ['limite' => $limite, 'saldos' => $deuda];
     }
+
+    public function listClients()
+    {
+        $clientes = Cliente::select('id', 'nombre')
+            ->get();
+        return $clientes;
+    }
 }

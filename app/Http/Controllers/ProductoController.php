@@ -129,18 +129,12 @@ class ProductoController extends Controller
         }
     }
 
-    public function productForBuy(Request $request)
+    public function productForBuy()
     {
-        $productos = Inventario::join('establecimientos', 'inventarios.establecimiento_id', 'establecimientos.id')
-            ->join('presentaciones', 'inventarios.presentacion_id', 'presentaciones.id')
-            ->join('productos', 'presentaciones.producto_id', 'productos.id')
-            ->join('tar_agregados', 'productos.tar_agregado_id', 'tar_agregados.id')
-            ->select(
-                'productos.id',
-                'productos.nombre',
-                'inventarios.establecimiento_id'
-            )
-            ->where('inventarios.establecimiento_id', $request->q)
+        $productos = Producto::select(
+            'productos.id',
+            'productos.nombre'
+        )
             ->orderBy('productos.nombre', 'asc')
             ->get();
         return $productos;
@@ -155,7 +149,6 @@ class ProductoController extends Controller
             ->join('unidades', 'presentaciones.unidad_id', 'unidades.id')
             ->select(
                 'presentaciones.id',
-                'presentaciones.cod_principal',
                 'presentaciones.presentacion',
                 'productos.nombre',
                 'inventarios.establecimiento_id',
@@ -183,27 +176,43 @@ class ProductoController extends Controller
 
     public function forSale()
     {
+        $productos = Producto::select(
+            'productos.id',
+            'productos.nombre'
+        )
+            ->orderBy('productos.nombre', 'asc')
+            ->get();
+        return $productos;
+    }
+
+    public function presentationsSale()
+    {
         $punto = PuntoEmision::select('establecimiento_id', 'user_id')
             ->where('user_id', Auth::user()->id)
             ->first();
-        $productos = Producto::join('tar_agregados', 'productos.tarifa_id', 'tar_agregados.id')
-            ->join('inventarios', 'productos.id', 'inventarios.producto_id')
+        $productos = Inventario::join('establecimientos', 'inventarios.establecimiento_id', 'establecimientos.id')
+            ->join('presentaciones', 'inventarios.presentacion_id', 'presentaciones.id')
+            ->join('productos', 'presentaciones.producto_id', 'productos.id')
+            ->join('tar_agregados', 'productos.tar_agregado_id', 'tar_agregados.id')
+            ->join('unidades', 'presentaciones.unidad_id', 'unidades.id')
             ->select(
-                'productos.id',
+                'presentaciones.id',
+                'presentaciones.cod_principal',
+                'presentaciones.presentacion',
+                'presentaciones.pre_venta',
                 'productos.nombre',
-                'productos.pre_venta',
                 'productos.por_descuento',
-                'productos.composicion',
+                'inventarios.establecimiento_id',
+                'inventarios.min_stock',
+                'inventarios.dis_stock',
+                'inventarios.estado',
                 'tar_agregados.nombre as impuesto',
                 'tar_agregados.valor',
                 'tar_agregados.codigo',
-                'inventarios.establecimiento_id',
-                'inventarios.min_stock',
-                'inventarios.dis_stock'
+                'unidades.sigla'
             )
             ->where('inventarios.establecimiento_id', $punto->establecimiento_id)
             ->where('inventarios.dis_stock', '>', 0)
-            ->orderBy('productos.nombre')
             ->get();
         return $productos;
     }

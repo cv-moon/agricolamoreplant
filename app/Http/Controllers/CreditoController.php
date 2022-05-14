@@ -25,8 +25,8 @@ class CreditoController extends Controller
                     'creditos.estado',
                     'clientes.nombre as cliente',
                     'facturas.num_secuencial',
-                    'puntos_emision.codigo',
-                    'establecimientos.numero',
+                    'puntos_emision.pun_codigo',
+                    'establecimientos.est_codigo',
                     'establecimientos.nom_referencia'
                 )
                 ->orderBy('creditos.fec_limite', 'desc')
@@ -48,8 +48,8 @@ class CreditoController extends Controller
                     'clientes.id',
                     'clientes.nombre as cliente',
                     'facturas.num_secuencial',
-                    'puntos_emision.codigo',
-                    'establecimientos.numero',
+                    'puntos_emision.pun_codigo',
+                    'establecimientos.est_codigo',
                     'establecimientos.nom_referencia'
                 )
                 ->where('clientes.id', '=', $request->cliente)
@@ -72,8 +72,8 @@ class CreditoController extends Controller
                     'clientes.id',
                     'clientes.nombre as cliente',
                     'facturas.num_secuencial',
-                    'puntos_emision.codigo',
-                    'establecimientos.numero',
+                    'puntos_emision.pun_codigo',
+                    'establecimientos.est_codigo',
                     'establecimientos.nom_referencia'
                 )
                 ->where('creditos.estado', '=', $request->estado)
@@ -96,8 +96,8 @@ class CreditoController extends Controller
                     'clientes.id',
                     'clientes.nombre as cliente',
                     'facturas.num_secuencial',
-                    'puntos_emision.codigo',
-                    'establecimientos.numero',
+                    'puntos_emision.pun_codigo',
+                    'establecimientos.est_codigo',
                     'establecimientos.nom_referencia'
                 )
                 ->where('clientes.id', '=', $request->cliente)
@@ -124,8 +124,8 @@ class CreditoController extends Controller
                 'clientes.nombre as cliente',
                 'facturas.num_secuencial',
                 'facturas.created_at',
-                'puntos_emision.codigo',
-                'establecimientos.numero',
+                'puntos_emision.pun_codigo',
+                'establecimientos.est_codigo',
                 'establecimientos.nom_referencia'
             )
             ->where('creditos.id', '=', $request->id)

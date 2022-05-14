@@ -28,15 +28,9 @@ class XmlController extends Controller
 
         $xml->startElement("infoTributaria");
 
-        if ($request->factura['tip_ambiente'] == 0) {
-            $xml->startElement("ambiente");
-            $xml->text(1);
-            $xml->endElement();
-        } else if ($request->factura['tip_ambiente'] == 1) {
-            $xml->startElement("ambiente");
-            $xml->text(2);
-            $xml->endElement();
-        }
+        $xml->startElement("ambiente");
+        $xml->text($request->factura['tip_ambiente']);
+        $xml->endElement();
 
         $xml->startElement("tipoEmision");
         $xml->text($request->factura['tip_emision']);
@@ -63,11 +57,11 @@ class XmlController extends Controller
         $xml->endElement();
 
         $xml->startElement("estab");
-        $xml->text(str_pad($request->factura['numero'], 3, "0", STR_PAD_LEFT));
+        $xml->text(str_pad($request->factura['est_codigo'], 3, "0", STR_PAD_LEFT));
         $xml->endElement();
 
         $xml->startElement("ptoEmi");
-        $xml->text(str_pad($request->factura['codigo'], 3, "0", STR_PAD_LEFT));
+        $xml->text(str_pad($request->factura['pun_codigo'], 3, "0", STR_PAD_LEFT));
         $xml->endElement();
 
         $xml->startElement("secuencial");

@@ -17,12 +17,12 @@ class sendEmail
             $mail->Host       = 'smtp.hostinger.com';                     //Set the SMTP server to send through
             $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
             $mail->Username   = 'facturacion@agricolamoreplant.com';                     //SMTP username
-            $mail->Password   = 'ESPltdM330*_*';                               //SMTP password
+            $mail->Password   = 'ESPltdM330r*_*';                               //SMTP password
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
             $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
             //Recipients
-            $mail->setFrom($empresas->corr_usuario, 'Agricola Moreplant');
+            $mail->setFrom('facturacion@agricolamoreplant.com', 'Agricola Moreplant');
             $mail->addAddress($email, $nombre);     //Add a recipient
 
             //Attachments
