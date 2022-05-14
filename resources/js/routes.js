@@ -111,6 +111,12 @@ import ListFactura from "./components/Ventas/Facturacion/ListFactura.vue";
 import AddFactura from "./components/Ventas/Facturacion/AddFactura.vue";
 import DetFactura from "./components/Ventas/Facturacion/DetFactura.vue";
 
+// Facturación
+import MainOdt from "./components/Ventas/OrdenTrabajo/Main.vue";
+import ListOdt from "./components/Ventas/OrdenTrabajo/ListOdt.vue";
+import AddOdt from "./components/Ventas/OrdenTrabajo/AddOdt.vue";
+import DetOdt from "./components/Ventas/OrdenTrabajo/DetOdt.vue";
+
 // Créditos
 import MainCredito from "./components/Ventas/Creditos/Main.vue";
 import ListCredito from "./components/Ventas/Creditos/ListCredito.vue";
@@ -526,6 +532,27 @@ export const routes = [
                 path: "detalle/:id",
                 name: "detFactura",
                 component: DetFactura
+            }
+        ]
+    },
+    {
+        path: "/odt",
+        component: MainOdt,
+        children: [
+            {
+                path: "",
+                name: "listOdt",
+                component: ListOdt
+            },
+            {
+                path: "agregar",
+                name: "addOdt",
+                component: AddOdt
+            },
+            {
+                path: "detalle/:id",
+                name: "detOdt",
+                component: DetOdt
             }
         ]
     },

@@ -52,7 +52,7 @@
                             </router-link>
                         </li>
                         <li class="nav-item">
-                            <router-link to="/odts" class="nav-link">
+                            <router-link to="/odt" class="nav-link">
                                 <i class="fas fa-file-signature nav-icon"></i>
                                 <p>Orden de Trabajo</p>
                             </router-link>
