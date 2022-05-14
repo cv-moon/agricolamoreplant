@@ -6,7 +6,7 @@
                 Facturar
             </h3>
             <div class="card-tools">
-                <router-link to="/facturacion" class="btn btn-secondary btn-sm">
+                <router-link to="/odt" class="btn btn-secondary btn-sm">
                     <i class="fas fa-arrow-left"></i> Regresar
                 </router-link>
             </div>

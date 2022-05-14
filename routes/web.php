@@ -21,26 +21,26 @@ Route::get('/', function () {
 Auth::routes();
 Route::middleware('auth')->group(function () {
     // Rutas Solitarias
-    
+
     // Formas de Pago
     Route::get('api/formas_pago', 'FormaPagoController@index');
-    
+
     // Tipos Comprobantes
     Route::get('api/compobantes', 'TipoComprobanteController@index');
-    
+
     // Tipo Estados
     Route::get('api/estados', 'TipoEstadoController@index');
-    
+
     // Tipo Ambientes
     Route::get('api/ambientes', 'TipoAmbienteController@index');
-    
+
     // Meses
     Route::get('api/meses', 'MesController@index');
-    
+
     // Rutas de Administración
     // Roles
     Route::get('api/roles', 'RolController@index');
-    
+
     // Identificaciones
     Route::get('api/identificaciones', 'TipoIdentificacionController@identityProvider');
     Route::get('api/identificacion-empleado', 'TipoIdentificacionController@identityEmployees');
@@ -198,6 +198,12 @@ Route::middleware('auth')->group(function () {
     Route::get('api/factura/pdf/{clave}', 'FacturaController@individualPdf');
     Route::get('api/factura/xml/{clave}', 'FacturaController@individualXml');
     Route::post('api/factura/reenvio', 'FacturaController@forwardingInvoice');
+
+    // Órdenes de Trabajo
+    Route::get('api/odts', 'OrdenTrabajoController@index');
+    Route::post('api/odt/guardar', 'OrdenTrabajoController@store');
+    Route::get('api/odt/detalle', 'OrdenTrabajoController@detail');
+    Route::get('api/odt/comprobante', 'OrdenTrabajoController@getOrder');
 
     // Cuentas por Cobrar - Créditos
     Route::get('api/creditos', 'CreditoController@index');

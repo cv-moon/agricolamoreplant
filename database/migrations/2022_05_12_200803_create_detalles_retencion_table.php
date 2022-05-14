@@ -17,7 +17,7 @@ class CreateDetallesRetencionTable extends Migration
             $table->id();
             $table->unsignedBigInteger('retencion_id');
             $table->unsignedBigInteger('compra_id');
-            $table->unsignedBigInteger('comprobante_id');
+            $table->unsignedBigInteger('tip_comprobante_id');
             $table->unsignedBigInteger('tar_retencion_id');
             $table->string('num_comprobante', 15);
             $table->date('fec_emi_comprobante');
@@ -26,7 +26,7 @@ class CreateDetallesRetencionTable extends Migration
 
             $table->foreign('retencion_id')->references('id')->on('retenciones');
             $table->foreign('compra_id')->references('id')->on('compras');
-            $table->foreign('comprobante_id')->references('id')->on('comprobantes');
+            $table->foreign('tip_comprobante_id')->references('id')->on('tip_comprobantes');
             $table->foreign('tar_retencion_id')->references('id')->on('tar_retenciones');
         });
     }
