@@ -9,9 +9,11 @@ class AbonoOrdenTrabajo extends Model
     protected $table = 'abonos_odt';
     protected $fillable = [
         'orden_trabajo_id',
+        'sec_recibo',
         'val_abono',
         'fec_abono',
-        'observaciones'
+        'observaciones',
+        'estado'
     ];
     public $timestamps = false;
 }

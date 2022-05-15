@@ -37,7 +37,7 @@ class BCGDrawing {
      * @param string filename
      * @param BCGColor $color
      */
-    public function __construct($filename = null, BCGColor $color) {
+    public function __construct($filename, BCGColor $color) {
         $this->im = null;
         $this->setFilename($filename);
         $this->color = $color;

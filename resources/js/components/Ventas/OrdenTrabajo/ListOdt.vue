@@ -46,23 +46,23 @@
                             <router-link
                                 type="button"
                                 title="Ver"
-                                :to="'/odt/detalle/' + compra.id"
+                                :to="'/odt/detalle/' + odt.id"
                                 class="btn btn-info btn-xs"
                             >
                                 <i class="fas fa-eye"></i>
                             </router-link>
-                            <template v-if="compra.estado == 1">
+                            <template v-if="odt.estado == 1">
                                 <button
                                     type="button"
                                     title="Anular"
                                     class="btn btn-danger btn-xs"
-                                    @click="anular(compra.id)"
+                                    @click="anular(odt.id)"
                                 >
                                     <i class="fas fa-trash-alt"></i>
                                 </button>
                             </template>
                         </td>
-                        <td v-text="odt.fec_emision"></td>
+                        <td v-text="odt.created_at"></td>
                         <td v-text="odt.num_secuencial"></td>
                         <td v-text="odt.cliente"></td>
                         <td align="right" v-text="odt.val_total"></td>

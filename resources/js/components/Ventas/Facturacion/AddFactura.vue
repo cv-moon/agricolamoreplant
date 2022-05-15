@@ -19,8 +19,7 @@
                     <label for="dat_cliente" class="col-sm-12 col-form-label"
                         >Cliente:</label
                     >
-                    <div class="input-group">
-                        <div class="col-sm-11">
+                        <div class="col-sm-12">
                             <v-select
                                 :options="arrayCliente"
                                 :getOptionLabel="
@@ -36,15 +35,6 @@
                             >
                             </v-select>
                         </div>
-                        <button
-                            title="Agregar Cliente"
-                            class="btn btn-success btn-sm"
-                            data-target="#modCliente"
-                            @click="abrirCliente()"
-                        >
-                            <i class="fas fa-plus"></i>
-                        </button>
-                    </div>
                 </div>
                 <div class="col-3">
                     <label for="telefonos" class="col-form-label"

@@ -74,7 +74,7 @@
                                 </button>
                             </template>
                         </td>
-                        <td v-text="establecimiento.numero" align="right"></td>
+                        <td v-text="establecimiento.est_codigo" align="right"></td>
                         <td v-text="establecimiento.nom_comercial"></td>
                         <td v-text="establecimiento.nom_referencia"></td>
                         <td v-text="establecimiento.direccion"></td>

@@ -150,13 +150,15 @@ class ProductoController extends Controller
             ->select(
                 'presentaciones.id',
                 'presentaciones.presentacion',
+                'presentaciones.producto_id',
                 'productos.nombre',
                 'inventarios.establecimiento_id',
                 'inventarios.estado',
                 'tar_agregados.valor as impuesto',
                 'unidades.sigla'
             )
-            ->where('inventarios.establecimiento_id', $request->q)
+            ->where('inventarios.establecimiento_id', $request->e)
+            ->where('presentaciones.producto_id', $request->q)
             ->orderBy('productos.nombre', 'asc')
             ->get();
         return $productos;
@@ -185,7 +187,7 @@ class ProductoController extends Controller
         return $productos;
     }
 
-    public function presentationsSale()
+    public function presentationsSale(Request $request)
     {
         $punto = PuntoEmision::select('establecimiento_id', 'user_id')
             ->where('user_id', Auth::user()->id)
@@ -212,6 +214,7 @@ class ProductoController extends Controller
                 'unidades.sigla'
             )
             ->where('inventarios.establecimiento_id', $punto->establecimiento_id)
+            ->where('presentaciones.producto_id', $request->q)
             ->where('inventarios.dis_stock', '>', 0)
             ->get();
         return $productos;

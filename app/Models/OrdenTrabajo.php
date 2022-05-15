@@ -11,12 +11,10 @@ class OrdenTrabajo extends Model
         'cliente_id',
         'punto_id',
         'usuario_id',
-        'for_pago_id',
         'num_secuencial',
         'sub_sin_imp',
         'tot_descuento',
         'val_total',
-        'for_pago',
         'estado'
     ];
 }

@@ -10786,7 +10786,8 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get("/api/productos/listar/presentaciones", {
         params: {
-          q: this.detalle.producto.id
+          q: this.detalle.producto.id,
+          e: this.establecimiento_id
         }
       }).then(function (resp) {
         _this5.arrayPresentaciones = resp.data;
@@ -17976,16 +17977,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -18798,413 +18789,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _factura__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../factura */ "./resources/js/factura.js");
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+/* harmony import */ var _factura__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../factura */ "./resources/js/factura.js");
 //
 //
 //
@@ -19542,44 +19127,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       selected: null,
-      pago: {
-        forma_id: 1,
-        codigo: 0,
-        plazo: 0,
-        tiempo: "Dias",
-        tipo: "E"
-      },
       factura: {
         cliente_id: 0,
         punto_id: 0,
         usuario_id: 0,
-        tip_emision: 1,
-        tip_ambiente: 0,
-        for_pago_id: 0,
         fec_emision: "",
-        fec_autorizacion: "",
         num_secuencial: 0,
-        cla_acceso: "",
-        num_autorizacion: "",
         sub_sin_imp: 0,
-        sub_iva: 0,
-        sub_0: 0,
-        sub_no_iva: 0,
-        sub_exento: 0,
         tot_descuento: 0,
-        val_ice: parseFloat(0).toFixed(2),
-        val_irbpnr: parseFloat(0).toFixed(2),
-        val_iva: parseFloat(0).toFixed(2),
-        val_propina: parseFloat(0).toFixed(2),
         val_total: parseFloat(0).toFixed(2),
-        for_pago: "",
         errors: []
       },
       datos: {
-        tip_comprobante: "FACTURA",
-        comprobante: "",
-        firma: "",
-        fir_clave: ""
+        tip_comprobante: "ORDEN DE TRABAJO",
+        comprobante: ""
       },
       info: {
         sal_pendiente: 0,
@@ -19597,17 +19158,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         min_stock: 0,
         dis_stock: 0
       },
-      cliente: {
-        identificacion_id: 0,
-        nombre: "",
-        num_identificacion: "",
-        direccion: "",
-        telefonos: "",
-        email: "",
-        lim_credito: 0,
-        descuento: 0,
-        errors: []
-      },
       detalle: {
         producto: 0,
         presentacion: 0,
@@ -19620,13 +19170,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         button: false
       },
       disabled: false,
-      identificacion_id: 0,
       arrayCliente: [],
-      arrayIdentificaciones: [],
       arrayProductos: [],
       arrayPresentaciones: [],
-      arrayDetalle: [],
-      arrayForma: []
+      arrayDetalle: []
     };
   },
   computed: {
@@ -19657,32 +19204,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               confirmButtonText: "OK"
             }).then(function (result) {
               if (result.isConfirmed) {
-                _this.$router.push("/facturacion");
+                _this.$router.push("/odt");
               }
             });
           }
         });
       }
     },
-    totalDescuento: function totalDescuento() {
-      var res = 0;
-
-      if (this.arrayDetalle.length > 0) {
-        this.arrayDetalle.forEach(function (e) {
-          res += parseFloat(e.des_individual);
-        });
-      } else {
-        res = parseFloat(0);
-      }
-
-      return res;
-    },
     subtotalSinImpuesto: function subtotalSinImpuesto() {
       var res = 0;
 
       if (this.arrayDetalle.length > 0) {
         this.arrayDetalle.forEach(function (e) {
-          res += parseFloat(e.sub_individual);
+          res += parseFloat(e.det_total);
         });
       } else {
         res = parseFloat(0);
@@ -19690,71 +19224,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return res;
     },
-    subtotalCero: function subtotalCero() {
+    totalDescuento: function totalDescuento() {
       var res = 0;
 
       if (this.arrayDetalle.length > 0) {
         this.arrayDetalle.forEach(function (e) {
-          if (e.codigo == 0) {
-            res += parseFloat(e.sub_individual);
-          }
+          res += parseFloat(e.det_descuento);
         });
-      } else {
-        res = parseFloat(0);
-      }
-
-      return res;
-    },
-    subtotalIva: function subtotalIva() {
-      var res = 0;
-
-      if (this.arrayDetalle.length > 0) {
-        this.arrayDetalle.forEach(function (e) {
-          if (e.codigo == 2) {
-            res += parseFloat(e.sub_individual);
-          }
-        });
-      } else {
-        res = parseFloat(0);
-      }
-
-      return res;
-    },
-    subtotalNoObjeto: function subtotalNoObjeto() {
-      var res = 0;
-
-      if (this.arrayDetalle.length > 0) {
-        this.arrayDetalle.forEach(function (e) {
-          if (e.codigo == 6) {
-            res += parseFloat(e.sub_individual);
-          }
-        });
-      } else {
-        res = parseFloat(0);
-      }
-
-      return res;
-    },
-    subtotalExento: function subtotalExento() {
-      var res = 0;
-
-      if (this.arrayDetalle.length > 0) {
-        this.arrayDetalle.forEach(function (e) {
-          if (e.codigo == 7) {
-            res += parseFloat(e.sub_individual);
-          }
-        });
-      } else {
-        res = parseFloat(0);
-      }
-
-      return res;
-    },
-    calcularIva: function calcularIva() {
-      var res = 0;
-
-      if (this.arrayDetalle.length > 0) {
-        res = parseFloat(this.factura.sub_iva * 0.12);
       } else {
         res = parseFloat(0);
       }
@@ -19765,12 +19241,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var res = 0;
 
       if (this.arrayDetalle.length > 0) {
-        res = parseFloat(this.factura.sub_iva) + parseFloat(this.factura.val_ice) + parseFloat(this.factura.val_irbpnr) + parseFloat(this.factura.sub_0) + parseFloat(this.factura.sub_no_iva) + parseFloat(this.factura.sub_exento) + parseFloat(this.factura.val_iva) + parseFloat(this.factura.val_propina);
+        res = parseFloat(this.factura.sub_sin_imp) - parseFloat(this.factura.tot_descuento);
       } else {
         res = parseFloat(0);
       }
 
-      if (res > this.info.dis_facturar && this.pago.tipo == "C") {
+      if (res > this.info.dis_facturar) {
         this.disabled = true;
         Swal.fire("Alto!", "El cliente no puede exceder el límite de crédito", "error");
       }
@@ -19787,22 +19263,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     getFactura: function getFactura() {
       var _this2 = this;
 
-      axios.get("/api/factura/comprobante").then(function (resp) {
-        _this2.factura.cla_acceso = resp.data.cla_acceso + _this2.modulo11(resp.data.cla_acceso);
+      axios.get("/api/odt/comprobante").then(function (resp) {
         _this2.factura.fec_emision = resp.data.fec_emision;
         _this2.factura.num_secuencial = resp.data.num_secuencial;
         _this2.factura.punto_id = resp.data.punto_id;
-        _this2.factura.tip_ambiente = resp.data.tip_ambiente;
-        _this2.datos.comprobante = resp.data.comprobante;
-        _this2.datos.firma = resp.data.firma;
-        _this2.datos.fir_clave = resp.data.fir_clave;
-      });
-    },
-    selectFormaPagos: function selectFormaPagos() {
-      var _this3 = this;
-
-      axios.get("/api/formas_pago").then(function (resp) {
-        _this3.arrayForma = resp.data;
       });
     },
     validaCampos: function validaCampos() {
@@ -19816,16 +19280,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         this.factura.errors.push("Agregue Productos");
       }
 
-      if (this.pago.tipo == "C") {
-        if (!this.pago.plazo || this.pago.plazo == 0) {
-          this.factura.errors.push("Revise el plazo");
-        }
-      }
-
       return this.factura.errors;
     },
     guardar: function guardar() {
-      var _this4 = this;
+      var _this3 = this;
 
       var condiciones = this.validaCampos();
 
@@ -19838,36 +19296,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         allowOutsideClick: false,
         didOpen: function didOpen() {
           Swal.showLoading();
-          axios.post("/api/factura/guardar", {
-            cliente_id: _this4.factura.cliente_id,
-            punto_id: _this4.factura.punto_id,
-            for_pago_id: _this4.pago.forma_id,
-            tip_ambiente: _this4.factura.tip_ambiente,
-            num_secuencial: _this4.factura.num_secuencial,
-            fec_emision: _this4.factura.fec_emision,
-            cla_acceso: _this4.factura.cla_acceso,
-            sub_sin_imp: _this4.factura.sub_sin_imp,
-            sub_iva: _this4.factura.sub_iva,
-            sub_0: _this4.factura.sub_0,
-            sub_no_iva: _this4.factura.sub_no_iva,
-            sub_exento: _this4.factura.sub_exento,
-            tot_descuento: _this4.factura.tot_descuento,
-            val_ice: _this4.factura.val_ice,
-            val_irbpnr: _this4.factura.val_irbpnr,
-            val_iva: _this4.factura.val_iva,
-            val_propina: _this4.factura.val_propina,
-            val_total: _this4.factura.val_total,
-            for_pago: _this4.pago.tipo,
-            dias_credito: _this4.pago.plazo,
-            detalles: _this4.arrayDetalle
+          axios.post("/api/odt/guardar", {
+            cliente_id: _this3.factura.cliente_id,
+            punto_id: _this3.factura.punto_id,
+            num_secuencial: _this3.factura.num_secuencial,
+            sub_sin_imp: _this3.factura.sub_sin_imp,
+            tot_descuento: _this3.factura.tot_descuento,
+            val_total: _this3.factura.val_total,
+            detalles: _this3.arrayDetalle
           }).then(function (resp) {
-            axios.post("/api/xml_factura", {
-              factura: resp.data.factura,
-              detalles: resp.data.detalles,
-              credito: resp.data.credito
-            }).then(function (res) {
-              _this4.crearfacturacion("/" + res.data.firma, res.data.clave, res.data.archivo, res.data.tipo, res.data.id, res.data.carpeta);
-            });
+            Swal.fire("Bien!", "El registro se guardó con éxito.", "success");
+
+            _this3.$router.push("/odt");
           })["catch"](function (err) {
             Swal.fire("Alto!", "Error: ".concat(err), "error");
           });
@@ -19875,11 +19315,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       });
     },
     selectCliente: function selectCliente(search, loading) {
-      var _this5 = this;
+      var _this4 = this;
 
       loading(true);
       axios.get("/api/cliente/buscar?cli=" + search).then(function (resp) {
-        _this5.arrayCliente = resp.data;
+        _this4.arrayCliente = resp.data;
         loading(false);
       })["catch"](function (err) {
         console.log(err);
@@ -19887,32 +19327,32 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     // Estructura para aggregar productos al detalle
     findProductos: function findProductos() {
-      var _this6 = this;
+      var _this5 = this;
 
       axios.get("/api/productos/venta").then(function (resp) {
-        _this6.arrayProductos = resp.data;
+        _this5.arrayProductos = resp.data;
       });
     },
     findPresentaciones: function findPresentaciones() {
-      var _this7 = this;
+      var _this6 = this;
 
       axios.get("/api/productos/presentaciones", {
         params: {
           q: this.detalle.producto.id
         }
       }).then(function (resp) {
-        _this7.arrayPresentaciones = resp.data;
+        _this6.arrayPresentaciones = resp.data;
       });
     },
     cleanDetalle: function cleanDetalle() {
-      this.detalle.producto = 0, this.detalle.presentacion = 0, this.detalle.cantidad = 0, this.detalle.fec_vencimiento = "", this.detalle.precio = 0, this.detalle.descuento = 0, this.detalle.impuesto = 0;
+      this.detalle.producto = 0, this.detalle.presentacion = 0, this.detalle.cantidad = 0, this.detalle.precio = 0, this.detalle.descuento = 0, this.detalle.impuesto = 0;
     },
     getInfo: function getInfo() {
       var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
       this.detalle.min_stock = data.min_stock;
-      this.detalle.dis_stock = data.dis_stock;
-      this.detalle.precio = data.pre_venta;
-      this.detalle.descuento = data.por_descuento;
+      this.detalle.dis_stock = parseInt(data.dis_stock);
+      this.detalle.precio = parseFloat(data.pre_venta).toFixed(2);
+      this.detalle.descuento = parseFloat(data.por_descuento).toFixed(2);
     },
     addDetalle: function addDetalle() {
       var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
@@ -19934,236 +19374,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         this.arrayDetalle.push({
           presentacion_id: data.presentacion.id,
           nombre: data.producto.nombre,
-          cantidad: data.cantidad,
-          fec_vencimiento: "",
-          pre_venta: data.precio,
-          por_descuento: data.descuento,
-          codigo: data.presentacion.codigo,
-          valor: data.presentacion.valor,
-          des_individual: parseFloat(0).toFixed(2),
-          sub_individual: parseFloat(0).toFixed(2)
+          det_cantidad: data.cantidad,
+          det_precio: data.precio,
+          det_descuento: data.cantidad * (data.descuento / 100 * data.precio),
+          det_total: data.precio * data.cantidad - data.cantidad * (data.descuento / 100 * data.precio)
         });
       }
     },
     eliminarDetalle: function eliminarDetalle(index) {
       this.arrayDetalle.splice(index, 1);
-    },
-    // Estructura para Agregar  Cliente
-    abrirCliente: function abrirCliente() {
-      $("#modCliente").modal("show");
-      this.selectIdentificaciones();
-    },
-    cerrarCliente: function cerrarCliente() {
-      $("#modCliente").modal("hide");
-      this.limpiar();
-    },
-    validaCamposCliente: function validaCamposCliente() {
-      this.cliente.errors = [];
-
-      if (!this.cliente.nombre) {
-        this.cliente.errors.push("Ingrese nombre.");
-      }
-
-      if (this.cliente.identificacion_id == "0") {
-        this.cliente.errors.push("Seleccione tipo de identificación.");
-      }
-
-      if (!this.cliente.num_identificacion) {
-        this.cliente.errors.push("Ingrese número de identificación.");
-      }
-
-      return this.cliente.errors;
-    },
-    guardarCliente: function guardarCliente() {
-      var _this8 = this;
-
-      var condiciones = this.validaCamposCliente();
-
-      if (condiciones.length) {
-        return;
-      }
-
-      axios.post("/api/cliente/guardar", {
-        nombre: this.cliente.nombre,
-        identificacion_id: this.cliente.identificacion_id,
-        num_identificacion: this.cliente.num_identificacion,
-        direccion: this.cliente.direccion,
-        telefonos: this.cliente.telefonos,
-        email: this.cliente.email,
-        lim_credito: this.cliente.lim_credito,
-        descuento: this.cliente.descuento
-      }).then(function (resp) {
-        Swal.fire("Bien!", "El registro se guardó con éxito.", "success");
-
-        _this8.cerrarCliente();
-      })["catch"](function (err) {
-        Swal.fire("Error!", "No se pudo realizar el registro. " + err, "error");
-      });
-    },
-    limpiar: function limpiar() {
-      this.cliente.nombre = "";
-      this.cliente.identificacion_id = "0";
-      this.cliente.num_identificacion = "";
-      this.cliente.direccion = "";
-      this.cliente.telefonos = "";
-      this.cliente.email = "";
-      this.cliente.lim_credito = 0;
-      this.cliente.descuento = 0;
-    },
-    selectIdentificaciones: function selectIdentificaciones() {
-      var _this9 = this;
-
-      axios.get("/api/identificaciones").then(function (resp) {
-        _this9.arrayIdentificaciones = resp.data;
-      });
-    },
-    // Métodos para la facturación
-    zeroFill: function zeroFill(number, width) {
-      width -= number.toString().length;
-
-      if (width > 0) {
-        return new Array(width + (/\./.test(number) ? 2 : 1)).join("0") + number;
-      }
-
-      return number + "";
-    },
-    modulo11: function modulo11(numero) {
-      var digito_calculado = -1;
-
-      if (typeof numero == "string" && /^\d+$/.test(numero)) {
-        var digitos = numero.split("").map(Number); //arreglo con los dígitos del número
-
-        digito_calculado = 11 - digitos.reduce(function (valorPrevio, valorActual, indice) {
-          return valorPrevio + valorActual * (7 - indice % 6);
-        }, 0) % 11;
-        digito_calculado = digito_calculado == 11 ? 0 : digito_calculado; //según ficha técnica
-
-        digito_calculado = digito_calculado == 10 ? 1 : digito_calculado; //según ficha técnica
-      }
-
-      return digito_calculado;
-    },
-    crearfacturacion: function crearfacturacion(firma, password, factura, tipo, id, carpeta) {
-      var _this10 = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var _yield$script_comprob, comprobante, _yield$script_comprob2, contenido, _yield$script_comprob3, certificado, _yield$script_comprob4, quefirma, _yield$script_comprob5, validado, _yield$script_comprob6, recibida, _yield$script_comprob7, registrado;
-
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.prev = 0;
-                _context.next = 3;
-                return _factura__WEBPACK_IMPORTED_MODULE_1__["default"].obtener_comprobante_firmado.getAll({
-                  factura: factura,
-                  id_factura: id,
-                  tipo: tipo
-                });
-
-              case 3:
-                _yield$script_comprob = _context.sent;
-                comprobante = _yield$script_comprob.data;
-                _context.next = 7;
-                return _factura__WEBPACK_IMPORTED_MODULE_1__["default"].lectura_firma.getAll({
-                  firma: firma,
-                  id_factura: id,
-                  tipo: tipo
-                });
-
-              case 7:
-                _yield$script_comprob2 = _context.sent;
-                contenido = _yield$script_comprob2.resultado;
-                _context.next = 11;
-                return _factura__WEBPACK_IMPORTED_MODULE_1__["default"].firmar_comprobante.getAll({
-                  contenido: contenido[0],
-                  password: password,
-                  comprobante: comprobante,
-                  id_factura: id,
-                  tipo: tipo
-                });
-
-              case 11:
-                _yield$script_comprob3 = _context.sent;
-                certificado = _yield$script_comprob3.data;
-                _context.next = 15;
-                return _factura__WEBPACK_IMPORTED_MODULE_1__["default"].verificar_firma.getAll({
-                  mensaje: certificado,
-                  tipo: tipo,
-                  id_factura: id,
-                  carpeta: carpeta
-                });
-
-              case 15:
-                _yield$script_comprob4 = _context.sent;
-                quefirma = _yield$script_comprob4.data;
-                _context.next = 19;
-                return _factura__WEBPACK_IMPORTED_MODULE_1__["default"].validar_comprobante.getAll({
-                  comprobante: comprobante,
-                  tipo: tipo,
-                  id_factura: id,
-                  carpeta: carpeta
-                });
-
-              case 19:
-                _yield$script_comprob5 = _context.sent;
-                validado = _yield$script_comprob5.data;
-                _context.next = 23;
-                return _factura__WEBPACK_IMPORTED_MODULE_1__["default"].autorizar_comprobante.getAll({
-                  comprobante: comprobante,
-                  validado: validado,
-                  tipo: tipo,
-                  id_factura: id,
-                  carpeta: carpeta
-                });
-
-              case 23:
-                _yield$script_comprob6 = _context.sent;
-                recibida = _yield$script_comprob6.data;
-                _context.next = 27;
-                return _factura__WEBPACK_IMPORTED_MODULE_1__["default"].autorizado_comprobante.getAll({
-                  recibida: recibida,
-                  tipo: tipo,
-                  id_factura: id
-                });
-
-              case 27:
-                _yield$script_comprob7 = _context.sent;
-                registrado = _yield$script_comprob7.data;
-
-                if (registrado == "enviado") {
-                  Swal.fire("Bien!", "La factura se envió exitosamente.", "success");
-
-                  _this10.$router.push("/facturacion");
-                } else {
-                  Swal.fire("Error!", "La factura no pudo ser enviada, intente mas tarde.", "error");
-
-                  _this10.$router.push("/facturacion");
-                }
-
-                _context.next = 36;
-                break;
-
-              case 32:
-                _context.prev = 32;
-                _context.t0 = _context["catch"](0);
-                Swal.fire("Error!", "Error en el envio al SRI" + _context.t0, "error");
-
-                _this10.$router.push("/facturacion");
-
-              case 36:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee, null, [[0, 32]]);
-      }))();
     }
   },
   mounted: function mounted() {
     this.getFactura();
     this.findProductos();
-    this.selectFormaPagos();
   }
 });
 
@@ -85142,7 +84366,9 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", {
                     attrs: { align: "right" },
-                    domProps: { textContent: _vm._s(establecimiento.numero) }
+                    domProps: {
+                      textContent: _vm._s(establecimiento.est_codigo)
+                    }
                   }),
                   _vm._v(" "),
                   _c("td", {
@@ -105593,49 +104819,30 @@ var render = function() {
             [_vm._v("Cliente:")]
           ),
           _vm._v(" "),
-          _c("div", { staticClass: "input-group" }, [
-            _c(
-              "div",
-              { staticClass: "col-sm-11" },
-              [
-                _c("v-select", {
-                  attrs: {
-                    options: _vm.arrayCliente,
-                    getOptionLabel: function(option) {
-                      return option.nombre + " - " + option.num_identificacion
-                    },
-                    placeholder: "Buscar Cliente..."
-                  },
-                  on: { search: _vm.selectCliente, input: _vm.getId },
-                  model: {
-                    value: _vm.selected,
-                    callback: function($$v) {
-                      _vm.selected = $$v
-                    },
-                    expression: "selected"
-                  }
-                })
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-success btn-sm",
+          _c(
+            "div",
+            { staticClass: "col-sm-12" },
+            [
+              _c("v-select", {
                 attrs: {
-                  title: "Agregar Cliente",
-                  "data-target": "#modCliente"
+                  options: _vm.arrayCliente,
+                  getOptionLabel: function(option) {
+                    return option.nombre + " - " + option.num_identificacion
+                  },
+                  placeholder: "Buscar Cliente..."
                 },
-                on: {
-                  click: function($event) {
-                    return _vm.abrirCliente()
-                  }
+                on: { search: _vm.selectCliente, input: _vm.getId },
+                model: {
+                  value: _vm.selected,
+                  callback: function($$v) {
+                    _vm.selected = $$v
+                  },
+                  expression: "selected"
                 }
-              },
-              [_c("i", { staticClass: "fas fa-plus" })]
-            )
-          ])
+              })
+            ],
+            1
+          )
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "col-3" }, [
@@ -107409,10 +106616,7 @@ var render = function() {
         [
           _c(
             "router-link",
-            {
-              staticClass: "btn btn-secondary btn-sm",
-              attrs: { to: "/facturacion" }
-            },
+            { staticClass: "btn btn-secondary btn-sm", attrs: { to: "/odt" } },
             [
               _c("i", { staticClass: "fas fa-arrow-left" }),
               _vm._v(" Regresar\n            ")
@@ -107555,26 +106759,7 @@ var render = function() {
           ),
           _vm._v(" "),
           _c("p", { staticClass: "col-form-label" }, [
-            _vm._v(_vm._s(_vm.datos.comprobante))
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-sm-6" }, [
-          _c(
-            "label",
-            {
-              staticClass: "col-form-label",
-              attrs: { for: "num_comprobante" }
-            },
-            [_vm._v("Clave de Acceso:")]
-          ),
-          _vm._v(" "),
-          _c("p", { staticClass: "col-form-label" }, [
-            _vm._v(
-              "\n                    " +
-                _vm._s(_vm.factura.cla_acceso) +
-                "\n                "
-            )
+            _vm._v(_vm._s(_vm.factura.num_secuencial))
           ])
         ])
       ]),
@@ -107886,51 +107071,19 @@ var render = function() {
                         }),
                         _vm._v(" "),
                         _c("td", {
-                          domProps: { textContent: _vm._s(detalle.cantidad) }
+                          domProps: {
+                            textContent: _vm._s(detalle.det_cantidad)
+                          }
                         }),
                         _vm._v(" "),
-                        _c("td", [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: detalle.fec_vencimiento,
-                                expression: "detalle.fec_vencimiento"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            attrs: { type: "date" },
-                            domProps: { value: detalle.fec_vencimiento },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(
-                                  detalle,
-                                  "fec_vencimiento",
-                                  $event.target.value
-                                )
-                              }
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
                         _c("td", { attrs: { align: "right" } }, [
-                          _vm._v("$" + _vm._s(detalle.pre_venta))
+                          _vm._v("$" + _vm._s(detalle.det_precio))
                         ]),
                         _vm._v(" "),
                         _c("td", { attrs: { align: "right" } }, [
                           _vm._v(
                             "\n                                $" +
-                              _vm._s(
-                                (detalle.des_individual = (
-                                  ((detalle.pre_venta * detalle.por_descuento) /
-                                    100) *
-                                  detalle.cantidad
-                                ).toFixed(2))
-                              ) +
+                              _vm._s(detalle.det_descuento.toFixed(2)) +
                               "\n                            "
                           )
                         ]),
@@ -107938,12 +107091,7 @@ var render = function() {
                         _c("td", { attrs: { align: "right" } }, [
                           _vm._v(
                             "\n                                $\n                                " +
-                              _vm._s(
-                                (detalle.sub_individual = (
-                                  detalle.pre_venta * detalle.cantidad -
-                                  detalle.des_individual
-                                ).toFixed(2))
-                              ) +
+                              _vm._s(detalle.det_total.toFixed(2)) +
                               "\n                            "
                           )
                         ])
@@ -107958,304 +107106,11 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "form-group row" }, [
-        _c("div", { staticClass: "col-7" }, [
-          _c("div", { staticClass: "card card-warning card-outline" }, [
-            _vm._m(3),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [
-              _c("div", { staticClass: "form-group row" }, [
-                _c(
-                  "label",
-                  {
-                    staticClass: "col-2 col-form-label",
-                    attrs: { for: "forma_pago" }
-                  },
-                  [_vm._v("Forma:")]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-10" }, [
-                  _c(
-                    "select",
-                    {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.pago.forma_id,
-                          expression: "pago.forma_id"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      on: {
-                        change: function($event) {
-                          var $$selectedVal = Array.prototype.filter
-                            .call($event.target.options, function(o) {
-                              return o.selected
-                            })
-                            .map(function(o) {
-                              var val = "_value" in o ? o._value : o.value
-                              return val
-                            })
-                          _vm.$set(
-                            _vm.pago,
-                            "forma_id",
-                            $event.target.multiple
-                              ? $$selectedVal
-                              : $$selectedVal[0]
-                          )
-                        }
-                      }
-                    },
-                    [
-                      _c("option", { attrs: { value: "0", disabled: "" } }, [
-                        _vm._v("Seleccione...")
-                      ]),
-                      _vm._v(" "),
-                      _vm._l(_vm.arrayForma, function(forma) {
-                        return _c("option", {
-                          key: forma.id,
-                          domProps: {
-                            value: forma.id,
-                            textContent: _vm._s(
-                              forma.codigo + "-" + forma.nombre
-                            )
-                          }
-                        })
-                      })
-                    ],
-                    2
-                  )
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group row" }, [
-                _c(
-                  "label",
-                  {
-                    staticClass: "col-2 col-form-label",
-                    attrs: { for: "forma_pago" }
-                  },
-                  [_vm._v("Tipo:")]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-10" }, [
-                  _c(
-                    "select",
-                    {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.pago.tipo,
-                          expression: "pago.tipo"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      on: {
-                        change: function($event) {
-                          var $$selectedVal = Array.prototype.filter
-                            .call($event.target.options, function(o) {
-                              return o.selected
-                            })
-                            .map(function(o) {
-                              var val = "_value" in o ? o._value : o.value
-                              return val
-                            })
-                          _vm.$set(
-                            _vm.pago,
-                            "tipo",
-                            $event.target.multiple
-                              ? $$selectedVal
-                              : $$selectedVal[0]
-                          )
-                        }
-                      }
-                    },
-                    [
-                      _c("option", { attrs: { value: "E" } }, [
-                        _vm._v("EFECTIVO")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "C" } }, [
-                        _vm._v("CRÉDITO")
-                      ])
-                    ]
-                  )
-                ])
-              ]),
-              _vm._v(" "),
-              _vm.pago.tipo == "C"
-                ? _c("div", { staticClass: "form-group row" }, [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "col-3 col-form-label",
-                        attrs: { for: "forma_pago" }
-                      },
-                      [_vm._v("Plazo:")]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-3" }, [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.pago.plazo,
-                            expression: "pago.plazo"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: {
-                          type: "number",
-                          placeholder: "0",
-                          min: "0",
-                          max: "30"
-                        },
-                        domProps: { value: _vm.pago.plazo },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(_vm.pago, "plazo", $event.target.value)
-                          }
-                        }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      {
-                        staticClass: "col-3 col-form-label",
-                        attrs: { for: "forma_pago" }
-                      },
-                      [_vm._v("Unidad:")]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-3" }, [
-                      _c(
-                        "select",
-                        {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.pago.tiempo,
-                              expression: "pago.tiempo"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          on: {
-                            change: function($event) {
-                              var $$selectedVal = Array.prototype.filter
-                                .call($event.target.options, function(o) {
-                                  return o.selected
-                                })
-                                .map(function(o) {
-                                  var val = "_value" in o ? o._value : o.value
-                                  return val
-                                })
-                              _vm.$set(
-                                _vm.pago,
-                                "tiempo",
-                                $event.target.multiple
-                                  ? $$selectedVal
-                                  : $$selectedVal[0]
-                              )
-                            }
-                          }
-                        },
-                        [
-                          _c("option", { attrs: { value: "", disabled: "" } }, [
-                            _vm._v("Seleccione...")
-                          ]),
-                          _vm._v(" "),
-                          _c("option", { attrs: { value: "Dias" } }, [
-                            _vm._v("Días")
-                          ])
-                        ]
-                      )
-                    ])
-                  ])
-                : _vm._e()
-            ])
-          ])
-        ]),
+        _vm._m(3),
         _vm._v(" "),
         _c("div", { staticClass: "col-5" }, [
           _c("div", { staticClass: "card card-success card-outline" }, [
             _c("div", { staticClass: "card-body" }, [
-              _c("div", { staticClass: "form-group row" }, [
-                _c("div", { staticClass: "col-sm-6" }, [
-                  _vm._v("Subtotal Iva 12%:")
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-6 bg-lightblue text-right" }, [
-                  _vm._v(
-                    "\n                                $\n                                " +
-                      _vm._s(
-                        (_vm.factura.sub_iva = _vm.subtotalIva.toFixed(2))
-                      ) +
-                      "\n                            "
-                  )
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group row" }, [
-                _c("div", { staticClass: "col-sm-6" }, [
-                  _vm._v("Subtotal 0%:")
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-6 bg-lightblue text-right" }, [
-                  _vm._v(
-                    "\n                                $\n                                " +
-                      _vm._s(
-                        (_vm.factura.sub_0 = _vm.subtotalCero.toFixed(2))
-                      ) +
-                      "\n                            "
-                  )
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group row" }, [
-                _c("div", { staticClass: "col-sm-6" }, [
-                  _vm._v(
-                    "\n                                Subtotal no objeto de iva:\n                            "
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-6 bg-lightblue text-right" }, [
-                  _vm._v(
-                    "\n                                $\n                                " +
-                      _vm._s(
-                        (_vm.factura.sub_no_iva = _vm.subtotalNoObjeto.toFixed(
-                          2
-                        ))
-                      ) +
-                      "\n                            "
-                  )
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group row" }, [
-                _c("div", { staticClass: "col-sm-6" }, [
-                  _vm._v(
-                    "\n                                Subtotal exento de iva:\n                            "
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-6 bg-lightblue text-right" }, [
-                  _vm._v(
-                    "\n                                $\n                                " +
-                      _vm._s(
-                        (_vm.factura.sub_exento = _vm.subtotalExento.toFixed(2))
-                      ) +
-                      "\n                            "
-                  )
-                ])
-              ]),
-              _vm._v(" "),
               _c("div", { staticClass: "form-group row" }, [
                 _c("div", { staticClass: "col-sm-6" }, [
                   _vm._v(
@@ -108296,60 +107151,6 @@ var render = function() {
                           2
                         ))
                       ) +
-                      "\n                            "
-                  )
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group row" }, [
-                _c("div", { staticClass: "col-sm-6" }, [_vm._v("Valor ICE:")]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-6 bg-lightblue text-right" }, [
-                  _vm._v(
-                    "\n                                $ " +
-                      _vm._s(_vm.factura.val_ice) +
-                      "\n                            "
-                  )
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group row" }, [
-                _c("div", { staticClass: "col-sm-6" }, [
-                  _vm._v("Valor Irbpnr:")
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-6 bg-lightblue text-right" }, [
-                  _vm._v(
-                    "\n                                $ " +
-                      _vm._s(_vm.factura.val_irbpnr) +
-                      "\n                            "
-                  )
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group row" }, [
-                _c("div", { staticClass: "col-sm-6" }, [_vm._v("Iva 12%:")]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-6 bg-lightblue text-right" }, [
-                  _vm._v(
-                    "\n                                $\n                                " +
-                      _vm._s(
-                        (_vm.factura.val_iva = _vm.calcularIva.toFixed(2))
-                      ) +
-                      "\n                            "
-                  )
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group row" }, [
-                _c("div", { staticClass: "col-sm-6" }, [
-                  _vm._v("Propina 10%:")
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-6 bg-lightblue text-right" }, [
-                  _vm._v(
-                    "\n                                $ " +
-                      _vm._s(_vm.factura.val_propina) +
                       "\n                            "
                   )
                 ])
@@ -108407,7 +107208,7 @@ var render = function() {
       [
         _c(
           "router-link",
-          { staticClass: "btn btn-danger", attrs: { to: "/facturacion" } },
+          { staticClass: "btn btn-danger", attrs: { to: "/odt" } },
           [_vm._v("\n            Cancelar\n        ")]
         ),
         _vm._v(" "),
@@ -108422,494 +107223,7 @@ var render = function() {
         )
       ],
       1
-    ),
-    _vm._v(" "),
-    _c("div", { staticClass: "modal fade", attrs: { id: "modCliente" } }, [
-      _c("div", { staticClass: "modal-dialog modal-xl" }, [
-        _c("div", { staticClass: "modal-content" }, [
-          _c("div", { staticClass: "modal-header" }, [
-            _c("h4", { staticClass: "modal-title" }, [
-              _vm._v("Agregar Cliente")
-            ]),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "close",
-                attrs: { type: "button", "aria-label": "Close" },
-                on: { click: _vm.cerrarCliente }
-              },
-              [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "modal-body" }, [
-            _c("form", [
-              _c("b", { staticClass: "text-primary" }, [
-                _vm._v("Datos Generales")
-              ]),
-              _vm._v(" "),
-              _c("hr", { staticClass: "mt-0" }),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group row" }, [
-                _c(
-                  "label",
-                  {
-                    staticClass: "col-sm-2 col-form-label",
-                    attrs: { for: "nombre" }
-                  },
-                  [_vm._v("Nombre:")]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-6" }, [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.cliente.nombre,
-                        expression: "cliente.nombre"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: {
-                      type: "text",
-                      placeholder: "Nombre.",
-                      maxlength: "100"
-                    },
-                    domProps: { value: _vm.cliente.nombre },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(_vm.cliente, "nombre", $event.target.value)
-                      }
-                    }
-                  })
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group row" }, [
-                _c(
-                  "label",
-                  {
-                    staticClass: "col-sm-2 col-form-label",
-                    attrs: { for: "tip_identificacion" }
-                  },
-                  [_vm._v("Tipo Identificación:")]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-4" }, [
-                  _c(
-                    "select",
-                    {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.cliente.identificacion_id,
-                          expression: "cliente.identificacion_id"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      on: {
-                        change: function($event) {
-                          var $$selectedVal = Array.prototype.filter
-                            .call($event.target.options, function(o) {
-                              return o.selected
-                            })
-                            .map(function(o) {
-                              var val = "_value" in o ? o._value : o.value
-                              return val
-                            })
-                          _vm.$set(
-                            _vm.cliente,
-                            "identificacion_id",
-                            $event.target.multiple
-                              ? $$selectedVal
-                              : $$selectedVal[0]
-                          )
-                        }
-                      }
-                    },
-                    [
-                      _c("option", { attrs: { value: "0", disabled: "" } }, [
-                        _vm._v("Seleccione...")
-                      ]),
-                      _vm._v(" "),
-                      _vm._l(_vm.arrayIdentificaciones, function(
-                        identificacion
-                      ) {
-                        return _c("option", {
-                          key: identificacion.id,
-                          domProps: {
-                            value: identificacion.id,
-                            textContent: _vm._s(identificacion.nombre)
-                          }
-                        })
-                      })
-                    ],
-                    2
-                  )
-                ]),
-                _vm._v(" "),
-                _c(
-                  "label",
-                  {
-                    staticClass: "col-sm-2 col-form-label",
-                    attrs: { for: "num_identificacion" }
-                  },
-                  [_vm._v("# Identificación:")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "col-sm-4" },
-                  [
-                    _vm.cliente.identificacion_id === 2
-                      ? [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.cliente.num_identificacion,
-                                expression: "cliente.num_identificacion"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            attrs: {
-                              type: "text",
-                              placeholder: "Cédula.",
-                              maxlength: "10"
-                            },
-                            domProps: { value: _vm.cliente.num_identificacion },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(
-                                  _vm.cliente,
-                                  "num_identificacion",
-                                  $event.target.value
-                                )
-                              }
-                            }
-                          })
-                        ]
-                      : _vm.identificacion_id === 1
-                      ? [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.cliente.num_identificacion,
-                                expression: "cliente.num_identificacion"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            attrs: {
-                              type: "text",
-                              placeholder: "RUC.",
-                              maxlength: "13"
-                            },
-                            domProps: { value: _vm.cliente.num_identificacion },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(
-                                  _vm.cliente,
-                                  "num_identificacion",
-                                  $event.target.value
-                                )
-                              }
-                            }
-                          })
-                        ]
-                      : _vm.identificacion_id === 3
-                      ? [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.cliente.num_identificacion,
-                                expression: "cliente.num_identificacion"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            attrs: {
-                              type: "text",
-                              placeholder: "Pasaporte.",
-                              maxlength: "13"
-                            },
-                            domProps: { value: _vm.cliente.num_identificacion },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(
-                                  _vm.cliente,
-                                  "num_identificacion",
-                                  $event.target.value
-                                )
-                              }
-                            }
-                          })
-                        ]
-                      : _vm._e()
-                  ],
-                  2
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group row" }, [
-                _c(
-                  "label",
-                  {
-                    staticClass: "col-sm-2 col-form-label",
-                    attrs: { for: "direccion" }
-                  },
-                  [_vm._v("Dirección:")]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-10" }, [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.cliente.direccion,
-                        expression: "cliente.direccion"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: {
-                      type: "text",
-                      placeholder: "Dirección.",
-                      maxlength: "200"
-                    },
-                    domProps: { value: _vm.cliente.direccion },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(_vm.cliente, "direccion", $event.target.value)
-                      }
-                    }
-                  })
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group row" }, [
-                _c(
-                  "label",
-                  {
-                    staticClass: "col-sm-2 col-form-label",
-                    attrs: { for: "telefonos" }
-                  },
-                  [_vm._v("Teléfonos:")]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-4" }, [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.cliente.telefonos,
-                        expression: "cliente.telefonos"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: {
-                      type: "text",
-                      placeholder: "Teléfonos.",
-                      maxlength: "50"
-                    },
-                    domProps: { value: _vm.cliente.telefonos },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(_vm.cliente, "telefonos", $event.target.value)
-                      }
-                    }
-                  })
-                ]),
-                _vm._v(" "),
-                _c(
-                  "label",
-                  {
-                    staticClass: "col-sm-2 col-form-label",
-                    attrs: { for: "email" }
-                  },
-                  [_vm._v("Site/e-mail:")]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-4" }, [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.cliente.email,
-                        expression: "cliente.email"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: {
-                      type: "email",
-                      placeholder: "E-mail.",
-                      maxlength: "100"
-                    },
-                    domProps: { value: _vm.cliente.email },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(_vm.cliente, "email", $event.target.value)
-                      }
-                    }
-                  })
-                ])
-              ]),
-              _vm._v(" "),
-              _c("b", { staticClass: "text-primary" }, [
-                _vm._v("Datos Adicionales")
-              ]),
-              _vm._v(" "),
-              _c("hr", { staticClass: "mt-0" }),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group row" }, [
-                _c(
-                  "label",
-                  {
-                    staticClass: "col-sm-2 col-form-label",
-                    attrs: { for: "lim_credito" }
-                  },
-                  [_vm._v("Lim. Crédito ($):")]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-4" }, [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.cliente.lim_credito,
-                        expression: "cliente.lim_credito"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: { type: "number", placeholder: "0", min: "0" },
-                    domProps: { value: _vm.cliente.lim_credito },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(
-                          _vm.cliente,
-                          "lim_credito",
-                          $event.target.value
-                        )
-                      }
-                    }
-                  })
-                ]),
-                _vm._v(" "),
-                _c(
-                  "label",
-                  {
-                    staticClass: "col-sm-2 col-form-label",
-                    attrs: { for: "descuento" }
-                  },
-                  [_vm._v("Descuento (%):")]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-4" }, [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.cliente.descuento,
-                        expression: "cliente.descuento"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: { type: "number", placeholder: "0", min: "0" },
-                    domProps: { value: _vm.cliente.descuento },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(_vm.cliente, "descuento", $event.target.value)
-                      }
-                    }
-                  })
-                ])
-              ]),
-              _vm._v(" "),
-              _vm.cliente.errors.length
-                ? _c("div", { staticClass: "alert alert-danger" }, [
-                    _c(
-                      "div",
-                      _vm._l(_vm.cliente.errors, function(error) {
-                        return _c("div", { key: error }, [
-                          _vm._v(
-                            "\n                                    " +
-                              _vm._s(error) +
-                              "\n                                "
-                          )
-                        ])
-                      }),
-                      0
-                    )
-                  ])
-                : _vm._e()
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "modal-footer justify-content-between" }, [
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-default",
-                attrs: { type: "button" },
-                on: { click: _vm.cerrarCliente }
-              },
-              [_vm._v("\n                        Close\n                    ")]
-            ),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-success",
-                attrs: { type: "button" },
-                on: { click: _vm.guardarCliente }
-              },
-              [
-                _vm._v(
-                  "\n                        Guardar\n                    "
-                )
-              ]
-            )
-          ])
-        ])
-      ])
-    ])
+    )
   ])
 }
 var staticRenderFns = [
@@ -108919,7 +107233,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("h3", { staticClass: "card-title mt-2" }, [
       _c("i", { staticClass: "fas fa-align-justify" }),
-      _vm._v("\n            Facturar\n        ")
+      _vm._v("\n            Orden de Trabajo\n        ")
     ])
   },
   function() {
@@ -108950,16 +107264,6 @@ var staticRenderFns = [
           [
             _vm._v(
               "\n                                Cantidad\n                            "
-            )
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "th",
-          { staticClass: "text-center", staticStyle: { width: "15%" } },
-          [
-            _vm._v(
-              "\n                                Camp. Adicional\n                            "
             )
           ]
         ),
@@ -109012,8 +107316,14 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header" }, [
-      _c("h5", { staticClass: "card-title" }, [_vm._v("FORMA DE PAGO")])
+    return _c("div", { staticClass: "col-7" }, [
+      _c("div", { staticClass: "card card-warning card-outline" }, [
+        _c("div", { staticClass: "card-header" }, [
+          _c("h5", { staticClass: "card-title" }, [_vm._v("ABONO")])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body" })
+      ])
     ])
   }
 ]
@@ -109093,13 +107403,13 @@ var render = function() {
                           attrs: {
                             type: "button",
                             title: "Ver",
-                            to: "/odt/detalle/" + _vm.compra.id
+                            to: "/odt/detalle/" + odt.id
                           }
                         },
                         [_c("i", { staticClass: "fas fa-eye" })]
                       ),
                       _vm._v(" "),
-                      _vm.compra.estado == 1
+                      odt.estado == 1
                         ? [
                             _c(
                               "button",
@@ -109108,7 +107418,7 @@ var render = function() {
                                 attrs: { type: "button", title: "Anular" },
                                 on: {
                                   click: function($event) {
-                                    return _vm.anular(_vm.compra.id)
+                                    return _vm.anular(odt.id)
                                   }
                                 }
                               },
@@ -109121,7 +107431,7 @@ var render = function() {
                   ),
                   _vm._v(" "),
                   _c("td", {
-                    domProps: { textContent: _vm._s(odt.fec_emision) }
+                    domProps: { textContent: _vm._s(odt.created_at) }
                   }),
                   _vm._v(" "),
                   _c("td", {
@@ -132858,7 +131168,7 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\cristian.chuquitarco\Documents\Projects\agricolamoreplant\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\crist\Documents\Projects\agricolamoreplant\resources\js\app.js */"./resources/js/app.js");
 
 
 /***/ }),

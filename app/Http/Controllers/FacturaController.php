@@ -268,17 +268,12 @@ class FacturaController extends Controller
         } else {
             $consecutivo = $sec_inicial->sec_factura + 1;
         }
-        if ($sec_inicial->tip_ambiente == 0) {
-            $ambiente = '1';
-        } else if ($sec_inicial->tip_ambiente == 1) {
-            $ambiente = '2';
-        }
 
         $fecha = date('dmY');
         $n_cons = str_pad($consecutivo, 9, "0", STR_PAD_LEFT);
         $hoy = date('d/m/Y');
         $num_comprobante = $n_est . '-' . $n_pto . '-' . $n_cons;
-        $clave = $fecha . '01' . $sec_inicial->ruc . $ambiente . $n_est . $n_pto . $n_cons . '12345678' . '1';
+        $clave = $fecha . '01' . $sec_inicial->ruc . $sec_inicial->tip_ambiente . $n_est . $n_pto . $n_cons . '12345678' . '1';
         return [
             'punto_id' => $sec_inicial->id,
             'tip_ambiente' => $sec_inicial->tip_ambiente,

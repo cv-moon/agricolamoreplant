@@ -87,8 +87,11 @@ class generarPDF
         $pdf->Cell(88, 5, utf8_decode('CLAVE DE ACCESO'), 0, 2, 'L', 0);
         $pdf->SetFont('Helvetica', '', 8);
         $pdf->Cell(88, 5, $claveAcceso, 0, 2, 'L', 0);
+
+        //prueba de barcode 
+
         $this->generarCodigoBarras($claveAcceso, 'facturas');
-        $pdf->image('archivos/comprobantes/facturas/codigosbarras/codigo' . $claveAcceso . '.png', 115, null, 80);
+        // $pdf->image('archivos/comprobantes/facturas/codigosbarras/codigo' . $claveAcceso . '.png', 115, null, 80);
 
         $cli_guias = '';
 

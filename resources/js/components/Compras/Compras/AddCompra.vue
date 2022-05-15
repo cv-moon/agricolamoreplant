@@ -617,17 +617,16 @@ export default {
             });
         },
         findProductos() {
-            axios
-                .get("/api/productos/listar/comprar")
-                .then(resp => {
-                    this.arrayProductos = resp.data;
-                });
+            axios.get("/api/productos/listar/comprar").then(resp => {
+                this.arrayProductos = resp.data;
+            });
         },
         findPresentaciones() {
             axios
                 .get("/api/productos/listar/presentaciones", {
                     params: {
-                        q: this.detalle.producto.id
+                        q: this.detalle.producto.id,
+                        e: this.establecimiento_id
                     }
                 })
                 .then(resp => {

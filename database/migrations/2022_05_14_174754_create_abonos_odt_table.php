@@ -16,7 +16,7 @@ class CreateAbonosOdtTable extends Migration
         Schema::create('abonos_odt', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('orden_trabajo_id');
-            $table->integer('num_secuencial');
+            $table->integer('sec_recibo');
             $table->decimal('val_abono', 12, 2);
             $table->date('fec_abono');
             $table->string('observaciones', 150);

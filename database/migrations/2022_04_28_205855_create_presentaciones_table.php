@@ -19,7 +19,7 @@ class CreatePresentacionesTable extends Migration
             $table->unsignedBigInteger('unidad_id');
             $table->string('cod_principal', 15)->unique();
             $table->string('cod_auxiliar', 15)->unique()->nullable();
-            $table->tinyInteger('presentacion');
+            $table->integer('presentacion');
             $table->decimal('pre_venta', 15, 3)->default(0);
             $table->boolean('estado')->default(1);
             $table->timestamps();

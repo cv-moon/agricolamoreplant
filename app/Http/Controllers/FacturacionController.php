@@ -11,8 +11,10 @@ use generarPDF;
 use Illuminate\Http\Request;
 use nusoap_client;
 
+// use nusoap_client;
+
 include 'class/generarPDF.php';
-include('class/lib/nusoap.php');
+// include('class/lib/nusoap.php');
 
 class FacturacionController extends Controller
 {

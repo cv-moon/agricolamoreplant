@@ -18,19 +18,16 @@ class CreateOrdenesTrabajoTable extends Migration
             $table->unsignedBigInteger('cliente_id');
             $table->unsignedBigInteger('punto_id');
             $table->unsignedBigInteger('usuario_id');
-            $table->unsignedBigInteger('for_pago_id');
             $table->integer('num_secuencial');
             $table->decimal('sub_sin_imp', 12, 2)->default(0);
             $table->decimal('tot_descuento', 12, 2)->default(0);
             $table->decimal('val_total', 12, 2)->default(0);
-            $table->char('for_pago', 1);
             $table->string('estado', 3);
             $table->timestamps();
 
             $table->foreign('cliente_id')->references('id')->on('clientes');
             $table->foreign('punto_id')->references('id')->on('puntos_emision');
             $table->foreign('usuario_id')->references('id')->on('users');
-            $table->foreign('for_pago_id')->references('id')->on('for_pagos');
         });
     }
 
